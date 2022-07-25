@@ -1,7 +1,8 @@
+import CreateProduct from 'components/CreateProduct';
 import type { NextPage } from 'next';
 
 const Product: NextPage = () => {
-  return <div>Product</div>;
+  return <CreateProduct />;
 };
 
 export default Product;
