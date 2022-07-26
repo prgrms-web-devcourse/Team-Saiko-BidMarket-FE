@@ -17,7 +17,7 @@ const Product: NextPage = () => {
           </Text>
         }
       />
-      <CreateProduct />;
+      <CreateProduct />
     </>
   );
 };
