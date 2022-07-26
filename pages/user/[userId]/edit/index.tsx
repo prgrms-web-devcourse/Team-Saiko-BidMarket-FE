@@ -1,7 +1,8 @@
+import ProfileEdit from 'components/ProfileEdit';
 import type { NextPage } from 'next';
 
 const Edit: NextPage = () => {
-  return <div>Edit</div>;
+  return <ProfileEdit />;
 };
 
 export default Edit;
