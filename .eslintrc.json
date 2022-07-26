@@ -17,5 +17,18 @@
     "plugin:@typescript-eslint/recommended",
     "next/core-web-vitals",
     "plugin:prettier/recommended"
-  ]
+  ],
+  "rules": {
+    "import/order": [
+      "warn",
+      {
+        "groups": ["builtin", "external", "internal"],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ]
+  }
 }
