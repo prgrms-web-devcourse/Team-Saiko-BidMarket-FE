@@ -53,7 +53,7 @@ const CreateProduct = () => {
                     boxSize="22px"
                     variant="outline"
                     minWidth="1"
-                    aria-label="Search database"
+                    aria-label="Delete Button"
                     bg="#FF4370"
                     icon={<CloseIcon w="8px" h="8px" color="#FFFFFF" />}
                   />

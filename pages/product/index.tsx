@@ -1,4 +1,4 @@
-import { Text } from '@chakra-ui/react';
+import { Button, Text } from '@chakra-ui/react';
 import Header from '@common/Header';
 import GoBackIcon from '@common/Header/GoBackIcon';
 import Seo from '@common/Seo';
@@ -15,6 +15,17 @@ const Product: NextPage = () => {
           <Text fontWeight="bold" fontSize="20px">
             상품등록
           </Text>
+        }
+        rightContent={
+          <Button
+            w="55px"
+            h="29px"
+            fontSize="14px"
+            bg="#FF4370"
+            color="#FFFFFF"
+          >
+            완료
+          </Button>
         }
       />
       <CreateProduct />
