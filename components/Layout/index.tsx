@@ -4,7 +4,7 @@ type LayoutProps = {
   children?: React.ReactNode;
 };
 
-const layout = ({ children }: LayoutProps) => {
+const Layout = ({ children }: LayoutProps) => {
   return (
     <Flex bg="#eee" justifyContent="center" minHeight="100vh">
       <Flex bg="#fff" flexDirection="column" width="768px" alignItems="center">
@@ -14,4 +14,4 @@ const layout = ({ children }: LayoutProps) => {
   );
 };
 
-export default layout;
+export default Layout;

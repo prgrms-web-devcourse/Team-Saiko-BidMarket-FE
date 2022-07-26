@@ -5,7 +5,7 @@ type CardImageProps = {
   src: string;
 };
 
-const cardImage = ({ alt, src }: CardImageProps) => {
+const CardImage = ({ alt, src }: CardImageProps) => {
   return (
     <Image
       boxSize="114px"
@@ -17,4 +17,4 @@ const cardImage = ({ alt, src }: CardImageProps) => {
   );
 };
 
-export default cardImage;
+export default CardImage;

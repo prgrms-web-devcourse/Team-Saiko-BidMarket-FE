@@ -1,7 +1,7 @@
 import { Input, InputGroup, InputLeftElement } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
 
-const searchInput = () => {
+const SearchInput = () => {
   return (
     <InputGroup marginTop="15px">
       <InputLeftElement
@@ -19,4 +19,4 @@ const searchInput = () => {
   );
 };
 
-export default searchInput;
+export default SearchInput;
