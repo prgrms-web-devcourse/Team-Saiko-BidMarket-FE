@@ -1,6 +1,7 @@
-import Header from '@common/header';
-import GoBackIcon from '@common/Header/GoBackIcon';
 import { Text } from '@chakra-ui/react';
+
+import Header from '@common/Header';
+import GoBackIcon from '@common/Header/GoBackIcon';
 
 const ProfileEditHeader = () => (
   <Header

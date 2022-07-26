@@ -1,7 +1,8 @@
-import type { NextPage } from 'next';
-import CardImage from './CardImage';
-import { Flex, Text } from '@chakra-ui/react';
 import { StarIcon } from '@chakra-ui/icons';
+import { Flex, Text } from '@chakra-ui/react';
+import type { NextPage } from 'next';
+
+import CardImage from './CardImage';
 
 const Card: NextPage = () => {
   return (

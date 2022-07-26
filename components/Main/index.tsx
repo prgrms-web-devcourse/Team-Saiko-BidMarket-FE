@@ -1,9 +1,11 @@
+import { Divider, Flex } from '@chakra-ui/react';
 import { Fragment } from 'react';
+
 import Card from '@common/Card';
 import SearchInput from '@common/SearchInput';
+
 import Banner from './Banner';
 import ProductAddButton from './ProductAddButton';
-import { Divider, Flex } from '@chakra-ui/react';
 
 const Main = () => {
   //TODO: Header 컴포넌트 추가

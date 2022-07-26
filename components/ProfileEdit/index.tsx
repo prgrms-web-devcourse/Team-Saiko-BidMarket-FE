@@ -1,7 +1,8 @@
 import { Flex } from '@chakra-ui/react';
+
+import NicknameInput from './NicknameInput';
 import ProfileEditHeader from './ProfileEditHeader';
 import ProfileImage from './ProfileImage';
-import NicknameInput from './NicknameInput';
 import SubmitButton from './SubmitButton';
 
 const ProfileEdit = () => {
