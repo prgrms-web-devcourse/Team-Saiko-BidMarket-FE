@@ -19,6 +19,7 @@ const CreateProduct = () => {
       paddingLeft="15px"
       paddingRight="15px"
       gap="20px"
+      marginTop="20px"
     >
       <Flex direction="column">
         <Flex alignItems="center">
