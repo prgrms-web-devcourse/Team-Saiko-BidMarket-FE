@@ -18,64 +18,124 @@ const CreateProduct = () => {
       alignItems="center"
       paddingLeft="15px"
       paddingRight="15px"
-      gap="16px"
+      gap="20px"
     >
-      <Flex marginTop="5" w="100%">
-        <IconButton
-          boxSize="12"
-          variant="outline"
-          borderColor="#E2E8F0"
-          aria-label="Add Image"
-          icon={<AddIcon />}
-        />
-        <Divider orientation="vertical" w="24px" />
-        {Array.from({ length: 5 }, (_, index) => index).map(() => {
-          return (
-            <>
-              <Box>
-                <IconButton
-                  position="absolute"
-                  transform="translate(230%, -40%)"
-                  boxSize="4"
-                  variant="outline"
-                  minWidth="1"
-                  aria-label="Search database"
-                  bg="#E2E8F0"
-                  icon={<CloseIcon w="8px" h="8px" />}
-                />
-                <Image
-                  boxSize="48px"
-                  objectFit="cover"
-                  borderRadius="5px"
-                  src="https://bit.ly/dan-abramov"
-                  alt="Dan Abramov"
-                />
-              </Box>
-              <Divider orientation="vertical" w="8px" />
-            </>
-          );
-        })}
-      </Flex>
-      <Input placeholder="상품 제목" marginTop="8px" />
-      <Flex direction="column" w="100%" alignItems="flex-end">
-        <Input placeholder="최소 금액" />
-        <Text fontSize="sm" color="#007C14">
-          11,000원
+      <Flex direction="column">
+        <Flex alignItems="center">
+          <Box w="33px">
+            <img src="/CreateProduct/cp4.png" width="22px" />
+          </Box>
+          <Text fontSize="lg" fontWeight="semibold">
+            사진
+          </Text>
+        </Flex>
+        <Text fontSize="sm" marginTop="1">
+          다양한 사진이 많을수록 입찰받을 확률이 높아져요!
         </Text>
+        <Flex marginTop="3" w="100%">
+          <IconButton
+            boxSize="82px"
+            variant="outline"
+            borderColor="#FF4370"
+            aria-label="Add Image"
+            icon={<AddIcon color="#FF4370" />}
+          />
+          <Divider orientation="vertical" w="24px" />
+          {Array.from({ length: 3 }, (_, index) => index).map(() => {
+            return (
+              <>
+                <Box>
+                  <IconButton
+                    position="absolute"
+                    transform="translate(300%, -40%)"
+                    borderRadius="2xl"
+                    boxSize="22px"
+                    variant="outline"
+                    minWidth="1"
+                    aria-label="Search database"
+                    bg="#FF4370"
+                    icon={<CloseIcon w="8px" h="8px" color="#FFFFFF" />}
+                  />
+                  <Image
+                    boxSize="82px"
+                    objectFit="cover"
+                    borderRadius="5px"
+                    src="https://bit.ly/dan-abramov"
+                    alt="Dan Abramov"
+                  />
+                </Box>
+                <Divider orientation="vertical" w="8px" />
+              </>
+            );
+          })}
+        </Flex>
       </Flex>
-      <Flex flexDirection="row" justifyContent="space-between" w="100%">
-        <Select placeholder="카테고리" color="#718096" w="47%">
-          <option value="option1">디지털 기기</option>
-          <option value="option2">생활 가전</option>
-          <option value="option3">가구 인테리어</option>
-        </Select>
-        <Select placeholder="희망 거래 지역" color="#718096" w="47%">
-          <option value="option1">서울</option>
-          <option value="option2">인천</option>
-          <option value="option3">청주</option>
-        </Select>
+
+      <Flex direction="column" w="100%" gap="3">
+        <Flex alignItems="center">
+          <Box w="33px" position="absolute" transform="translate(-10%, 0)">
+            <img src="/CreateProduct/cp2.png" width="30px" height="30px" />
+          </Box>
+          <Text fontSize="lg" fontWeight="semibold" marginLeft="9%">
+            상품 제목
+          </Text>
+        </Flex>
+        <Input placeholder="상품 제목" />
       </Flex>
-      <Textarea placeholder="상품 내용 작성" h="260px" />
+
+      <Flex direction="column" w="100%" gap="3">
+        <Flex alignItems="center">
+          <Box w="33px">
+            <img src="/CreateProduct/cp1.png" width="25px" height="15px" />
+          </Box>
+          <Text fontSize="lg" fontWeight="semibold">
+            최소 금액
+          </Text>
+        </Flex>
+        <Flex direction="column" w="100%" alignItems="flex-end">
+          <Input placeholder="최소 금액" />
+          <Text fontSize="sm" color="#007C14" marginRight="3">
+            11,000원
+          </Text>
+        </Flex>
+      </Flex>
+
+      <Flex direction="column" w="100%" gap="3">
+        <Flex alignItems="center">
+          <Box w="33px">
+            <img src="/CreateProduct/cp5.png" width="21px" height="22px" />
+          </Box>
+
+          <Text fontSize="lg" fontWeight="semibold">
+            판매 설정
+          </Text>
+        </Flex>
+        <Flex flexDirection="row" justifyContent="space-between" w="100%">
+          <Select placeholder="카테고리" color="#718096" w="47%">
+            <option value="option1">디지털 기기</option>
+            <option value="option2">생활 가전</option>
+            <option value="option3">가구 인테리어</option>
+          </Select>
+
+          <Select placeholder="희망 거래 지역" color="#718096" w="47%">
+            <option value="option1">서울</option>
+            <option value="option2">인천</option>
+            <option value="option3">청주</option>
+          </Select>
+        </Flex>
+      </Flex>
+
+      <Flex direction="column" w="100%" gap="3">
+        <Flex alignItems="center">
+          <Box w="33px">
+            <img src="/CreateProduct/cp3.png" width="20px" height="21px" />
+          </Box>
+          <Text fontSize="lg" fontWeight="semibold">
+            상세 내용
+          </Text>
+        </Flex>
+        <Textarea placeholder="상품 내용 작성" h="260px" />
+      </Flex>
     </Flex>
   );
 };
