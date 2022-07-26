@@ -1,6 +1,7 @@
+import { Fragment } from 'react';
 import Card from '@common/Card';
+import SearchInput from '@common/SearchInput';
 import Banner from './Banner';
-import SearchInput from './SearchInput';
 import ProductAddButton from './ProductAddButton';
 import { Divider, Flex } from '@chakra-ui/react';
 
@@ -17,14 +18,16 @@ const Main = () => {
       <Banner />
       <Divider marginTop="15px" />
       <SearchInput />
-      {Array.from({ length: 10 }, (_, index) => index).map(() => {
-        return (
-          <>
-            <Card />
-            <Divider />
-          </>
-        );
-      })}
+      {Array(10)
+        .fill(1)
+        .map((_, index) => {
+          return (
+            <Fragment key={index}>
+              <Card />
+              <Divider />
+            </Fragment>
+          );
+        })}
       <ProductAddButton />
     </Flex>
   );
