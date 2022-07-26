@@ -12,25 +12,12 @@ import {
 import { EditIcon } from '@chakra-ui/icons';
 import Header from '@common/header';
 import GoBackIcon from '@common/Header/GoBackIcon';
+import ProfileEditHeader from './ProfileEditHeader';
 
 const ProfileEdit = () => {
   return (
     <Flex flexDirection="column" width="100%" height="100%">
-      <Header
-        leftContent={<GoBackIcon />}
-        middleContent={
-          <Text
-            fontFamily="Roboto"
-            fontSize="20px"
-            fontWeight="bold"
-            lineHeight="23px"
-            fontStyle="normal"
-            color="#2E2E2E"
-          >
-            프로필수정
-          </Text>
-        }
-      ></Header>
+      <ProfileEditHeader />
       <Flex width="100%" height="100%" marginTop="48px">
         <Flex width="100%" direction="column" alignItems="center" gap="48px">
           <Circle
