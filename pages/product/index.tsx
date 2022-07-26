@@ -23,6 +23,7 @@ const Product: NextPage = () => {
             fontSize="14px"
             bg="#FF4370"
             color="#FFFFFF"
+            marginRight="5px"
           >
             완료
           </Button>

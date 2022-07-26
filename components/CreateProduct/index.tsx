@@ -24,7 +24,7 @@ const CreateProduct = () => {
       <Flex direction="column">
         <Flex alignItems="center">
           <Box w="33px">
-            <img src="/CreateProduct/cp4.png" width="22px" />
+            <Image src="/CreateProduct/cp4.png" alt="picture" width="22px" />
           </Box>
           <Text fontSize="lg" fontWeight="semibold">
             사진
@@ -75,7 +75,12 @@ const CreateProduct = () => {
       <Flex direction="column" w="100%" gap="3">
         <Flex alignItems="center">
           <Box w="33px" position="absolute" transform="translate(-10%, 0)">
-            <img src="/CreateProduct/cp2.png" width="30px" height="30px" />
+            <Image
+              src="/CreateProduct/cp2.png"
+              alt="title"
+              width="30px"
+              height="30px"
+            />
           </Box>
           <Text fontSize="lg" fontWeight="semibold" marginLeft="9%">
             상품 제목
@@ -87,7 +92,12 @@ const CreateProduct = () => {
       <Flex direction="column" w="100%" gap="3">
         <Flex alignItems="center">
           <Box w="33px">
-            <img src="/CreateProduct/cp1.png" width="25px" height="15px" />
+            <Image
+              src="/CreateProduct/cp1.png"
+              alt="amount"
+              width="25px"
+              height="15px"
+            />
           </Box>
           <Text fontSize="lg" fontWeight="semibold">
             최소 금액
@@ -104,7 +114,12 @@ const CreateProduct = () => {
       <Flex direction="column" w="100%" gap="3">
         <Flex alignItems="center">
           <Box w="33px">
-            <img src="/CreateProduct/cp5.png" width="21px" height="22px" />
+            <Image
+              src="/CreateProduct/cp5.png"
+              alt="select"
+              width="21px"
+              height="22px"
+            />
           </Box>
 
           <Text fontSize="lg" fontWeight="semibold">
@@ -129,7 +144,12 @@ const CreateProduct = () => {
       <Flex direction="column" w="100%" gap="3">
         <Flex alignItems="center">
           <Box w="33px">
-            <img src="/CreateProduct/cp3.png" width="20px" height="21px" />
+            <Image
+              src="/CreateProduct/cp3.png"
+              alt="contents"
+              width="20px"
+              height="21px"
+            />
           </Box>
           <Text fontSize="lg" fontWeight="semibold">
             상세 내용
