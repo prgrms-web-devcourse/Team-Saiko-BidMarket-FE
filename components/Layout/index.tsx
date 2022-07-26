@@ -1,8 +1,8 @@
 import { Flex } from '@chakra-ui/react';
 
-type LayoutProps = {
+interface LayoutProps {
   children?: React.ReactNode;
-};
+}
 
 const Layout = ({ children }: LayoutProps) => {
   return (

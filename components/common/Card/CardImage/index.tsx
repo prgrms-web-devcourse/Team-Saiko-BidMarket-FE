@@ -1,9 +1,9 @@
 import { Image } from '@chakra-ui/react';
 
-type CardImageProps = {
+interface CardImageProps {
   alt: string;
   src: string;
-};
+}
 
 const CardImage = ({ alt, src }: CardImageProps) => {
   return (
