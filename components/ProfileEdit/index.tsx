@@ -2,36 +2,85 @@ import {
   Avatar,
   Box,
   Center,
+  Circle,
   Flex,
   Input,
   InputGroup,
   InputRightElement,
+  Text,
 } from '@chakra-ui/react';
 import { EditIcon } from '@chakra-ui/icons';
+import Header from '@common/header';
+import GoBackIcon from '@common/Header/GoBackIcon';
 
 const ProfileEdit = () => {
-  // TODO: header 공통 컴포넌트 구현되면 추가 해주기
   return (
-    <>
-      <Box textAlign="center">TODO 공통 헤더!</Box>
-      <Center width="100%" marginTop="48px">
+    <Flex flexDirection="column" width="100%" height="100%">
+      <Header
+        leftContent={<GoBackIcon />}
+        middleContent={
+          <Text
+            fontFamily="Roboto"
+            fontSize="20px"
+            fontWeight="bold"
+            lineHeight="23px"
+            fontStyle="normal"
+            color="#2E2E2E"
+          >
+            프로필수정
+          </Text>
+        }
+      ></Header>
+      <Flex width="100%" height="100%" marginTop="48px">
         <Flex width="100%" direction="column" alignItems="center" gap="48px">
-          <Avatar
-            name="Christian Nwamba"
-            size="2xl"
-            src="https://bit.ly/code-beast"
-          />
-          <Flex width="100%" paddingRight="15px" paddingLeft="15px">
+          <Circle border="2px solid #FF4370">
+            <Avatar
+              name="Christian Nwamba"
+              size="2xl"
+              src="https://bit.ly/code-beast"
+            />
+          </Circle>
+          <Flex
+            flexGrow="1"
+            width="100%"
+            paddingRight="19px"
+            paddingLeft="19px"
+            height="70%"
+          >
             <InputGroup size="md">
-              <Input variant="flushed" size="lg" placeholder="물안경" />
-              <InputRightElement width="24px" height="24px">
-                <EditIcon alignSelf="center" />
+              <Input
+                variant="flushed"
+                size="lg"
+                placeholder="물안경"
+                border="0.7px solid #BFBFBF"
+                borderRadius="10px"
+                paddingLeft="23px"
+              />
+              <InputRightElement paddingRight="16px">
+                <EditIcon width="22px" height="22px" alignSelf="center" />
               </InputRightElement>
             </InputGroup>
           </Flex>
+          <Center
+            flexShrink="0"
+            justifySelf="flex-end"
+            width="100%"
+            height="57px"
+            backgroundColor="#FF4370"
+          >
+            <Text
+              fontStyle="Roboto"
+              fontSize="17px"
+              fontWeight="400px"
+              lineHeight="20px"
+              color="white"
+            >
+              완료
+            </Text>
+          </Center>
         </Flex>
-      </Center>
-    </>
+      </Flex>
+    </Flex>
   );
 };
 
