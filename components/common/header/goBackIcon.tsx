@@ -1,7 +1,10 @@
 import { ChevronLeftIcon } from '@chakra-ui/icons';
+import { useRouter } from 'next/router';
 
 const GoBackIcon = () => {
-  return <ChevronLeftIcon boxSize="8" />;
+  const router = useRouter();
+
+  return <ChevronLeftIcon boxSize="8" onClick={() => router.back()} />;
 };
 
 export default GoBackIcon;
