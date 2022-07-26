@@ -1,7 +1,7 @@
 import { Text } from '@chakra-ui/react';
-import Header from '@common/header';
-import GoBackIcon from '@common/header/goBackIcon';
-import Seo from '@common/seo';
+import Header from '@common/Header';
+import GoBackIcon from '@common/Header/GoBackIcon';
+import Seo from '@common/Seo';
 import type { NextPage } from 'next';
 
 const Login: NextPage = () => {
