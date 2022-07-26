@@ -1,22 +1,22 @@
 import { Center, Flex } from '@chakra-ui/react';
 
 interface HeaderProp {
-  left?: React.ReactNode;
-  middle?: React.ReactNode;
-  right?: React.ReactNode;
+  leftContent?: React.ReactNode;
+  middleContent?: React.ReactNode;
+  rightContent?: React.ReactNode;
 }
 
-const Header = ({ left, middle, right }: HeaderProp) => {
+const Header = ({ leftContent, middleContent, rightContent }: HeaderProp) => {
   return (
     <Flex padding="10px" justifyContent="space-between" width="100%">
       <Flex alignItems="center" flex="1">
-        {left}
+        {leftContent}
       </Flex>
       <Center alignItems="center" flex="1">
-        {middle}
+        {middleContent}
       </Center>
       <Flex justifyContent="flex-end" alignItems="center" flex="1">
-        {right}
+        {rightContent}
       </Flex>
     </Flex>
   );

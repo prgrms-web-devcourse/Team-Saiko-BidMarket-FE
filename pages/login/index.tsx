@@ -8,7 +8,10 @@ const Login: NextPage = () => {
   return (
     <>
       <Seo title="로그인" />
-      <Header left={<GoBackIcon />} middle={<Text>비드마켓</Text>} />
+      <Header
+        leftContent={<GoBackIcon />}
+        middleContent={<Text>비드마켓</Text>}
+      />
     </>
   );
 };
