@@ -1,12 +1,12 @@
 import { Center, Flex } from '@chakra-ui/react';
 
-interface HeaderProp {
+interface HeaderProps {
   leftContent?: React.ReactNode;
   middleContent?: React.ReactNode;
   rightContent?: React.ReactNode;
 }
 
-const Header = ({ leftContent, middleContent, rightContent }: HeaderProp) => {
+const Header = ({ leftContent, middleContent, rightContent }: HeaderProps) => {
   return (
     <Flex padding="10px" justifyContent="space-between" width="100%">
       <Flex alignItems="center" flex="1">
