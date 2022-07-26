@@ -10,6 +10,7 @@ import {
   Divider,
   Text,
 } from '@chakra-ui/react';
+import { Fragment } from 'react';
 
 const CreateProduct = () => {
   return (
@@ -44,7 +45,7 @@ const CreateProduct = () => {
           <Divider orientation="vertical" w="24px" />
           {Array.from({ length: 3 }, (_, index) => index).map(() => {
             return (
-              <>
+              <Fragment key="index">
                 <Box>
                   <IconButton
                     position="absolute"
@@ -66,7 +67,7 @@ const CreateProduct = () => {
                   />
                 </Box>
                 <Divider orientation="vertical" w="8px" />
-              </>
+              </Fragment>
             );
           })}
         </Flex>
