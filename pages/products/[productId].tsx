@@ -1,7 +1,9 @@
 import type { NextPage } from 'next';
 
+import ProductDetail from 'components/ProductDetail';
+
 const ProductsId: NextPage = () => {
-  return <div>ProductsId</div>;
+  return <ProductDetail />;
 };
 
 export default ProductsId;
