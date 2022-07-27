@@ -22,7 +22,7 @@ const Product: NextPage = () => {
             w="55px"
             h="29px"
             fontSize="14px"
-            bg="#FF4370"
+            bg="brand.primary-900"
             color="#FFFFFF"
             marginRight="5px"
           >

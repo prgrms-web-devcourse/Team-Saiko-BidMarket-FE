@@ -8,7 +8,12 @@ interface HeaderProps {
 
 const Header = ({ leftContent, middleContent, rightContent }: HeaderProps) => {
   return (
-    <Flex padding="10px" justifyContent="space-between" width="100%">
+    <Flex
+      paddingTop="20px"
+      paddingBottom="20px"
+      justifyContent="space-between"
+      width="100%"
+    >
       <Flex alignItems="center" flex="1">
         {leftContent}
       </Flex>

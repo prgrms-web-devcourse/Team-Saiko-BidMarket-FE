@@ -38,9 +38,9 @@ const CreateProduct = () => {
           <IconButton
             boxSize="82px"
             variant="outline"
-            borderColor="#FF4370"
+            borderColor="brand.primary-900"
             aria-label="Add Image"
-            icon={<AddIcon color="#FF4370" />}
+            icon={<AddIcon color="brand.primary-900" />}
           />
           <Divider orientation="vertical" w="24px" />
           {Array.from({ length: 3 }, (_, index) => index).map(() => {
@@ -55,7 +55,7 @@ const CreateProduct = () => {
                     variant="outline"
                     minWidth="1"
                     aria-label="Delete Button"
-                    bg="#FF4370"
+                    bg="brand.primary-900"
                     icon={<CloseIcon w="8px" h="8px" color="#FFFFFF" />}
                   />
                   <Image

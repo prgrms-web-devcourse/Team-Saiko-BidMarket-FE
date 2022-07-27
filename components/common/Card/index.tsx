@@ -11,13 +11,13 @@ const Card: NextPage = () => {
       <Flex direction="column" paddingLeft="15px" width="100%" gap="5px">
         <Text fontSize="lg">먹다 남은 케이크</Text>
         <Flex justifyContent="space-between" alignItems="center">
-          <Text fontSize="sm" color="#FF4370">
+          <Text fontSize="sm" color="brand.primary-900">
             시작가
           </Text>
           <Text
             fontSize="sm"
-            bg="#FFECF2"
-            color="#FF4370"
+            bg="brand.primary-100"
+            color="brand.primary-900"
             padding="3px 10px"
             borderRadius="20px"
             fontWeight="bold"
