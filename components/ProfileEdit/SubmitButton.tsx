@@ -7,7 +7,7 @@ const SubmitButton = () => (
     type="submit"
     width="100%"
     height="57px"
-    backgroundColor="#FF4370"
+    backgroundColor="brand.primary-900"
     cursor="pointer"
   >
     <Text

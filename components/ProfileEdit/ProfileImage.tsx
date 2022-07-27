@@ -4,7 +4,7 @@ const ProfileImage = () => (
   <Circle
     position="relative"
     flexDirection="column"
-    border="2px solid #FF4370"
+    border="2px solid brand.primary-900"
     overflow="hidden"
     cursor="pointer"
   >

@@ -13,7 +13,7 @@ const ProfileEditHeader = () => (
         fontWeight="bold"
         lineHeight="23px"
         fontStyle="normal"
-        color="#2E2E2E"
+        color="barnd.dark"
       >
         프로필수정
       </Text>

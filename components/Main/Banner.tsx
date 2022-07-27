@@ -6,7 +6,7 @@ const Banner = () => {
     <Flex justifyContent="space-between" alignItems="flex-end">
       <Flex direction="column" gap="6px">
         <Text fontSize="lg">
-          <Text as="span" color="#FF4370">
+          <Text as="span" color="brand.primary-900">
             비딩
           </Text>
           을 통한

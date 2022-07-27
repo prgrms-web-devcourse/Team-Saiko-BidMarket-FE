@@ -5,13 +5,13 @@ const SearchInput = () => {
   return (
     <InputGroup marginTop="15px">
       <InputLeftElement pointerEvents="none">
-        <SearchIcon color="#FF4370" />
+        <SearchIcon color="brand.primary-900" />
       </InputLeftElement>
       <Input
         type="text"
         placeholder="찾으시는 상품을 검색해보세요!"
-        focusBorderColor="#FF4370"
-        borderColor="#FF4370"
+        focusBorderColor="brand.primary-900"
+        borderColor="brand.primary-900"
         borderRadius="50px"
       />
     </InputGroup>

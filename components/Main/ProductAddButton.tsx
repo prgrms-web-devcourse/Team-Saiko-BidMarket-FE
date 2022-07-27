@@ -10,7 +10,7 @@ const ProductAddButton = () => {
       w="60px"
       h="60px"
       borderRadius="50px"
-      backgroundColor="#FF4370"
+      backgroundColor="brand.primary-900"
       aria-label="product-add-button"
     >
       <AddIcon color="white" />
