@@ -3,7 +3,7 @@ import { Flex, Image, Text } from '@chakra-ui/react';
 const Banner = () => {
   //TODO: 슬로건 수정하기
   return (
-    <Flex justifyContent="space-between" alignItems="flex-end" marginTop="15px">
+    <Flex justifyContent="space-between" alignItems="flex-end">
       <Flex direction="column" gap="6px">
         <Text fontSize="lg">
           <Text as="span" color="#FF4370">

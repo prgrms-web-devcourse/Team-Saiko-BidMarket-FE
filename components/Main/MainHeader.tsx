@@ -3,7 +3,7 @@ import { Image } from '@chakra-ui/react';
 
 import Header from '@common/Header';
 
-const ProfileEditHeader = () => (
+const MainHeader = () => (
   <Header
     leftContent={
       <Image src="/Header/BidMarket.png" alt="bidmarket" height="20px" />
@@ -12,4 +12,4 @@ const ProfileEditHeader = () => (
   ></Header>
 );
 
-export default ProfileEditHeader;
+export default MainHeader;
