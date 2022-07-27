@@ -1,14 +1,12 @@
-import { Flex, Button, Text, Divider } from '@chakra-ui/react';
+import { Flex, Button, Text, Divider, useDisclosure } from '@chakra-ui/react';
+
+import ProductBidProgress from './ProductBidDrawer';
 
 const ProductBid = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
-    <Flex
-      direction="column"
-      gap="10px"
-      position="fixed"
-      bottom="0"
-      width="100%"
-    >
+    <Flex direction="column" gap="10px">
       <Divider />
       <Flex justifyContent="space-between" alignItems="center">
         <Text>시작가</Text>
@@ -28,9 +26,16 @@ const ProductBid = () => {
           01일 22시간 22분 40초
         </Text>
       </Flex>
-      <Button backgroundColor="brand.primary-900" cursor="pointer">
+      <Button
+        backgroundColor="brand.primary-900"
+        cursor="pointer"
+        borderRadius="50px"
+        marginBottom="15px"
+        onClick={onOpen}
+      >
         <Text color="white">입찰하기</Text>
       </Button>
+      <ProductBidProgress onClose={onClose} isOpen={isOpen} />
     </Flex>
   );
 };

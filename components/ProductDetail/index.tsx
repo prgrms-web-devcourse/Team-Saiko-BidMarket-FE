@@ -8,16 +8,28 @@ import ProductSeller from './ProductSeller';
 
 const ProductDetail = () => {
   return (
-    <Flex direction="column" width="100%">
+    <Flex direction="column">
       <ProductImage />
-      <Box h="7px" backgroundColor="#E2E2E2" />
       <Flex justifyContent="space-between" alignItems="center">
         <ProductSeller />
         <StarIcon w="22px" color="brand.primary-900" />
       </Flex>
       <Divider />
       <ProductInfo />
-      <ProductBid />
+      <Box
+        position="fixed"
+        bottom="0"
+        right="0"
+        left="0"
+        width="100%"
+        maxWidth="738px"
+        margin="0 auto"
+        padding="0 15px"
+        z-index="10"
+        backgroundColor="white"
+      >
+        <ProductBid />
+      </Box>
     </Flex>
   );
 };
