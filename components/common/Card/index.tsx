@@ -1,5 +1,5 @@
 import { StarIcon } from '@chakra-ui/icons';
-import { Flex, Text } from '@chakra-ui/react';
+import { Box, Flex, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 
 import CardImage from './CardImage';
@@ -13,9 +13,9 @@ const Card = ({ productId }: CardProps) => {
 
   return (
     <Flex
-      marginTop="15px"
+      padding="15px 0"
       width="100%"
-      height="130px"
+      height="144px"
       cursor="pointer"
       onClick={() => router.push(`/products/${productId}`)}
     >
