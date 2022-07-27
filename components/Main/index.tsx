@@ -21,7 +21,7 @@ const Main = () => {
           .map((_, index) => {
             return (
               <Fragment key={index}>
-                <Card />
+                <Card productId={index.toString()} />
                 <Divider />
               </Fragment>
             );
