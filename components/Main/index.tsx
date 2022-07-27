@@ -1,4 +1,4 @@
-import { Divider, Flex } from '@chakra-ui/react';
+import { Box, Divider, Flex } from '@chakra-ui/react';
 import { Fragment } from 'react';
 
 import Card from '@common/Card';
@@ -12,7 +12,7 @@ const Main = () => {
   return (
     <>
       <MainHeader />
-      <Flex position="relative" direction="column" width="100%">
+      <Flex direction="column" width="100%">
         <Banner />
         <Divider marginTop="15px" />
         <SearchInput />
@@ -26,8 +26,10 @@ const Main = () => {
               </Fragment>
             );
           })}
-        <ProductAddButton />
       </Flex>
+      <Box alignSelf="flex-end" position="sticky" bottom="15px" right="15px">
+        <ProductAddButton />
+      </Box>
     </>
   );
 };
