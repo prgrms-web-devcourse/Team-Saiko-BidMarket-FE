@@ -1,12 +1,24 @@
 import { StarIcon } from '@chakra-ui/icons';
 import { Flex, Text } from '@chakra-ui/react';
-import type { NextPage } from 'next';
+import { useRouter } from 'next/router';
 
 import CardImage from './CardImage';
 
-const Card: NextPage = () => {
+interface CardProps {
+  productId: string;
+}
+
+const Card = ({ productId }: CardProps) => {
+  const router = useRouter();
+
   return (
-    <Flex marginTop="15px" width="100%" height="130px">
+    <Flex
+      padding="15px 0"
+      width="100%"
+      height="144px"
+      cursor="pointer"
+      onClick={() => router.push(`/products/${productId}`)}
+    >
       <CardImage alt="abc" src="https://bit.ly/code-beast" />
       <Flex direction="column" paddingLeft="15px" width="100%" gap="5px">
         <Text fontSize="lg">먹다 남은 케이크</Text>
