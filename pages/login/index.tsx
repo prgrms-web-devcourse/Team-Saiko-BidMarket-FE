@@ -18,7 +18,7 @@ const Login: NextPage = () => {
       <Flex direction="column" alignItems="center" marginTop="20px">
         <Phrases />
         <Image
-          src="/login/basket.png"
+          src="/svg/basket.svg"
           alt="basket"
           marginTop="20px"
           marginBottom="45px"
