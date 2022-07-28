@@ -1,11 +1,8 @@
 import { Flex, Image, Text } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 
-import Header from '@common/Header';
-import GoBackIcon from '@common/Header/GoBackIcon';
-import SEO from '@common/SEO';
-import GoogleLoginButton from 'components/Login/GoogleLoginButton';
-import Phrases from 'components/Login/Phrases';
+import { Header, GoBackIcon, SEO } from 'components/common';
+import { GoogleLoginButton, Phrases } from 'components/Login';
 
 const Login: NextPage = () => {
   return (

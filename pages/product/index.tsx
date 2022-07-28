@@ -1,9 +1,7 @@
 import { Button, Text } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 
-import Header from '@common/Header';
-import GoBackIcon from '@common/Header/GoBackIcon';
-import SEO from '@common/SEO';
+import { Header, GoBackIcon, SEO } from 'components/common';
 import CreateProduct from 'components/CreateProduct';
 
 const Product: NextPage = () => {
