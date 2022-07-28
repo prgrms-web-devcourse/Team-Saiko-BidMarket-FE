@@ -20,7 +20,7 @@
   ],
   "rules": {
     "import/order": [
-      "warn",
+      "error",
       {
         "groups": ["builtin", "external", "internal"],
         "newlines-between": "always",
