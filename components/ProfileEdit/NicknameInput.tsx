@@ -4,11 +4,10 @@ import { ChangeEvent } from 'react';
 
 interface NicknameInputProps {
   name: string;
-  nickName: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const NicknameInput = ({ name, nickName, onChange }: NicknameInputProps) => {
+const NicknameInput = ({ name, onChange }: NicknameInputProps) => {
   return (
     <Flex
       flexGrow="1"
@@ -26,7 +25,6 @@ const NicknameInput = ({ name, nickName, onChange }: NicknameInputProps) => {
           borderRadius="10px"
           paddingLeft="23px"
           name={name}
-          value={nickName}
           onChange={onChange}
         />
         <InputRightElement paddingRight="16px">

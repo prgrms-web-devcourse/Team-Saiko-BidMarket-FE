@@ -1,14 +1,12 @@
 import { ChangeEvent, useState } from 'react';
 
-type InitialValuesType = {};
-
-interface useFormProps {
+interface useFormProps<InitialValuesType> {
   initialValues: InitialValuesType;
   onSubmit: (values: InitialValuesType) => void;
-  validate: (initialValues: InitialValuesType) => {};
+  validate: (initialValues: InitialValuesType) => InitialValuesType | {};
 }
 
-const useForm = ({ initialValues, onSubmit, validate }: useFormProps) => {
+const useForm = ({ initialValues, onSubmit, validate }: useFormProps<any>) => {
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -19,7 +17,7 @@ const useForm = ({ initialValues, onSubmit, validate }: useFormProps) => {
     setValues({ ...values, [name]: value });
   };
 
-  const handleSubmit = async (e: SubmitEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     setIsLoading(true);
     e.preventDefault();
 
