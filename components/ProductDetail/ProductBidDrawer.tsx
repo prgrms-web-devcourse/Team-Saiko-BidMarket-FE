@@ -24,7 +24,7 @@ const ProductBidDrawer = ({ isOpen, onClose }: ProductBidDrawerProps) => {
         <DrawerHeader>
           <Flex justifyContent="space-between" alignItems="center">
             <Flex alignItems="center" gap="10px">
-              <Image src="/CreateProduct/cp1.png" alt="hope-price" />
+              <Image src="/svg/price.svg" alt="bid-price" />
               <Text fontWeight="bold" fontSize="lg">
                 입찰 희망가
               </Text>

@@ -16,7 +16,7 @@ const Banner = () => {
           원하는 가격에 팔고, 좋은 물건은 싸게 산다!
         </Text>
       </Flex>
-      <Image src="/Banner/banner.png" alt="banner" height="65" />
+      <Image src="/svg/banner.svg" alt="banner" height="65" />
     </Flex>
   );
 };
