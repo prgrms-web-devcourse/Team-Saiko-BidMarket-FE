@@ -2,8 +2,7 @@ import { Box, Divider, Flex } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 import { Fragment } from 'react';
 
-import Card from '@common/Card';
-import SearchInput from '@common/SearchInput';
+import { Card, SearchInput } from 'components/common';
 import { Banner, MainHeader, ProductAddButton } from 'components/Main';
 
 const Home: NextPage = () => {
