@@ -1,11 +1,11 @@
 import { StarIcon } from '@chakra-ui/icons';
-import { Box, Flex, Text } from '@chakra-ui/react';
+import { Flex, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 
 import CardImage from './CardImage';
 
 interface CardProps {
-  productId?: string;
+  productId: string;
 }
 
 const Card = ({ productId }: CardProps) => {

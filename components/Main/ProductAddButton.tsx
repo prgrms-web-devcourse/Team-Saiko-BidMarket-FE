@@ -1,5 +1,5 @@
 import { AddIcon } from '@chakra-ui/icons';
-import { Box, Button } from '@chakra-ui/react';
+import { Button } from '@chakra-ui/react';
 
 const ProductAddButton = () => {
   return (
