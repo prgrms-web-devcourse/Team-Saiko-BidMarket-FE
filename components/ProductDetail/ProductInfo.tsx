@@ -21,7 +21,7 @@ const ProductInfo = () => {
       <Text fontSize="sm" color="#838383" marginTop="7px">
         10월 27일
       </Text>
-      <Text marginTop="14px" whiteSpace="pre-wrap" marginBottom="143px">
+      <Text marginTop="14px" whiteSpace="pre-wrap" marginBottom="158px">
         라이언이 키우는 춘식이! 고구마를 제일 좋아하지만 겨울에 이불을 덮고 귤을
         까먹는 맛이 있죠잉~ 귀여운 춘식이가 먹다 남은 귤 모음! 가볍게 만원부터
         시작하겠습니다.

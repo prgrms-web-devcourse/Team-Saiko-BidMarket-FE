@@ -1,4 +1,11 @@
-import { Flex, Button, Text, Divider, useDisclosure } from '@chakra-ui/react';
+import {
+  Flex,
+  Button,
+  Text,
+  Divider,
+  useDisclosure,
+  Image,
+} from '@chakra-ui/react';
 
 import ProductBidProgress from './ProductBidDrawer';
 
@@ -9,7 +16,10 @@ const ProductBid = () => {
     <Flex direction="column" gap="10px">
       <Divider />
       <Flex justifyContent="space-between" alignItems="center">
-        <Text>시작가</Text>
+        <Flex alignItems="center" gap="10px">
+          <Image src="/svg/price.svg" alt="start-price" />
+          <Text>시작가</Text>
+        </Flex>
         <Text
           bg="brand.primary-100"
           color="brand.primary-900"
@@ -21,7 +31,10 @@ const ProductBid = () => {
         </Text>
       </Flex>
       <Flex justifyContent="space-between" alignItems="center">
-        <Text>남은 시간</Text>
+        <Flex alignItems="center" gap="10px">
+          <Image src="/svg/time.svg" alt="remained-time" />
+          <Text>남은 시간</Text>
+        </Flex>
         <Text fontSize="sm" bg="#EFEFEF" padding="3px 10px" borderRadius="20px">
           01일 22시간 22분 40초
         </Text>
