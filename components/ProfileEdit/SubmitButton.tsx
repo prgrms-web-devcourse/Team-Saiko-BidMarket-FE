@@ -1,7 +1,14 @@
 import { Button, Text } from '@chakra-ui/react';
 
-const SubmitButton = () => (
+interface SubmitButtonProps {
+  isLoading: boolean;
+  loadingText: string;
+}
+
+const SubmitButton = ({ isLoading, loadingText }: SubmitButtonProps) => (
   <Button
+    isLoading={isLoading}
+    loadingText={loadingText}
     flexShrink="0"
     justifySelf="flex-end"
     type="submit"
