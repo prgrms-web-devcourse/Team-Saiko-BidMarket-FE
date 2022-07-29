@@ -1,4 +1,5 @@
 import {
+  Box,
   Flex,
   Button,
   Text,
@@ -13,43 +14,61 @@ const ProductBid = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Flex direction="column" gap="10px">
-      <Divider />
-      <Flex justifyContent="space-between" alignItems="center">
-        <Flex alignItems="center" gap="10px">
-          <Image src="/svg/price.svg" alt="start-price" />
-          <Text>시작가</Text>
+    <Box
+      position="fixed"
+      bottom="0"
+      right="0"
+      left="0"
+      width="100%"
+      maxWidth="738px"
+      margin="0 auto"
+      padding="0 15px"
+      z-index="10"
+      backgroundColor="white"
+    >
+      <Flex direction="column" gap="10px">
+        <Divider />
+        <Flex justifyContent="space-between" alignItems="center">
+          <Flex alignItems="center" gap="10px">
+            <Image src="/svg/price.svg" alt="start-price" />
+            <Text>시작가</Text>
+          </Flex>
+          <Text
+            bg="brand.primary-100"
+            color="brand.primary-900"
+            padding="3px 10px"
+            borderRadius="20px"
+            fontWeight="bold"
+          >
+            10,000원
+          </Text>
         </Flex>
-        <Text
-          bg="brand.primary-100"
-          color="brand.primary-900"
-          padding="3px 10px"
-          borderRadius="20px"
-          fontWeight="bold"
+        <Flex justifyContent="space-between" alignItems="center">
+          <Flex alignItems="center" gap="10px">
+            <Image src="/svg/time.svg" alt="remained-time" />
+            <Text>남은 시간</Text>
+          </Flex>
+          <Text
+            fontSize="sm"
+            bg="#EFEFEF"
+            padding="3px 10px"
+            borderRadius="20px"
+          >
+            01일 22시간 22분 40초
+          </Text>
+        </Flex>
+        <Button
+          backgroundColor="brand.primary-900"
+          cursor="pointer"
+          borderRadius="50px"
+          marginBottom="15px"
+          onClick={onOpen}
         >
-          10,000원
-        </Text>
+          <Text color="white">입찰하기</Text>
+        </Button>
+        <ProductBidProgress onClose={onClose} isOpen={isOpen} />
       </Flex>
-      <Flex justifyContent="space-between" alignItems="center">
-        <Flex alignItems="center" gap="10px">
-          <Image src="/svg/time.svg" alt="remained-time" />
-          <Text>남은 시간</Text>
-        </Flex>
-        <Text fontSize="sm" bg="#EFEFEF" padding="3px 10px" borderRadius="20px">
-          01일 22시간 22분 40초
-        </Text>
-      </Flex>
-      <Button
-        backgroundColor="brand.primary-900"
-        cursor="pointer"
-        borderRadius="50px"
-        marginBottom="15px"
-        onClick={onOpen}
-      >
-        <Text color="white">입찰하기</Text>
-      </Button>
-      <ProductBidProgress onClose={onClose} isOpen={isOpen} />
-    </Flex>
+    </Box>
   );
 };
 

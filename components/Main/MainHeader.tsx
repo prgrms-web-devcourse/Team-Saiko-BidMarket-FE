@@ -1,7 +1,6 @@
 import { Image } from '@chakra-ui/react';
 
-import Header from '@common/Header';
-import SideBar from '@common/Header/SideBar';
+import { Header, SideBar } from 'components/common';
 
 const MainHeader = () => (
   <Header
