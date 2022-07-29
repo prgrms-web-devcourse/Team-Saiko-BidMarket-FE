@@ -1,18 +1,20 @@
-import { Circle, Avatar, Box, Text } from '@chakra-ui/react';
+import { Avatar, Box, Circle, Text } from '@chakra-ui/react';
 
-const ProfileImage = () => (
+interface ProfileImageProps {
+  propfileImageUrl: string;
+  onClick: () => void;
+}
+
+const ProfileImage = ({ propfileImageUrl, onClick }: ProfileImageProps) => (
   <Circle
     position="relative"
     flexDirection="column"
     border="2px solid brand.primary-900"
     overflow="hidden"
     cursor="pointer"
+    onClick={onClick}
   >
-    <Avatar
-      name="Christian Nwamba"
-      size="2xl"
-      src="https://bit.ly/code-beast"
-    />
+    <Avatar name="profile-image" size="2xl" src={propfileImageUrl} />
     <Box
       position="absolute"
       bottom="0"
