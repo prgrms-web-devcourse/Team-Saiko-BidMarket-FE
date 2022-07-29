@@ -7,11 +7,13 @@ const EditProfileForm = () => {
   const { errors, isLoading, handleChange, handleSubmit } = useForm({
     initialValues: { nickname: '', profile: '' },
     // TODO: api로 닉네임, 사진(S3 주소값??) 보내주기
-    onSubmit: async ({ nickname, profile }) => {
+    onSubmit: async ({ nickname, e }) => {
       const fakeSubmit = () =>
         new Promise((resolve) => {
           setTimeout(() => {
-            alert(`onSubmit!\n nickname: ${nickname} \n profile: ${profile}`);
+            alert(
+              `onSubmit!\n nickname: ${nickname} \n profile: ${e.target.profile.dataset.url}`
+            );
             resolve('Success');
           }, 1500);
         });
