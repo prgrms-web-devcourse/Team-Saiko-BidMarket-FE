@@ -3,7 +3,7 @@ import ProductLabel from './ProductLabel';
 
 const AddProductTitle = () => {
   return (
-    <Flex direction="column" w="100%" gap="3">
+    <Flex direction="column" w="100%" gap="3" marginTop="3">
       <ProductLabel
         LabelImage={
           <Image
@@ -20,7 +20,13 @@ const AddProductTitle = () => {
           </Text>
         }
       />
-      <Input placeholder="상품 제목" />
+      <Input
+        placeholder="상품 제목"
+        border="1px"
+        borderColor="#B6B6B6"
+        maxLength={20}
+        h="50px"
+      />
     </Flex>
   );
 };

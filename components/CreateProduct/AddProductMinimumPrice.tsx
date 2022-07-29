@@ -1,7 +1,26 @@
 import { Flex, Image, Input, Text } from '@chakra-ui/react';
+import React, { useState } from 'react';
 import ProductLabel from './ProductLabel';
 
+//TODO: 100원 단위로 작성 가능, 1000원 이상 입력 가능
 const AddProductMinimumPrice = () => {
+  const [price, setPrice] = useState('');
+  const [format, setFormat] = useState('0');
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const target = event.target as HTMLInputElement;
+
+    const numeralReg = new RegExp(/\B(?=(\d{3})+(?!\d))/g);
+    const numericValueOnly = target.value.replaceAll(',', '');
+
+    if (target.value.length > target.maxLength) {
+      target.value = target.value.slice(0, target.maxLength);
+    }
+
+    setFormat(numericValueOnly.replace(numeralReg, ','));
+    setPrice(target.value);
+  };
+
   return (
     <Flex direction="column" w="100%" gap="3">
       <ProductLabel
@@ -20,9 +39,20 @@ const AddProductMinimumPrice = () => {
         }
       />
       <Flex direction="column" w="100%" alignItems="flex-end">
-        <Input placeholder="최소 금액" />
+        <Input
+          type="number"
+          onChange={handleInputChange}
+          value={price}
+          placeholder="최소 금액"
+          border="1px"
+          borderColor="#B6B6B6"
+          max="10000"
+          h="50px"
+          min="1000"
+          maxLength={13}
+        />
         <Text fontSize="sm" color="#007C14" marginRight="3">
-          11,000원
+          {format}원
         </Text>
       </Flex>
     </Flex>

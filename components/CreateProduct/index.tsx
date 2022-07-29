@@ -14,7 +14,7 @@ const CreateProduct = () => {
       paddingLeft="15px"
       paddingRight="15px"
       gap="20px"
-      marginTop="20px"
+      marginTop="10px"
       w="100%"
     >
       <AddProductImages />

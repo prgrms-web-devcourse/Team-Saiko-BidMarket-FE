@@ -3,6 +3,7 @@ import { Box, Divider, Flex, IconButton, Image, Text } from '@chakra-ui/react';
 import { Fragment } from 'react';
 import ProductLabel from './ProductLabel';
 
+//TODO: 이미지 추가/삭제 기능 추가 예정
 const AddProductImages = () => {
   return (
     <Flex direction="column" w="100%" gap="1">
@@ -28,33 +29,35 @@ const AddProductImages = () => {
           icon={<AddIcon color="#FF4370" />}
         />
         <Divider orientation="vertical" w="24px" />
-        {Array.from({ length: 3 }, (_, index) => index).map(() => {
-          return (
-            <Fragment key="index">
-              <Box>
-                <IconButton
-                  position="absolute"
-                  transform="translate(300%, -40%)"
-                  borderRadius="2xl"
-                  boxSize="22px"
-                  variant="outline"
-                  minWidth="1"
-                  aria-label="Delete Button"
-                  bg="#FF4370"
-                  icon={<CloseIcon w="8px" h="8px" color="#FFFFFF" />}
-                />
-                <Image
-                  boxSize="82px"
-                  objectFit="cover"
-                  borderRadius="5px"
-                  src="https://bit.ly/dan-abramov"
-                  alt="Dan Abramov"
-                />
-              </Box>
-              <Divider orientation="vertical" w="8px" />
-            </Fragment>
-          );
-        })}
+        {Array(3)
+          .fill(1)
+          .map((_, index) => {
+            return (
+              <Fragment key={index}>
+                <Box>
+                  <IconButton
+                    position="absolute"
+                    transform="translate(300%, -40%)"
+                    borderRadius="2xl"
+                    boxSize="22px"
+                    variant="outline"
+                    minWidth="1"
+                    aria-label="Delete Button"
+                    bg="#FF4370"
+                    icon={<CloseIcon w="8px" h="8px" color="#FFFFFF" />}
+                  />
+                  <Image
+                    boxSize="82px"
+                    objectFit="cover"
+                    borderRadius="5px"
+                    src="https://bit.ly/dan-abramov"
+                    alt="Dan Abramov"
+                  />
+                </Box>
+                <Divider orientation="vertical" w="8px" />
+              </Fragment>
+            );
+          })}
       </Flex>
     </Flex>
   );

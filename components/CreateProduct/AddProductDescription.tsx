@@ -19,7 +19,13 @@ const AddProductDescription = () => {
           </Text>
         }
       />
-      <Textarea placeholder="상품 내용 작성" h="260px" />
+      <Textarea
+        placeholder="상품 내용 작성"
+        border="1px"
+        borderColor="#B6B6B6"
+        h="240px"
+        maxLength={300}
+      />
     </Flex>
   );
 };
