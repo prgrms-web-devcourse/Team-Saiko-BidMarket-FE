@@ -3,15 +3,16 @@ import { useRouter } from 'next/router';
 import Script from 'next/script';
 import { useRef } from 'react';
 
+const GOOGLE_LOGIN_URL =
+  'http://localhost:8080/oauth2/authorization/google?redirect_uri=http://localhost:3000/oauth/redirect';
+
 const GoogleLoginButton = () => {
   const router = useRouter();
   const loginButton = useRef<HTMLDivElement>(null);
 
   const handleLoginButtonClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    event.stopPropagation;
-    router.push(
-      'http://localhost:8080/oauth2/authorization/google?redirect_uri=http://localhost:3000/oauth/redirect'
-    );
+    event.stopPropagation();
+    router.push(GOOGLE_LOGIN_URL);
   };
 
   return (
