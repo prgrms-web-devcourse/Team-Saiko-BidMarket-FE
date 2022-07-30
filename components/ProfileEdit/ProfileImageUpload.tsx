@@ -1,5 +1,6 @@
 import { Input } from '@chakra-ui/react';
 import { ChangeEvent, useRef, useState } from 'react';
+
 import { ProfileImage } from '.';
 
 interface ImageUploadProps {
