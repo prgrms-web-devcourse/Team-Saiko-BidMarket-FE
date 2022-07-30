@@ -8,7 +8,7 @@ interface useFormProps<InitialValuesType> {
 
 const useForm = ({ initialValues, onSubmit, validate }: useFormProps<any>) => {
   const [values, setValues] = useState(initialValues);
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<Record<string, unknown>>({});
   const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {

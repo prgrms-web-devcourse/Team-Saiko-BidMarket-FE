@@ -1,4 +1,4 @@
-import { Flex, Text } from '@chakra-ui/react';
+import { Flex, FormControl, FormErrorMessage } from '@chakra-ui/react';
 
 import { NicknameInput, SubmitButton } from '.';
 import useForm from '../../hooks/useForm';
@@ -22,10 +22,10 @@ const EditProfileForm = () => {
       await fakeSubmit();
     },
     validate: ({ nickname }) => {
-      const error: { nickname?: string; profile?: string } = {};
+      const error: { nickname?: string } = {};
 
       if (!nickname) {
-        error.nickname = '닉네임을 입력해주세요.';
+        error.nickname = '수정할 닉네임을 입력해주세요.';
       }
 
       return error;
@@ -41,13 +41,15 @@ const EditProfileForm = () => {
           profileImageUrl="https://bit.ly/code-beast"
           onChange={handleChange}
         />
-        {Object.keys(errors).length > 0 &&
-          Object.values(errors).map((errorMessage, index) => (
-            <Text key={index} size="20px" color="red">
-              {errorMessage as string}
-            </Text>
-          ))}
-        <NicknameInput name="nickname" onChange={handleChange} />
+        <FormControl
+          isInvalid={(errors.nickname as string)?.length > 0 ? true : false}
+        >
+          <NicknameInput name="nickname" onChange={handleChange} />
+          <FormErrorMessage paddingLeft="19px">
+            {errors.nickname as string}
+          </FormErrorMessage>
+        </FormControl>
+
         <SubmitButton isLoading={isLoading} loadingText={'전송 중'} />
       </Flex>
     </form>
