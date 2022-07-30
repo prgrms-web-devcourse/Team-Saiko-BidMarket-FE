@@ -36,13 +36,9 @@ const NicknameInput = ({ name, onChange }: NicknameInputProps) => {
           onChange={onChange}
         />
         {visible && (
-          <InputRightElement
-            pointerEvents="none"
-            paddingRight="16px"
-            children={
-              <EditIcon width="22px" height="22px" alignSelf="center" />
-            }
-          />
+          <InputRightElement pointerEvents="none" paddingRight="16px">
+            <EditIcon width="22px" height="22px" alignSelf="center" />
+          </InputRightElement>
         )}
       </InputGroup>
     </Flex>
