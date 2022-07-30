@@ -3,7 +3,7 @@ import { ChangeEvent, useState } from 'react';
 interface useFormProps<InitialValuesType> {
   initialValues: InitialValuesType;
   onSubmit: (values: InitialValuesType) => void;
-  validate: (initialValues: InitialValuesType) => InitialValuesType | {};
+  validate: (initialValues: InitialValuesType) => InitialValuesType;
 }
 
 const useForm = ({ initialValues, onSubmit, validate }: useFormProps<any>) => {
