@@ -1,1 +1,1 @@
-export { default as NoSellProduct } from './NoSellProduct';
+export { default as NoSellProducts } from './NoSellProducts';
