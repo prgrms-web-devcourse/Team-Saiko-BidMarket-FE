@@ -3,11 +3,16 @@ import { Flex, InputGroup, Input, InputRightElement } from '@chakra-ui/react';
 import { ChangeEvent, useRef, useState } from 'react';
 
 interface NicknameInputProps {
-  name: string;
+  inputName: string;
+  nickname: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const NicknameInput = ({ name, onChange }: NicknameInputProps) => {
+const NicknameInput = ({
+  inputName,
+  nickname,
+  onChange,
+}: NicknameInputProps) => {
   const [visible, setVisible] = useState(true);
   const inputRef = useRef<HTMLInputElement>(null);
   const handleFocus = () => setVisible(false);
@@ -28,11 +33,12 @@ const NicknameInput = ({ name, onChange }: NicknameInputProps) => {
           onBlur={handleBlur}
           variant="flushed"
           size="lg"
-          placeholder="물안경"
+          defaultValue={nickname}
+          placeholder="수정할 닉네임을 입력해주세요"
           border="0.7px solid #BFBFBF"
           borderRadius="10px"
           paddingLeft="23px"
-          name={name}
+          name={inputName}
           onChange={onChange}
         />
         {visible && (

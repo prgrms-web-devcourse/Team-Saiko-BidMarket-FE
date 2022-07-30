@@ -4,7 +4,15 @@ import { NicknameInput, SubmitButton } from '.';
 import useForm from '../../hooks/useForm';
 import ProfileImageUpload from './ProfileImageUpload';
 
-const EditProfileForm = () => {
+interface EditProfileFormProps {
+  nickname: string;
+  profileImageUrl: string;
+}
+
+const EditProfileForm = ({
+  nickname,
+  profileImageUrl,
+}: EditProfileFormProps) => {
   const { errors, isLoading, handleChange, handleSubmit } = useForm({
     initialValues: { nickname: '', profile: '' },
     // TODO: api로 닉네임, 사진(S3 주소값??) 보내주기
@@ -38,13 +46,17 @@ const EditProfileForm = () => {
       <Flex width="100%" direction="column" alignItems="center" gap="48px">
         <ProfileImageUpload
           name="profile"
-          profileImageUrl="https://bit.ly/code-beast"
+          profileImageUrl={profileImageUrl}
           onChange={handleChange}
         />
         <FormControl
           isInvalid={(errors.nickname as string)?.length > 0 ? true : false}
         >
-          <NicknameInput name="nickname" onChange={handleChange} />
+          <NicknameInput
+            inputName="nickname"
+            nickname={nickname}
+            onChange={handleChange}
+          />
           <FormErrorMessage paddingLeft="19px">
             {errors.nickname as string}
           </FormErrorMessage>
