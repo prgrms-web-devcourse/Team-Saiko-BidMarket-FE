@@ -16,6 +16,7 @@ const SubmitButton = ({ isLoading, loadingText }: SubmitButtonProps) => (
     height="57px"
     backgroundColor="brand.primary-900"
     cursor="pointer"
+    _hover={{ bg: 'brand.primary-900' }}
   >
     <Text
       fontFamily="Roboto"
