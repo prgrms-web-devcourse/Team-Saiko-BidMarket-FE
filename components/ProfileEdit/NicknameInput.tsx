@@ -1,6 +1,6 @@
 import { EditIcon } from '@chakra-ui/icons';
 import { Flex, InputGroup, Input, InputRightElement } from '@chakra-ui/react';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 
 interface NicknameInputProps {
   name: string;
@@ -8,6 +8,11 @@ interface NicknameInputProps {
 }
 
 const NicknameInput = ({ name, onChange }: NicknameInputProps) => {
+  const [visible, setVisible] = useState(true);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const handleFocus = () => setVisible(false);
+  const handleBlur = () => setVisible(true);
+
   return (
     <Flex
       flexGrow="1"
@@ -18,6 +23,9 @@ const NicknameInput = ({ name, onChange }: NicknameInputProps) => {
     >
       <InputGroup size="md">
         <Input
+          ref={inputRef}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
           variant="flushed"
           size="lg"
           placeholder="물안경"
@@ -27,9 +35,15 @@ const NicknameInput = ({ name, onChange }: NicknameInputProps) => {
           name={name}
           onChange={onChange}
         />
-        <InputRightElement paddingRight="16px">
-          <EditIcon width="22px" height="22px" alignSelf="center" />
-        </InputRightElement>
+        {visible && (
+          <InputRightElement
+            pointerEvents="none"
+            paddingRight="16px"
+            children={
+              <EditIcon width="22px" height="22px" alignSelf="center" />
+            }
+          />
+        )}
       </InputGroup>
     </Flex>
   );

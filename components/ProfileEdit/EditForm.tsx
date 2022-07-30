@@ -1,7 +1,7 @@
 import { Flex, Text } from '@chakra-ui/react';
 import { NicknameInput, SubmitButton } from '.';
 import useForm from '../../hooks/useForm';
-import ProfileImageUpload from './ProfileImageupload';
+import ProfileImageUpload from './ProfileImageUpload';
 
 const EditProfileForm = () => {
   const { errors, isLoading, handleChange, handleSubmit } = useForm({
