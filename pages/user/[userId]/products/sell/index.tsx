@@ -10,6 +10,7 @@ const DUMMY = [];
 const Sell: NextPage = () => {
   return (
     <>
+      {/* @ TODO 실제 사용자 닉네임으로 교체 예정 */}
       <SEO title="사용자 이름" />
       <Header
         leftContent={<GoBackIcon />}
