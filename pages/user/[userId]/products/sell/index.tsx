@@ -4,6 +4,7 @@ import type { NextPage } from 'next';
 import { GoBackIcon, Header, SEO } from 'components/common';
 import { NoSellProduct } from 'components/User';
 
+// @ TODO 데이터 가져와서 연결 작업
 const DUMMY = [];
 
 const Sell: NextPage = () => {
