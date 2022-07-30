@@ -43,6 +43,7 @@ const ProfileImageUpload = ({
         type="file"
         name={name}
         accept="image/*"
+        data-url={previewImageUrl}
         onChange={handleChange}
       />
       <ProfileImage

@@ -21,15 +21,11 @@ const EditProfileForm = () => {
 
       await fakeSubmit();
     },
-    validate: ({ nickname, profile }) => {
+    validate: ({ nickname }) => {
       const error: { nickname?: string; profile?: string } = {};
 
       if (!nickname) {
         error.nickname = '닉네임을 입력해주세요.';
-      }
-
-      if (!profile) {
-        error.profile = '프로필 사진을 등록해주세요.';
       }
 
       return error;
