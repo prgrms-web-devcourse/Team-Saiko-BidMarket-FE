@@ -9,7 +9,8 @@ const ProfileImage = ({ propfileImageUrl, onClick }: ProfileImageProps) => (
   <Circle
     position="relative"
     flexDirection="column"
-    border="2px solid brand.primary-900"
+    border="2px solid"
+    borderColor="brand.primary-900"
     overflow="hidden"
     cursor="pointer"
     onClick={onClick}
