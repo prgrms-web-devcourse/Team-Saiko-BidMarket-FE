@@ -1,7 +1,7 @@
 import { Button, Image, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 
-const NoBidProduct = () => {
+const NoSellProducts = () => {
   const router = useRouter();
 
   return (
@@ -25,4 +25,4 @@ const NoBidProduct = () => {
   );
 };
 
-export default NoBidProduct;
+export default NoSellProducts;
