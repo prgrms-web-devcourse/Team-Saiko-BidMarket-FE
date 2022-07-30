@@ -5,9 +5,10 @@ interface SEOProps {
 }
 
 const SEO = ({ title }: SEOProps) => {
+  const titleContent = `${title} | Bidmarket`;
   return (
     <Head>
-      <title>{title} | Bidmarket</title>
+      <title>{titleContent}</title>
     </Head>
   );
 };
