@@ -1,7 +1,8 @@
 import { Flex, FormControl, FormErrorMessage } from '@chakra-ui/react';
 
+import useForm from 'hooks/useForm';
+
 import { NicknameInput, SubmitButton } from '.';
-import useForm from '../../hooks/useForm';
 import ProfileImageUpload from './ProfileImageUpload';
 
 interface EditProfileFormProps {
