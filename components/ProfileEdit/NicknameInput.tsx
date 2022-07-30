@@ -15,8 +15,6 @@ const NicknameInput = ({
 }: NicknameInputProps) => {
   const [visible, setVisible] = useState(true);
   const inputRef = useRef<HTMLInputElement>(null);
-  const handleFocus = () => setVisible(false);
-  const handleBlur = () => setVisible(true);
 
   return (
     <Flex
@@ -29,8 +27,8 @@ const NicknameInput = ({
       <InputGroup size="md">
         <Input
           ref={inputRef}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
+          onFocus={() => setVisible(false)}
+          onBlur={() => setVisible(true)}
           variant="flushed"
           size="lg"
           defaultValue={nickname}
