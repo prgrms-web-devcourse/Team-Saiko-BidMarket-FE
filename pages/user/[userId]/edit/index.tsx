@@ -1,25 +1,26 @@
 import { Flex } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 
-import {
-  NicknameInput,
-  ProfileEditHeader,
-  ProfileImage,
-  SubmitButton,
-} from 'components/ProfileEdit';
+import { SEO } from 'components/common';
+import { ProfileEditHeader } from 'components/ProfileEdit';
+import EditProfileForm from 'components/ProfileEdit/EditForm';
 
 const Edit: NextPage = () => {
+  const dummyProps = {
+    nickname: '물안경',
+    profileImageUrl: 'https://bit.ly/code-beast',
+  };
+
   return (
-    <Flex flexDirection="column" width="100%" height="100%">
-      <ProfileEditHeader />
-      <Flex width="100%" height="100%" marginTop="48px">
-        <Flex width="100%" direction="column" alignItems="center" gap="48px">
-          <ProfileImage />
-          <NicknameInput />
-          <SubmitButton />
+    <>
+      <SEO title="프로필 수정" />
+      <Flex flexDirection="column" width="100%" height="100%">
+        <ProfileEditHeader />
+        <Flex width="100%" height="100%" marginTop="48px">
+          <EditProfileForm {...dummyProps} />
         </Flex>
       </Flex>
-    </Flex>
+    </>
   );
 };
 
