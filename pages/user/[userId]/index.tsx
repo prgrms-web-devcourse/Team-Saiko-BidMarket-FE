@@ -3,8 +3,11 @@ import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 
 import { GoBackIcon, Header, SEO, SideBar } from 'components/common';
-import { UserProfileEditButton, UserProfileInformation } from 'components/User';
-import ProductMenuList from 'components/User/ProductMenuList';
+import {
+  ProductMenuList,
+  UserProfileEditButton,
+  UserProfileInformation,
+} from 'components/User';
 
 const UserId: NextPage = () => {
   const router = useRouter();
