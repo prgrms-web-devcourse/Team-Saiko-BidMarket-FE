@@ -1,4 +1,5 @@
 import { Flex, FormControl, FormErrorMessage } from '@chakra-ui/react';
+import { useState } from 'react';
 
 import useForm from 'hooks/useForm';
 
@@ -14,6 +15,9 @@ const EditProfileForm = ({
   nickname,
   profileImageUrl,
 }: EditProfileFormProps) => {
+  const [prevNickname, setPrevNickname] = useState(nickname);
+  const [prevProfileImageUrl, setPrevProfileImageUrl] =
+    useState(profileImageUrl);
   const { errors, isLoading, handleChange, handleSubmit } = useForm({
     initialValues: { nickname, profile: profileImageUrl },
     // TODO: api로 닉네임, 사진(S3 주소값??) 보내주기
@@ -29,12 +33,18 @@ const EditProfileForm = ({
         });
 
       await fakeSubmit();
+      setPrevNickname(nickname);
+      setPrevProfileImageUrl(e.target.profile.value);
     },
-    validate: ({ nickname }) => {
+    validate: ({ nickname, profile }) => {
       const error: { nickname?: string } = {};
 
       if (!nickname) {
         error.nickname = '수정할 닉네임을 입력해주세요.';
+      }
+
+      if (prevNickname === nickname && prevProfileImageUrl === profile) {
+        error.nickname = '닉네임이 변경 안됐습니다.';
       }
 
       return error;
