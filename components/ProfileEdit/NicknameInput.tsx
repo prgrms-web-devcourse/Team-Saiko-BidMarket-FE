@@ -17,13 +17,7 @@ const NicknameInput = ({
   const inputRef = useRef<HTMLInputElement>(null);
 
   return (
-    <Flex
-      flexGrow="1"
-      width="100%"
-      paddingRight="19px"
-      paddingLeft="19px"
-      height="70%"
-    >
+    <Flex width="100%" paddingRight="19px" paddingLeft="19px">
       <InputGroup size="md">
         <Input
           ref={inputRef}

@@ -44,13 +44,23 @@ const EditProfileForm = ({
   // TODO: error(빈값, 길이제한?, 닉네임 정의 필요) 적절하게 렌더링 해주기. (글자 vs 모달)
   return (
     <form style={{ width: '100%', height: '100%' }} onSubmit={handleSubmit}>
-      <Flex width="100%" direction="column" alignItems="center" gap="48px">
+      <Flex
+        width="100%"
+        height="100%"
+        direction="column"
+        alignItems="center"
+        gap="48px"
+      >
         <ProfileImageUpload
           name="profile"
           profileImageUrl={profileImageUrl}
           onChange={handleChange}
         />
         <FormControl
+          flexGrow="1"
+          display="flex"
+          flexDirection="column"
+          height="20%"
           isInvalid={(errors.nickname as string)?.length > 0 ? true : false}
         >
           <NicknameInput
