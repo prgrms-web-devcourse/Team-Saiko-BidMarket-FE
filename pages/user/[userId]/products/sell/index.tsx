@@ -9,7 +9,7 @@ const DUMMY = [];
 
 const Sell: NextPage = () => {
   // @ TODO 유저 정보와 접속자 정보 비교하는 작업 필요
-  const isOwner = false;
+  const isOwnerUser = false;
   return (
     <>
       {/* @ TODO 실제 사용자 닉네임으로 교체 예정 */}
@@ -20,7 +20,7 @@ const Sell: NextPage = () => {
       />
       {DUMMY.length === 0 ? (
         <Center flexDirection="column" height="100%">
-          {isOwner ? <NoSellProducts /> : <NoSellProductsOtherUsers />}
+          {isOwnerUser ? <NoSellProducts /> : <NoSellProductsOtherUsers />}
         </Center>
       ) : (
         <Text>list of Product Cards</Text>
