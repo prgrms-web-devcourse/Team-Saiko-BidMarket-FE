@@ -3,11 +3,7 @@ import type { NextPage } from 'next';
 import { Fragment } from 'react';
 
 import { Card, GoBackIcon, Header, SearchInput, SEO } from 'components/common';
-import {
-  BidFilterCheckBox,
-  CategoryFilterButton,
-  SortFilterButton,
-} from 'components/Products';
+import { BidFilterCheckBox, FilterButton } from 'components/Products';
 
 const Products: NextPage = () => {
   return (
@@ -17,8 +13,8 @@ const Products: NextPage = () => {
       <SearchInput />
       <Divider marginTop="18px" />
       <Flex width="100%" gap="18px" marginTop="15px">
-        <SortFilterButton />
-        <CategoryFilterButton />
+        <FilterButton filterName="sortFilter" />
+        <FilterButton filterName="categoryFilter" />
       </Flex>
       <Flex width="100%" marginTop="15px">
         <BidFilterCheckBox />
