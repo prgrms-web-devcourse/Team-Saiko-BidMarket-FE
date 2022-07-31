@@ -21,7 +21,11 @@ const setItem = (key: string, item: string) => {
 };
 
 const removeItem = (key: string) => {
-  storage.removeItem(key);
+  try {
+    storage.removeItem(key);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export { getItem, setItem, removeItem };
