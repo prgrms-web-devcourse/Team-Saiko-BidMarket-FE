@@ -16,17 +16,16 @@ const EditProfileForm = ({
   profileImageUrl,
 }: EditProfileFormProps) => {
   const [prevNickname, setPrevNickname] = useState(nickname);
-  const [prevProfileImageUrl, setPrevProfileImageUrl] =
-    useState(profileImageUrl);
+  const [prevProfileImage, setPrevProfileImage] = useState(profileImageUrl);
   const { errors, isLoading, handleChange, handleSubmit } = useForm({
-    initialValues: { nickname, profile: profileImageUrl },
+    initialValues: { nickname, profileImage: profileImageUrl },
     // TODO: api로 닉네임, 사진(S3 주소값??) 보내주기
     onSubmit: async ({ nickname, e }) => {
       const fakeSubmit = () =>
         new Promise((resolve) => {
           setTimeout(() => {
             alert(
-              `onSubmit!\n nickname: ${nickname} \n profile: ${e.target.profile.dataset.url}`
+              `onSubmit!\n nickname: ${nickname} \n profileImage: ${e.target.profileImage.dataset.url}`
             );
             resolve('Success');
           }, 1500);
@@ -34,16 +33,16 @@ const EditProfileForm = ({
 
       await fakeSubmit();
       setPrevNickname(nickname);
-      setPrevProfileImageUrl(e.target.profile.value);
+      setPrevProfileImage(e.target.profileImage.value);
     },
-    validate: ({ nickname, profile }) => {
+    validate: ({ nickname, profileImage }) => {
       const error: { nickname?: string } = {};
 
       if (!nickname) {
         error.nickname = '수정할 닉네임을 입력해주세요.';
       }
 
-      if (prevNickname === nickname && prevProfileImageUrl === profile) {
+      if (prevNickname === nickname && prevProfileImage === profileImage) {
         error.nickname = '닉네임이 변경 안됐습니다.';
       }
 
@@ -62,7 +61,7 @@ const EditProfileForm = ({
         gap="48px"
       >
         <ProfileImageUpload
-          name="profile"
+          name="profileImage"
           profileImageUrl={profileImageUrl}
           onChange={handleChange}
         />
