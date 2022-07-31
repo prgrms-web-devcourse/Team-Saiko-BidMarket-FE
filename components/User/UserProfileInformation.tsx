@@ -2,9 +2,13 @@ import { Avatar, Circle, Flex, Text } from '@chakra-ui/react';
 
 interface UserInformationProps {
   profileImageUrl: string;
+  nickname: string;
 }
 
-const UserProfileInformation = ({ profileImageUrl }: UserInformationProps) => {
+const UserProfileInformation = ({
+  profileImageUrl,
+  nickname,
+}: UserInformationProps) => {
   return (
     <Flex width="100%" gap="20px" alignItems="center" marginTop="12px">
       <Circle border="2px solid" borderColor="brand.primary-900">
@@ -16,7 +20,7 @@ const UserProfileInformation = ({ profileImageUrl }: UserInformationProps) => {
         fontWeight="400"
         fontSize="20"
       >
-        닐리리맘보
+        {nickname}
       </Text>
     </Flex>
   );

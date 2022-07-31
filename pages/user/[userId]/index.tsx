@@ -1,12 +1,19 @@
-import { Text } from '@chakra-ui/react';
+import { Divider, Flex, Text } from '@chakra-ui/react';
 import type { NextPage } from 'next';
+import { useRouter } from 'next/router';
 
 import { GoBackIcon, Header, SEO, SideBar } from 'components/common';
-import { UserProfileInformation } from 'components/User';
+import { UserProfileEditButton, UserProfileInformation } from 'components/User';
 
 const UserId: NextPage = () => {
+  const router = useRouter();
+  const { userId } = router.query;
   // TODO: url의 id와 로그인 중인 id를 비교해서 마이 페이지인지 사용자 페이지 확인
   const isMyPage = true;
+  const dummyProfile = {
+    nickname: '물안경',
+    profileImageUrl: 'https://bit.ly/code-beast',
+  };
 
   return (
     <>
@@ -27,7 +34,18 @@ const UserId: NextPage = () => {
         }
         rightContent={<SideBar />}
       ></Header>
-      <UserProfileInformation profileImageUrl="https://bit.ly/code-beast" />
+      <Flex width="100%" flexDirection="column" gap="29px">
+        <UserProfileInformation
+          profileImageUrl={dummyProfile.profileImageUrl}
+          nickname={dummyProfile.nickname}
+        />
+        {isMyPage ? (
+          <UserProfileEditButton
+            onClick={() => router.push(`./${userId}/edit`)}
+          />
+        ) : undefined}
+      </Flex>
+      <Divider height="7px" marginTop="27px" backgroundColor="#F2F2F2" />
     </>
   );
 };
