@@ -15,7 +15,7 @@ const EditProfileForm = ({
   profileImageUrl,
 }: EditProfileFormProps) => {
   const { errors, isLoading, handleChange, handleSubmit } = useForm({
-    initialValues: { nickname: '', profile: '' },
+    initialValues: { nickname, profile: profileImageUrl },
     // TODO: api로 닉네임, 사진(S3 주소값??) 보내주기
     onSubmit: async ({ nickname, e }) => {
       const fakeSubmit = () =>
