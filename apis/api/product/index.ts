@@ -1,5 +1,9 @@
+import { baseInstance } from 'apis/utils/instance';
+
 const productAPI = {
-  // getProducts: () => {},
+  getProduct: (productId: number) => {
+    baseInstance.get(`/products/${productId}`);
+  },
 };
 
 export default productAPI;
