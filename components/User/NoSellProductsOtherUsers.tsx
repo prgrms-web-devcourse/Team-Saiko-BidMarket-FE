@@ -1,6 +1,6 @@
 import { Image, Text } from '@chakra-ui/react';
 
-const NoSellProductsOther = () => {
+const NoSellProductsOtherUsers = () => {
   return (
     <>
       <Image src="/svg/noneProductOther.svg" alt="None Product" />
@@ -9,4 +9,4 @@ const NoSellProductsOther = () => {
   );
 };
 
-export default NoSellProductsOther;
+export default NoSellProductsOtherUsers;
