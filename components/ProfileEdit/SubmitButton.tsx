@@ -9,8 +9,9 @@ const SubmitButton = ({ isLoading, loadingText }: SubmitButtonProps) => (
   <Button
     isLoading={isLoading}
     loadingText={loadingText}
-    flexShrink="0"
-    justifySelf="flex-end"
+    position="fixed"
+    bottom="0"
+    maxWidth="768px"
     type="submit"
     width="100%"
     height="57px"
