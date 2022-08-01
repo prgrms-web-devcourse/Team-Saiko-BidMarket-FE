@@ -7,9 +7,10 @@ interface SEOProps {
 }
 
 const SEO = ({ title, description, image }: SEOProps) => {
+  const titleContent = `${title} | Bidmarket`;
   return (
     <Head>
-      <title>{title} | BidMarket</title>
+      <title>{titleContent}</title>
       <meta
         name="description"
         content={description || '비딩을 통한 현명한 중고 거래'}
