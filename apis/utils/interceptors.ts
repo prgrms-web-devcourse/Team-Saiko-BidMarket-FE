@@ -8,7 +8,7 @@ export const interceptors = (instance: AxiosInstance) => {
       const token = getItem('token');
 
       config.headers = {
-        authorization: `Bearer ${token}`,
+        authorization: token ? `Bearer ${token}` : '',
       };
       return config;
     },
