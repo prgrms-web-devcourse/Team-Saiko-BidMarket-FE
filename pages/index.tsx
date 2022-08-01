@@ -2,12 +2,13 @@ import { Box, Divider, Flex } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 import { Fragment } from 'react';
 
-import { Card, SearchInput } from 'components/common';
+import { Card, SearchInput, SEO } from 'components/common';
 import { Banner, MainHeader, ProductAddButton } from 'components/Main';
 
 const Home: NextPage = () => {
   return (
     <>
+      <SEO title="비드마켓" />
       <MainHeader />
       <Flex direction="column" width="100%">
         <Banner />
