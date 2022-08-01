@@ -1,10 +1,10 @@
-const storage = window.localStorage;
+const storage = typeof window !== 'undefined' ? window.localStorage : null;
 
 const getItem = (key: string) => {
   const defaultValue = '';
 
   try {
-    const item = storage.getItem(key);
+    const item = storage?.getItem(key);
     return item ? JSON.parse(item) : defaultValue;
   } catch (error) {
     console.log(error);
@@ -14,7 +14,7 @@ const getItem = (key: string) => {
 
 const setItem = (key: string, item: string) => {
   try {
-    storage.setItem(key, JSON.stringify(item));
+    storage?.setItem(key, JSON.stringify(item));
   } catch (error) {
     console.log(error);
   }
@@ -22,7 +22,7 @@ const setItem = (key: string, item: string) => {
 
 const removeItem = (key: string) => {
   try {
-    storage.removeItem(key);
+    storage?.removeItem(key);
   } catch (error) {
     console.log(error);
   }
