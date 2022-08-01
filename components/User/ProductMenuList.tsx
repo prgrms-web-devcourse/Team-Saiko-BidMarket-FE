@@ -3,24 +3,36 @@ import { Fragment } from 'react';
 
 import { ProductMenuItem } from '.';
 
-interface ProductMenu {
-  iconUrl: string;
-  title: string;
-  routingUrl: string;
-}
-
 interface ProductMenuListProps {
-  productMenues: Array<ProductMenu>;
+  userId: string;
 }
 
-const ProductMenuList = ({ productMenues }: ProductMenuListProps) => {
+const ProductMenuList = ({ userId }: ProductMenuListProps) => {
+  const productMenu = [
+    {
+      iconUrl: '/svg/sellProductMenuIcon.svg',
+      title: '판매한 상품',
+      routingUrl: `./${userId}/products/sell`,
+    },
+    {
+      iconUrl: '/svg/bidProductMenuIcon.svg',
+      title: '입찰한 상품',
+      routingUrl: `./${userId}/products/bid`,
+    },
+    {
+      iconUrl: '/svg/likeProductMenuIcon.svg',
+      title: '찜한 상품',
+      routingUrl: `./${userId}/products/like`,
+    },
+  ];
+
   return (
     <Flex width="100%" direction="column" gap="12px" marginTop="21px">
-      {productMenues.map((productMenuProp, index) => (
+      {productMenu.map((currentMenu, index) => (
         <Fragment key={index}>
           <ProductMenuItem
-            {...productMenuProp}
-            isLastItem={index === productMenues.length - 1}
+            {...currentMenu}
+            isLastItem={index === productMenu.length - 1}
           />
         </Fragment>
       ))}

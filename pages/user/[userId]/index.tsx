@@ -18,23 +18,6 @@ const UserId: NextPage = () => {
     nickname: '물안경',
     profileImageUrl: 'https://bit.ly/code-beast',
   };
-  const productMenues = [
-    {
-      iconUrl: '/svg/sellProductMenuIcon.svg',
-      title: '판매한 상품',
-      routingUrl: `./${userId}/products/sell`,
-    },
-    {
-      iconUrl: '/svg/bidProductMenuIcon.svg',
-      title: '입찰한 상품',
-      routingUrl: `./${userId}/products/bid`,
-    },
-    {
-      iconUrl: '/svg/likeProductMenuIcon.svg',
-      title: '찜한 상품',
-      routingUrl: `./${userId}/products/like`,
-    },
-  ];
 
   return (
     <>
@@ -67,7 +50,7 @@ const UserId: NextPage = () => {
         ) : undefined}
       </Flex>
       <Divider height="7px" marginTop="27px" backgroundColor="#F2F2F2" />
-      <ProductMenuList productMenues={productMenues} />
+      <ProductMenuList userId={userId as string} />
     </>
   );
 };
