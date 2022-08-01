@@ -2,7 +2,7 @@ import axios, { AxiosInstance } from 'axios';
 
 import { interceptors } from './interceptors';
 
-const REACT_APP_API_URL = `${process.env.REACT_APP_API_END_POINT}/api/v1`;
+const NEXT_APP_API_END_POINT = `${process.env.NEXT_APP_API_END_POINT}/api/v1`;
 
 const createAuthInstance = (url: string, options: object): AxiosInstance => {
   const instance = axios.create({
@@ -16,4 +16,4 @@ const createAuthInstance = (url: string, options: object): AxiosInstance => {
   return instance;
 };
 
-export const authInstance = createAuthInstance(REACT_APP_API_URL, {});
+export const authInstance = createAuthInstance(NEXT_APP_API_END_POINT, {});
