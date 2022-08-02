@@ -1,11 +1,19 @@
 import { Box, Divider, Flex } from '@chakra-ui/react';
-import type { NextPage } from 'next';
+import type { InferGetServerSidePropsType } from 'next';
 import { Fragment } from 'react';
 
+import { productAPI } from 'apis';
 import { Card, SearchInput, SEO } from 'components/common';
 import { Banner, MainHeader, ProductAddButton } from 'components/Main';
 
-const Home: NextPage = () => {
+export const getServerSideProps = async () => {
+  const { data } = await productAPI.getProducts({ offset: 0, limit: 5 });
+  return { props: { products: data } };
+};
+
+const Home = ({
+  products,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
     <>
       <SEO title="비드마켓" />
@@ -14,16 +22,14 @@ const Home: NextPage = () => {
         <Banner />
         <Divider marginTop="15px" />
         <SearchInput />
-        {Array(10)
-          .fill(1)
-          .map((_, index) => {
-            return (
-              <Fragment key={index}>
-                <Card productId={index.toString()} />
-                <Divider />
-              </Fragment>
-            );
-          })}
+        {products.map((product, index) => {
+          return (
+            <Fragment key={index}>
+              <Card productInfo={product} />
+              <Divider />
+            </Fragment>
+          );
+        })}
       </Flex>
       <Box alignSelf="flex-end" position="sticky" bottom="15px" right="15px">
         <ProductAddButton />
