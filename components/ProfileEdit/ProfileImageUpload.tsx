@@ -68,7 +68,7 @@ const ProfileImageUpload = ({
         type="file"
         name={name}
         accept="image/*"
-        data-url={profileImageUrl}
+        data-uploadedUrl={profileImageUrl}
         onChange={handleChange}
       />
       <ProfileImage
