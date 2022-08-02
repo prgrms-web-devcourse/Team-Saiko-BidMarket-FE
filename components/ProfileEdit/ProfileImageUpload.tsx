@@ -34,10 +34,10 @@ const ProfileImageUpload = ({
 
     await uploadImage(changedImageFile);
 
-    const url = `${BUCKET_URL}/${changedImageFile.name}`;
+    const uploadedUrl = `${BUCKET_URL}/${changedImageFile.name}`;
 
-    e.target.dataset.url = url;
-    setProfileImageUrl(url);
+    e.target.dataset.uploadedUrl = uploadedUrl;
+    setProfileImageUrl(uploadedUrl);
     onChange(e);
   };
   const uploadImage = async (imageFile: File) => {
@@ -47,9 +47,9 @@ const ProfileImageUpload = ({
         type: imageFile.type,
       });
 
-      const { url } = data;
+      const { signedUrl } = data;
 
-      await axios.put(url, imageFile, {
+      await axios.put(signedUrl, imageFile, {
         headers: {
           'Content-Type': imageFile.type,
           'Access-Control-Allow-Origin': '*',

@@ -28,9 +28,12 @@ const uploadImageApi = async (req: NextApiRequest, res: NextApiResponse) => {
       ACL: 'public-read',
     };
 
-    const url = await s3.getSignedUrlPromise('putObject', imageParameters);
+    const signedUrl = await s3.getSignedUrlPromise(
+      'putObject',
+      imageParameters
+    );
 
-    res.status(200).json({ url });
+    res.status(200).json({ signedUrl });
   } catch (error) {
     console.log(error);
     res.status(400).json({ message: error });
