@@ -5,7 +5,7 @@ export interface Image {
   url: string;
 }
 
-export interface Product {
+export interface ProductResponseType {
   id: number;
   title: string;
   description: string;

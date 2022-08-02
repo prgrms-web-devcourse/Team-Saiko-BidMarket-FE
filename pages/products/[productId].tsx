@@ -10,7 +10,6 @@ import {
   ProductInfo,
   ProductSeller,
 } from 'components/ProductDetail';
-import { Product } from 'types/product';
 
 export const getServerSideProps = async (context: any) => {
   const { productId } = context.query;
@@ -36,7 +35,7 @@ const ProductDetail = ({
     imageUrls,
     expireAt,
     createdAt,
-  } = product as Product;
+  } = product;
 
   return (
     <>
