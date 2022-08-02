@@ -8,8 +8,6 @@ const s3 = new S3({
   signatureVersion: 'v4',
 });
 
-console.log(process.env.ACCESS_KEY);
-
 export const config = {
   api: {
     bodyParser: {
