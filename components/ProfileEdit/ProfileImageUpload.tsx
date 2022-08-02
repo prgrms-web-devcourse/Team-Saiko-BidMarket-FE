@@ -1,4 +1,5 @@
 import { Input } from '@chakra-ui/react';
+import axios from 'axios';
 import { ChangeEvent, useRef, useState } from 'react';
 
 import { ProfileImage } from '.';
@@ -8,6 +9,7 @@ interface ImageUploadProps {
   profileImageUrl: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
+const BUCKET_URL = 'https://bid-market-bucket.s3.ap-northeast-2.amazonaws.com';
 
 const ProfileImageUpload = ({
   name,
@@ -20,19 +22,41 @@ const ProfileImageUpload = ({
   const handleChooseFile = () => {
     inputRef.current && inputRef.current.click();
   };
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
 
     if (!files) {
       return;
     }
 
-    const url = URL.createObjectURL(files[0]);
-    // TODO: S3에서 받아오는 값 넣어주기
-    e.target.dataset.url = url;
+    const changedImageFile = files[0];
 
+    await uploadImage(changedImageFile);
+
+    const url = `${BUCKET_URL}/${changedImageFile.name}`;
+
+    e.target.dataset.url = url;
     setPreviewImageUrl(url);
     onChange(e);
+  };
+  const uploadImage = async (imageFile: File) => {
+    try {
+      const { data } = await axios.post('/api/s3/image', {
+        name: imageFile.name,
+        type: imageFile.type,
+      });
+
+      const { url } = data;
+
+      await axios.put(url, imageFile, {
+        headers: {
+          'Content-Type': imageFile.type,
+          'Access-Control-Allow-Origin': '*',
+        },
+      });
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
