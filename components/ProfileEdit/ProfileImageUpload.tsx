@@ -26,7 +26,7 @@ const ProfileImageUpload = ({
   const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
 
-    if (!files) {
+    if (!files || files.length === 0) {
       return;
     }
 
