@@ -1,7 +1,8 @@
 import { StarIcon } from '@chakra-ui/icons';
 import { Divider, Flex } from '@chakra-ui/react';
-import type { NextPage } from 'next';
+import type { InferGetServerSidePropsType } from 'next';
 
+import { productAPI } from 'apis';
 import { SEO } from 'components/common';
 import {
   ProductBid,
@@ -9,20 +10,55 @@ import {
   ProductInfo,
   ProductSeller,
 } from 'components/ProductDetail';
+import { Product } from 'types/product';
 
-const ProductDetail: NextPage = () => {
+export const getServerSideProps = async (context: any) => {
+  const { productId } = context.query;
+  const { data } = await productAPI.getProduct(productId);
+
+  return {
+    props: {
+      product: data,
+    },
+  };
+};
+
+const ProductDetail = ({
+  product,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const {
+    title,
+    description,
+    minimumPrice,
+    category,
+    location,
+    writer,
+    imageUrls,
+    expireAt,
+    createdAt,
+  } = product as Product;
+
   return (
     <>
-      <SEO title="상세 상품 중고 거래 이름" />
-      <Flex direction="column">
+      <SEO title={title} description={description} />
+      <Flex direction="column" width="100%">
         <ProductImage />
         <Flex justifyContent="space-between" alignItems="center">
-          <ProductSeller />
+          <ProductSeller
+            name={writer.name}
+            profileImageUrl={writer.profileImageUrl}
+          />
           <StarIcon w="22px" color="brand.primary-900" />
         </Flex>
         <Divider />
-        <ProductInfo />
-        <ProductBid />
+        <ProductInfo
+          title={title}
+          description={description}
+          category={category}
+          location={location}
+          createdAt={createdAt}
+        />
+        <ProductBid minimumPrice={minimumPrice} expireAt={expireAt} />
       </Flex>
     </>
   );
