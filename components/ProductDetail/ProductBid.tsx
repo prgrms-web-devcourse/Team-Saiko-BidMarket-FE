@@ -10,9 +10,14 @@ import {
 
 import ProductBidProgress from './ProductBidDrawer';
 
-const ProductBid = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+interface ProductBidProps {
+  minimumPrice: number;
+  expireAt: Date;
+}
 
+const ProductBid = ({ minimumPrice, expireAt }: ProductBidProps) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  3;
   return (
     <Box
       position="fixed"
@@ -40,7 +45,7 @@ const ProductBid = () => {
             borderRadius="20px"
             fontWeight="bold"
           >
-            10,000원
+            {minimumPrice}
           </Text>
         </Flex>
         <Flex justifyContent="space-between" alignItems="center">
@@ -54,7 +59,7 @@ const ProductBid = () => {
             padding="3px 10px"
             borderRadius="20px"
           >
-            01일 22시간 22분 40초
+            {expireAt.toString()}
           </Text>
         </Flex>
         <Button
