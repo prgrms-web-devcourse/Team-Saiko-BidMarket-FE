@@ -13,11 +13,12 @@ const BUCKET_URL = 'https://bid-market-bucket.s3.ap-northeast-2.amazonaws.com';
 
 const ProfileImageUpload = ({
   name,
-  profileImageUrl,
+  profileImageUrl: defaultProfileImageUrl,
   onChange,
 }: ImageUploadProps) => {
-  const [previewImageUrl, setPreviewImageUrl] =
-    useState<string>(profileImageUrl);
+  const [profileImageUrl, setProfileImageUrl] = useState<string>(
+    defaultProfileImageUrl
+  );
   const inputRef = useRef<HTMLInputElement>(null);
   const handleChooseFile = () => {
     inputRef.current && inputRef.current.click();
@@ -36,7 +37,7 @@ const ProfileImageUpload = ({
     const url = `${BUCKET_URL}/${changedImageFile.name}`;
 
     e.target.dataset.url = url;
-    setPreviewImageUrl(url);
+    setProfileImageUrl(url);
     onChange(e);
   };
   const uploadImage = async (imageFile: File) => {
@@ -67,11 +68,11 @@ const ProfileImageUpload = ({
         type="file"
         name={name}
         accept="image/*"
-        data-url={previewImageUrl}
+        data-url={profileImageUrl}
         onChange={handleChange}
       />
       <ProfileImage
-        propfileImageUrl={previewImageUrl}
+        propfileImageUrl={profileImageUrl}
         onClick={handleChooseFile}
       />
     </>
