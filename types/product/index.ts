@@ -16,5 +16,5 @@ export interface ProductResponse {
   createdAt: Date;
   updatedAt: Date;
   writer: User;
-  imageUrls: Image[];
+  images: Image[];
 }
