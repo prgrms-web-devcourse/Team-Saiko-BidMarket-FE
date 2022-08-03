@@ -13,7 +13,7 @@ const ProductImage = ({ images }: ProductImageProps) => {
       height="317px"
       objectFit="cover"
       alt="product-image"
-      src={images[0].url}
+      src={images.length ? images[0].url : '/svg/basket.svg'}
     />
   );
 };
