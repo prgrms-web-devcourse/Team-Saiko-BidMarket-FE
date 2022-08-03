@@ -25,7 +25,7 @@ const EditProfileForm = ({
         new Promise((resolve) => {
           setTimeout(() => {
             alert(
-              `onSubmit!\n nickname: ${nickname} \n profileImage: ${e.target.profileImage.dataset.url}`
+              `onSubmit!\n nickname: ${nickname} \n profileImage: ${e.target.profileImage.dataset.uploadedurl}`
             );
             resolve('Success');
           }, 1500);
