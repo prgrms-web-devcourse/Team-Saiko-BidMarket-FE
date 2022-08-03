@@ -37,7 +37,7 @@ const ProfileImageUpload = ({
 
     const uploadedUrl = `${BUCKET_URL}/${FOLDER_NAME}/${changedImageFile.name}`;
 
-    e.target.dataset.uploadedUrl = uploadedUrl;
+    e.target.dataset.uploadedurl = uploadedUrl;
     setProfileImageUrl(uploadedUrl);
     onChange(e);
   };
@@ -69,7 +69,7 @@ const ProfileImageUpload = ({
         type="file"
         name={name}
         accept="image/*"
-        data-uploadedUrl={profileImageUrl}
+        data-uploadedurl={profileImageUrl}
         onChange={handleChange}
       />
       <ProfileImage
