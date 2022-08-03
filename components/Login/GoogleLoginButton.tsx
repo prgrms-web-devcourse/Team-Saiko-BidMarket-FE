@@ -3,8 +3,7 @@ import { useRouter } from 'next/router';
 import Script from 'next/script';
 import { useRef } from 'react';
 
-const GOOGLE_LOGIN_URL =
-  'http://ec2-3-39-189-129.ap-northeast-2.compute.amazonaws.com/oauth2/authorization/google';
+const GOOGLE_LOGIN_URL = process.env.GOOGLE_LOGIN_URL as string;
 
 const GoogleLoginButton = () => {
   const router = useRouter();
