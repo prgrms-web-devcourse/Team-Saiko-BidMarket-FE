@@ -10,6 +10,7 @@ interface ImageUploadProps {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 const BUCKET_URL = 'https://bid-market-bucket.s3.ap-northeast-2.amazonaws.com';
+const FOLDER_NAME = 'profiles';
 
 const ProfileImageUpload = ({
   name,
@@ -34,7 +35,7 @@ const ProfileImageUpload = ({
 
     await uploadImage(changedImageFile);
 
-    const uploadedUrl = `${BUCKET_URL}/${changedImageFile.name}`;
+    const uploadedUrl = `${BUCKET_URL}/${FOLDER_NAME}/${changedImageFile.name}`;
 
     e.target.dataset.uploadedUrl = uploadedUrl;
     setProfileImageUrl(uploadedUrl);
@@ -43,7 +44,7 @@ const ProfileImageUpload = ({
   const uploadImage = async (imageFile: File) => {
     try {
       const { data } = await axios.post('/api/s3/image', {
-        name: imageFile.name,
+        name: `${FOLDER_NAME}/${imageFile.name}`,
         type: imageFile.type,
       });
 
