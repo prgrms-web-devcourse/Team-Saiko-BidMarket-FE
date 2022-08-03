@@ -10,6 +10,7 @@ const theme = extendTheme({
       'primary-500': '#FFDEE6',
       'primary-100': '#FFECF2',
       dark: '#2E2E2E',
+      'dark-light': '#8E8E8E',
     },
   },
 });

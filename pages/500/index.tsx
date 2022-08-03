@@ -16,10 +16,10 @@ const ERROR = () => {
       <Text fontSize="xl" fontWeight="bold" color="brand.primary-900">
         서비스에 접속할 수 없습니다.
       </Text>
-      <Text color="#8E8E8E">
+      <Text color="brand.dark-light">
         기술적인 문제로 일시적으로 접속되지 않았습니다.
       </Text>
-      <Text color="#8E8E8E">
+      <Text color="brand.dark-light">
         잠시 후 다시 이용 부탁드리며 이용에 불편을 드려 사과드립니다.
       </Text>
       <Button
