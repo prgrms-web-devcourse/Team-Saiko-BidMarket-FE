@@ -73,7 +73,7 @@ const ProfileImageUpload = ({
         onChange={handleChange}
       />
       <ProfileImage
-        propfileImageUrl={profileImageUrl}
+        profileImageUrl={profileImageUrl}
         onClick={handleChooseFile}
       />
     </>
