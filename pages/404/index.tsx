@@ -25,6 +25,17 @@ const NotFound = () => {
         borderRadius="30px"
         color="white"
         backgroundColor="brand.primary-900"
+        onClick={() => router.back()}
+      >
+        이전 페이지로 돌아가기
+      </Button>
+      <Button
+        marginTop="5px"
+        padding="10px 30px"
+        border="1px"
+        borderRadius="30px"
+        color="brand.primary-900"
+        backgroundColor="white"
         onClick={() => router.push(`/`)}
       >
         메인 페이지로 돌아가기
