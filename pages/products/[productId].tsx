@@ -32,7 +32,7 @@ const ProductDetail = ({
     category,
     location,
     writer,
-    imageUrls,
+    images,
     expireAt,
     createdAt,
   } = product;
@@ -41,13 +41,13 @@ const ProductDetail = ({
     <>
       <SEO title={title} description={description} />
       <Flex direction="column" width="100%">
-        <ProductImage />
+        <ProductImage images={images} />
         <Flex justifyContent="space-between" alignItems="center">
           <ProductSeller
             name={writer.name}
             profileImageUrl={writer.profileImageUrl}
           />
-          <StarIcon w="22px" color="brand.primary-900" />
+          <StarIcon w="23px" color="brand.primary-900" />
         </Flex>
         <Divider />
         <ProductInfo
@@ -56,6 +56,7 @@ const ProductDetail = ({
           category={category}
           location={location}
           createdAt={createdAt}
+          expireAt={expireAt}
         />
         <ProductBid minimumPrice={minimumPrice} expireAt={expireAt} />
       </Flex>
