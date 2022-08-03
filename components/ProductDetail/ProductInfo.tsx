@@ -1,4 +1,5 @@
 import { Flex, Text } from '@chakra-ui/react';
+import { differenceInDays, format } from 'date-fns';
 
 interface ProductInfoProps {
   title: string;
@@ -6,6 +7,7 @@ interface ProductInfoProps {
   category: string;
   location: string;
   createdAt: Date;
+  expireAt: Date;
 }
 
 const ProductInfo = ({
@@ -14,7 +16,10 @@ const ProductInfo = ({
   category,
   location,
   createdAt,
+  expireAt,
 }: ProductInfoProps) => {
+  const DDay = differenceInDays(new Date(expireAt), new Date());
+
   return (
     <Flex direction="column">
       <Flex marginTop="14px" alignItems="center">
@@ -26,14 +31,14 @@ const ProductInfo = ({
           borderRadius="20px"
           fontWeight="bold"
         >
-          D-1
+          D-{DDay === 0 ? 'Day' : DDay}
         </Text>
         <Text fontSize="lg" marginLeft="10px" fontWeight="bold">
           {title}
         </Text>
       </Flex>
       <Text fontSize="sm" color="#838383" marginTop="7px">
-        {createdAt.toString()}
+        {format(new Date(createdAt), 'M월 d일')}
       </Text>
       <Text marginTop="14px" whiteSpace="pre-wrap" marginBottom="158px">
         {description}
