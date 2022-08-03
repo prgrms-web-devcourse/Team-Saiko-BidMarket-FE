@@ -1,7 +1,7 @@
 import { Flex, Image, Text, Button } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 
-const NotFound = () => {
+const ERROR = () => {
   const router = useRouter();
 
   return (
@@ -47,4 +47,4 @@ const NotFound = () => {
   );
 };
 
-export default NotFound;
+export default ERROR;
