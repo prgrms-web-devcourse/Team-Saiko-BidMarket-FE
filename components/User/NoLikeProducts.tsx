@@ -8,7 +8,7 @@ const NoLikeProducts = () => {
     <>
       <Image src="/svg/noneProduct.svg" alt="None Product" />
       <Text marginTop="34px">아직 찜하신 상품이 없으시군요:(</Text>
-      <Text marginTop="10px" color="#8E8E8E">
+      <Text marginTop="10px" color="brand.dark-light">
         마음에 드는 상품을 찜하고 간편하게 확인하세요!
       </Text>
       <Button
