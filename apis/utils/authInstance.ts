@@ -10,6 +10,7 @@ const createAuthInstance = (url: string, options: object): AxiosInstance => {
     headers: {
       'Content-Type': 'application/json',
     },
+    timeout: 5000,
     ...options,
   });
   interceptors(instance);
