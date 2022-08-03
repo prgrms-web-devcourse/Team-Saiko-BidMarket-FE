@@ -1,11 +1,11 @@
 import { Avatar, Box, Circle, Text } from '@chakra-ui/react';
 
 interface ProfileImageProps {
-  propfileImageUrl: string;
+  profileImageUrl: string;
   onClick: () => void;
 }
 
-const ProfileImage = ({ propfileImageUrl, onClick }: ProfileImageProps) => (
+const ProfileImage = ({ profileImageUrl, onClick }: ProfileImageProps) => (
   <Circle
     position="relative"
     flexDirection="column"
@@ -15,7 +15,7 @@ const ProfileImage = ({ propfileImageUrl, onClick }: ProfileImageProps) => (
     cursor="pointer"
     onClick={onClick}
   >
-    <Avatar name="profile-image" size="2xl" src={propfileImageUrl} />
+    <Avatar name="profile-image" size="2xl" src={profileImageUrl} />
     <Box
       position="absolute"
       bottom="0"
