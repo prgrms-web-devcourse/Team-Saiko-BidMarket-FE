@@ -12,11 +12,9 @@ const Auth = () => {
     router.push('/');
   }, []);
   return (
-    <>
-      <Center height="100%">
-        <Spinner size="xl" />
-      </Center>
-    </>
+    <Center height="100%">
+      <Spinner size="xl" />
+    </Center>
   );
 };
 export default Auth;
