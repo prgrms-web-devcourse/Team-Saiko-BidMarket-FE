@@ -8,7 +8,6 @@ const Auth = () => {
   const router = useRouter();
 
   useEffect(() => {
-    console.log(router);
     setItem('token', router.query.token as string);
     router.push('/');
   }, []);
