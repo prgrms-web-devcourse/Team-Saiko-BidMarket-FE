@@ -37,7 +37,9 @@ const AddProductImage = ({
           icon={<AddIcon color="#FF4370" />}
         />
         <Divider orientation="vertical" w="24px" />
-        <Image alt="image" width="82px" src={productImageUrl} />
+        {productImageUrl && (
+          <Image alt="image" width="82px" src={productImageUrl} />
+        )}
       </Flex>
     </Flex>
   );
