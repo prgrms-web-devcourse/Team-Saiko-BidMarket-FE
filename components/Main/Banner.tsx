@@ -3,10 +3,10 @@ import { Flex, Image, Text } from '@chakra-ui/react';
 const Banner = () => {
   //TODO: 슬로건 수정하기
   return (
-    <Flex justifyContent="space-between" alignItems="flex-end" marginTop="15px">
+    <Flex justifyContent="space-between" alignItems="flex-end">
       <Flex direction="column" gap="6px">
         <Text fontSize="lg">
-          <Text as="span" color="#FF4370">
+          <Text as="span" color="brand.primary-900">
             비딩
           </Text>
           을 통한
@@ -16,7 +16,7 @@ const Banner = () => {
           원하는 가격에 팔고, 좋은 물건은 싸게 산다!
         </Text>
       </Flex>
-      <Image src="/Banner/banner.png" alt="banner" height="65" />
+      <Image src="/svg/banner.svg" alt="banner" height="65" />
     </Flex>
   );
 };

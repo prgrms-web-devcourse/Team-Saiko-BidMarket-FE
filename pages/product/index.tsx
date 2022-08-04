@@ -1,6 +1,11 @@
+
 import SEO from '@common/SEO';
 import CreateProduct from 'components/CreateProduct';
+
 import type { NextPage } from 'next';
+
+import { Header, GoBackIcon, SEO } from 'components/common';
+import CreateProduct from 'components/CreateProduct';
 
 const Product: NextPage = () => {
   return (

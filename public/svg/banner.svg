@@ -1,0 +1,19 @@
+<svg width="91" height="65" viewBox="0 0 91 65" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="53.0791" y="27.1594" width="36.7244" height="12.2669" rx="6.13345" fill="#FFDEE6" stroke="#FF4370" stroke-width="2"/>
+<rect x="53.0791" y="39.3882" width="36.7244" height="12.2669" rx="6.13345" fill="white" stroke="#FF4370" stroke-width="2"/>
+<rect x="53.0791" y="51.6169" width="36.7244" height="12.2669" rx="6.13345" fill="#FFDEE6" stroke="#FF4370" stroke-width="2"/>
+<rect x="1.10693" y="2.7019" width="36.7244" height="12.2669" rx="6.13345" fill="#FFDEE6" stroke="#FF4370" stroke-width="2"/>
+<rect x="1.10693" y="14.9307" width="36.7244" height="12.2669" rx="6.13345" fill="white" stroke="#FF4370" stroke-width="2"/>
+<rect x="1.10693" y="27.1594" width="36.7244" height="12.2669" rx="6.13345" fill="#FFDEE6" stroke="#FF4370" stroke-width="2"/>
+<rect x="1.10693" y="39.3882" width="36.7244" height="12.2669" rx="6.13345" fill="white" stroke="#FF4370" stroke-width="2"/>
+<rect x="1.10693" y="51.6169" width="36.7244" height="12.2669" rx="6.13345" fill="#FFDEE6" stroke="#FF4370" stroke-width="2"/>
+<circle cx="45.4553" cy="39.9168" r="23.9671" fill="white" stroke="#FF4370" stroke-width="2"/>
+<circle cx="45.4553" cy="39.9167" r="19.8908" fill="#FFDEE6" stroke="#FF4370" stroke-width="2"/>
+<line x1="45.1768" y1="27.4094" x2="45.1768" y2="30.0047" stroke="#FF4370" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="45.1768" y1="48.8098" x2="45.1768" y2="51.4051" stroke="#FF4370" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M45.2516 39.4071C42.2687 39.4071 39.8506 37.5821 39.8506 35.3309C39.8506 33.0796 42.2687 31.2546 45.2516 31.2546" stroke="#FF4370" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M39.8508 35.3309C39.8508 33.0796 42.2689 31.2546 45.2518 31.2546C48.2347 31.2546 50.6528 33.0796 50.6528 35.3309" stroke="#FF4370" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M45.2518 39.4071C48.2347 39.4071 50.6528 41.2321 50.6528 43.4833C50.6528 45.7346 48.2347 47.5596 45.2518 47.5596" stroke="#FF4370" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M50.6527 43.4833C50.6527 45.7346 48.2345 47.5596 45.2516 47.5596C42.2687 47.5596 39.8506 45.7346 39.8506 43.4833" stroke="#FF4370" stroke-width="2.5" stroke-linecap="round"/>
+<rect width="45" height="65" fill="white" fill-opacity="0.5"/>
+</svg>

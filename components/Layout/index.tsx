@@ -7,7 +7,14 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
   return (
     <Flex bg="#eee" justifyContent="center" minHeight="100vh">
-      <Flex bg="#fff" flexDirection="column" width="768px" alignItems="center">
+      <Flex
+        bg="#fff"
+        flexDirection="column"
+        width="768px"
+        alignItems="center"
+        paddingLeft="15px"
+        paddingRight="15px"
+      >
         {children}
       </Flex>
     </Flex>
