@@ -1,8 +1,10 @@
 import { StarIcon } from '@chakra-ui/icons';
 import { Flex, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
 import { CardProductData } from 'types/product';
+import { priceFormat, remainedTimeFormat } from 'utils';
 
 import CardImage from './CardImage';
 
@@ -12,7 +14,12 @@ interface CardProps {
 
 const Card = ({ productInfo }: CardProps) => {
   const { id, title, thumbnailImage, minimumPrice, expireAt } = productInfo;
+  const [remainedTime, setRemainedTime] = useState('0초');
   const router = useRouter();
+
+  useEffect(() => {
+    setRemainedTime(remainedTimeFormat(expireAt));
+  }, [remainedTime]);
 
   return (
     <Flex
@@ -37,7 +44,7 @@ const Card = ({ productInfo }: CardProps) => {
             borderRadius="20px"
             fontWeight="bold"
           >
-            {minimumPrice}
+            {priceFormat(minimumPrice)}원
           </Text>
         </Flex>
         <Flex justifyContent="space-between" alignItems="center">
@@ -48,7 +55,7 @@ const Card = ({ productInfo }: CardProps) => {
             padding="3px 10px"
             borderRadius="20px"
           >
-            {expireAt.toString()}
+            {remainedTime}
           </Text>
         </Flex>
         <Flex justifyContent="flex-end" alignItems="center">
