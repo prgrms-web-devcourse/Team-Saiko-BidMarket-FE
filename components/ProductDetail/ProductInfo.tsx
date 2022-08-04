@@ -1,6 +1,25 @@
 import { Flex, Text } from '@chakra-ui/react';
+import { differenceInDays, format } from 'date-fns';
 
-const ProductInfo = () => {
+interface ProductInfoProps {
+  title: string;
+  description: string;
+  category: string;
+  location: string;
+  createdAt: Date;
+  expireAt: Date;
+}
+
+const ProductInfo = ({
+  title,
+  description,
+  category,
+  location,
+  createdAt,
+  expireAt,
+}: ProductInfoProps) => {
+  const DDay = differenceInDays(new Date(expireAt), new Date());
+
   return (
     <Flex direction="column">
       <Flex marginTop="14px" alignItems="center">
@@ -12,19 +31,17 @@ const ProductInfo = () => {
           borderRadius="20px"
           fontWeight="bold"
         >
-          D-1
+          D-{DDay === 0 ? 'Day' : DDay}
         </Text>
         <Text fontSize="lg" marginLeft="10px" fontWeight="bold">
-          춘식이가 먹다 남은 귤
+          {title}
         </Text>
       </Flex>
       <Text fontSize="sm" color="#838383" marginTop="7px">
-        10월 27일
+        {format(new Date(createdAt), 'M월 d일')}
       </Text>
       <Text marginTop="14px" whiteSpace="pre-wrap" marginBottom="158px">
-        라이언이 키우는 춘식이! 고구마를 제일 좋아하지만 겨울에 이불을 덮고 귤을
-        까먹는 맛이 있죠잉~ 귀여운 춘식이가 먹다 남은 귤 모음! 가볍게 만원부터
-        시작하겠습니다.
+        {description}
       </Text>
     </Flex>
   );
