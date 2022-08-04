@@ -22,10 +22,7 @@ const Card = ({ productInfo }: CardProps) => {
       cursor="pointer"
       onClick={() => router.push(`/products/${id}`)}
     >
-      <CardImage
-        alt="abc"
-        src={thumbnailImage || 'https://bit.ly/code-beast'}
-      />
+      <CardImage alt="abc" src={thumbnailImage || '/svg/basket.svg'} />
       <Flex direction="column" paddingLeft="15px" width="100%" gap="5px">
         <Text fontSize="lg">{title}</Text>
         <Flex justifyContent="space-between" alignItems="center">
