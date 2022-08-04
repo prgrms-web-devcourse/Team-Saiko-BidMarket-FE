@@ -38,9 +38,9 @@ const Home = ({
         <Banner />
         <Divider marginTop="15px" />
         <SearchInput />
-        {products.map((product, index) => {
+        {products.map((product) => {
           return (
-            <Fragment key={index}>
+            <Fragment key={product.id}>
               <Card productInfo={product} />
               <Divider />
             </Fragment>

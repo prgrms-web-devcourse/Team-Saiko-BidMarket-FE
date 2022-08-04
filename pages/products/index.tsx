@@ -23,9 +23,9 @@ const Products: NextPage = () => {
       <Flex width="100%" marginTop="15px">
         <BidFilterCheckBox />
       </Flex>
-      {products.map((product, index) => {
+      {products.map((product) => {
         return (
-          <Fragment key={index}>
+          <Fragment key={product.id}>
             <Card productInfo={product} />
             <Divider />
           </Fragment>
