@@ -1,12 +1,12 @@
 import axios, { AxiosInstance } from 'axios';
+import getConfig from 'next/config';
+const { publicRuntimeConfig } = getConfig();
 
 import { interceptors } from './interceptors';
 
-const NEXT_APP_API_END_POINT = `${process.env.NEXT_APP_API_END_POINT}/api/v1`;
-
 const createAuthInstance = (url: string, options: object): AxiosInstance => {
   const instance = axios.create({
-    baseURL: url,
+    baseURL: publicRuntimeConfig.customBaseUrl,
     headers: {
       'Content-Type': 'application/json',
     },
@@ -16,4 +16,7 @@ const createAuthInstance = (url: string, options: object): AxiosInstance => {
   return instance;
 };
 
-export const authInstance = createAuthInstance(NEXT_APP_API_END_POINT, {});
+export const authInstance = createAuthInstance(
+  publicRuntimeConfig.customBaseUrl,
+  {}
+);
