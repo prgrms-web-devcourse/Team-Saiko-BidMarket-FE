@@ -1,6 +1,5 @@
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import {
-  Box,
   Button,
   Drawer,
   DrawerBody,
@@ -10,9 +9,13 @@ import {
   Flex,
   useDisclosure,
 } from '@chakra-ui/react';
-import { Fragment, useState } from 'react';
+import { ChangeEvent, Fragment, useState } from 'react';
 
-const Category = () => {
+interface CategoryProps {
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+}
+
+const Category = ({ onChange }: CategoryProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const Categoryitems = [
     '디지털 기기',
@@ -36,6 +39,7 @@ const Category = () => {
   const handleCategoryClick = (item: string) => {
     setSelectedCategory(item);
     onClose();
+    onChange;
   };
   return (
     <>
@@ -43,7 +47,7 @@ const Category = () => {
         bg="#ffffff"
         border="1px"
         borderColor="#B6B6B6"
-        w="47%"
+        w="100%"
         onClick={onOpen}
         color="#718096"
         fontWeight="normal"

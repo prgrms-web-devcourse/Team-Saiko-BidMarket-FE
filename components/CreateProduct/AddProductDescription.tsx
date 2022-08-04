@@ -1,9 +1,10 @@
 import { Flex, Image, Text, Textarea } from '@chakra-ui/react';
+import { ChangeEventHandler, useState } from 'react';
 import ProductLabel from './ProductLabel';
 
 const AddProductDescription = () => {
   return (
-    <Flex direction="column" w="100%" gap="3">
+    <Flex direction="column" w="100%" gap="3" marginBottom="30px">
       <ProductLabel
         LabelImage={
           <Image
