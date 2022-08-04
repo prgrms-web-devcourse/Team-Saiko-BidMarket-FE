@@ -1,5 +1,5 @@
 import { baseInstance } from 'apis/utils/baseInstance';
-import { ProductResponse } from 'types/product';
+import { ProductResponse, ProductsResponseType } from 'types/product';
 
 interface productsAPITypes {
   offset: number;
