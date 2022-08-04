@@ -7,6 +7,8 @@ import { productAPI } from 'apis';
 import { Card, SearchInput, SEO } from 'components/common';
 import { Banner, MainHeader, ProductAddButton } from 'components/Main';
 
+let offset = 0;
+const limit = 5;
 export const getServerSideProps = async () => {
   const { data } = await productAPI.getProducts({ offset: 0, limit: 5 });
   return { props: { productsProp: data } };
@@ -16,16 +18,14 @@ const Home = ({
   productsProp,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [products, setProducts] = useState(productsProp);
-  let offset = 0;
-  const limit = 5;
 
   const handleMoreProductClick = async () => {
-    offset = offset + 5;
+    offset = offset + 1;
     try {
       const { data } = await productAPI.getProducts({ offset, limit });
       setProducts([...products, ...data]);
     } catch (error) {
-      offset = offset - 5;
+      offset = offset - 1;
       console.log(error);
     }
   };
