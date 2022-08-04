@@ -1,6 +1,6 @@
 import { StarIcon } from '@chakra-ui/icons';
 import { Divider, Flex, Box } from '@chakra-ui/react';
-import type { InferGetServerSidePropsType } from 'next';
+import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 
 import { productAPI } from 'apis';
 import { GoBackIcon, SEO } from 'components/common';
@@ -11,9 +11,9 @@ import {
   ProductSeller,
 } from 'components/ProductDetail';
 
-export const getServerSideProps = async (context: any) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const { productId } = context.query;
-  const { data } = await productAPI.getProduct(productId);
+  const { data } = await productAPI.getProduct(Number(productId));
 
   return {
     props: {
