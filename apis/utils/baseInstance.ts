@@ -1,18 +1,20 @@
 import axios, { AxiosInstance } from 'axios';
-
-const NEXT_APP_API_END_POINT = `${process.env.NEXT_APP_API_END_POINT}/api/v1`;
+import getConfig from 'next/config';
+const { publicRuntimeConfig } = getConfig();
 
 const createBaseInstance = (url: string, options: object): AxiosInstance => {
   const instance = axios.create({
-    baseURL: url,
+    baseURL: publicRuntimeConfig.customBaseUrl,
     headers: {
       'Content-Type': 'application/json',
     },
-    timeout: 5000,
     ...options,
   });
 
   return instance;
 };
 
-export const baseInstance = createBaseInstance(NEXT_APP_API_END_POINT, {});
+export const baseInstance = createBaseInstance(
+  publicRuntimeConfig.customBaseUrl,
+  {}
+);
