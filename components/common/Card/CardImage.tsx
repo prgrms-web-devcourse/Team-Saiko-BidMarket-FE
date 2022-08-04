@@ -7,13 +7,7 @@ interface CardImageProps {
 
 const CardImage = ({ alt, src }: CardImageProps) => {
   return (
-    <Image
-      boxSize="114px"
-      objectFit="cover"
-      borderRadius="5"
-      alt={alt}
-      src={src}
-    />
+    <Image w="114px" objectFit="cover" borderRadius="5" alt={alt} src={src} />
   );
 };
 
