@@ -4,9 +4,11 @@ const { publicRuntimeConfig } = getConfig();
 
 import { interceptors } from './interceptors';
 
+const BACKEND_API_BASEURL = publicRuntimeConfig.customBaseUrl;
+
 const createAuthInstance = (url: string, options: object): AxiosInstance => {
   const instance = axios.create({
-    baseURL: publicRuntimeConfig.customBaseUrl,
+    baseURL: BACKEND_API_BASEURL,
     headers: {
       'Content-Type': 'application/json',
     },
@@ -17,7 +19,4 @@ const createAuthInstance = (url: string, options: object): AxiosInstance => {
   return instance;
 };
 
-export const authInstance = createAuthInstance(
-  publicRuntimeConfig.customBaseUrl,
-  {}
-);
+export const authInstance = createAuthInstance(BACKEND_API_BASEURL, {});
