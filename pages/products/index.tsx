@@ -1,11 +1,15 @@
 import { Divider, Flex, Text } from '@chakra-ui/react';
 import type { NextPage } from 'next';
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 
 import { Card, GoBackIcon, Header, SearchInput, SEO } from 'components/common';
 import { BidFilterCheckBox, FilterButton } from 'components/Products';
+import { CardProductData } from 'types/product';
+
+const DUMMY_DATA: Array<CardProductData> = [];
 
 const Products: NextPage = () => {
+  const [products, setProducts] = useState(DUMMY_DATA);
   return (
     <>
       <SEO title="검색" />
@@ -19,16 +23,14 @@ const Products: NextPage = () => {
       <Flex width="100%" marginTop="15px">
         <BidFilterCheckBox />
       </Flex>
-      {Array(10)
-        .fill(1)
-        .map((_, index) => {
-          return (
-            <Fragment key={index}>
-              <Card productId={index} />
-              <Divider />
-            </Fragment>
-          );
-        })}
+      {products.map((product, index) => {
+        return (
+          <Fragment key={index}>
+            <Card productInfo={product} />
+            <Divider />
+          </Fragment>
+        );
+      })}
     </>
   );
 };
