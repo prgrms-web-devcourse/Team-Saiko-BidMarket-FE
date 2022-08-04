@@ -58,8 +58,9 @@ const Home = ({
           color="white"
           backgroundColor="brand.primary-900"
           isLoading={isMoreButtonLoading}
+          onClick={() => handleMoreProductClick()}
         >
-          <DownloadIcon w="5" h="5" onClick={() => handleMoreProductClick()} />
+          <DownloadIcon w="5" h="5" />
         </Button>
       </Flex>
       <Box alignSelf="flex-end" position="sticky" bottom="15px" right="15px">
