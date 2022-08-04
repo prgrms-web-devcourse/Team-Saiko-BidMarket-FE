@@ -53,7 +53,7 @@ const ProductBid = ({ minimumPrice, expireAt }: ProductBidProps) => {
             borderRadius="20px"
             fontWeight="bold"
           >
-            {priceFormat(minimumPrice)}
+            {priceFormat(minimumPrice)}원
           </Text>
         </Flex>
         <Flex justifyContent="space-between" alignItems="center">
