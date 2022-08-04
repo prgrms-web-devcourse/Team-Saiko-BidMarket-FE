@@ -40,11 +40,14 @@ const ProductDetail = ({
   return (
     <>
       <SEO title={title} description={description} />
+      <Box position="absolute">
+        <ProductImage images={images} />
+      </Box>
       <Box position="absolute" left="0" paddingTop="5px" cursor="pointer">
+        {/* //TODO 색상 props 적용 */}
         <GoBackIcon />
       </Box>
-      <Flex direction="column" width="100%">
-        <ProductImage images={images} />
+      <Flex direction="column" width="100%" marginTop="317px">
         <Flex justifyContent="space-between" alignItems="center">
           <ProductSeller
             name={writer.username}
