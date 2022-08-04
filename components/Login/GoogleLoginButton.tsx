@@ -1,9 +1,10 @@
 import { Box } from '@chakra-ui/react';
+import getConfig from 'next/config';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
 import { useRef } from 'react';
 
-const GOOGLE_LOGIN_URL = process.env.GOOGLE_LOGIN_URL as string;
+const { publicRuntimeConfig } = getConfig();
 
 const GoogleLoginButton = () => {
   const router = useRouter();
@@ -11,7 +12,7 @@ const GoogleLoginButton = () => {
 
   const handleLoginButtonClick = (event: React.MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
-    router.push(GOOGLE_LOGIN_URL);
+    router.push(publicRuntimeConfig.googleLoginUrl);
   };
 
   return (

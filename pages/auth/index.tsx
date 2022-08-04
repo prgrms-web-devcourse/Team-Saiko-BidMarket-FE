@@ -11,6 +11,7 @@ const Auth = () => {
     setItem('token', router.query.token as string);
     router.push('/');
   }, []);
+
   return (
     <Center height="100%">
       <Spinner size="xl" />
