@@ -7,6 +7,9 @@ import {
   useDisclosure,
   Image,
 } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
+
+import { priceFormat, remainedTimeFormat } from 'utils';
 
 import ProductBidProgress from './ProductBidDrawer';
 
@@ -17,7 +20,12 @@ interface ProductBidProps {
 
 const ProductBid = ({ minimumPrice, expireAt }: ProductBidProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  3;
+  const [remainedTime, setRemainedTime] = useState('0초');
+
+  useEffect(() => {
+    setRemainedTime(remainedTimeFormat(expireAt));
+  }, [remainedTime]);
+
   return (
     <Box
       position="fixed"
@@ -45,7 +53,7 @@ const ProductBid = ({ minimumPrice, expireAt }: ProductBidProps) => {
             borderRadius="20px"
             fontWeight="bold"
           >
-            {minimumPrice}
+            {priceFormat(minimumPrice)}
           </Text>
         </Flex>
         <Flex justifyContent="space-between" alignItems="center">
@@ -59,7 +67,7 @@ const ProductBid = ({ minimumPrice, expireAt }: ProductBidProps) => {
             padding="3px 10px"
             borderRadius="20px"
           >
-            {expireAt.toString()}
+            {remainedTime}
           </Text>
         </Flex>
         <Button
