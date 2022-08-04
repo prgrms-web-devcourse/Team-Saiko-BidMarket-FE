@@ -1,9 +1,9 @@
 import { StarIcon } from '@chakra-ui/icons';
-import { Divider, Flex } from '@chakra-ui/react';
+import { Divider, Flex, Box } from '@chakra-ui/react';
 import type { InferGetServerSidePropsType } from 'next';
 
 import { productAPI } from 'apis';
-import { SEO } from 'components/common';
+import { GoBackIcon, SEO } from 'components/common';
 import {
   ProductBid,
   ProductImage,
@@ -40,6 +40,9 @@ const ProductDetail = ({
   return (
     <>
       <SEO title={title} description={description} />
+      <Box position="absolute" left="0" paddingTop="5px" cursor="pointer">
+        <GoBackIcon />
+      </Box>
       <Flex direction="column" width="100%">
         <ProductImage images={images} />
         <Flex justifyContent="space-between" alignItems="center">
