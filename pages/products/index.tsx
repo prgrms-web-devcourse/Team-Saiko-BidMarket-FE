@@ -24,7 +24,7 @@ const Products: NextPage = () => {
         .map((_, index) => {
           return (
             <Fragment key={index}>
-              <Card productId={index.toString()} />
+              <Card productId={index} />
               <Divider />
             </Fragment>
           );

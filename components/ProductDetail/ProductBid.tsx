@@ -7,11 +7,24 @@ import {
   useDisclosure,
   Image,
 } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
+
+import { priceFormat, remainedTimeFormat } from 'utils';
 
 import ProductBidProgress from './ProductBidDrawer';
 
-const ProductBid = () => {
+interface ProductBidProps {
+  minimumPrice: number;
+  expireAt: Date;
+}
+
+const ProductBid = ({ minimumPrice, expireAt }: ProductBidProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [remainedTime, setRemainedTime] = useState('0초');
+
+  useEffect(() => {
+    setRemainedTime(remainedTimeFormat(expireAt));
+  }, [remainedTime]);
 
   return (
     <Box
@@ -40,7 +53,7 @@ const ProductBid = () => {
             borderRadius="20px"
             fontWeight="bold"
           >
-            10,000원
+            {priceFormat(minimumPrice)}원
           </Text>
         </Flex>
         <Flex justifyContent="space-between" alignItems="center">
@@ -54,7 +67,7 @@ const ProductBid = () => {
             padding="3px 10px"
             borderRadius="20px"
           >
-            01일 22시간 22분 40초
+            {remainedTime}
           </Text>
         </Flex>
         <Button

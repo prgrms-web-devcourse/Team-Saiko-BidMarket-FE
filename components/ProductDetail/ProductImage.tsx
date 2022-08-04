@@ -1,13 +1,19 @@
 import { Image } from '@chakra-ui/react';
 
-const ProductImage = () => {
+import { Image as ImageType } from 'types/product';
+
+interface ProductImageProps {
+  images: ImageType[];
+}
+
+const ProductImage = ({ images }: ProductImageProps) => {
   return (
     <Image
       width="100%"
       height="317px"
-      objectFit="contain"
+      objectFit="cover"
       alt="product-image"
-      src="https://bit.ly/code-beast"
+      src={images.length ? images[0].url : '/svg/basket.svg'}
     />
   );
 };

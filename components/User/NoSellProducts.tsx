@@ -8,7 +8,7 @@ const NoSellProducts = () => {
     <>
       <Image src="/svg/noneProduct.svg" alt="None Product" />
       <Text marginTop="34px">아직 판매하신 상품이 없으시군요:(</Text>
-      <Text marginTop="10px" color="#8E8E8E">
+      <Text marginTop="10px" color="brand.dark-light">
         첫 상품 판매를 도와드릴게요!
       </Text>
       <Button

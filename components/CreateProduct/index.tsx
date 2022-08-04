@@ -1,164 +1,193 @@
-import { AddIcon, CloseIcon } from '@chakra-ui/icons';
 import {
   Flex,
-  Input,
-  Image,
-  Select,
-  Textarea,
-  IconButton,
-  Box,
-  Divider,
+  FormControl,
+  FormErrorMessage,
   Text,
+  Image,
 } from '@chakra-ui/react';
-import { Fragment } from 'react';
+import { useState } from 'react';
 
-const CreateProduct = () => {
-  return (
-    <Flex
-      direction="column"
-      alignItems="center"
-      paddingLeft="15px"
-      paddingRight="15px"
-      gap="20px"
-      marginTop="20px"
-    >
-      <Flex direction="column">
-        <Flex alignItems="center">
-          <Box w="33px">
-            <Image src="/CreateProduct/cp4.png" alt="picture" width="22px" />
-          </Box>
-          <Text fontSize="lg" fontWeight="semibold">
-            사진
-          </Text>
-        </Flex>
-        <Text fontSize="sm" marginTop="1">
-          다양한 사진이 많을수록 입찰받을 확률이 높아져요!
-        </Text>
-        <Flex marginTop="3" w="100%">
-          <IconButton
-            boxSize="82px"
-            variant="outline"
-            borderColor="brand.primary-900"
-            aria-label="Add Image"
-            icon={<AddIcon color="brand.primary-900" />}
-          />
-          <Divider orientation="vertical" w="24px" />
-          {Array.from({ length: 3 }, (_, index) => index).map(() => {
-            return (
-              <Fragment key="index">
-                <Box>
-                  <IconButton
-                    position="absolute"
-                    transform="translate(300%, -40%)"
-                    borderRadius="2xl"
-                    boxSize="22px"
-                    variant="outline"
-                    minWidth="1"
-                    aria-label="Delete Button"
-                    bg="brand.primary-900"
-                    icon={<CloseIcon w="8px" h="8px" color="#FFFFFF" />}
-                  />
-                  <Image
-                    boxSize="82px"
-                    objectFit="cover"
-                    borderRadius="5px"
-                    src="https://bit.ly/dan-abramov"
-                    alt="Dan Abramov"
-                  />
-                </Box>
-                <Divider orientation="vertical" w="8px" />
-              </Fragment>
+import { Category, Header, GoBackIcon } from 'components/common';
+import useForm from 'hooks/useForm';
+
+import AddProductDescription from './AddProductDescription';
+import AddProductImageUpload from './AddProductImageUpload';
+import AddProductLocation from './AddProductLocation';
+import AddProductMinimumPrice from './AddProductMinimumPrice';
+import AddProductTitle from './AddProductTitle';
+import ProductLabel from './ProductLabel';
+import SubmitButton from './SubmitButton';
+
+interface CreateProductProps {
+  productName: string;
+  productPrice: number;
+  productLocation: string;
+  productImageUrl: string;
+  productCategory: string;
+}
+
+const CreateProduct = ({
+  productName,
+  productPrice,
+  productLocation,
+  productImageUrl,
+  productCategory,
+}: CreateProductProps) => {
+  const [productInput, setProductInput] = useState();
+
+  const { errors, isLoading, handleChange, handleSubmit } = useForm({
+    initialValues: {
+      productName,
+      productPrice,
+      productLocation,
+      productImageUrl,
+      productCategory,
+    },
+    onSubmit: async ({ productName, e }) => {
+      const fakeSubmit = () =>
+        new Promise((resolve) => {
+          setTimeout(() => {
+            alert(
+              `onSubmit!\n productName: ${productName} \n profileImage: ${e.target.productImageUrl.dataset.url}`
             );
-          })}
-        </Flex>
-      </Flex>
+            resolve('Success');
+          }, 1500);
+        });
 
-      <Flex direction="column" w="100%" gap="3">
-        <Flex alignItems="center">
-          <Box w="33px" position="absolute" transform="translate(-10%, 0)">
-            <Image
-              src="/CreateProduct/cp2.png"
-              alt="title"
-              width="30px"
-              height="30px"
-            />
-          </Box>
-          <Text fontSize="lg" fontWeight="semibold" marginLeft="9%">
-            상품 제목
+      await fakeSubmit();
+      setProductInput(productName);
+      // setProductInput(productPrice);
+      // setProductInput(productLocation);
+    },
+    validate: ({
+      productName,
+      productPrice,
+      productLocation,
+      productCategory,
+    }) => {
+      const error: {
+        productName?: string;
+        productPrice?: string;
+        productLocation?: string;
+        productCategory?: string;
+        defalutValue?: string;
+      } = {};
+
+      if (!productName) {
+        error.productName = '상품 제목을 입력해주세요.';
+      }
+
+      if (!productPrice) {
+        error.productPrice = '1000원 이상 입력 가능합니다.';
+      }
+
+      if (!productLocation) {
+        error.productLocation = '희망 거래지역을 입력해주세요.';
+      }
+
+      if (productCategory === '') {
+        error.productCategory = '카테고리를 선택해주세요.';
+      }
+
+      return error;
+    },
+  });
+
+  return (
+    <form style={{ width: '100%', height: '100%' }} onSubmit={handleSubmit}>
+      <Header
+        leftContent={<GoBackIcon />}
+        middleContent={
+          <Text fontWeight="bold" fontSize="20px">
+            상품등록
           </Text>
+        }
+        rightContent={
+          <SubmitButton isLoading={isLoading} loadingText={'전송 중'} />
+        }
+      />
+      <Flex
+        direction="column"
+        alignItems="center"
+        paddingLeft="15px"
+        paddingRight="15px"
+        gap="20px"
+        marginTop="10px"
+        w="100%"
+      >
+        <AddProductImageUpload
+          name="profileImage"
+          productImageUrl={productImageUrl}
+          onChange={handleChange}
+        />
+        <FormControl
+          flexGrow="1"
+          display="flex"
+          flexDirection="column"
+          height="20%"
+          isInvalid={(errors.productName as string)?.length > 0 ? true : false}
+        >
+          <AddProductTitle inputTitle="productName" onChange={handleChange} />
+          <FormErrorMessage paddingLeft="19px">
+            {errors.productName as string}
+          </FormErrorMessage>
+        </FormControl>
+
+        <FormControl
+          flexGrow="1"
+          display="flex"
+          flexDirection="column"
+          height="20%"
+          isInvalid={(errors.productPrice as number) > 1000 ? true : false}
+        >
+          <AddProductMinimumPrice />
+          <FormErrorMessage paddingLeft="19px">
+            {errors.productPrice as string}
+          </FormErrorMessage>
+        </FormControl>
+        <Flex direction="column" w="100%" gap="3" marginTop="-2.5">
+          <ProductLabel
+            LabelImage={
+              <Image
+                src="/CreateProduct/cp5.png"
+                alt="select"
+                width="21px"
+                height="22px"
+              />
+            }
+            LabelTitle={
+              <Text fontSize="lg" fontWeight="semibold">
+                판매 설정
+              </Text>
+            }
+          />
+          <Flex flexDirection="row" justifyContent="space-between" w="100%">
+            <FormControl w="47%" h="20%">
+              <Category onChange={handleChange} />
+              <FormErrorMessage paddingLeft="19px">
+                {errors.productCategory as string}
+              </FormErrorMessage>
+            </FormControl>
+            <FormControl
+              w="47%"
+              h="20%"
+              isInvalid={
+                (errors.productLocation as string)?.length > 0 ? true : false
+              }
+            >
+              <AddProductLocation
+                inputLocation="productLocation"
+                onChange={handleChange}
+              />
+              <FormErrorMessage paddingLeft="19px">
+                {errors.productLocation as string}
+              </FormErrorMessage>
+            </FormControl>
+          </Flex>
         </Flex>
-        <Input placeholder="상품 제목" />
+        <AddProductDescription />
       </Flex>
-
-      <Flex direction="column" w="100%" gap="3">
-        <Flex alignItems="center">
-          <Box w="33px">
-            <Image
-              src="/CreateProduct/cp1.png"
-              alt="amount"
-              width="25px"
-              height="15px"
-            />
-          </Box>
-          <Text fontSize="lg" fontWeight="semibold">
-            최소 금액
-          </Text>
-        </Flex>
-        <Flex direction="column" w="100%" alignItems="flex-end">
-          <Input placeholder="최소 금액" />
-          <Text fontSize="sm" color="#007C14" marginRight="3">
-            11,000원
-          </Text>
-        </Flex>
-      </Flex>
-
-      <Flex direction="column" w="100%" gap="3">
-        <Flex alignItems="center">
-          <Box w="33px">
-            <Image
-              src="/CreateProduct/cp5.png"
-              alt="select"
-              width="21px"
-              height="22px"
-            />
-          </Box>
-
-          <Text fontSize="lg" fontWeight="semibold">
-            판매 설정
-          </Text>
-        </Flex>
-        <Flex flexDirection="row" justifyContent="space-between" w="100%">
-          <Select placeholder="카테고리" color="#718096" w="47%">
-            <option value="option1">디지털 기기</option>
-            <option value="option2">생활 가전</option>
-            <option value="option3">가구 인테리어</option>
-          </Select>
-
-          <Select placeholder="희망 거래 지역" color="#718096" w="47%">
-            <option value="option1">서울</option>
-            <option value="option2">인천</option>
-            <option value="option3">청주</option>
-          </Select>
-        </Flex>
-      </Flex>
-
-      <Flex direction="column" w="100%" gap="3">
-        <Flex alignItems="center">
-          <Box w="33px">
-            <Image
-              src="/CreateProduct/cp3.png"
-              alt="contents"
-              width="20px"
-              height="21px"
-            />
-          </Box>
-          <Text fontSize="lg" fontWeight="semibold">
-            상세 내용
-          </Text>
-        </Flex>
-        <Textarea placeholder="상품 내용 작성" h="260px" />
-      </Flex>
-    </Flex>
+    </form>
   );
 };
 

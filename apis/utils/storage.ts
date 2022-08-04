@@ -1,10 +1,8 @@
-const storage = window.localStorage;
-
 const getItem = (key: string) => {
   const defaultValue = '';
 
   try {
-    const item = storage.getItem(key);
+    const item = window.localStorage.getItem(key);
     return item ? JSON.parse(item) : defaultValue;
   } catch (error) {
     console.log(error);
@@ -14,7 +12,7 @@ const getItem = (key: string) => {
 
 const setItem = (key: string, item: string) => {
   try {
-    storage.setItem(key, JSON.stringify(item));
+    window.localStorage.setItem(key, JSON.stringify(item));
   } catch (error) {
     console.log(error);
   }
@@ -22,7 +20,7 @@ const setItem = (key: string, item: string) => {
 
 const removeItem = (key: string) => {
   try {
-    storage.removeItem(key);
+    window.localStorage.removeItem(key);
   } catch (error) {
     console.log(error);
   }

@@ -8,7 +8,7 @@ const NoBidProducts = () => {
     <>
       <Image src="/svg/noneProduct.svg" alt="None Product" />
       <Text marginTop="34px">아직 입찰하신 상품이 없으시군요:(</Text>
-      <Text marginTop="10px" color="#8E8E8E">
+      <Text marginTop="10px" color="brand.dark-light">
         메인화면에서 다양한 상품을 구경하세요!
       </Text>
       <Button

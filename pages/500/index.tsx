@@ -1,7 +1,7 @@
 import { Flex, Image, Text, Button } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 
-const NotFound = () => {
+const ERROR = () => {
   const router = useRouter();
 
   return (
@@ -12,12 +12,15 @@ const NotFound = () => {
       gap="5px"
       height="100%"
     >
-      <Image src="/svg/404.svg" alt="404-image" />
+      <Image src="/svg/500.svg" alt="500-image" />
       <Text fontSize="xl" fontWeight="bold" color="brand.primary-900">
-        페이지를 찾을 수 없습니다.
+        서비스에 접속할 수 없습니다.
       </Text>
       <Text color="brand.dark-light">
-        페이지가 삭제되었거나 주소가 변경되었을 수 있습니다
+        기술적인 문제로 일시적으로 접속되지 않았습니다.
+      </Text>
+      <Text color="brand.dark-light">
+        잠시 후 다시 이용 부탁드리며 이용에 불편을 드려 사과드립니다.
       </Text>
       <Button
         marginTop="20px"
@@ -44,4 +47,4 @@ const NotFound = () => {
   );
 };
 
-export default NotFound;
+export default ERROR;
