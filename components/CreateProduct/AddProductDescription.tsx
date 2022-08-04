@@ -1,5 +1,5 @@
 import { Flex, Image, Text, Textarea } from '@chakra-ui/react';
-import { ChangeEventHandler, useState } from 'react';
+
 import ProductLabel from './ProductLabel';
 
 const AddProductDescription = () => {

@@ -1,5 +1,5 @@
 import { Input } from '@chakra-ui/react';
-import { ChangeEvent, useRef, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 interface AddProductLocationProps {
   inputLocation: string;

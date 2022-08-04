@@ -1,5 +1,6 @@
-import React, { ChangeEvent, useRef, useState } from 'react';
 import { Flex, Image, Input, Text } from '@chakra-ui/react';
+import React, { useRef, useState } from 'react';
+
 import ProductLabel from './ProductLabel';
 
 //TODO: 100원 단위로 작성 가능, 1000원 이상 입력 가능

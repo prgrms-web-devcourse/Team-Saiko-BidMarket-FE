@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {
   Flex,
   FormControl,
@@ -6,18 +5,18 @@ import {
   Text,
   Image,
 } from '@chakra-ui/react';
+import { useState } from 'react';
 
+import { Category, Header, GoBackIcon } from 'components/common';
+import useForm from 'hooks/useForm';
+
+import AddProductDescription from './AddProductDescription';
+import AddProductImageUpload from './AddProductImageUpload';
+import AddProductLocation from './AddProductLocation';
 import AddProductMinimumPrice from './AddProductMinimumPrice';
 import AddProductTitle from './AddProductTitle';
-import AddProductImageUpload from './AddProductImageUpload';
-import AddProductDescription from './AddProductDescription';
-import SubmitButton from './SubmitButton';
-import useForm from 'hooks/useForm';
 import ProductLabel from './ProductLabel';
-import Category from '@common/Category';
-import AddProductLocation from './AddProductLocation';
-import Header from '@common/Header';
-import GoBackIcon from '@common/Header/GoBackIcon';
+import SubmitButton from './SubmitButton';
 
 interface CreateProductProps {
   productName: string;

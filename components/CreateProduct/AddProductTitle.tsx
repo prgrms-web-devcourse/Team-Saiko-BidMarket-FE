@@ -1,5 +1,6 @@
-import { ChangeEvent, useRef, useState } from 'react';
 import { Flex, Image, Input, Text } from '@chakra-ui/react';
+import { ChangeEvent, useRef, useState } from 'react';
+
 import ProductLabel from './ProductLabel';
 
 interface AddProductTitleProps {

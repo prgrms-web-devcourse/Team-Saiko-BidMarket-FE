@@ -1,5 +1,6 @@
-import { AddIcon, CloseIcon } from '@chakra-ui/icons';
+import { AddIcon } from '@chakra-ui/icons';
 import { Divider, Flex, IconButton, Image, Text } from '@chakra-ui/react';
+
 import ProductLabel from './ProductLabel';
 
 interface AddProductImageProps {
