@@ -18,15 +18,19 @@ const Home = ({
   productsProp,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [products, setProducts] = useState(productsProp);
+  const [isMoreButtonLoading, setIsMoreButtonLoading] = useState(false);
 
   const handleMoreProductClick = async () => {
+    setIsMoreButtonLoading(true);
     offset = offset + 1;
     try {
       const { data } = await productAPI.getProducts({ offset, limit });
       setProducts([...products, ...data]);
+      setIsMoreButtonLoading(false);
     } catch (error) {
       offset = offset - 1;
       console.log(error);
+      setIsMoreButtonLoading(false);
     }
   };
 
@@ -53,6 +57,7 @@ const Home = ({
           borderRadius="30px"
           color="white"
           backgroundColor="brand.primary-900"
+          isLoading={isMoreButtonLoading}
         >
           <DownloadIcon w="5" h="5" onClick={() => handleMoreProductClick()} />
         </Button>
