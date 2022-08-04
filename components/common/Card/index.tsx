@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import CardImage from './CardImage';
 
 interface CardProps {
-  productId: string;
+  productId: number;
 }
 
 const Card = ({ productId }: CardProps) => {
