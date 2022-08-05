@@ -23,9 +23,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 const ProductDetail = ({
-  product,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const {
+  product: {
     title,
     description,
     minimumPrice,
@@ -35,8 +33,8 @@ const ProductDetail = ({
     images,
     expireAt,
     createdAt,
-  } = product;
-
+  },
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
     <>
       <SEO title={title} description={description} />
