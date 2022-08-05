@@ -1,4 +1,9 @@
-import { Flex, FormControl, FormErrorMessage } from '@chakra-ui/react';
+import {
+  Flex,
+  FormControl,
+  FormErrorMessage,
+  useToast,
+} from '@chakra-ui/react';
 import { useState } from 'react';
 
 import userAPI from 'apis/api/user';
@@ -26,6 +31,15 @@ const EditProfileForm = ({
       await userAPI.updateUser(nickname, profileImageUrl);
       setPrevNickname(nickname);
       setPrevProfileImage(profileImageUrl);
+
+      toast({
+        position: 'top',
+        title: '변경 완료',
+        description: '프로필 정보가 변경 됐습니다.',
+        status: 'success',
+        duration: 1500,
+        isClosable: true,
+      });
     },
     validate: ({ nickname, profileImage }) => {
       const error: { nickname?: string } = {};
@@ -41,6 +55,7 @@ const EditProfileForm = ({
       return error;
     },
   });
+  const toast = useToast();
 
   // TODO: error(빈값, 길이제한?, 닉네임 정의 필요) 적절하게 렌더링 해주기. (글자 vs 모달)
   return (
