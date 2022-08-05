@@ -1,7 +1,13 @@
-import { Divider, Flex, Text } from '@chakra-ui/react';
-import type { NextPage } from 'next';
+import { Center, Divider, Flex, Spinner, Text } from '@chakra-ui/react';
+import type {
+  GetServerSideProps,
+  InferGetServerSidePropsType,
+  NextPage,
+} from 'next';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
+import userAPI from 'apis/api/user';
 import { GoBackIcon, Header, SEO, SideBar } from 'components/common';
 import {
   ProductMenuList,
@@ -9,15 +15,58 @@ import {
   UserProfileInformation,
 } from 'components/User';
 
-const UserId: NextPage = () => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { userId } = context.query;
+  let user = {};
+
+  try {
+    const { data } = await userAPI.getUser(userId as string);
+
+    user = data;
+  } catch (error) {
+    console.error(error);
+  }
+
+  return {
+    props: {
+      user,
+    },
+  };
+};
+
+const UserId: NextPage = ({
+  user: { encodedId, thumbnailImg, username },
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
   const { userId } = router.query;
-  // TODO: url의 id와 로그인 중인 id를 비교해서 마이 페이지인지 사용자 페이지 확인
-  const isMyPage = true;
-  const dummyProfile = {
-    nickname: '물안경',
-    profileImageUrl: 'https://bit.ly/code-beast',
-  };
+  const [authUserId, setAuthUserId] = useState('');
+  const isMyPage = encodedId === authUserId;
+
+  useEffect(() => {
+    if (!encodedId) {
+      router.replace('/404');
+    }
+  }, [encodedId, router]);
+
+  useEffect(() => {
+    const fetchAuthUser = async () => {
+      const {
+        data: { encodedId },
+      } = await userAPI.getAuthUser();
+
+      setAuthUserId(encodedId);
+    };
+
+    fetchAuthUser();
+  }, []);
+
+  if (!encodedId) {
+    return (
+      <Center height="100%">
+        <Spinner size="xl" />
+      </Center>
+    );
+  }
 
   return (
     <>
@@ -33,15 +82,15 @@ const UserId: NextPage = () => {
             fontStyle="normal"
             color="barnd.dark"
           >
-            {isMyPage ? '마이페이지' : '사용자 닉네임'}
+            {isMyPage ? '마이페이지' : ''}
           </Text>
         }
         rightContent={<SideBar />}
       ></Header>
       <Flex width="100%" flexDirection="column" gap="29px">
         <UserProfileInformation
-          profileImageUrl={dummyProfile.profileImageUrl}
-          nickname={dummyProfile.nickname}
+          profileImageUrl={thumbnailImg}
+          nickname={username}
         />
         {isMyPage ? (
           <UserProfileEditButton
