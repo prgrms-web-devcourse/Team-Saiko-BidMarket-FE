@@ -15,19 +15,19 @@ const MainHeader = () => {
   const [userId, setUserId] = useState('');
 
   useEffect(() => {
+    setLoginUserProfile();
+  }, []);
+
+  const setLoginUserProfile = async () => {
     try {
-      (async () => {
-        const {
-          data: { thumbnailImg, encodedId },
-        } = await userAPI.getAuthUser();
-        setProfileImageUrl(thumbnailImg);
-        setUserId(encodedId);
-      })();
+      const { encodedId, thumbnailImg } = (await userAPI.getAuthUser()).data;
+      setProfileImageUrl(thumbnailImg);
+      setUserId(encodedId);
       setIsLogin(true);
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  };
 
   return (
     <Header
