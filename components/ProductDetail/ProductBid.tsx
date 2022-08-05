@@ -37,10 +37,6 @@ const ProductBid = ({
     setRemainedTime(remainedTimeFormat(expireAt));
   }, [remainedTime]);
 
-  const isSameAuthUserAndWriter = () => {
-    return writerId === authUserId;
-  };
-
   const handleBidButtonClick = () => {
     if (!authUserId) {
       toast({
@@ -110,7 +106,7 @@ const ProductBid = ({
           _active={{
             borderColor: '#brand.primary-900',
           }}
-          disabled={isSameAuthUserAndWriter()}
+          disabled={writerId === authUserId}
         >
           <Text color="white">입찰하기</Text>
         </Button>
