@@ -40,16 +40,20 @@ const ProductDetail = ({
   const [authUserId, setAuthUserId] = useState('');
 
   useEffect(() => {
-    if (getItem('token')) {
-      //TODO: fetch 접두사 우선 사용
-      fetchAuthUser();
-    }
+    setAuthUserInfo();
   }, []);
 
-  const fetchAuthUser = async () => {
-    const { encodedId } = (await userAPI.getAuthUser()).data;
+  const setAuthUserInfo = async () => {
+    try {
+      if (!getItem('token')) {
+        return;
+      }
 
-    setAuthUserId(encodedId);
+      const { encodedId } = (await userAPI.getAuthUser()).data;
+      setAuthUserId(encodedId);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

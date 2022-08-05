@@ -8,6 +8,7 @@ import {
   Image,
   useToast,
 } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import { priceFormat, remainedTimeFormat } from 'utils';
@@ -29,6 +30,7 @@ const ProductBid = ({
 }: ProductBidProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [remainedTime, setRemainedTime] = useState('0초');
+  const router = useRouter();
   const toast = useToast();
 
   useEffect(() => {
@@ -43,6 +45,8 @@ const ProductBid = ({
         status: 'warning',
         duration: 1000,
       });
+
+      router.push('/login');
       return;
     }
 
@@ -99,6 +103,9 @@ const ProductBid = ({
           borderRadius="50px"
           marginBottom="15px"
           onClick={handleBidButtonClick}
+          _active={{
+            borderColor: '#brand.primary-900',
+          }}
         >
           <Text color="white">입찰하기</Text>
         </Button>
