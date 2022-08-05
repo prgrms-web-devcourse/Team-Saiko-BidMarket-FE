@@ -82,7 +82,7 @@ const UserId: NextPage = ({
             fontStyle="normal"
             color="barnd.dark"
           >
-            {isMyPage ? '마이페이지' : username}
+            {isMyPage ? '마이페이지' : ''}
           </Text>
         }
         rightContent={<SideBar />}
