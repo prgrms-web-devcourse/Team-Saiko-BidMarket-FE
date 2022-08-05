@@ -6,6 +6,7 @@ import {
   Divider,
   useDisclosure,
   Image,
+  useToast,
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 
@@ -14,17 +15,39 @@ import { priceFormat, remainedTimeFormat } from 'utils';
 import ProductBidProgress from './ProductBidDrawer';
 
 interface ProductBidProps {
+  writerId: string;
+  authUserId: string;
   minimumPrice: number;
   expireAt: Date;
 }
 
-const ProductBid = ({ minimumPrice, expireAt }: ProductBidProps) => {
+const ProductBid = ({
+  writerId,
+  authUserId,
+  minimumPrice,
+  expireAt,
+}: ProductBidProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [remainedTime, setRemainedTime] = useState('0초');
+  const toast = useToast();
 
   useEffect(() => {
     setRemainedTime(remainedTimeFormat(expireAt));
   }, [remainedTime]);
+
+  const handleBidButtonClick = () => {
+    if (!authUserId) {
+      toast({
+        position: 'top-right',
+        title: '로그인 후 이용 가능합니다.',
+        status: 'warning',
+        duration: 1000,
+      });
+      return;
+    }
+
+    onOpen();
+  };
 
   return (
     <Box
@@ -75,7 +98,7 @@ const ProductBid = ({ minimumPrice, expireAt }: ProductBidProps) => {
           cursor="pointer"
           borderRadius="50px"
           marginBottom="15px"
-          onClick={onOpen}
+          onClick={handleBidButtonClick}
         >
           <Text color="white">입찰하기</Text>
         </Button>

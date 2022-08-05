@@ -80,7 +80,12 @@ const ProductDetail = ({
           createdAt={createdAt}
           expireAt={expireAt}
         />
-        <ProductBid minimumPrice={minimumPrice} expireAt={expireAt} />
+        <ProductBid
+          writerId={writer.encodedId}
+          authUserId={authUserId}
+          minimumPrice={minimumPrice}
+          expireAt={expireAt}
+        />
       </Flex>
     </>
   );
