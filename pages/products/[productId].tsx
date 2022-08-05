@@ -1,8 +1,10 @@
 import { StarIcon } from '@chakra-ui/icons';
 import { Divider, Flex, Box } from '@chakra-ui/react';
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import { useEffect, useState } from 'react';
 
-import { productAPI } from 'apis';
+import { productAPI, userAPI } from 'apis';
+import { getItem } from 'apis/utils/storage';
 import { GoBackIcon, SEO } from 'components/common';
 import {
   ProductBid,
@@ -35,6 +37,21 @@ const ProductDetail = ({
     createdAt,
   },
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const [authUserId, setAuthUserId] = useState('');
+
+  useEffect(() => {
+    if (getItem('token')) {
+      //TODO: fetch 접두사 우선 사용
+      fetchAuthUser();
+    }
+  }, []);
+
+  const fetchAuthUser = async () => {
+    const { encodedId } = (await userAPI.getAuthUser()).data;
+
+    setAuthUserId(encodedId);
+  };
+
   return (
     <>
       <SEO title={title} description={description} />
