@@ -14,6 +14,7 @@ const SearchInput = ({ keyword, onChange }: SearchInputProps) => {
       </InputLeftElement>
       <Input
         type="text"
+        maxLength={32}
         placeholder="찾으시는 상품을 검색해보세요!"
         focusBorderColor="brand.primary-900"
         borderColor="brand.primary-900"
