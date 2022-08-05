@@ -43,7 +43,7 @@ const ProductDetail = ({
       <Box position="absolute">
         <ProductImage images={images} />
       </Box>
-      <Box position="absolute" left="0" paddingTop="5px" cursor="pointer">
+      <Box position="absolute" left="15px" top="20px" cursor="pointer">
         {/* //TODO 색상 props 적용 */}
         <GoBackIcon />
       </Box>
