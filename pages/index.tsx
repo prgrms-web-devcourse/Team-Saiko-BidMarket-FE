@@ -1,6 +1,7 @@
 import { DownloadIcon } from '@chakra-ui/icons';
 import { Box, Button, Divider, Flex } from '@chakra-ui/react';
 import type { InferGetServerSidePropsType } from 'next';
+import { useRouter } from 'next/router';
 import { Fragment, useState } from 'react';
 
 import { productAPI } from 'apis';
@@ -17,8 +18,16 @@ export const getServerSideProps = async () => {
 const Home = ({
   productsProp,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const router = useRouter();
+  const [keyword, setKeyword] = useState('');
+
   const [products, setProducts] = useState(productsProp);
   const [isMoreButtonLoading, setIsMoreButtonLoading] = useState(false);
+
+  const handleFormSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    router.push(`products?title=${keyword}&progressed=true&offset=0&limit=10`);
+  };
 
   const handleMoreProductClick = async () => {
     setIsMoreButtonLoading(true);
@@ -41,7 +50,9 @@ const Home = ({
       <Flex direction="column" width="100%">
         <Banner />
         <Divider marginTop="15px" />
-        <SearchInput />
+        <form onSubmit={(event) => handleFormSubmit(event)}>
+          <SearchInput keyword={keyword} onChange={setKeyword} />
+        </form>
         {products.map((product) => {
           return (
             <Fragment key={product.id}>
