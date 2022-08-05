@@ -41,9 +41,9 @@ const ProductBid = ({
     if (!authUserId) {
       toast({
         position: 'top-right',
-        title: '로그인 후 이용 가능합니다.',
+        title: '입찰은 로그인 후 이용 가능합니다.',
         status: 'warning',
-        duration: 1000,
+        duration: 2000,
       });
 
       router.push('/login');
