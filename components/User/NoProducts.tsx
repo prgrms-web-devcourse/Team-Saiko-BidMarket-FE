@@ -12,25 +12,25 @@ interface NoProducts {
 
 const NoProducts = ({ pageName }: NoProducts) => {
   const router = useRouter();
+  const isUserBidProducts = pageName === 'userBidProducts';
+  const isUserSellProductsOther = pageName === 'userSellProductsOther';
+  const isUserSellProducts = pageName === 'userSellProducts';
+  const isUserLikeProducts = pageName === 'userLikeProducts';
 
   return (
     <>
-      {pageName !== 'userSellProductsOther' ? (
+      {!isUserSellProductsOther ? (
         <Fragment>
           <Image src="/svg/noneProduct.svg" alt="None Product" />
           <Text marginTop="34px">
-            {pageName === 'userBidProducts' &&
-              '아직 입찰하신 상품이 없으시군요:('}
-            {pageName === 'userSellProducts' &&
-              '아직 판매하신 상품이 없으시군요:('}
-            {pageName === 'userLikeProducts' &&
-              '아직 찜하신 상품이 없으시군요:('}
+            {isUserBidProducts && '아직 입찰하신 상품이 없으시군요:('}
+            {isUserSellProducts && '아직 판매하신 상품이 없으시군요:('}
+            {isUserLikeProducts && '아직 찜하신 상품이 없으시군요:('}
           </Text>
           <Text marginTop="10px" color="brand.dark-light">
-            {pageName === 'userBidProducts' &&
-              '메인화면에서 다양한 상품을 구경하세요!'}
-            {pageName === 'userSellProducts' && '첫 상품 판매를 도와드릴게요!'}
-            {pageName === 'userLikeProducts' &&
+            {isUserBidProducts && '메인화면에서 다양한 상품을 구경하세요!'}
+            {isUserSellProducts && '첫 상품 판매를 도와드릴게요!'}
+            {isUserLikeProducts &&
               '마음에 드는 상품을 찜하고 간편하게 확인하세요!'}
           </Text>
 
@@ -41,12 +41,10 @@ const NoProducts = ({ pageName }: NoProducts) => {
             color="white"
             backgroundColor="brand.primary-900"
             onClick={() =>
-              pageName === 'userSellProducts'
-                ? router.push('/product')
-                : router.push(`/`)
+              isUserSellProducts ? router.push('/product') : router.push(`/`)
             }
           >
-            {pageName === 'userSellProducts'
+            {isUserSellProducts
               ? '판매 글 작성하러 가기'
               : '메인 페이지로 이동하기'}
           </Button>
