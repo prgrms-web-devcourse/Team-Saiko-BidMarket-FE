@@ -8,6 +8,8 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 
+import LogoutButton from './LogoutButton';
+
 const SideBar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -21,7 +23,7 @@ const SideBar = () => {
           <DrawerHeader borderBottomWidth="1px">회원이름</DrawerHeader>
           <DrawerBody>
             <p>회원 정보</p>
-            <p>로그아웃</p>
+            <LogoutButton />
           </DrawerBody>
         </DrawerContent>
       </Drawer>
