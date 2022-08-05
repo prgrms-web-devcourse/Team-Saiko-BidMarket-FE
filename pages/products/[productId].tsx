@@ -65,6 +65,7 @@ const ProductDetail = ({
       <Flex direction="column" width="100%" marginTop="317px">
         <Flex justifyContent="space-between" alignItems="center">
           <ProductSeller
+            id={writer.encodedId}
             name={writer.username}
             thumbnailImg={writer.thumbnailImg}
           />
