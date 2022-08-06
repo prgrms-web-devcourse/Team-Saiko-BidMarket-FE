@@ -6,7 +6,7 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 
-import userAPI from 'apis/api/user';
+import { userAPI } from 'apis';
 import useForm from 'hooks/useForm';
 
 import { NicknameInput, SubmitButton } from '.';

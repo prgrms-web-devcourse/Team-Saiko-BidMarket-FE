@@ -1,8 +1,10 @@
 import { StarIcon } from '@chakra-ui/icons';
 import { Divider, Flex, Box } from '@chakra-ui/react';
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import { useEffect, useState } from 'react';
 
-import { productAPI } from 'apis';
+import { productAPI, userAPI } from 'apis';
+import { getItem } from 'apis/utils/storage';
 import { GoBackIcon, SEO } from 'components/common';
 import {
   ProductBid,
@@ -23,9 +25,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 const ProductDetail = ({
-  product,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const {
+  product: {
     title,
     description,
     minimumPrice,
@@ -35,7 +35,26 @@ const ProductDetail = ({
     images,
     expireAt,
     createdAt,
-  } = product;
+  },
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const [authUserId, setAuthUserId] = useState('');
+
+  useEffect(() => {
+    setAuthUserInfo();
+  }, []);
+
+  const setAuthUserInfo = async () => {
+    try {
+      if (!getItem('token')) {
+        return;
+      }
+
+      const { encodedId } = (await userAPI.getAuthUser()).data;
+      setAuthUserId(encodedId);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -43,13 +62,14 @@ const ProductDetail = ({
       <Box position="absolute">
         <ProductImage images={images} />
       </Box>
-      <Box position="absolute" left="0" paddingTop="5px" cursor="pointer">
+      <Box position="absolute" left="15px" top="20px" cursor="pointer">
         {/* //TODO 색상 props 적용 */}
         <GoBackIcon />
       </Box>
       <Flex direction="column" width="100%" marginTop="317px">
         <Flex justifyContent="space-between" alignItems="center">
           <ProductSeller
+            userId={writer.encodedId}
             name={writer.username}
             thumbnailImg={writer.thumbnailImg}
           />
@@ -64,7 +84,12 @@ const ProductDetail = ({
           createdAt={createdAt}
           expireAt={expireAt}
         />
-        <ProductBid minimumPrice={minimumPrice} expireAt={expireAt} />
+        <ProductBid
+          writerId={writer.encodedId}
+          authUserId={authUserId}
+          minimumPrice={minimumPrice}
+          expireAt={expireAt}
+        />
       </Flex>
     </>
   );
