@@ -23,11 +23,11 @@ import {
 import useForm from 'hooks/useForm';
 
 interface CreateProductProps {
-  productName: string;
-  productPrice: number;
-  productLocation: string;
+  title: string;
+  minimumPrice: number;
+  location: string;
   productImageUrl: string;
-  productCategory: string;
+  category: string;
   productDescription: string;
 }
 
@@ -36,53 +36,50 @@ const Product: NextPage = () => {
 
   const { errors, isLoading, handleChange, handleSubmit } = useForm({
     initialValues: {
-      productName: '',
-      productPrice: '',
-      productLocation: '',
-      productImageUrl: '',
-      productCategory: '',
+      // title: '안녕하세요',
+      // minimumPrice: 100000,
+      // location: '서울',
+      // images: [
+      //   'https://bid-market-bucket.s3.ap-northeast-2.amazonaws.com/products/project.jpeg',
+      // ],
+      // category: 'DIGITAL_DEVICE',
     },
     onSubmit: async (data) => {
       await productAPI.createProduct({
+        title: '안녕하세요',
+        minimumPrice: 100000,
+        location: '서울',
         images: [
           'https://bid-market-bucket.s3.ap-northeast-2.amazonaws.com/products/project.jpeg',
         ],
-        title: 'title',
-        minimumPrice: 100000,
-        category: 'HOUSEHOLD_APPLIANCE',
-        location: '서울',
-        description: '20만원인데 10만원에 팝니다',
+        category: 'DIGITAL_DEVICE',
+        description: '안녕하세요 상세정보',
       });
     },
 
-    validate: ({
-      productName,
-      productPrice,
-      productLocation,
-      productCategory,
-    }) => {
+    validate: ({ title, minimumPrice, location, images, category }) => {
       const error: {
-        productName?: string;
-        productPrice?: string;
-        productLocation?: string;
-        productCategory?: string;
-        defalutValue?: string;
+        // title?: string;
+        // minimumPrice?: string;
+        // location?: string;
+        // category?: string;
+        // images?: string;
       } = {};
 
-      // if (!productName) {
-      //   error.productName = '상품 제목을 입력해주세요.';
+      // if (!title) {
+      //   error.title = '상품 제목을 입력해주세요.';
       // }
 
-      // if (productPrice && parseInt(productPrice, 10) < 1000) {
-      //   error.productPrice = '1000원 이상 입력 가능합니다.';
+      // if (minimumPrice && parseInt(minimumPrice, 10) < 1000) {
+      //   error.minimumPrice = '1000원 이상 입력 가능합니다.';
       // }
 
-      // if (!productLocation) {
-      //   error.productLocation = '희망 거래지역을 입력해주세요.';
+      // if (!location) {
+      //   error.location = '희망 거래지역을 입력해주세요.';
       // }
 
-      // if (productCategory === '') {
-      //   error.productCategory = '카테고리를 선택해주세요.';
+      // if (category === '') {
+      //   error.category = '카테고리를 선택해주세요.';
       // }
 
       return error;
@@ -122,13 +119,11 @@ const Product: NextPage = () => {
             display="flex"
             flexDirection="column"
             height="20%"
-            isInvalid={
-              (errors.productName as string)?.length > 0 ? true : false
-            }
+            // isInvalid={(errors.title as string)?.length > 0 ? true : false}
           >
-            <AddProductTitle inputTitle="productName" onChange={handleChange} />
+            <AddProductTitle inputTitle="title" onChange={handleChange} />
             <FormErrorMessage paddingLeft="19px">
-              {errors.productName as string}
+              {/* {errors.title as string} */}
             </FormErrorMessage>
           </FormControl>
 
@@ -137,11 +132,11 @@ const Product: NextPage = () => {
             display="flex"
             flexDirection="column"
             height="20%"
-            // isInvalid={(errors.productPrice as number) > 1000 ? true : false}
+            // isInvalid={(errors.minimumPrice as number) > 1000 ? true : false}
           >
             <AddProductMinimumPrice />
             <FormErrorMessage paddingLeft="19px">
-              {errors.productPrice as string}
+              {/* {errors.minimumPrice as string} */}
             </FormErrorMessage>
           </FormControl>
           <Flex direction="column" w="100%" gap="3" marginTop="-2.5">
@@ -164,22 +159,22 @@ const Product: NextPage = () => {
               <FormControl w="47%" h="20%">
                 <Category onChange={handleChange} />
                 <FormErrorMessage paddingLeft="19px">
-                  {errors.productCategory as string}
+                  {/* {errors.category as string} */}
                 </FormErrorMessage>
               </FormControl>
               <FormControl
                 w="47%"
                 h="20%"
-                isInvalid={
-                  (errors.productLocation as string)?.length > 0 ? true : false
-                }
+                // isInvalid={
+                //   (errors.location as string)?.length > 0 ? true : false
+                // }
               >
                 <AddProductLocation
-                  inputLocation="productLocation"
+                  inputLocation="location"
                   onChange={handleChange}
                 />
                 <FormErrorMessage paddingLeft="19px">
-                  {errors.productLocation as string}
+                  {/* {errors.location as string} */}
                 </FormErrorMessage>
               </FormControl>
             </Flex>
