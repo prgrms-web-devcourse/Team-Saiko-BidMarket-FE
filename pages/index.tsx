@@ -12,21 +12,23 @@ let offset = 0;
 const limit = 5;
 export const getServerSideProps = async () => {
   const { data } = await productAPI.getProducts({ offset: 0, limit: 5 });
-  return { props: { productsProp: data } };
+  return { props: { productsProps: data } };
 };
 
 const Home = ({
-  productsProp,
+  productsProps,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
-  const [keyword, setKeyword] = useState('');
+  const [title, setTitle] = useState('');
 
-  const [products, setProducts] = useState(productsProp);
+  const [products, setProducts] = useState(productsProps);
   const [isMoreButtonLoading, setIsMoreButtonLoading] = useState(false);
 
   const handleFormSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    router.push(`products?title=${keyword}&progressed=true&offset=0&limit=10`);
+    router.push(
+      `/products?title=${title}&sort=END_DATE_ASC&category=ALL&progressed=true&offset=0&limit=10`
+    );
   };
 
   const handleMoreProductClick = async () => {
@@ -51,7 +53,7 @@ const Home = ({
         <Banner />
         <Divider marginTop="15px" />
         <form onSubmit={(event) => handleFormSubmit(event)}>
-          <SearchInput keyword={keyword} onChange={setKeyword} />
+          <SearchInput keyword={title} onChange={setTitle} />
         </form>
         {products.map((product) => {
           return (
