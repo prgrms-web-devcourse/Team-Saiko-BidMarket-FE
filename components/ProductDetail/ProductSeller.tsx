@@ -2,18 +2,18 @@ import { Flex, Box, Image, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 
 interface ProductSellerProps {
-  id: string;
+  userId: string;
   name: string;
   thumbnailImg: string;
 }
 
-const ProductSeller = ({ id, name, thumbnailImg }: ProductSellerProps) => {
+const ProductSeller = ({ userId, name, thumbnailImg }: ProductSellerProps) => {
   const router = useRouter();
 
   return (
     <Box
       _hover={{ cursor: 'pointer' }}
-      onClick={() => router.push(`/user/${id}`)}
+      onClick={() => router.push(`/user/${userId}`)}
     >
       <Flex alignItems="center">
         <Image
