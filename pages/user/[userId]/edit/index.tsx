@@ -39,17 +39,11 @@ const Edit: NextPage = ({
   const { authUserId } = useLoginUser();
 
   useEffect(() => {
-    if (!encodedId) {
-      router.replace('/');
-
-      return;
-    }
-
     if (!authUserId) {
       return;
     }
 
-    if (encodedId !== authUserId) {
+    if (!encodedId || encodedId !== authUserId) {
       router.replace('/');
 
       return;
