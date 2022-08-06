@@ -5,12 +5,13 @@ import type {
   NextPage,
 } from 'next';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import userAPI from 'apis/api/user';
 import { SEO } from 'components/common';
 import { ProfileEditHeader } from 'components/ProfileEdit';
 import EditProfileForm from 'components/ProfileEdit/EditForm';
+import useLoginUser from 'hooks/useLoginUser';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { userId } = context.query;
@@ -35,7 +36,7 @@ const Edit: NextPage = ({
   user: { encodedId, thumbnailImg, username },
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
-  const [authUserId, setAuthUserId] = useState('');
+  const { authUserId } = useLoginUser();
 
   useEffect(() => {
     if (!encodedId) {
@@ -54,18 +55,6 @@ const Edit: NextPage = ({
       return;
     }
   }, [encodedId, authUserId, router]);
-
-  useEffect(() => {
-    const fetchAuthUser = async () => {
-      const {
-        data: { encodedId },
-      } = await userAPI.getAuthUser();
-
-      setAuthUserId(encodedId);
-    };
-
-    fetchAuthUser();
-  }, []);
 
   if (!authUserId || authUserId !== encodedId) {
     return (
