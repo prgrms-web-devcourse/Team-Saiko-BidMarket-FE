@@ -34,8 +34,7 @@ const EditProfileForm = ({
 
       toast({
         position: 'top',
-        title: '변경 완료',
-        description: '프로필 정보가 변경 됐습니다.',
+        title: '프로필 변경 완료',
         status: 'success',
         duration: 1500,
         isClosable: true,
