@@ -28,7 +28,6 @@ const AddProductImageUpload = ({
     }
 
     const url = URL.createObjectURL(files[0]);
-    // TODO: S3에서 받아오는 값 넣어주기
     e.target.dataset.url = url;
 
     setPreviewImageUrl(url);

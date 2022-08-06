@@ -54,7 +54,6 @@ const AddProductMinimumPrice = () => {
           borderColor="#B6B6B6"
           max="10000000000"
           h="50px"
-          min="1000"
           maxLength={13}
           step={100}
         />
