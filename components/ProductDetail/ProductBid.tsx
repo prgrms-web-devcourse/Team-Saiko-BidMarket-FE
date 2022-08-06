@@ -40,10 +40,10 @@ const ProductBid = ({
   const handleBidButtonClick = () => {
     if (!authUserId) {
       toast({
-        position: 'top-right',
+        position: 'top',
         title: '입찰은 로그인 후 이용 가능합니다.',
         status: 'warning',
-        duration: 2000,
+        duration: 1500,
       });
 
       router.push('/login');
