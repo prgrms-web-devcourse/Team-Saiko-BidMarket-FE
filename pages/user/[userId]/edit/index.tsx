@@ -18,9 +18,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   let user = {};
 
   try {
-    const { data } = await userAPI.getUser(userId as string);
-
-    user = data;
+    user = (await userAPI.getUser(userId as string)).data;
   } catch (error) {
     console.error(error);
   }
