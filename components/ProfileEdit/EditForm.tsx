@@ -1,6 +1,12 @@
-import { Flex, FormControl, FormErrorMessage } from '@chakra-ui/react';
+import {
+  Flex,
+  FormControl,
+  FormErrorMessage,
+  useToast,
+} from '@chakra-ui/react';
 import { useState } from 'react';
 
+import userAPI from 'apis/api/user';
 import useForm from 'hooks/useForm';
 
 import { NicknameInput, SubmitButton } from '.';
@@ -19,21 +25,20 @@ const EditProfileForm = ({
   const [prevProfileImage, setPrevProfileImage] = useState(profileImageUrl);
   const { errors, isLoading, handleChange, handleSubmit } = useForm({
     initialValues: { nickname, profileImage: profileImageUrl },
-    // TODO: api로 닉네임, 사진(S3 주소값??) 보내주기
     onSubmit: async ({ nickname, e }) => {
-      const fakeSubmit = () =>
-        new Promise((resolve) => {
-          setTimeout(() => {
-            alert(
-              `onSubmit!\n nickname: ${nickname} \n profileImage: ${e.target.profileImage.dataset.uploadedurl}`
-            );
-            resolve('Success');
-          }, 1500);
-        });
+      const profileImageUrl = e.target.profileImage.dataset.uploadedurl;
 
-      await fakeSubmit();
+      await userAPI.updateUser(nickname, profileImageUrl);
       setPrevNickname(nickname);
-      setPrevProfileImage(e.target.profileImage.value);
+      setPrevProfileImage(profileImageUrl);
+
+      toast({
+        position: 'top',
+        title: '프로필 변경 완료',
+        status: 'success',
+        duration: 1500,
+        isClosable: true,
+      });
     },
     validate: ({ nickname, profileImage }) => {
       const error: { nickname?: string } = {};
@@ -49,6 +54,7 @@ const EditProfileForm = ({
       return error;
     },
   });
+  const toast = useToast();
 
   // TODO: error(빈값, 길이제한?, 닉네임 정의 필요) 적절하게 렌더링 해주기. (글자 vs 모달)
   return (
