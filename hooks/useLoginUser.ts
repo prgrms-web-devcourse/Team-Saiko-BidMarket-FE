@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react';
 import userAPI from 'apis/api/user';
 
 const useLoginUser = () => {
-  const [authUserId, setAuthUserId] = useState('');
-  const [profileImage, setProfileImage] = useState('');
-  const [nickname, setNickname] = useState('');
+  const [authUserId, setAuthUserId] = useState<string | undefined>('');
+  const [profileImage, setProfileImage] = useState<string | undefined>('');
+  const [nickname, setNickname] = useState<string | undefined>('');
 
   useEffect(() => {
     setAuthUserInformation();
@@ -22,6 +22,10 @@ const useLoginUser = () => {
       setNickname(username);
     } catch (e) {
       console.error(e);
+
+      setAuthUserId(undefined);
+      setProfileImage(undefined);
+      setNickname(undefined);
     }
   };
 

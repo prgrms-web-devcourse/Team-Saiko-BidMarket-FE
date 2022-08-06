@@ -39,7 +39,7 @@ const Edit: NextPage = ({
   const { authUserId } = useLoginUser();
 
   useEffect(() => {
-    if (!authUserId) {
+    if (authUserId === '') {
       return;
     }
 
