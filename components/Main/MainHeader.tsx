@@ -3,35 +3,21 @@ import { Avatar, Circle, Flex, Image } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
-import userAPI from 'apis/api/user';
-import { getItem } from 'apis/utils/storage';
 import { Header } from 'components/common';
+import useLoginUser from 'hooks/useLoginUser';
 
 import LoginButton from './LoginButton';
 
 const MainHeader = () => {
   const router = useRouter();
   const [isLogin, setIsLogin] = useState(false);
-  const [profileImageUrl, setProfileImageUrl] = useState('');
-  const [userId, setUserId] = useState(-1);
+  const { id: userId, profileImage: profileImageUrl } = useLoginUser();
 
   useEffect(() => {
-    if (getItem('token')) {
-      setLoginUserStatus();
-    }
-  }, []);
-
-  const setLoginUserStatus = async () => {
-    try {
-      const { id, profileImage } = (await userAPI.getAuthUser()).data;
-
-      setProfileImageUrl(profileImage);
-      setUserId(id);
+    if (userId !== -1) {
       setIsLogin(true);
-    } catch (error) {
-      console.log(error);
     }
-  };
+  }, [userId]);
 
   return (
     <Header
