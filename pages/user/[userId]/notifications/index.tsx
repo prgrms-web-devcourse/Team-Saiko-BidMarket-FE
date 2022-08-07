@@ -14,7 +14,17 @@ const DUMMY = [
     iconImage: '/svg/sellProductMenuIcon.svg',
     productImage:
       'https://user-images.githubusercontent.com/61923768/182772718-258fa024-b207-4203-8e8a-2dc1f3bc21f2.png',
-    createdAt: new Date(),
+    createdAt: new Date('2022-07-20T14:36:00'),
+  },
+  {
+    id: 1,
+    title: '입찰 종료',
+    description:
+      '축하드립니다       “래쉬가드 M s...” 상품 입찰에 성공하셨어요. 게시글을 확인하고 거래 일정을 잡아보세요!',
+    iconImage: '/svg/sellProductMenuIcon.svg',
+    productImage:
+      'https://user-images.githubusercontent.com/61923768/182772718-258fa024-b207-4203-8e8a-2dc1f3bc21f2.png',
+    createdAt: new Date('2022-08-02T14:51:00'),
   },
 ];
 
