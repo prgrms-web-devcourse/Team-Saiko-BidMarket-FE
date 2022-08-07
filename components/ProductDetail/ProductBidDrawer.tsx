@@ -45,7 +45,7 @@ const ProductBidDrawer = ({
 
   const createBiddingAuthUser = async () => {
     try {
-      await bidAPI.postBid(Number(productId), biddingPrice);
+      await bidAPI.postBid(parseInt(productId as string, 10), biddingPrice);
       toast({
         position: 'top',
         title: `${biddingPrice}원에 입찰하였습니다.`,
