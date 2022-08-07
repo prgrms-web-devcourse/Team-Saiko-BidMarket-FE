@@ -1,5 +1,5 @@
 import { BellIcon } from '@chakra-ui/icons';
-import { Avatar, Badge, Circle, Flex, Image } from '@chakra-ui/react';
+import { Avatar, Circle, Flex, Image } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
