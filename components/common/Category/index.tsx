@@ -19,7 +19,7 @@ const Category = ({ onChange }: CategoryProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const Categoryitems = [
     '디지털 기기',
-    '생활 가전"',
+    '생활 가전',
     '가구/인테리어',
     '유아 도서',
     '생활/가공 식품',

@@ -2,14 +2,19 @@ import { Flex, Image, Input, Text } from '@chakra-ui/react';
 import React, { useRef, useState } from 'react';
 
 import ProductLabel from './ProductLabel';
+interface AddProductMinimumPriceProps {
+  inputMinimumPrice: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
 
 //TODO: 100원 단위로 작성 가능, 1000원 이상 입력 가능
-const AddProductMinimumPrice = () => {
-  const [price, setPrice] = useState('');
+const AddProductMinimumPrice = ({
+  inputMinimumPrice,
+  onChange,
+}: AddProductMinimumPriceProps) => {
   const [format, setFormat] = useState('0');
   const [visible, setVisible] = useState(true);
   const inputRef = useRef<HTMLInputElement>(null);
-
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const target = event.target as HTMLInputElement;
 
@@ -21,7 +26,6 @@ const AddProductMinimumPrice = () => {
     }
 
     setFormat(numericValueOnly.replace(numeralReg, ','));
-    setPrice(target.value);
   };
 
   return (
@@ -43,12 +47,13 @@ const AddProductMinimumPrice = () => {
       />
       <Flex direction="column" w="100%" alignItems="flex-end">
         <Input
-          type="number"
           ref={inputRef}
+          name={inputMinimumPrice}
+          type="number"
           onFocus={() => setVisible(false)}
           onBlur={() => setVisible(true)}
-          onChange={handleInputChange}
-          value={price}
+          onChange={onChange}
+          onInput={handleInputChange}
           placeholder="최소 금액"
           border="1px"
           borderColor="#B6B6B6"

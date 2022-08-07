@@ -6,7 +6,6 @@ import {
   Image,
 } from '@chakra-ui/react';
 import type { NextPage } from 'next';
-import { useState } from 'react';
 
 import { productAPI } from 'apis';
 import { Category, Header, GoBackIcon } from 'components/common';
@@ -22,65 +21,73 @@ import {
 } from 'components/CreateProduct';
 import useForm from 'hooks/useForm';
 
-interface CreateProductProps {
-  title: string;
-  minimumPrice: number;
-  location: string;
-  productImageUrl: string;
-  category: string;
-  productDescription: string;
-}
-
 const Product: NextPage = () => {
-  const [productInput, setProductInput] = useState();
-
-  const { errors, isLoading, handleChange, handleSubmit } = useForm({
+  const { values, errors, isLoading, handleChange, handleSubmit } = useForm({
     initialValues: {
-      // title: '안녕하세요',
-      // minimumPrice: 100000,
-      // location: '서울',
-      // images: [
-      //   'https://bid-market-bucket.s3.ap-northeast-2.amazonaws.com/products/project.jpeg',
-      // ],
-      // category: 'DIGITAL_DEVICE',
+      title: '',
+      minimumPrice: 0,
+      location: '',
+      images: [
+        'https://bid-market-bucket.s3.ap-northeast-2.amazonaws.com/products/project.jpeg',
+      ],
+      category: 'DIGITAL_DEVICE',
+      description: '',
     },
-    onSubmit: async (data) => {
-      await productAPI.createProduct({
-        title: '안녕하세요',
-        minimumPrice: 100000,
-        location: '서울',
-        images: [
-          'https://bid-market-bucket.s3.ap-northeast-2.amazonaws.com/products/project.jpeg',
-        ],
-        category: 'DIGITAL_DEVICE',
-        description: '안녕하세요 상세정보',
-      });
+    onSubmit: async ({
+      title,
+      minimumPrice,
+      location,
+      images,
+      category,
+      description,
+      e,
+    }) => {
+      const data = {
+        title: title.trim(),
+        minimumPrice,
+        location: location.trim(),
+        images,
+        category,
+        description: description.trim(),
+      };
+      await productAPI.createProduct(data);
     },
 
-    validate: ({ title, minimumPrice, location, images, category }) => {
+    validate: ({
+      title,
+      minimumPrice,
+      location,
+      images,
+      category,
+      description,
+    }) => {
       const error: {
-        // title?: string;
-        // minimumPrice?: string;
-        // location?: string;
-        // category?: string;
-        // images?: string;
+        title?: string;
+        minimumPrice?: string;
+        location?: string;
+        category?: string;
+        images?: string;
+        description?: string;
       } = {};
+      // TODO: 검증 임시로 주석처리
+      if (!title.trim()) {
+        error.title = '상품 제목을 입력해주세요.';
+      }
 
-      // if (!title) {
-      //   error.title = '상품 제목을 입력해주세요.';
-      // }
+      if (minimumPrice && Number(minimumPrice) < 1000) {
+        error.minimumPrice = '1000원 이상 입력 가능합니다.';
+      }
 
-      // if (minimumPrice && parseInt(minimumPrice, 10) < 1000) {
-      //   error.minimumPrice = '1000원 이상 입력 가능합니다.';
-      // }
-
-      // if (!location) {
-      //   error.location = '희망 거래지역을 입력해주세요.';
-      // }
+      if (!location.trim()) {
+        error.location = '희망 거래지역을 입력해주세요.';
+      }
 
       // if (category === '') {
       //   error.category = '카테고리를 선택해주세요.';
       // }
+      if (!description.trim()) {
+        error.description = '상세 내용을 입력해주세요.';
+      }
 
       return error;
     },
@@ -119,11 +126,11 @@ const Product: NextPage = () => {
             display="flex"
             flexDirection="column"
             height="20%"
-            // isInvalid={(errors.title as string)?.length > 0 ? true : false}
+            isInvalid={(values.title as string)?.length > 0 ? false : true}
           >
             <AddProductTitle inputTitle="title" onChange={handleChange} />
             <FormErrorMessage paddingLeft="19px">
-              {/* {errors.title as string} */}
+              {errors.title as string}
             </FormErrorMessage>
           </FormControl>
 
@@ -132,11 +139,14 @@ const Product: NextPage = () => {
             display="flex"
             flexDirection="column"
             height="20%"
-            // isInvalid={(errors.minimumPrice as number) > 1000 ? true : false}
+            isInvalid={Number(values.minimumPrice) > 1000 ? false : true}
           >
-            <AddProductMinimumPrice />
+            <AddProductMinimumPrice
+              inputMinimumPrice="minimumPrice"
+              onChange={handleChange}
+            />
             <FormErrorMessage paddingLeft="19px">
-              {/* {errors.minimumPrice as string} */}
+              {errors.minimumPrice as string}
             </FormErrorMessage>
           </FormControl>
           <Flex direction="column" w="100%" gap="3" marginTop="-2.5">
@@ -159,27 +169,43 @@ const Product: NextPage = () => {
               <FormControl w="47%" h="20%">
                 <Category onChange={handleChange} />
                 <FormErrorMessage paddingLeft="19px">
-                  {/* {errors.category as string} */}
+                  {errors.category as string}
                 </FormErrorMessage>
               </FormControl>
               <FormControl
                 w="47%"
                 h="20%"
-                // isInvalid={
-                //   (errors.location as string)?.length > 0 ? true : false
-                // }
+                isInvalid={
+                  (values.location as string)?.length > 0 ? false : true
+                }
               >
                 <AddProductLocation
                   inputLocation="location"
                   onChange={handleChange}
                 />
                 <FormErrorMessage paddingLeft="19px">
-                  {/* {errors.location as string} */}
+                  {errors.location as string}
                 </FormErrorMessage>
               </FormControl>
             </Flex>
           </Flex>
-          <AddProductDescription />
+          <FormControl
+            flexGrow="1"
+            display="flex"
+            flexDirection="column"
+            height="20%"
+            isInvalid={
+              (values.description as string)?.length > 0 ? false : true
+            }
+          >
+            <AddProductDescription
+              inputTitle="description"
+              onChange={handleChange}
+            />
+            <FormErrorMessage paddingLeft="19px">
+              {errors.description as string}
+            </FormErrorMessage>
+          </FormControl>
         </Flex>
       </form>
     </>
