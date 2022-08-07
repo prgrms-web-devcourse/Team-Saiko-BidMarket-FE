@@ -1,4 +1,5 @@
-import { Divider, Flex, Text } from '@chakra-ui/react';
+import { DownloadIcon } from '@chakra-ui/icons';
+import { Box, Button, Divider, Flex, Text } from '@chakra-ui/react';
 import type {
   GetServerSideProps,
   InferGetServerSidePropsType,
@@ -9,6 +10,7 @@ import { Fragment, useEffect, useState } from 'react';
 
 import { productAPI } from 'apis';
 import { Card, GoBackIcon, Header, SearchInput, SEO } from 'components/common';
+import { ProductAddButton } from 'components/Main';
 import { BidFilterCheckBox, FilterButton } from 'components/Products';
 import { ProductsResponseType } from 'types/product';
 import { categoryOptionsENType, sortOptionsENType } from 'types/products';
@@ -33,9 +35,16 @@ const Products: NextPage = ({
     useState<categoryOptionsENType>(queryDatas.category);
   const [progressed, setProgressed] = useState<boolean>(queryDatas.progressed);
   const [products, setProducts] = useState<ProductsResponseType>(productsProps);
+  const [isMoreButtonLoading, setIsMoreButtonLoading] = useState(false);
 
   offset = queryDatas.offset;
   limit = queryDatas.limit;
+
+  useEffect(() => {
+    router.push(
+      `/products?title=${title}&sort=${selectedSortOption}&category=${selectedCategoryOption}&progressed=${progressed}&offset=0&limit=10`
+    );
+  }, [title, selectedSortOption, selectedCategoryOption, progressed]);
 
   const handleFormSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -63,11 +72,19 @@ const Products: NextPage = ({
     setProgressed(!progressed);
   };
 
-  useEffect(() => {
-    router.push(
-      `/products?title=${title}&sort=${selectedSortOption}&category=${selectedCategoryOption}&progressed=${progressed}&offset=0&limit=10`
-    );
-  }, [title, selectedSortOption, selectedCategoryOption, progressed]);
+  const handleMoreProductClick = async () => {
+    setIsMoreButtonLoading(true);
+    offset = offset + 1;
+    try {
+      const { data } = await productAPI.getProducts({ offset, limit });
+      setProducts([...products, ...data]);
+      setIsMoreButtonLoading(false);
+    } catch (error) {
+      offset = offset - 1;
+      console.log(error);
+      setIsMoreButtonLoading(false);
+    }
+  };
 
   return (
     <>
@@ -104,6 +121,18 @@ const Products: NextPage = ({
             </Fragment>
           );
         })}
+        <Button
+          alignSelf="center"
+          w="100px"
+          margin="20px 0"
+          borderRadius="30px"
+          color="white"
+          backgroundColor="brand.primary-900"
+          isLoading={isMoreButtonLoading}
+          onClick={() => handleMoreProductClick()}
+        >
+          <DownloadIcon w="5" h="5" />
+        </Button>
       </Flex>
     </>
   );
