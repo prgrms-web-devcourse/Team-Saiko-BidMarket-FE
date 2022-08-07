@@ -13,6 +13,7 @@ import {
   ProductMenuList,
   UserProfileEditButton,
   UserProfileInformation,
+  UserSetting,
 } from 'components/User';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -84,7 +85,7 @@ const UserId: NextPage = ({
           </Text>
         }
         rightContent={<SideBar />}
-      ></Header>
+      />
       <Flex width="100%" flexDirection="column" gap="29px">
         <UserProfileInformation
           profileImageUrl={profileImage}
@@ -96,8 +97,19 @@ const UserId: NextPage = ({
           />
         ) : undefined}
       </Flex>
-      <Divider height="7px" marginTop="27px" backgroundColor="#F2F2F2" />
       <ProductMenuList userId={userId as string} />
+      {isMyPage ? (
+        <>
+          <Divider
+            width="100%"
+            height="7px"
+            background="#F8F8F8"
+            boxShadow="inset 0px 1px 3px rgba(0, 0, 0, 0.03)"
+            marginTop="25px"
+          />
+          <UserSetting />
+        </>
+      ) : undefined}
     </>
   );
 };

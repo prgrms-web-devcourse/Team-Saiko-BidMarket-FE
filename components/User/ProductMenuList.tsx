@@ -11,12 +11,12 @@ const ProductMenuList = ({ userId }: ProductMenuListProps) => {
   const productMenu = [
     {
       iconUrl: '/svg/sellProductMenuIcon.svg',
-      title: '판매한 상품',
+      title: '판매 상품',
       routingUrl: `./${userId}/products/sell`,
     },
     {
       iconUrl: '/svg/bidProductMenuIcon.svg',
-      title: '입찰한 상품',
+      title: '입찰 상품',
       routingUrl: `./${userId}/products/bid`,
     },
     {
@@ -27,7 +27,13 @@ const ProductMenuList = ({ userId }: ProductMenuListProps) => {
   ];
 
   return (
-    <Flex width="100%" direction="column" gap="12px" marginTop="21px">
+    <Flex
+      width="100%"
+      justifyContent="center"
+      alignItems="center"
+      gap="12px"
+      marginTop="21px"
+    >
       {productMenu.map((currentMenu, index) => (
         <Fragment key={index}>
           <ProductMenuItem
