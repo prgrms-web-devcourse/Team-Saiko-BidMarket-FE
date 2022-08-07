@@ -33,7 +33,7 @@ const ProductMenuItem = ({
         />
         <Text
           flexGrow="1"
-          color="#2E2E2E"
+          color="brand.dark"
           fontFamily="Roboto"
           fontStyle="normal"
           fontWeight="400"
