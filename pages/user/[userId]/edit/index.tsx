@@ -18,7 +18,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   let user = {};
 
   try {
-    user = (await userAPI.getUser(userId as string)).data;
+    user = (await userAPI.getUser(parseInt(userId as string, 10))).data;
   } catch (error) {
     console.error(error);
   }
@@ -31,24 +31,24 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 const Edit: NextPage = ({
-  user: { encodedId, thumbnailImg, username },
+  user: { id, profileImage, username },
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
   const { authUserId } = useLoginUser();
 
   useEffect(() => {
-    if (authUserId === '') {
+    if (authUserId === -1) {
       return;
     }
 
-    if (!encodedId || encodedId !== authUserId) {
+    if (!id || id !== authUserId) {
       router.replace('/');
 
       return;
     }
-  }, [encodedId, authUserId, router]);
+  }, [id, authUserId, router]);
 
-  if (!authUserId || authUserId !== encodedId) {
+  if (!authUserId || authUserId !== id) {
     return (
       <Center height="100%">
         <Spinner size="xl" />
@@ -62,7 +62,7 @@ const Edit: NextPage = ({
       <Flex flexDirection="column" width="100%" height="100%">
         <ProfileEditHeader />
         <Flex width="100%" height="100%" marginTop="48px">
-          <EditProfileForm nickname={username} profileImageUrl={thumbnailImg} />
+          <EditProfileForm nickname={username} profileImageUrl={profileImage} />
         </Flex>
       </Flex>
     </>
