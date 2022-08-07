@@ -21,9 +21,10 @@ import { categoryOption, sortOption } from 'utils';
 
 interface FilterButtonTypes {
   filterName: 'sortFilter' | 'categoryFilter';
-  selectedCategoryOption?: sortOptionsENType;
-  selectedSortOption?: categoryOptionsENType;
-  handleFilterChange: (selectedOption: string) => void;
+  selectedOption: sortOptionsENType | categoryOptionsENType;
+  handleFilterChange: (
+    value: sortOptionsENType | categoryOptionsENType
+  ) => void;
 }
 
 const { sortOptionsKOKeys, transformSortOptionsKO, transformSortOptionsEN } =
@@ -37,25 +38,22 @@ const {
 
 const FilterButton = ({
   filterName,
-  selectedCategoryOption,
-  selectedSortOption,
+  selectedOption,
   handleFilterChange,
 }: FilterButtonTypes) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const OPTIONS =
     filterName === 'sortFilter' ? sortOptionsKOKeys : categoryOptionsKOKeys;
 
-  console.log(selectedSortOption, selectedCategoryOption);
   const [selectedFilterOption, setSelectedFilterOption] = useState(
     filterName === 'sortFilter'
-      ? transformSortOptionsEN(selectedSortOption as sortOptionsENType) ??
-          'END_DATE_ASC'
-      : transformCategoryOptionsEN(
-          selectedCategoryOption as categoryOptionsENType
-        ) ?? 'ALL'
+      ? transformSortOptionsEN(selectedOption as sortOptionsENType)
+      : transformCategoryOptionsEN(selectedOption as categoryOptionsENType)
   );
 
-  const handleFilterButtonClick = (selectedOption: string) => {
+  const handleFilterButtonClick = (
+    selectedOption: sortOptionsKOType | categoryOptionsKOType
+  ) => {
     setSelectedFilterOption(selectedOption);
     handleFilterChange(
       filterName === 'sortFilter'
