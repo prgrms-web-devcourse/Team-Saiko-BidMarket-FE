@@ -15,6 +15,7 @@ import {
   UserProfileInformation,
   UserSetting,
 } from 'components/User';
+import useLoginUser from 'hooks/useLoginUser';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { userId } = context.query;
@@ -40,7 +41,7 @@ const UserId: NextPage = ({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
   const { userId } = router.query;
-  const [authUserId, setAuthUserId] = useState(-1);
+  const { id: authUserId } = useLoginUser();
   const isMyPage = id === authUserId;
 
   useEffect(() => {
@@ -48,16 +49,6 @@ const UserId: NextPage = ({
       router.replace('/404');
     }
   }, [id, router]);
-
-  useEffect(() => {
-    const fetchAuthUser = async () => {
-      const { id } = (await userAPI.getAuthUser()).data;
-
-      setAuthUserId(id);
-    };
-
-    fetchAuthUser();
-  }, []);
 
   if (!id) {
     return (
