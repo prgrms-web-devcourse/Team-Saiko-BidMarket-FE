@@ -75,7 +75,6 @@ const UserId: NextPage = ({
             {isMyPage ? '마이페이지' : ''}
           </Text>
         }
-        rightContent={<SideBar />}
       />
       <Flex width="100%" flexDirection="column" gap="29px">
         <UserProfileInformation
