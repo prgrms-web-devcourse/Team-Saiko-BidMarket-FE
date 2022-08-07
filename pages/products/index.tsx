@@ -1,5 +1,5 @@
 import { DownloadIcon } from '@chakra-ui/icons';
-import { Box, Button, Divider, Flex, Text } from '@chakra-ui/react';
+import { Button, Divider, Flex, Text } from '@chakra-ui/react';
 import type {
   GetServerSideProps,
   InferGetServerSidePropsType,
@@ -10,7 +10,6 @@ import { Fragment, useEffect, useState } from 'react';
 
 import { productAPI } from 'apis';
 import { Card, GoBackIcon, Header, SearchInput, SEO } from 'components/common';
-import { ProductAddButton } from 'components/Main';
 import { BidFilterCheckBox, FilterButton } from 'components/Products';
 import { ProductsResponseType } from 'types/product';
 import { categoryOptionsENType, sortOptionsENType } from 'types/products';
@@ -52,7 +51,6 @@ const Products: NextPage = ({
       `/products?title=${title}&sort=${selectedSortOption}&category=${selectedCategoryOption}&progressed=true&offset=0&limit=10`
     );
   };
-
   const handleFilterButtonChange = (
     option: sortOptionsENType | categoryOptionsENType
   ) => {
@@ -72,6 +70,7 @@ const Products: NextPage = ({
     setProgressed(!progressed);
   };
 
+  // @TODO 메인페이지와 동일한 코드이며 무한 스크롤과 함께 개선 예정
   const handleMoreProductClick = async () => {
     setIsMoreButtonLoading(true);
     offset = offset + 1;
