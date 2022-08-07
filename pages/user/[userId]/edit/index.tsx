@@ -34,7 +34,7 @@ const Edit: NextPage = ({
   user: { id, profileImage, username },
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
-  const { authUserId } = useLoginUser();
+  const { id: authUserId } = useLoginUser();
 
   useEffect(() => {
     if (authUserId === -1) {

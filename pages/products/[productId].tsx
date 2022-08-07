@@ -12,6 +12,7 @@ import {
   ProductInfo,
   ProductSeller,
 } from 'components/ProductDetail';
+import useLoginUser from 'hooks/useLoginUser';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { productId } = context.query;
@@ -37,24 +38,7 @@ const ProductDetail = ({
     createdAt,
   },
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const [authUserId, setAuthUserId] = useState('');
-
-  useEffect(() => {
-    setAuthUserInfo();
-  }, []);
-
-  const setAuthUserInfo = async () => {
-    try {
-      if (!getItem('token')) {
-        return;
-      }
-
-      const { encodedId } = (await userAPI.getAuthUser()).data;
-      setAuthUserId(encodedId);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const { id: authUserId } = useLoginUser();
 
   return (
     <>
@@ -69,9 +53,9 @@ const ProductDetail = ({
       <Flex direction="column" width="100%" marginTop="317px">
         <Flex justifyContent="space-between" alignItems="center">
           <ProductSeller
-            userId={writer.encodedId}
+            userId={writer.id}
             name={writer.username}
-            thumbnailImg={writer.thumbnailImg}
+            profileImage={writer.profileImage}
           />
           <StarIcon w="23px" color="brand.primary-900" />
         </Flex>
@@ -85,7 +69,7 @@ const ProductDetail = ({
           expireAt={expireAt}
         />
         <ProductBid
-          writerId={writer.encodedId}
+          writerId={writer.id}
           authUserId={authUserId}
           minimumPrice={minimumPrice}
           expireAt={expireAt}
