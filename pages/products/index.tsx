@@ -11,6 +11,8 @@ import { productAPI } from 'apis';
 import { Card, GoBackIcon, Header, SearchInput, SEO } from 'components/common';
 import { BidFilterCheckBox, FilterButton } from 'components/Products';
 import { ProductsResponseType } from 'types/product';
+import { categoryOptionsENType, sortOptionsENType } from 'types/products';
+import { categoryOption, sortOption } from 'utils';
 
 let offset = 0;
 let limit = 10;
@@ -24,29 +26,44 @@ const Products: NextPage = ({
   productsProps,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
-  const [title, setTitle] = useState(queryDatas.title);
-  const [selectedSortOption, setSelectedSortOption] = useState(queryDatas.sort);
-  const [selectedCategoryOption, setSelectedCategoryOption] = useState(
-    queryDatas.category
-  );
-  const [progressed, setProgressed] = useState(queryDatas.progressed);
+  const [title, setTitle] = useState<string>(queryDatas.title);
+  const [selectedSortOption, setSelectedSortOption] =
+    useState<sortOptionsENType>(queryDatas.sort);
+  const [selectedCategoryOption, setSelectedCategoryOption] =
+    useState<categoryOptionsENType>(queryDatas.category);
+  const [progressed, setProgressed] = useState<boolean>(queryDatas.progressed);
   const [products, setProducts] = useState<ProductsResponseType>(productsProps);
+
   offset = queryDatas.offset;
   limit = queryDatas.limit;
 
   const handleFormSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    // const categoryQuery = category
     router.push(
       `/products?title=${title}&sort=${selectedSortOption}&category=${selectedCategoryOption}&progressed=true&offset=0&limit=10`
     );
+  };
+
+  const handleFilterButtonChange = (
+    option: sortOptionsENType | categoryOptionsENType
+  ) => {
+    if (sortOption.sortOptionsENKeys.includes(option as sortOptionsENType)) {
+      setSelectedSortOption(option as sortOptionsENType);
+    }
+    if (
+      categoryOption.categoryOptionsENKeys.includes(
+        option as categoryOptionsENType
+      )
+    ) {
+      setSelectedCategoryOption(option as categoryOptionsENType);
+    }
   };
 
   useEffect(() => {
     router.push(
       `/products?title=${title}&sort=${selectedSortOption}&category=${selectedCategoryOption}&progressed=true&offset=0&limit=10`
     );
-  }, [selectedSortOption, selectedCategoryOption]);
+  }, [title, selectedSortOption, selectedCategoryOption]);
 
   return (
     <>
@@ -60,13 +77,13 @@ const Products: NextPage = ({
         <Flex width="100%" gap="18px" marginTop="15px">
           <FilterButton
             filterName="sortFilter"
-            selectedSortOption={selectedSortOption}
-            handleFilterChange={setSelectedSortOption}
+            selectedOption={selectedSortOption}
+            handleFilterChange={handleFilterButtonChange}
           />
           <FilterButton
             filterName="categoryFilter"
-            selectedCategoryOption={selectedCategoryOption}
-            handleFilterChange={setSelectedCategoryOption}
+            selectedOption={selectedCategoryOption}
+            handleFilterChange={handleFilterButtonChange}
           />
         </Flex>
         <Flex width="100%" marginTop="15px">
