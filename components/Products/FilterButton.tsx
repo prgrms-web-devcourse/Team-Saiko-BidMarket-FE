@@ -22,9 +22,7 @@ import { categoryOption, sortOption } from 'utils';
 interface FilterButtonTypes {
   filterName: 'sortFilter' | 'categoryFilter';
   selectedOption: sortOptionsENType | categoryOptionsENType;
-  handleFilterChange: (
-    value: sortOptionsENType | categoryOptionsENType
-  ) => void;
+  onFilterChange: (value: sortOptionsENType | categoryOptionsENType) => void;
 }
 
 const { sortOptionsKOKeys, transformSortOptionsKO, transformSortOptionsEN } =
@@ -39,7 +37,7 @@ const {
 const FilterButton = ({
   filterName,
   selectedOption,
-  handleFilterChange,
+  onFilterChange,
 }: FilterButtonTypes) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const OPTIONS =
@@ -55,7 +53,7 @@ const FilterButton = ({
     selectedOption: sortOptionsKOType | categoryOptionsKOType
   ) => {
     setSelectedFilterOption(selectedOption);
-    handleFilterChange(
+    onFilterChange(
       filterName === 'sortFilter'
         ? transformSortOptionsKO(selectedOption as sortOptionsKOType)
         : transformCategoryOptionsKO(selectedOption as categoryOptionsKOType)
