@@ -16,7 +16,7 @@ const Bid: NextPage = () => {
     []
   );
   const [offset, setOffset] = useState(0);
-  const fetchData = async () => {
+  const getBiddingProducts = async () => {
     try {
       const { data } = await userAPI.getBiddingProducts({
         offset,
@@ -32,7 +32,7 @@ const Bid: NextPage = () => {
   };
 
   useEffect(() => {
-    fetchData();
+    getBiddingProducts();
   }, []);
 
   if (!isLoaded) {
@@ -83,7 +83,7 @@ const Bid: NextPage = () => {
             color="white"
             backgroundColor="brand.primary-900"
             _hover={{ bg: 'brand.primary-900' }}
-            onClick={() => fetchData()}
+            onClick={getBiddingProducts}
           >
             <DownloadIcon w="5" h="5" />
           </Button>
