@@ -30,7 +30,7 @@ const useLoginUser = () => {
     }
   };
 
-  return { ...userInfo };
+  return userInfo;
 };
 
 export default useLoginUser;
