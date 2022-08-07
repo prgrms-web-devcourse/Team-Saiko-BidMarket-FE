@@ -1,5 +1,5 @@
 import { BellIcon } from '@chakra-ui/icons';
-import { Avatar, Circle, Flex, Image } from '@chakra-ui/react';
+import { Avatar, Badge, Circle, Flex, Image } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
@@ -23,10 +23,10 @@ const MainHeader = () => {
 
   const setLoginUserStatus = async () => {
     try {
-      const { encodedId, thumbnailImg } = (await userAPI.getAuthUser()).data;
+      const { id, profileImage } = (await userAPI.getAuthUser()).data;
 
-      setProfileImageUrl(thumbnailImg);
-      setUserId(encodedId);
+      setProfileImageUrl(profileImage);
+      setUserId(id);
       setIsLogin(true);
     } catch (error) {
       console.log(error);
