@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import userAPI from 'apis/api/user';
+import { getItem } from 'apis/utils/storage';
 import { Header } from 'components/common';
 
 import LoginButton from './LoginButton';
@@ -15,12 +16,15 @@ const MainHeader = () => {
   const [userId, setUserId] = useState('');
 
   useEffect(() => {
-    setLoginUserProfile();
+    if (getItem('token')) {
+      setLoginUserStatus();
+    }
   }, []);
 
-  const setLoginUserProfile = async () => {
+  const setLoginUserStatus = async () => {
     try {
       const { encodedId, thumbnailImg } = (await userAPI.getAuthUser()).data;
+
       setProfileImageUrl(thumbnailImg);
       setUserId(encodedId);
       setIsLogin(true);
