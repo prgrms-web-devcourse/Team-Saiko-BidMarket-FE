@@ -59,11 +59,15 @@ const Products: NextPage = ({
     }
   };
 
+  const handleBidFilterCheckBoxChange = () => {
+    setProgressed(!progressed);
+  };
+
   useEffect(() => {
     router.push(
-      `/products?title=${title}&sort=${selectedSortOption}&category=${selectedCategoryOption}&progressed=true&offset=0&limit=10`
+      `/products?title=${title}&sort=${selectedSortOption}&category=${selectedCategoryOption}&progressed=${progressed}&offset=0&limit=10`
     );
-  }, [title, selectedSortOption, selectedCategoryOption]);
+  }, [title, selectedSortOption, selectedCategoryOption, progressed]);
 
   return (
     <>
@@ -78,16 +82,19 @@ const Products: NextPage = ({
           <FilterButton
             filterName="sortFilter"
             selectedOption={selectedSortOption}
-            handleFilterChange={handleFilterButtonChange}
+            onFilterChange={handleFilterButtonChange}
           />
           <FilterButton
             filterName="categoryFilter"
             selectedOption={selectedCategoryOption}
-            handleFilterChange={handleFilterButtonChange}
+            onFilterChange={handleFilterButtonChange}
           />
         </Flex>
         <Flex width="100%" marginTop="15px">
-          <BidFilterCheckBox />
+          <BidFilterCheckBox
+            isProgressed={!progressed}
+            onBidFilterChange={handleBidFilterCheckBoxChange}
+          />
         </Flex>
         {products.map((product) => {
           return (
