@@ -13,7 +13,7 @@ const MainHeader = () => {
   const router = useRouter();
   const [isLogin, setIsLogin] = useState(false);
   const [profileImageUrl, setProfileImageUrl] = useState('');
-  const [userId, setUserId] = useState('');
+  const [userId, setUserId] = useState<number>();
 
   useEffect(() => {
     if (getItem('token')) {
@@ -26,7 +26,7 @@ const MainHeader = () => {
       const { id, profileImage } = (await userAPI.getAuthUser()).data;
 
       setProfileImageUrl(profileImage);
-      setUserId(id);
+      setUserId(Number(id));
       setIsLogin(true);
     } catch (error) {
       console.log(error);
