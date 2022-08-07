@@ -13,7 +13,7 @@ const MainHeader = () => {
   const router = useRouter();
   const [isLogin, setIsLogin] = useState(false);
   const [profileImageUrl, setProfileImageUrl] = useState('');
-  const [userId, setUserId] = useState('');
+  const [userId, setUserId] = useState(-1);
 
   useEffect(() => {
     if (getItem('token')) {
