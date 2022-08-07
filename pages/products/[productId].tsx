@@ -1,10 +1,8 @@
 import { StarIcon } from '@chakra-ui/icons';
 import { Divider, Flex, Box } from '@chakra-ui/react';
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import { useEffect, useState } from 'react';
 
-import { productAPI, userAPI } from 'apis';
-import { getItem } from 'apis/utils/storage';
+import { productAPI } from 'apis';
 import { GoBackIcon, SEO } from 'components/common';
 import {
   ProductBid,
