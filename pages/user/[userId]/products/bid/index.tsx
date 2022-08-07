@@ -49,7 +49,17 @@ const Bid: NextPage = () => {
       <SEO title="사용자 이름" />
       <Header
         leftContent={<GoBackIcon />}
-        middleContent={<Text>입찰한 상품</Text>}
+        middleContent={
+          <Text
+            fontFamily="Roboto"
+            fontSize="20px"
+            fontWeight="700"
+            lineHeight="23px"
+            color="barnd.dark"
+          >
+            입찰한 상품
+          </Text>
+        }
       />
       {biddingProducts.length === 0 ? (
         <Center flexDirection="column" height="100%">
