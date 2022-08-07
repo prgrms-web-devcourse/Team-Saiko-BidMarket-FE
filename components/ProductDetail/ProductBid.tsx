@@ -38,7 +38,7 @@ const ProductBid = ({
   }, [remainedTime]);
 
   const handleBidButtonClick = () => {
-    if (!authUserId) {
+    if (authUserId === -1) {
       toast({
         position: 'top',
         title: '입찰은 로그인 후 이용 가능합니다.',

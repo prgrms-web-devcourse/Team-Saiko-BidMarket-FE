@@ -4,10 +4,10 @@ import { useRouter } from 'next/router';
 interface ProductSellerProps {
   userId: number;
   name: string;
-  thumbnailImg: string;
+  profileImage: string;
 }
 
-const ProductSeller = ({ userId, name, thumbnailImg }: ProductSellerProps) => {
+const ProductSeller = ({ userId, name, profileImage }: ProductSellerProps) => {
   const router = useRouter();
 
   return (
@@ -18,7 +18,7 @@ const ProductSeller = ({ userId, name, thumbnailImg }: ProductSellerProps) => {
       <Flex alignItems="center">
         <Image
           alt="profile-image"
-          src={thumbnailImg}
+          src={profileImage}
           w="45px"
           h="45px"
           borderRadius="50%"

@@ -1,10 +1,8 @@
 import { StarIcon } from '@chakra-ui/icons';
 import { Divider, Flex, Box } from '@chakra-ui/react';
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import { useEffect, useState } from 'react';
 
-import { productAPI, userAPI } from 'apis';
-import { getItem } from 'apis/utils/storage';
+import { productAPI } from 'apis';
 import { GoBackIcon, SEO } from 'components/common';
 import {
   ProductBid,
@@ -12,6 +10,7 @@ import {
   ProductInfo,
   ProductSeller,
 } from 'components/ProductDetail';
+import useLoginUser from 'hooks/useLoginUser';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { productId } = context.query;
@@ -37,24 +36,7 @@ const ProductDetail = ({
     createdAt,
   },
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const [authUserId, setAuthUserId] = useState<number>();
-
-  useEffect(() => {
-    setAuthUserInfo();
-  }, []);
-
-  const setAuthUserInfo = async () => {
-    try {
-      if (!getItem('token')) {
-        return;
-      }
-
-      const { id } = (await userAPI.getAuthUser()).data;
-      setAuthUserId(id);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const { id: authUserId } = useLoginUser();
 
   return (
     <>
@@ -71,7 +53,7 @@ const ProductDetail = ({
           <ProductSeller
             userId={writer.id}
             name={writer.username}
-            thumbnailImg={writer.thumbnailImg}
+            profileImage={writer.profileImage}
           />
           <StarIcon w="23px" color="brand.primary-900" />
         </Flex>
@@ -86,7 +68,7 @@ const ProductDetail = ({
         />
         <ProductBid
           writerId={writer.id}
-          authUserId={authUserId as number}
+          authUserId={authUserId}
           minimumPrice={minimumPrice}
           expireAt={expireAt}
         />

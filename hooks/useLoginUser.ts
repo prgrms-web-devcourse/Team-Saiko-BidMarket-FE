@@ -1,33 +1,36 @@
 import { useEffect, useState } from 'react';
 
-import userAPI from 'apis/api/user';
+import { userAPI } from 'apis';
+import { getItem } from 'apis/utils/storage';
+import { User } from 'types/user';
 
 const useLoginUser = () => {
-  const [authUserId, setAuthUserId] = useState<number | undefined>(-1);
-  const [profileImage, setProfileImage] = useState<string | undefined>('');
-  const [nickname, setNickname] = useState<string | undefined>('');
+  const [userInfo, setUserInfo] = useState<User>({
+    id: -1,
+    username: '',
+    profileImage: '',
+  });
 
   useEffect(() => {
+    if (!getItem('token')) {
+      return;
+    }
+
     setAuthUserInformation();
   }, []);
 
   const setAuthUserInformation = async () => {
     try {
-      const { id, profileImage, username } = (await userAPI.getAuthUser()).data;
-
-      setAuthUserId(id);
-      setProfileImage(profileImage);
-      setNickname(username);
+      const { data } = await userAPI.getAuthUser();
+      setUserInfo(data);
     } catch (e) {
       console.error(e);
 
-      setAuthUserId(undefined);
-      setProfileImage(undefined);
-      setNickname(undefined);
+      setUserInfo({} as User);
     }
   };
 
-  return { authUserId, profileImage, nickname };
+  return userInfo;
 };
 
 export default useLoginUser;

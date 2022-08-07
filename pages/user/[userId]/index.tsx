@@ -50,9 +50,7 @@ const UserId: NextPage = ({
 
   useEffect(() => {
     const fetchAuthUser = async () => {
-      const {
-        data: { id },
-      } = await userAPI.getAuthUser();
+      const { id } = (await userAPI.getAuthUser()).data;
 
       setAuthUserId(id);
     };
