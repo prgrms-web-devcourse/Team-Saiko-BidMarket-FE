@@ -25,7 +25,7 @@ const UserSetting = () => {
         cursor="pointer"
         onClick={() => {
           removeItem('token');
-          router.reload();
+          router.push('/');
         }}
       >
         <Img src="/svg/logout.svg" />
