@@ -51,7 +51,7 @@ const ProductDetail = ({
         <Flex justifyContent="space-between" alignItems="center">
           <ProductSeller
             name={writer.username}
-            thumbnailImg={writer.thumbnailImg}
+            profileImage={writer.profileImage}
           />
           <StarIcon w="23px" color="brand.primary-900" />
         </Flex>

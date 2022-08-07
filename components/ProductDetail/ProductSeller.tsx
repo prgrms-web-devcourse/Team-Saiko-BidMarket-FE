@@ -2,15 +2,15 @@ import { Flex, Image, Text } from '@chakra-ui/react';
 
 interface ProductSeller {
   name: string;
-  thumbnailImg: string;
+  profileImage: string;
 }
 
-const ProductSeller = ({ name, thumbnailImg }: ProductSeller) => {
+const ProductSeller = ({ name, profileImage }: ProductSeller) => {
   return (
     <Flex alignItems="center">
       <Image
         alt="profile-image"
-        src={thumbnailImg}
+        src={profileImage}
         w="45px"
         h="45px"
         borderRadius="50%"
