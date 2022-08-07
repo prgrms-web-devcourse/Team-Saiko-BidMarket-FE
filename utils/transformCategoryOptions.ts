@@ -1,6 +1,8 @@
 import { categoryOptionsENType, categoryOptionsKOType } from 'types/products';
 
-const categoryOptionsKO = {
+const categoryOptionsKO: {
+  [key: string]: categoryOptionsENType;
+} = {
   전체: 'ALL',
   '디지털 기기': 'DIGITAL_DEVICE',
   '생활 가전': 'HOUSEHOLD_APPLIANCE',
@@ -19,7 +21,9 @@ const categoryOptionsKO = {
   '기타 중고 물품': 'ETC',
 };
 
-const categoryOptionsEN = {
+const categoryOptionsEN: {
+  [key: string]: categoryOptionsKOType;
+} = {
   ALL: '전체',
   DIGITAL_DEVICE: '디지털 기기',
   HOUSEHOLD_APPLIANCE: '생활 가전',
@@ -38,14 +42,22 @@ const categoryOptionsEN = {
   ETC: '기타 중고 물품',
 };
 
-const categoryOptionsKOKeys = Object.keys(categoryOptionsKO);
-const categoryOptionsENKeys = Object.keys(categoryOptionsEN);
+const categoryOptionsKOKeys = Object.keys(
+  categoryOptionsKO
+) as Array<categoryOptionsKOType>;
+const categoryOptionsENKeys = Object.keys(
+  categoryOptionsEN
+) as Array<categoryOptionsENType>;
 
-const transformCategoryOptionsKO = (category: categoryOptionsKOType) => {
+const transformCategoryOptionsKO = (
+  category: categoryOptionsKOType
+): categoryOptionsENType => {
   return categoryOptionsKO[category];
 };
 
-const transformCategoryOptionsEN = (category: categoryOptionsENType) => {
+const transformCategoryOptionsEN = (
+  category: categoryOptionsENType
+): categoryOptionsKOType => {
   return categoryOptionsEN[category];
 };
 
