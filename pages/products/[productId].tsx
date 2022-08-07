@@ -37,7 +37,7 @@ const ProductDetail = ({
     createdAt,
   },
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const [authUserId, setAuthUserId] = useState('');
+  const [authUserId, setAuthUserId] = useState<number>();
 
   useEffect(() => {
     setAuthUserInfo();
@@ -49,8 +49,8 @@ const ProductDetail = ({
         return;
       }
 
-      const { encodedId } = (await userAPI.getAuthUser()).data;
-      setAuthUserId(encodedId);
+      const { id } = (await userAPI.getAuthUser()).data;
+      setAuthUserId(id);
     } catch (error) {
       console.log(error);
     }
@@ -69,7 +69,7 @@ const ProductDetail = ({
       <Flex direction="column" width="100%" marginTop="317px">
         <Flex justifyContent="space-between" alignItems="center">
           <ProductSeller
-            userId={writer.encodedId}
+            userId={writer.id}
             name={writer.username}
             thumbnailImg={writer.thumbnailImg}
           />
@@ -85,8 +85,8 @@ const ProductDetail = ({
           expireAt={expireAt}
         />
         <ProductBid
-          writerId={writer.encodedId}
-          authUserId={authUserId}
+          writerId={writer.id}
+          authUserId={authUserId as number}
           minimumPrice={minimumPrice}
           expireAt={expireAt}
         />

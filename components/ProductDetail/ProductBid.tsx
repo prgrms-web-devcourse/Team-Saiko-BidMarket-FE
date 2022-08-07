@@ -16,8 +16,8 @@ import { priceFormat, remainedTimeFormat } from 'utils';
 import ProductBidProgress from './ProductBidDrawer';
 
 interface ProductBidProps {
-  writerId: string;
-  authUserId: string;
+  writerId: number;
+  authUserId: number;
   minimumPrice: number;
   expireAt: Date;
 }

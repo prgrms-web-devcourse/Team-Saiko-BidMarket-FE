@@ -2,7 +2,7 @@ import { Flex, Box, Image, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 
 interface ProductSellerProps {
-  userId: string;
+  userId: number;
   name: string;
   thumbnailImg: string;
 }
