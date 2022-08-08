@@ -4,7 +4,7 @@ import type { NextPage } from 'next';
 import { Fragment, useEffect, useState } from 'react';
 
 import { userAPI } from 'apis';
-import { Card, GoBackIcon, Header, SEO } from 'components/common';
+import { GoBackIcon, Header, ProductCard, SEO } from 'components/common';
 import { NoProducts } from 'components/User';
 import { ProductsResponseType } from 'types/product';
 
@@ -71,7 +71,7 @@ const Bid: NextPage = () => {
           {biddingProducts.map((product) => {
             return (
               <Fragment key={product.id}>
-                <Card productInfo={product} />
+                <ProductCard productInfo={product} />
                 <Divider />
               </Fragment>
             );
