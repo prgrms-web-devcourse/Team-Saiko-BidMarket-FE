@@ -16,6 +16,11 @@ const Bid: NextPage = () => {
     []
   );
   const [offset, setOffset] = useState(0);
+
+  useEffect(() => {
+    getBiddingProducts();
+  }, []);
+
   const getBiddingProducts = async () => {
     try {
       const { data } = await userAPI.getBiddingProducts({
@@ -30,10 +35,6 @@ const Bid: NextPage = () => {
       console.error(error);
     }
   };
-
-  useEffect(() => {
-    getBiddingProducts();
-  }, []);
 
   if (!isLoaded) {
     return (
