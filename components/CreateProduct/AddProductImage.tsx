@@ -1,5 +1,5 @@
-import { AddIcon } from '@chakra-ui/icons';
-import { Divider, Flex, IconButton, Image, Text } from '@chakra-ui/react';
+import { AddIcon, CloseIcon } from '@chakra-ui/icons';
+import { Box, Divider, Flex, IconButton, Image, Text } from '@chakra-ui/react';
 
 import ProductLabel from './ProductLabel';
 
@@ -39,16 +39,32 @@ const AddProductImage = ({
           icon={<AddIcon color="#FF4370" />}
         />
         <Divider orientation="vertical" w="24px" />
-        {productImageArray.map((URL) => {
+        {productImageArray.map((ImageURL) => {
           return (
-            <Image
-              key={URL}
-              alt="image"
-              width="82px"
-              borderRadius="5px"
-              marginRight="15px"
-              src={URL}
-            />
+            <>
+              <Box>
+                <IconButton
+                  position="absolute"
+                  transform="translate(300%, -40%)"
+                  borderRadius="2xl"
+                  boxSize="22px"
+                  variant="outline"
+                  minWidth="1"
+                  aria-label="Delete Button"
+                  bg="#FF4370"
+                  icon={<CloseIcon w="8px" h="8px" color="#FFFFFF" />}
+                />
+                <Image
+                  key={ImageURL}
+                  alt="image"
+                  w="82px"
+                  h="82px"
+                  borderRadius="5px"
+                  marginRight="15px"
+                  src={ImageURL}
+                />
+              </Box>
+            </>
           );
         })}
       </Flex>
