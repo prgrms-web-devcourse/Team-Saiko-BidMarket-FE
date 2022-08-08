@@ -1,12 +1,12 @@
 import { ChangeEvent, useState } from 'react';
 
-interface useFormProps<InitialValuesType> {
+interface UseFormProps<InitialValuesType> {
   initialValues: InitialValuesType;
   onSubmit: (values: InitialValuesType) => void;
   validate: (initialValues: InitialValuesType) => InitialValuesType;
 }
 
-const useForm = ({ initialValues, onSubmit, validate }: useFormProps<any>) => {
+const useForm = ({ initialValues, onSubmit, validate }: UseFormProps<any>) => {
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState<Record<string, unknown>>({});
   const [isLoading, setIsLoading] = useState(false);
