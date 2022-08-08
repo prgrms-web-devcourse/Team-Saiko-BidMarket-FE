@@ -13,7 +13,9 @@ import {
   ProductMenuList,
   UserProfileEditButton,
   UserProfileInformation,
+  UserSetting,
 } from 'components/User';
+import useLoginUser from 'hooks/useLoginUser';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { userId } = context.query;
@@ -39,7 +41,7 @@ const UserId: NextPage = ({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
   const { userId } = router.query;
-  const [authUserId, setAuthUserId] = useState(-1);
+  const { id: authUserId } = useLoginUser();
   const isMyPage = id === authUserId;
 
   useEffect(() => {
@@ -47,16 +49,6 @@ const UserId: NextPage = ({
       router.replace('/404');
     }
   }, [id, router]);
-
-  useEffect(() => {
-    const fetchAuthUser = async () => {
-      const { id } = (await userAPI.getAuthUser()).data;
-
-      setAuthUserId(id);
-    };
-
-    fetchAuthUser();
-  }, []);
 
   if (!id) {
     return (
@@ -83,21 +75,31 @@ const UserId: NextPage = ({
             {isMyPage ? '마이페이지' : ''}
           </Text>
         }
-        rightContent={<SideBar />}
-      ></Header>
+      />
       <Flex width="100%" flexDirection="column" gap="29px">
         <UserProfileInformation
           profileImageUrl={profileImage}
           nickname={username}
         />
-        {isMyPage ? (
+        {isMyPage && (
           <UserProfileEditButton
             onClick={() => router.push(`./${userId}/edit`)}
           />
-        ) : undefined}
+        )}
       </Flex>
-      <Divider height="7px" marginTop="27px" backgroundColor="#F2F2F2" />
       <ProductMenuList userId={userId as string} />
+      {isMyPage ? (
+        <>
+          <Divider
+            width="100%"
+            height="7px"
+            background="#F8F8F8"
+            boxShadow="inset 0px 1px 3px rgba(0, 0, 0, 0.03)"
+            marginTop="25px"
+          />
+          <UserSetting />
+        </>
+      ) : undefined}
     </>
   );
 };
