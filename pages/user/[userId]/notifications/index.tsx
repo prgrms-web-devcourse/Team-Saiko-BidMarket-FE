@@ -2,7 +2,7 @@ import { Center, Text } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 
 import { GoBackIcon, Header } from 'components/common';
-import { NoNotifications, Notification } from 'components/User';
+import { NoNotifications, NotificationCard } from 'components/User';
 
 //TODO : 데이터 연결
 const DUMMY = [
@@ -36,7 +36,7 @@ const Notifications: NextPage = () => {
       {DUMMY.length ? (
         DUMMY.map(
           ({ id, title, description, iconImage, productImage, createdAt }) => (
-            <Notification
+            <NotificationCard
               key={id}
               title={title}
               description={description}
