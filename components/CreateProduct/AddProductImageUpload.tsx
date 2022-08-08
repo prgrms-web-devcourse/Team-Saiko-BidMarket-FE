@@ -1,4 +1,5 @@
 import { Input } from '@chakra-ui/react';
+import axios from 'axios';
 import { ChangeEvent, useRef, useState } from 'react';
 
 import AddProductImage from './AddProductImage';
@@ -6,32 +7,66 @@ import AddProductImage from './AddProductImage';
 interface ImageUploadProps {
   name: string;
   productImageUrl: string;
+  productImageArray: string[];
+  setProductImageArray: any;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
+// const BUCKET_URL = process.env.BUCKET_URL;
+const BUCKET_URL = 'https://bid-market-bucket.s3.ap-northeast-2.amazonaws.com';
+const FOLDER_NAME = 'products';
+
 const AddProductImageUpload = ({
   name,
-  productImageUrl,
+  productImageUrl: defaultProductImageUrl,
+  productImageArray,
+  setProductImageArray,
   onChange,
 }: ImageUploadProps) => {
-  const [previewImageUrl, setPreviewImageUrl] =
-    useState<string>(productImageUrl);
+  const [productImageUrl, setProductImageUrl] = useState<string>(
+    defaultProductImageUrl
+  );
   const inputRef = useRef<HTMLInputElement>(null);
   const handleChooseFile = () => {
     inputRef.current && inputRef.current.click();
   };
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
 
-    if (!files) {
+    if (!files || files.length === 0) {
       return;
     }
 
-    const url = URL.createObjectURL(files[0]);
-    e.target.dataset.url = url;
+    const changedImageFile = files[0];
 
-    setPreviewImageUrl(url);
+    await uploadImage(changedImageFile);
+
+    const uploadedUrl = `${BUCKET_URL}/${FOLDER_NAME}/${changedImageFile.name}`;
+    setProductImageArray([...productImageArray, uploadedUrl]);
+    e.target.dataset.url = uploadedUrl;
+
+    setProductImageUrl(uploadedUrl);
     onChange(e);
+  };
+
+  const uploadImage = async (imageFile: File) => {
+    try {
+      const { data } = await axios.post('/api/s3/image', {
+        name: `${FOLDER_NAME}/${imageFile.name}`,
+        type: imageFile.type,
+      });
+
+      const { signedUrl } = data;
+
+      await axios.put(signedUrl, imageFile, {
+        headers: {
+          'Content-Type': imageFile.type,
+          'Access-Control-Allow-Origin': '*',
+        },
+      });
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
@@ -42,11 +77,13 @@ const AddProductImageUpload = ({
         type="file"
         name={name}
         accept="image/*"
-        data-url={previewImageUrl}
+        data-url={productImageUrl}
         onChange={handleChange}
       />
+
       <AddProductImage
-        productImageUrl={previewImageUrl}
+        productImageUrl={productImageUrl}
+        productImageArray={productImageArray}
         onClick={handleChooseFile}
       />
     </>

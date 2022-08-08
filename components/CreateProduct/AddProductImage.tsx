@@ -5,11 +5,13 @@ import ProductLabel from './ProductLabel';
 
 interface AddProductImageProps {
   productImageUrl: string;
+  productImageArray: string[];
   onClick: () => void;
 }
 //TODO: 이미지 추가/삭제 기능 추가 예정
 const AddProductImage = ({
   productImageUrl,
+  productImageArray,
   onClick,
 }: AddProductImageProps) => {
   return (
@@ -37,9 +39,18 @@ const AddProductImage = ({
           icon={<AddIcon color="#FF4370" />}
         />
         <Divider orientation="vertical" w="24px" />
-        {productImageUrl && (
-          <Image alt="image" width="82px" src={productImageUrl} />
-        )}
+        {productImageArray.map((URL) => {
+          return (
+            <Image
+              key={URL}
+              alt="image"
+              width="82px"
+              borderRadius="5px"
+              marginRight="15px"
+              src={URL}
+            />
+          );
+        })}
       </Flex>
     </Flex>
   );
