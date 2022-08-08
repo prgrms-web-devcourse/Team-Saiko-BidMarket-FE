@@ -110,7 +110,11 @@ const ProductBid = ({
         >
           <Text color="white">입찰하기</Text>
         </Button>
-        <ProductBidProgress onClose={onClose} isOpen={isOpen} />
+        <ProductBidProgress
+          minimumPrice={minimumPrice}
+          onClose={onClose}
+          isOpen={isOpen}
+        />
       </Flex>
     </Box>
   );
