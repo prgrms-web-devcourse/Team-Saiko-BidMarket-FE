@@ -1,14 +1,14 @@
 import { Image } from '@chakra-ui/react';
 
-interface CardImageProps {
+interface CardProductImageProps {
   alt: string;
   src: string;
 }
 
-const CardImage = ({ alt, src }: CardImageProps) => {
+const CardProductImage = ({ alt, src }: CardProductImageProps) => {
   return (
     <Image w="114px" objectFit="cover" borderRadius="5" alt={alt} src={src} />
   );
 };
 
-export default CardImage;
+export default CardProductImage;

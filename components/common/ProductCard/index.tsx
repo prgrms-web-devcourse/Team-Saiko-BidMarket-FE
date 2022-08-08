@@ -6,13 +6,13 @@ import { useEffect, useState } from 'react';
 import { CardProductData } from 'types/product';
 import { priceFormat, remainedTimeFormat } from 'utils';
 
-import CardImage from './CardImage';
+import ProductCardImage from './ProductCardImage';
 
-interface CardProps {
+interface ProductCardProps {
   productInfo: CardProductData;
 }
 
-const Card = ({ productInfo }: CardProps) => {
+const ProductCard = ({ productInfo }: ProductCardProps) => {
   const { id, title, thumbnailImage, minimumPrice, expireAt } = productInfo;
   const [remainedTime, setRemainedTime] = useState('0초');
   const router = useRouter();
@@ -29,7 +29,10 @@ const Card = ({ productInfo }: CardProps) => {
       cursor="pointer"
       onClick={() => router.push(`/products/${id}`)}
     >
-      <CardImage alt="abc" src={thumbnailImage || '/svg/basket.svg'} />
+      <ProductCardImage
+        alt={`${id}-product-image`}
+        src={thumbnailImage || '/svg/basket.svg'}
+      />
       <Flex direction="column" paddingLeft="15px" width="100%" gap="5px">
         <Text fontSize="lg">{title}</Text>
         <Flex justifyContent="space-between" alignItems="center">
@@ -69,4 +72,4 @@ const Card = ({ productInfo }: CardProps) => {
   );
 };
 
-export default Card;
+export default ProductCard;

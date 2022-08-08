@@ -27,7 +27,12 @@ const MainHeader = () => {
       rightContent={
         isLogin ? (
           <Flex gap="10px" alignItems="center">
-            <BellIcon w="32px" h="32px" _hover={{ cursor: 'pointer' }} />
+            <BellIcon
+              w="32px"
+              h="32px"
+              _hover={{ cursor: 'pointer' }}
+              onClick={() => router.push(`/user/${userId}/notifications`)}
+            />
             <Circle
               border="2px solid"
               borderColor="brand.primary-900"

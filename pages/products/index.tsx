@@ -2,7 +2,13 @@ import { Divider, Flex, Text } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 import { Fragment, useState } from 'react';
 
-import { Card, GoBackIcon, Header, SearchInput, SEO } from 'components/common';
+import {
+  ProductCard,
+  GoBackIcon,
+  Header,
+  SearchInput,
+  SEO,
+} from 'components/common';
 import { BidFilterCheckBox, FilterButton } from 'components/Products';
 import { CardProductData } from 'types/product';
 
@@ -26,7 +32,7 @@ const Products: NextPage = () => {
       {products.map((product) => {
         return (
           <Fragment key={product.id}>
-            <Card productInfo={product} />
+            <ProductCard productInfo={product} />
             <Divider />
           </Fragment>
         );

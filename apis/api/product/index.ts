@@ -1,13 +1,13 @@
 import { baseInstance } from 'apis/utils/baseInstance';
 import { ProductResponse, ProductsResponseType } from 'types/product';
 
-interface productsAPITypes {
+interface ProductsAPITypes {
   offset: number;
   limit: number;
 }
 
 const productAPI = {
-  getProducts: ({ offset, limit }: productsAPITypes) =>
+  getProducts: ({ offset, limit }: ProductsAPITypes) =>
     baseInstance.get<ProductsResponseType>(
       `/products?offset=${offset}&limit=${limit}`
     ),
