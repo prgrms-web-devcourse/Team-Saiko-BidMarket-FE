@@ -1,5 +1,5 @@
 export interface User {
-  encodedId: string;
+  id: number;
   username: string;
-  thumbnailImg: string;
+  profileImage: string;
 }

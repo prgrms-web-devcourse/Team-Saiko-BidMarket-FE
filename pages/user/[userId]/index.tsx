@@ -20,7 +20,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   let user = {};
 
   try {
-    const { data } = await userAPI.getUser(userId as string);
+    const { data } = await userAPI.getUser(parseInt(userId as string, 10));
 
     user = data;
   } catch (error) {
@@ -35,32 +35,30 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 const UserId: NextPage = ({
-  user: { encodedId, thumbnailImg, username },
+  user: { id, profileImage, username },
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
   const { userId } = router.query;
-  const [authUserId, setAuthUserId] = useState('');
-  const isMyPage = encodedId === authUserId;
+  const [authUserId, setAuthUserId] = useState(-1);
+  const isMyPage = id === authUserId;
 
   useEffect(() => {
-    if (!encodedId) {
+    if (!id) {
       router.replace('/404');
     }
-  }, [encodedId, router]);
+  }, [id, router]);
 
   useEffect(() => {
     const fetchAuthUser = async () => {
-      const {
-        data: { encodedId },
-      } = await userAPI.getAuthUser();
+      const { id } = (await userAPI.getAuthUser()).data;
 
-      setAuthUserId(encodedId);
+      setAuthUserId(id);
     };
 
     fetchAuthUser();
   }, []);
 
-  if (!encodedId) {
+  if (!id) {
     return (
       <Center height="100%">
         <Spinner size="xl" />
@@ -89,7 +87,7 @@ const UserId: NextPage = ({
       ></Header>
       <Flex width="100%" flexDirection="column" gap="29px">
         <UserProfileInformation
-          profileImageUrl={thumbnailImg}
+          profileImageUrl={profileImage}
           nickname={username}
         />
         {isMyPage ? (

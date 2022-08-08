@@ -4,7 +4,9 @@ import { User } from 'types/user';
 
 const userAPI = {
   getAuthUser: () => authInstance.get<User>('users/auth'),
-  getUser: (encodedId: string) => baseInstance.get<User>(`/users/${encodedId}`),
+  getUser: (id: number) => baseInstance.get<User>(`/users/${id}`),
+  updateUser: (username: string, profileImage: string) =>
+    authInstance.patch('users', { username, profileImage }),
 };
 
 export default userAPI;

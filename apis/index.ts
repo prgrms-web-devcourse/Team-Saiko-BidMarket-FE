@@ -1,4 +1,5 @@
 import bidAPI from './api/bid';
 import productAPI from './api/product';
+import userAPI from './api/user';
 
-export { productAPI, bidAPI };
+export { productAPI, userAPI, bidAPI };
