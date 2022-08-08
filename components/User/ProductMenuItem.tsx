@@ -43,13 +43,13 @@ const ProductMenuItem = ({
           {title}
         </Text>
       </Flex>
-      {!isLastItem ? (
+      {!isLastItem && (
         <Divider
           orientation="vertical"
           border="3px solid #EFEFEF"
           height="20px"
         />
-      ) : undefined}
+      )}
     </>
   );
 };

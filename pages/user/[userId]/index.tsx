@@ -81,11 +81,11 @@ const UserId: NextPage = ({
           profileImageUrl={profileImage}
           nickname={username}
         />
-        {isMyPage ? (
+        {isMyPage && (
           <UserProfileEditButton
             onClick={() => router.push(`./${userId}/edit`)}
           />
-        ) : undefined}
+        )}
       </Flex>
       <ProductMenuList userId={userId as string} />
       {isMyPage ? (
