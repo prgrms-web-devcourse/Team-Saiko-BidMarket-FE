@@ -6,6 +6,7 @@ import {
   Image,
 } from '@chakra-ui/react';
 import type { NextPage } from 'next';
+import { useState } from 'react';
 
 import { productAPI } from 'apis';
 import { Category, Header, GoBackIcon } from 'components/common';
@@ -22,14 +23,13 @@ import {
 import useForm from 'hooks/useForm';
 
 const Product: NextPage = () => {
+  const [productImageArray, setProductImageArray] = useState<string[]>([]);
   const { values, errors, isLoading, handleChange, handleSubmit } = useForm({
     initialValues: {
       title: '',
       minimumPrice: 0,
       location: '',
-      images: [
-        'https://bid-market-bucket.s3.ap-northeast-2.amazonaws.com/products/project.jpeg',
-      ],
+      images: [''],
       category: 'DIGITAL_DEVICE',
       description: '',
     },
@@ -46,7 +46,7 @@ const Product: NextPage = () => {
         title: title.trim(),
         minimumPrice,
         location: location.trim(),
-        images,
+        images: productImageArray,
         category,
         description: description.trim(),
       };
@@ -69,14 +69,20 @@ const Product: NextPage = () => {
         images?: string;
         description?: string;
       } = {};
-      // TODO: 검증 임시로 주석처리
       if (!title.trim()) {
         error.title = '상품 제목을 입력해주세요.';
       }
 
-      if (minimumPrice && Number(minimumPrice) < 1000) {
+      // if (!images) {
+      //   error.images = '상품 이미지를 넣어주세요.';
+      // }
+
+      if (minimumPrice && parseInt(minimumPrice, 10) < 1000) {
         error.minimumPrice = '1000원 이상 입력 가능합니다.';
       }
+      // else if (minimumPrice && Math.floor(minimumPrice / 100) * 100) {
+      //   error.minimumPrice = '100원 단위로 입력 가능합니다.';
+      // }
 
       if (!location.trim()) {
         error.location = '희망 거래지역을 입력해주세요.';
@@ -116,11 +122,24 @@ const Product: NextPage = () => {
           marginTop="10px"
           w="100%"
         >
-          <AddProductImageUpload
-            name="profileImage"
-            productImageUrl={''}
-            onChange={handleChange}
-          />
+          <FormControl
+            flexGrow="1"
+            display="flex"
+            flexDirection="column"
+            height="20%"
+            isInvalid={(values.images as string[])?.length > 0 ? false : true}
+          >
+            <AddProductImageUpload
+              name="productImage"
+              productImageArray={productImageArray}
+              setProductImageArray={setProductImageArray}
+              productImageUrl={values.images}
+              onChange={handleChange}
+            />
+            <FormErrorMessage paddingLeft="19px">
+              {errors.images as string}
+            </FormErrorMessage>
+          </FormControl>
           <FormControl
             flexGrow="1"
             display="flex"
