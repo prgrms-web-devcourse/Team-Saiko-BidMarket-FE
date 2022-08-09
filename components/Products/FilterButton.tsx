@@ -12,11 +12,10 @@ import {
 import React, { Fragment, useState } from 'react';
 
 import {
-  sortOptionsENType,
   categoryOptionsENType,
   categoryOptionsKOType,
-  sortOptionsKOType,
-} from 'types/products';
+} from 'types/categoryOption';
+import { sortOptionsENType, sortOptionsKOType } from 'types/sortOption';
 import { categoryOption, sortOption } from 'utils';
 
 interface FilterButtonProps {
