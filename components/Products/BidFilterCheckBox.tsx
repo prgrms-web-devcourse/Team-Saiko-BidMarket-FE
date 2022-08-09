@@ -1,9 +1,19 @@
 import { Checkbox } from '@chakra-ui/react';
 
-const BidFilterCheckBox = () => {
+interface BidFilterCheckBoxProps {
+  isProgressed: boolean;
+  onBidFilterChange: () => void;
+}
+
+const BidFilterCheckBox = ({
+  isProgressed,
+  onBidFilterChange,
+}: BidFilterCheckBoxProps) => {
   return (
     <>
       <Checkbox
+        isChecked={isProgressed}
+        onChange={onBidFilterChange}
         sx={{
           '.chakra-checkbox__control': {
             borderRadius: '50%',
