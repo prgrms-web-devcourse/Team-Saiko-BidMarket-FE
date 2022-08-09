@@ -9,7 +9,6 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
 
 import { priceFormat, remainedTimeFormat } from 'utils';
 
@@ -29,13 +28,8 @@ const ProductBid = ({
   expireAt,
 }: ProductBidProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [remainedTime, setRemainedTime] = useState('0초');
   const router = useRouter();
   const toast = useToast();
-
-  useEffect(() => {
-    setRemainedTime(remainedTimeFormat(expireAt));
-  }, [remainedTime]);
 
   const handleBidButtonClick = () => {
     if (authUserId === -1) {
@@ -94,7 +88,7 @@ const ProductBid = ({
             padding="3px 10px"
             borderRadius="20px"
           >
-            {remainedTime}
+            {remainedTimeFormat(expireAt)}
           </Text>
         </Flex>
         <Button
