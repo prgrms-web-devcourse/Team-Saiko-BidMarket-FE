@@ -27,12 +27,13 @@ const Products: NextPage = ({
   productsDatas,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
-  const [title, setTitle] = useState<string>(queryDatas.title);
+  const { title, sort, category, progressed } = queryDatas;
+  const [keyword, setKeyword] = useState<string>(title);
   const [selectedSortOption, setSelectedSortOption] =
-    useState<sortOptionsENType>(queryDatas.sort);
+    useState<sortOptionsENType>(sort);
   const [selectedCategoryOption, setSelectedCategoryOption] =
-    useState<categoryOptionsENType>(queryDatas.category);
-  const [progressed, setProgressed] = useState<boolean>(queryDatas.progressed);
+    useState<categoryOptionsENType>(category);
+  const [isProgressed, setIsProgressed] = useState<boolean>(progressed);
   const [products, setProducts] = useState<ProductsResponseType>(productsDatas);
   const [isMoreButtonLoading, setIsMoreButtonLoading] = useState(false);
 
@@ -41,16 +42,17 @@ const Products: NextPage = ({
 
   useEffect(() => {
     router.push(
-      `/products?title=${title}&sort=${selectedSortOption}&category=${selectedCategoryOption}&progressed=${progressed}&offset=0&limit=10`
+      `/products?title=${keyword}&sort=${selectedSortOption}&category=${selectedCategoryOption}&progressed=${isProgressed}&offset=0&limit=10`
     );
-  }, [title, selectedSortOption, selectedCategoryOption, progressed]);
+  }, [keyword, selectedSortOption, selectedCategoryOption, isProgressed]);
 
   const handleFormSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     router.push(
-      `/products?title=${title}&sort=${selectedSortOption}&category=${selectedCategoryOption}&progressed=true&offset=0&limit=10`
+      `/products?title=${keyword}&sort=${selectedSortOption}&category=${selectedCategoryOption}&progressed=${isProgressed}&offset=0&limit=10`
     );
   };
+
   const handleFilterButtonChange = (
     option: sortOptionsENType | categoryOptionsENType
   ) => {
@@ -67,7 +69,7 @@ const Products: NextPage = ({
   };
 
   const handleBidFilterCheckBoxChange = () => {
-    setProgressed(!progressed);
+    setIsProgressed(!isProgressed);
   };
 
   // @TODO 메인페이지와 동일한 코드이며 무한 스크롤과 함께 개선 예정
@@ -91,7 +93,7 @@ const Products: NextPage = ({
       <Header leftContent={<GoBackIcon />} middleContent={<Text>검색</Text>} />
       <Flex direction="column" w="100%">
         <form onSubmit={(event) => handleFormSubmit(event)}>
-          <SearchInput keyword={title} onChange={setTitle} />
+          <SearchInput keyword={keyword} onChange={setKeyword} />
         </form>
         <Divider marginTop="18px" />
         <Flex width="100%" gap="18px" marginTop="15px">
@@ -108,7 +110,7 @@ const Products: NextPage = ({
         </Flex>
         <Flex width="100%" marginTop="15px">
           <BidFilterCheckBox
-            isProgressed={!progressed}
+            isProgressed={!isProgressed}
             onBidFilterChange={handleBidFilterCheckBoxChange}
           />
         </Flex>
