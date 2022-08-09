@@ -39,12 +39,11 @@ const FilterButton = ({
   selectedOption,
   onFilterChange,
 }: FilterButtonProps) => {
+  const isSortFilter = filterName === 'sortFilter';
+  const OPTIONS = isSortFilter ? sortOptionsKOKeys : categoryOptionsKOKeys;
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const OPTIONS =
-    filterName === 'sortFilter' ? sortOptionsKOKeys : categoryOptionsKOKeys;
-
   const [selectedFilterOption, setSelectedFilterOption] = useState(
-    filterName === 'sortFilter'
+    isSortFilter
       ? transformSortOptionsEN(selectedOption as sortOptionsENType)
       : transformCategoryOptionsEN(selectedOption as categoryOptionsENType)
   );
@@ -54,7 +53,7 @@ const FilterButton = ({
   ) => {
     setSelectedFilterOption(selectedOption);
     onFilterChange(
-      filterName === 'sortFilter'
+      isSortFilter
         ? transformSortOptionsKO(selectedOption as sortOptionsKOType)
         : transformCategoryOptionsKO(selectedOption as categoryOptionsKOType)
     );
