@@ -1,6 +1,8 @@
 import { DownloadIcon } from '@chakra-ui/icons';
 import { Box, Button, Divider, Flex } from '@chakra-ui/react';
 import type { NextPage } from 'next';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 
 import { ProductCardContainer, SearchInput, SEO } from 'components/common';
 import { Banner, MainHeader, ProductAddButton } from 'components/Main';
@@ -8,7 +10,9 @@ import { useGetProducts } from 'hooks/queries';
 
 const Home: NextPage = () => {
   const { data: productPages, fetchNextPage, hasNextPage } = useGetProducts();
-  
+  const router = useRouter();
+  const [title, setTitle] = useState('');
+
   const handleFormSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     router.push(
