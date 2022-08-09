@@ -18,17 +18,16 @@ const Home: NextPage = () => {
         <Banner />
         <Divider marginTop="15px" />
         <SearchInput />
-        {productPages &&
-          productPages.pages.map((page) => {
-            return page.data.map((product) => {
-              return (
-                <Fragment key={product.id}>
-                  <ProductCard productInfo={product} />
-                  <Divider />
-                </Fragment>
-              );
-            });
-          })}
+        {productPages?.pages.map((page) => {
+          return page.data.map((product) => {
+            return (
+              <Fragment key={product.id}>
+                <ProductCard productInfo={product} />
+                <Divider />
+              </Fragment>
+            );
+          });
+        })}
         {hasNextPage && (
           <Button
             alignSelf="center"
