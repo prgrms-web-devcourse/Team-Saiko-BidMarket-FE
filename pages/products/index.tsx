@@ -11,8 +11,9 @@ import { Fragment, useEffect, useState } from 'react';
 import { productAPI } from 'apis';
 import { Card, GoBackIcon, Header, SearchInput, SEO } from 'components/common';
 import { BidFilterCheckBox, FilterButton } from 'components/Products';
+import { categoryOptionsENType } from 'types/categoryOption';
 import { ProductsResponseType } from 'types/product';
-import { categoryOptionsENType, sortOptionsENType } from 'types/products';
+import { sortOptionsENType } from 'types/sortOption';
 import { categoryOption, sortOption } from 'utils';
 
 let offset = 0;
@@ -53,6 +54,7 @@ const Products: NextPage = ({
     );
   };
 
+  // @TODO FilterButton과 함께 간결한 코드로 풀어낼 필요 (with Type)
   const handleFilterButtonChange = (
     option: sortOptionsENType | categoryOptionsENType
   ) => {
