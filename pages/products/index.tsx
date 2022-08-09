@@ -19,12 +19,12 @@ let offset = 0;
 let limit = 10;
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { data } = await productAPI.getProducts({ offset: 0, limit: 10 });
-  return { props: { queryDatas: context.query, productsProps: data } };
+  return { props: { queryDatas: context.query, productsDatas: data } };
 };
 
 const Products: NextPage = ({
   queryDatas,
-  productsProps,
+  productsDatas,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
   const [title, setTitle] = useState<string>(queryDatas.title);
@@ -33,7 +33,7 @@ const Products: NextPage = ({
   const [selectedCategoryOption, setSelectedCategoryOption] =
     useState<categoryOptionsENType>(queryDatas.category);
   const [progressed, setProgressed] = useState<boolean>(queryDatas.progressed);
-  const [products, setProducts] = useState<ProductsResponseType>(productsProps);
+  const [products, setProducts] = useState<ProductsResponseType>(productsDatas);
   const [isMoreButtonLoading, setIsMoreButtonLoading] = useState(false);
 
   offset = queryDatas.offset;
