@@ -1,48 +1,23 @@
 import { DownloadIcon } from '@chakra-ui/icons';
 import { Box, Button, Divider, Flex } from '@chakra-ui/react';
-import type { InferGetServerSidePropsType } from 'next';
+import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { Fragment, useState } from 'react';
+import { useState } from 'react';
 
-import { productAPI } from 'apis';
-import { ProductCard, SearchInput, SEO } from 'components/common';
+import { ProductCardContainer, SearchInput, SEO } from 'components/common';
 import { Banner, MainHeader, ProductAddButton } from 'components/Main';
+import { useGetProducts } from 'hooks/queries';
 
-let offset = 0;
-const limit = 10;
-export const getServerSideProps = async () => {
-  const { data } = await productAPI.getProducts({ offset, limit });
-  return { props: { productsProps: data } };
-};
-
-const Home = ({
-  productsProps,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const Home: NextPage = () => {
+  const { data: productPages, fetchNextPage, hasNextPage } = useGetProducts();
   const router = useRouter();
   const [title, setTitle] = useState('');
-
-  const [products, setProducts] = useState(productsProps);
-  const [isMoreButtonLoading, setIsMoreButtonLoading] = useState(false);
 
   const handleFormSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     router.push(
       `/products?title=${title}&sort=END_DATE_ASC&category=ALL&progressed=true&offset=0&limit=10`
     );
-  };
-
-  const handleMoreProductClick = async () => {
-    setIsMoreButtonLoading(true);
-    offset = offset + limit;
-    try {
-      const { data } = await productAPI.getProducts({ offset, limit });
-      setProducts([...products, ...data]);
-      setIsMoreButtonLoading(false);
-    } catch (error) {
-      offset = offset - limit;
-      console.log(error);
-      setIsMoreButtonLoading(false);
-    }
   };
 
   return (
@@ -55,26 +30,24 @@ const Home = ({
         <form onSubmit={handleFormSubmit}>
           <SearchInput keyword={title} onChange={setTitle} />
         </form>
-        {products.map((product) => {
-          return (
-            <Fragment key={product.id}>
-              <ProductCard productInfo={product} />
-              <Divider />
-            </Fragment>
-          );
+        {productPages?.pages.map(({ data }) => {
+          return data.map((product) => {
+            return <ProductCardContainer key={product.id} product={product} />;
+          });
         })}
-        <Button
-          alignSelf="center"
-          w="100px"
-          marginTop="20px"
-          borderRadius="30px"
-          color="white"
-          backgroundColor="brand.primary-900"
-          isLoading={isMoreButtonLoading}
-          onClick={() => handleMoreProductClick()}
-        >
-          <DownloadIcon w="5" h="5" />
-        </Button>
+        {hasNextPage && (
+          <Button
+            alignSelf="center"
+            w="100px"
+            marginTop="20px"
+            borderRadius="30px"
+            color="white"
+            backgroundColor="brand.primary-900"
+            onClick={() => fetchNextPage()}
+          >
+            <DownloadIcon w="5" h="5" />
+          </Button>
+        )}
       </Flex>
       <Box alignSelf="flex-end" position="sticky" bottom="15px" right="15px">
         <ProductAddButton />
