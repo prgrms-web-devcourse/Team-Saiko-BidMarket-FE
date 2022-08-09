@@ -25,7 +25,7 @@ import { categoryOption, sortOption } from 'utils';
 let offset = 0;
 let limit = 10;
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { data } = await productAPI.getProducts({ offset: 0, limit: 10 });
+  const { data } = await productAPI.getProducts({ offset: 0 });
   return { props: { queryDatas: context.query, productsDatas: data } };
 };
 
@@ -85,7 +85,7 @@ const Products: NextPage = ({
     setIsMoreButtonLoading(true);
     offset = offset + 1;
     try {
-      const { data } = await productAPI.getProducts({ offset, limit });
+      const { data } = await productAPI.getProducts({ offset });
       setProducts([...products, ...data]);
       setIsMoreButtonLoading(false);
     } catch (error) {
