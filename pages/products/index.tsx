@@ -125,7 +125,7 @@ const Products: NextPage = ({
         {products.map((product) => {
           return (
             <Fragment key={product.id}>
-              <Card productInfo={product} />
+              <ProductCard productInfo={product} />
               <Divider />
             </Fragment>
           );
