@@ -1,6 +1,6 @@
 import { Checkbox } from '@chakra-ui/react';
 
-interface BidFilterCheckBoxTypes {
+interface BidFilterCheckBoxProps {
   isProgressed: boolean;
   onBidFilterChange: () => void;
 }
@@ -8,7 +8,7 @@ interface BidFilterCheckBoxTypes {
 const BidFilterCheckBox = ({
   isProgressed,
   onBidFilterChange,
-}: BidFilterCheckBoxTypes) => {
+}: BidFilterCheckBoxProps) => {
   return (
     <>
       <Checkbox
