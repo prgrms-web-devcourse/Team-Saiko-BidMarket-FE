@@ -10,18 +10,18 @@ const getProductsAPI = async ({ pageParam = 0 }) => {
   return {
     data,
     currentPage: pageParam,
-    isLast: data.length === 0 ? true : false,
+    isLast: data.length ? true : false,
   };
 };
 
 const useGetProducts = () => {
   return useInfiniteQuery(['products'], getProductsAPI, {
     getNextPageParam: (lastPage) => {
-      if (!lastPage.isLast) {
-        return lastPage.currentPage + LIMIT;
+      if (lastPage.isLast) {
+        return undefined;
       }
 
-      return undefined;
+      return lastPage.currentPage + LIMIT;
     },
   });
 };
