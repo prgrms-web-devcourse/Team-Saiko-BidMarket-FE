@@ -1,4 +1,4 @@
-import { sortOptionsENType, sortOptionsKOType } from 'types/products';
+import { sortOptionsENType, sortOptionsKOType } from 'types/sortOption';
 
 const sortOptionsKO: {
   [key: string]: sortOptionsENType;

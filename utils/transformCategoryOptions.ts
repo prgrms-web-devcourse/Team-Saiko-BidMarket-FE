@@ -1,4 +1,7 @@
-import { categoryOptionsENType, categoryOptionsKOType } from 'types/products';
+import {
+  categoryOptionsENType,
+  categoryOptionsKOType,
+} from 'types/categoryOption';
 
 const categoryOptionsKO: {
   [key: string]: categoryOptionsENType;
