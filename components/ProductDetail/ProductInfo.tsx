@@ -31,7 +31,7 @@ const ProductInfo = ({
           borderRadius="20px"
           fontWeight="bold"
         >
-          D-{DDay === 0 ? 'Day' : DDay}
+          {DDay === 0 ? 'D-Day' : DDay < 0 ? `마감` : `D-${DDay}`}
         </Text>
         <Text fontSize="lg" marginLeft="10px" fontWeight="bold">
           {title}

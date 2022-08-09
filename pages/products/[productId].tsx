@@ -10,6 +10,7 @@ import {
   ProductInfo,
   ProductSeller,
 } from 'components/ProductDetail';
+import useLoginUser from 'hooks/useLoginUser';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { productId } = context.query;
@@ -23,9 +24,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 const ProductDetail = ({
-  product,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const {
+  product: {
     title,
     description,
     minimumPrice,
@@ -35,7 +34,9 @@ const ProductDetail = ({
     images,
     expireAt,
     createdAt,
-  } = product;
+  },
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const { id: authUserId } = useLoginUser();
 
   return (
     <>
@@ -43,15 +44,16 @@ const ProductDetail = ({
       <Box position="absolute">
         <ProductImage images={images} />
       </Box>
-      <Box position="absolute" left="0" paddingTop="5px" cursor="pointer">
+      <Box position="absolute" left="15px" top="20px" cursor="pointer">
         {/* //TODO 색상 props 적용 */}
         <GoBackIcon />
       </Box>
       <Flex direction="column" width="100%" marginTop="317px">
         <Flex justifyContent="space-between" alignItems="center">
           <ProductSeller
+            userId={writer.id}
             name={writer.username}
-            thumbnailImg={writer.thumbnailImg}
+            profileImage={writer.profileImage}
           />
           <StarIcon w="23px" color="brand.primary-900" />
         </Flex>
@@ -64,7 +66,12 @@ const ProductDetail = ({
           createdAt={createdAt}
           expireAt={expireAt}
         />
-        <ProductBid minimumPrice={minimumPrice} expireAt={expireAt} />
+        <ProductBid
+          writerId={writer.id}
+          authUserId={authUserId}
+          minimumPrice={minimumPrice}
+          expireAt={expireAt}
+        />
       </Flex>
     </>
   );

@@ -35,9 +35,9 @@ type EnglishCategory =
   | 'ALL';
 
 const productAPI = {
-  getProducts: ({ offset, limit }: productsAPITypes) =>
+  getProducts: ({ offset }: { offset: number }) =>
     baseInstance.get<ProductsResponseType>(
-      `/products?offset=${offset}&limit=${limit}`
+      `/products?offset=${offset}&limit=10`
     ),
   getProduct: (productId: number) =>
     baseInstance.get<ProductResponse>(`/products/${productId}`),

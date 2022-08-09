@@ -8,7 +8,9 @@ const Auth = () => {
   const router = useRouter();
 
   useEffect(() => {
-    setItem('token', router.query.token as string);
+    const token =
+      router.query.token || router.asPath.split('?')[1].substring(6);
+    setItem('token', token as string);
     router.push('/');
   }, []);
 
