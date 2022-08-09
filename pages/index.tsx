@@ -3,7 +3,7 @@ import { Box, Button, Divider, Flex } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 import { Fragment } from 'react';
 
-import { ProductCard, SearchInput, SEO } from 'components/common';
+import { ProductCardContainer, SearchInput, SEO } from 'components/common';
 import { Banner, MainHeader, ProductAddButton } from 'components/Main';
 import { useGetProducts } from 'hooks/queries';
 
@@ -18,14 +18,9 @@ const Home: NextPage = () => {
         <Banner />
         <Divider marginTop="15px" />
         <SearchInput />
-        {productPages?.pages.map((page) => {
-          return page.data.map((product) => {
-            return (
-              <Fragment key={product.id}>
-                <ProductCard productInfo={product} />
-                <Divider />
-              </Fragment>
-            );
+        {productPages?.pages.map(({ data }) => {
+          return data.map((product) => {
+            return <ProductCardContainer key={product.id} product={product} />;
           });
         })}
         {hasNextPage && (
