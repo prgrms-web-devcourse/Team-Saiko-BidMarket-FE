@@ -13,6 +13,7 @@ const MainHeader = () => {
   const [isLogin, setIsLogin] = useState(false);
   const { id: userId, profileImage: profileImageUrl } = useLoginUser();
 
+  // @TODO HOOK으로 개선 (BM-184 참고)
   useEffect(() => {
     if (userId !== -1) {
       setIsLogin(true);
@@ -24,6 +25,7 @@ const MainHeader = () => {
       leftContent={
         <Image src="/svg/bidMarket.svg" alt="bidmarket" height="20px" />
       }
+      // @TODO 컴포넌트로 분리 (BM-184 참고)
       rightContent={
         isLogin ? (
           <Flex gap="10px" alignItems="center">
