@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { Fragment, useState } from 'react';
 
 import { productAPI } from 'apis';
-import { Card, SearchInput, SEO } from 'components/common';
+import { ProductCard, SearchInput, SEO } from 'components/common';
 import { Banner, MainHeader, ProductAddButton } from 'components/Main';
 
 let offset = 0;
@@ -58,7 +58,7 @@ const Home = ({
         {products.map((product) => {
           return (
             <Fragment key={product.id}>
-              <Card productInfo={product} />
+              <ProductCard productInfo={product} />
               <Divider />
             </Fragment>
           );

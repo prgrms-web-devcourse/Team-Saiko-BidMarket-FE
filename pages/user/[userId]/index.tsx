@@ -13,14 +13,16 @@ import {
   ProductMenuList,
   UserProfileEditButton,
   UserProfileInformation,
+  UserSetting,
 } from 'components/User';
+import useLoginUser from 'hooks/useLoginUser';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { userId } = context.query;
   let user = {};
 
   try {
-    const { data } = await userAPI.getUser(userId as string);
+    const { data } = await userAPI.getUser(parseInt(userId as string, 10));
 
     user = data;
   } catch (error) {
@@ -35,32 +37,20 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 const UserId: NextPage = ({
-  user: { encodedId, thumbnailImg, username },
+  user: { id, profileImage, username },
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
   const { userId } = router.query;
-  const [authUserId, setAuthUserId] = useState('');
-  const isMyPage = encodedId === authUserId;
+  const { id: authUserId } = useLoginUser();
+  const isMyPage = id === authUserId;
 
   useEffect(() => {
-    if (!encodedId) {
+    if (!id) {
       router.replace('/404');
     }
-  }, [encodedId, router]);
+  }, [id, router]);
 
-  useEffect(() => {
-    const fetchAuthUser = async () => {
-      const {
-        data: { encodedId },
-      } = await userAPI.getAuthUser();
-
-      setAuthUserId(encodedId);
-    };
-
-    fetchAuthUser();
-  }, []);
-
-  if (!encodedId) {
+  if (!id) {
     return (
       <Center height="100%">
         <Spinner size="xl" />
@@ -85,21 +75,31 @@ const UserId: NextPage = ({
             {isMyPage ? '마이페이지' : ''}
           </Text>
         }
-        rightContent={<SideBar />}
-      ></Header>
+      />
       <Flex width="100%" flexDirection="column" gap="29px">
         <UserProfileInformation
-          profileImageUrl={thumbnailImg}
+          profileImageUrl={profileImage}
           nickname={username}
         />
-        {isMyPage ? (
+        {isMyPage && (
           <UserProfileEditButton
             onClick={() => router.push(`./${userId}/edit`)}
           />
-        ) : undefined}
+        )}
       </Flex>
-      <Divider height="7px" marginTop="27px" backgroundColor="#F2F2F2" />
       <ProductMenuList userId={userId as string} />
+      {isMyPage ? (
+        <>
+          <Divider
+            width="100%"
+            height="7px"
+            background="#F8F8F8"
+            boxShadow="inset 0px 1px 3px rgba(0, 0, 0, 0.03)"
+            marginTop="25px"
+          />
+          <UserSetting />
+        </>
+      ) : undefined}
     </>
   );
 };

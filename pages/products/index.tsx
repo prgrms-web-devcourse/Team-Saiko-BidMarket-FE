@@ -9,7 +9,13 @@ import { useRouter } from 'next/router';
 import { Fragment, useEffect, useState } from 'react';
 
 import { productAPI } from 'apis';
-import { Card, GoBackIcon, Header, SearchInput, SEO } from 'components/common';
+import {
+  ProductCard,
+  GoBackIcon,
+  Header,
+  SearchInput,
+  SEO,
+} from 'components/common';
 import { BidFilterCheckBox, FilterButton } from 'components/Products';
 import { categoryOptionsENType } from 'types/categoryOption';
 import { ProductsResponseType } from 'types/product';

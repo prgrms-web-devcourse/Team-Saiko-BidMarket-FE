@@ -16,8 +16,8 @@ import { priceFormat, remainedTimeFormat } from 'utils';
 import ProductBidProgress from './ProductBidDrawer';
 
 interface ProductBidProps {
-  writerId: string;
-  authUserId: string;
+  writerId: number;
+  authUserId: number;
   minimumPrice: number;
   expireAt: Date;
 }
@@ -38,7 +38,7 @@ const ProductBid = ({
   }, [remainedTime]);
 
   const handleBidButtonClick = () => {
-    if (!authUserId) {
+    if (authUserId === -1) {
       toast({
         position: 'top',
         title: '입찰은 로그인 후 이용 가능합니다.',
@@ -110,7 +110,11 @@ const ProductBid = ({
         >
           <Text color="white">입찰하기</Text>
         </Button>
-        <ProductBidProgress onClose={onClose} isOpen={isOpen} />
+        <ProductBidProgress
+          minimumPrice={minimumPrice}
+          onClose={onClose}
+          isOpen={isOpen}
+        />
       </Flex>
     </Box>
   );
