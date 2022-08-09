@@ -9,9 +9,9 @@ import { Card, SearchInput, SEO } from 'components/common';
 import { Banner, MainHeader, ProductAddButton } from 'components/Main';
 
 let offset = 0;
-const limit = 5;
+const limit = 10;
 export const getServerSideProps = async () => {
-  const { data } = await productAPI.getProducts({ offset: 0, limit: 5 });
+  const { data } = await productAPI.getProducts({ offset: 0, limit: 10 });
   return { props: { productsProps: data } };
 };
 

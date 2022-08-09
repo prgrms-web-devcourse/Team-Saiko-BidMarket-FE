@@ -18,7 +18,7 @@ import { categoryOption, sortOption } from 'utils';
 let offset = 0;
 let limit = 10;
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { data } = await productAPI.getProducts({ offset: 0, limit: 5 });
+  const { data } = await productAPI.getProducts({ offset: 0, limit: 10 });
   return { props: { queryDatas: context.query, productsProps: data } };
 };
 
