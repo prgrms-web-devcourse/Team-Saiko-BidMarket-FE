@@ -2,7 +2,7 @@ import { DownloadIcon } from '@chakra-ui/icons';
 import { Box, Button, Divider, Flex } from '@chakra-ui/react';
 import type { InferGetServerSidePropsType } from 'next';
 import { useRouter } from 'next/router';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useState } from 'react';
 
 import { productAPI } from 'apis';
 import { Card, SearchInput, SEO } from 'components/common';
