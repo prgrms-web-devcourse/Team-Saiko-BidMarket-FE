@@ -27,7 +27,7 @@ const Notification = ({
             <Flex direction="column">
               <Text width="100%" paddingTop="5px">
                 {description}
-              </Text>{' '}
+              </Text>
               <Text color="brand.dark-light">
                 {distanceTimeFormat(createdAt)}
               </Text>
