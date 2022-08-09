@@ -2,7 +2,7 @@ import { DownloadIcon } from '@chakra-ui/icons';
 import { Box, Button, Divider, Flex } from '@chakra-ui/react';
 import type { InferGetServerSidePropsType } from 'next';
 import { useRouter } from 'next/router';
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 
 import { productAPI } from 'apis';
 import { Card, SearchInput, SEO } from 'components/common';
@@ -11,7 +11,7 @@ import { Banner, MainHeader, ProductAddButton } from 'components/Main';
 let offset = 0;
 const limit = 10;
 export const getServerSideProps = async () => {
-  const { data } = await productAPI.getProducts({ offset: 0, limit: 10 });
+  const { data } = await productAPI.getProducts({ offset, limit });
   return { props: { productsProps: data } };
 };
 
@@ -33,13 +33,13 @@ const Home = ({
 
   const handleMoreProductClick = async () => {
     setIsMoreButtonLoading(true);
-    offset = offset + 1;
+    offset = offset + limit;
     try {
       const { data } = await productAPI.getProducts({ offset, limit });
       setProducts([...products, ...data]);
       setIsMoreButtonLoading(false);
     } catch (error) {
-      offset = offset - 1;
+      offset = offset - limit;
       console.log(error);
       setIsMoreButtonLoading(false);
     }
@@ -52,7 +52,7 @@ const Home = ({
       <Flex direction="column" width="100%">
         <Banner />
         <Divider marginTop="15px" />
-        <form onSubmit={(event) => handleFormSubmit(event)}>
+        <form onSubmit={handleFormSubmit}>
           <SearchInput keyword={title} onChange={setTitle} />
         </form>
         {products.map((product) => {
