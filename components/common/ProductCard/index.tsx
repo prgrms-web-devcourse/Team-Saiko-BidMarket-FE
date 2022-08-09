@@ -19,7 +19,7 @@ const ProductCard = ({ productInfo }: ProductCardProps) => {
 
   useEffect(() => {
     setRemainedTime(remainedTimeFormat(expireAt));
-  }, [remainedTime]);
+  }, [remainedTime, expireAt]);
 
   return (
     <Flex
