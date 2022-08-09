@@ -1,4 +1,4 @@
-import { BellIcon } from '@chakra-ui/icons';
+import { BellIcon, ChatIcon } from '@chakra-ui/icons';
 import { Avatar, Circle, Flex, Image } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -27,6 +27,12 @@ const MainHeader = () => {
       rightContent={
         isLogin ? (
           <Flex gap="10px" alignItems="center">
+            <ChatIcon
+              w="24px"
+              h="24px"
+              _hover={{ cursor: 'pointer' }}
+              onClick={() => router.push(`/user/${userId}/chattings`)}
+            />
             <BellIcon
               w="32px"
               h="32px"
