@@ -9,7 +9,7 @@ const getProductsAPI = async ({ pageParam = 0 }) => {
 
   return {
     data,
-    current_page: pageParam,
+    currentPage: pageParam,
     isLast: data.length === 0 ? true : false,
   };
 };
@@ -18,7 +18,7 @@ const useGetProducts = () => {
   return useInfiniteQuery(['products'], getProductsAPI, {
     getNextPageParam: (lastPage) => {
       if (!lastPage.isLast) {
-        return lastPage.current_page + LIMIT;
+        return lastPage.currentPage + LIMIT;
       }
 
       return undefined;
