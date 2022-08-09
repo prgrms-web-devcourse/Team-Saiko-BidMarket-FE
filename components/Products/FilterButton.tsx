@@ -19,7 +19,7 @@ import {
 } from 'types/products';
 import { categoryOption, sortOption } from 'utils';
 
-interface FilterButtonTypes {
+interface FilterButtonProps {
   filterName: 'sortFilter' | 'categoryFilter';
   selectedOption: sortOptionsENType | categoryOptionsENType;
   onFilterChange: (value: sortOptionsENType | categoryOptionsENType) => void;
@@ -38,7 +38,7 @@ const FilterButton = ({
   filterName,
   selectedOption,
   onFilterChange,
-}: FilterButtonTypes) => {
+}: FilterButtonProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const OPTIONS =
     filterName === 'sortFilter' ? sortOptionsKOKeys : categoryOptionsKOKeys;
