@@ -6,6 +6,7 @@ import {
   DrawerBody,
   DrawerContent,
   DrawerOverlay,
+  Flex,
   Text,
   useDisclosure,
 } from '@chakra-ui/react';
@@ -36,15 +37,20 @@ const AddProductCategory = ({ onChange }: AddProductCategoryProps) => {
     <>
       <Button
         variant="outline"
-        w="100%"
-        h="50px"
+        bg="#ffffff"
         border="1px"
+        w="100%"
+        color="#718096"
+        fontWeight="normal"
+        h="50px"
         borderColor="#B6B6B6"
         gap="5px"
         onClick={onOpen}
       >
-        {selectedCategory || '카테고리 선택'}
-        <ChevronDownIcon />
+        <Flex w="100%" justifyContent="space-between">
+          {selectedCategory || '카테고리 선택'}
+          <ChevronDownIcon />
+        </Flex>
       </Button>
       <Drawer placement="bottom" onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
