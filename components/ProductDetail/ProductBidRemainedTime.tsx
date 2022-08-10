@@ -14,21 +14,18 @@ const SECONDS = 1000;
 
 const ProductBidRemainedTime = ({ expireAt }: ProductBidRemainedTimeProps) => {
   const [remainedTime, setRemainedTime] = useState('계산중입니다.');
+  const expireTime = new Date(expireAt).getTime();
+  const currentTime = new Date().getTime();
 
   const remainedDayTime = useIntervalComparedValue(
-    () =>
-      Math.floor(
-        (new Date(expireAt).getTime() - new Date().getTime()) / DAY_TO_SECONDS
-      ),
+    () => Math.floor((expireTime - currentTime) / DAY_TO_SECONDS),
     SECONDS
   );
 
   const remainedHourTime = useIntervalComparedValue(
     () =>
       Math.floor(
-        ((new Date(expireAt).getTime() - new Date().getTime()) %
-          DAY_TO_SECONDS) /
-          HOUR_TO_SECONDS
+        ((expireTime - currentTime) % DAY_TO_SECONDS) / HOUR_TO_SECONDS
       ),
     SECONDS
   );
@@ -36,20 +33,14 @@ const ProductBidRemainedTime = ({ expireAt }: ProductBidRemainedTimeProps) => {
   const remainedMinuteTime = useIntervalComparedValue(
     () =>
       Math.floor(
-        ((new Date(expireAt).getTime() - new Date().getTime()) %
-          HOUR_TO_SECONDS) /
-          MINUTE_TO_SECONDS
+        ((expireTime - currentTime) % HOUR_TO_SECONDS) / MINUTE_TO_SECONDS
       ),
     SECONDS
   );
 
   const remainedSecondTime = useIntervalComparedValue(
     () =>
-      Math.floor(
-        ((new Date(expireAt).getTime() - new Date().getTime()) %
-          MINUTE_TO_SECONDS) /
-          SECONDS
-      ),
+      Math.floor(((expireTime - currentTime) % MINUTE_TO_SECONDS) / SECONDS),
     SECONDS
   );
 
