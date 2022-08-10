@@ -14,6 +14,7 @@ const AddProductImage = ({
   productImageArray,
   onClick,
 }: AddProductImageProps) => {
+  console.log(productImageArray);
   return (
     <Flex direction="column" w="100%" gap="1">
       <ProductLabel
@@ -39,10 +40,10 @@ const AddProductImage = ({
           icon={<AddIcon color="#FF4370" />}
         />
         <Divider orientation="vertical" w="24px" />
-        {productImageArray.map((ImageURL) => {
-          return (
-            <>
-              <Box>
+        {productImageArray &&
+          productImageArray.map((ImageURL, index) => {
+            return (
+              <Box key={index}>
                 <IconButton
                   position="absolute"
                   transform="translate(300%, -40%)"
@@ -55,7 +56,6 @@ const AddProductImage = ({
                   icon={<CloseIcon w="8px" h="8px" color="#FFFFFF" />}
                 />
                 <Image
-                  key={ImageURL}
                   alt="image"
                   w="82px"
                   h="82px"
@@ -64,9 +64,8 @@ const AddProductImage = ({
                   src={ImageURL}
                 />
               </Box>
-            </>
-          );
-        })}
+            );
+          })}
       </Flex>
     </Flex>
   );
