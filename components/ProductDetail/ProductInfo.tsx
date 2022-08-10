@@ -46,7 +46,6 @@ const ProductInfo = ({
           {format(new Date(createdAt), 'M월 d일')}
         </Text>
       </Flex>
-
       <Text marginTop="14px" whiteSpace="pre-wrap" marginBottom="158px">
         {description}
       </Text>
