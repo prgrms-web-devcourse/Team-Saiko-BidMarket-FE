@@ -37,7 +37,6 @@ const Product: NextPage = () => {
       title,
       minimumPrice,
       location,
-      images,
       category,
       description,
       e,
@@ -84,6 +83,10 @@ const Product: NextPage = () => {
       // else if (minimumPrice && Math.floor(minimumPrice / 100) * 100) {
       //   error.minimumPrice = '100원 단위로 입력 가능합니다.';
       // }
+
+      if (productImageArray.length) {
+        error.images = '사진 1개 이상 필요합니다.';
+      }
 
       if (!location.trim()) {
         error.location = '희망 거래지역을 입력해주세요.';
@@ -134,8 +137,6 @@ const Product: NextPage = () => {
               name="productImage"
               productImageArray={productImageArray}
               setProductImageArray={setProductImageArray}
-              productImageUrl={values.images}
-              onChange={handleChange}
             />
             <FormErrorMessage paddingLeft="19px">
               {errors.images as string}

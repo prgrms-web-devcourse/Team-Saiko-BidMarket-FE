@@ -43,7 +43,6 @@ const productAPI = {
     baseInstance.get<ProductResponse>(`/products/${productId}`),
 
   createProduct: async (data: PostData) => {
-    console.log(data);
     return await authInstance.post(`/products`, data);
   },
 };
