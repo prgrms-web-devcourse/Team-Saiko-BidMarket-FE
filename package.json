@@ -14,6 +14,8 @@
     "@chakra-ui/react": "^2.2.4",
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
+    "@tanstack/react-query": "^4.0.10",
+    "@tanstack/react-query-devtools": "^4.0.10",
     "aws-sdk": "^2.1185.0",
     "axios": "^0.27.2",
     "date-fns": "^2.29.1",
@@ -32,7 +34,17 @@
     "eslint-config-next": "12.2.3",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.1",
+    "jira-prepare-commit-msg": "^1.6.2",
     "prettier": "^2.7.1",
     "typescript": "4.7.4"
+  },
+  "jira-prepare-commit-msg": {
+    "messagePattern": "[$J] $M",
+    "jiraTicketPattern": "([A-Z]+-\\d+)",
+    "commentChar": "#",
+    "isConventionalCommit": false,
+    "allowEmptyCommitMessage": false,
+    "gitRoot": ""
   }
 }

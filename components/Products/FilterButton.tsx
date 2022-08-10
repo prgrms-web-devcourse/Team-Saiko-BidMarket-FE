@@ -11,28 +11,51 @@ import {
 } from '@chakra-ui/react';
 import React, { Fragment, useState } from 'react';
 
-interface FilterButtonTypes {
+import {
+  categoryOptionsENType,
+  categoryOptionsKOType,
+} from 'types/categoryOption';
+import { sortOptionsENType, sortOptionsKOType } from 'types/sortOption';
+import { categoryOption, sortOption } from 'utils';
+
+interface FilterButtonProps {
   filterName: 'sortFilter' | 'categoryFilter';
+  selectedOption: sortOptionsENType | categoryOptionsENType;
+  onFilterChange: (value: sortOptionsENType | categoryOptionsENType) => void;
 }
 
-const CATEGORY_OPTIONS = ['전체', '디지털 기기', '생활 가전', '가구 인테리어'];
-const SORT_OPTIONS = [
-  '종료임박순',
-  '최신순',
-  '입찰건수',
-  '시작가 오름차순',
-  '시작가 내림차순',
-];
+const { sortOptionsKOKeys, transformSortOptionsKO, transformSortOptionsEN } =
+  sortOption;
 
-const FilterButton = ({ filterName }: FilterButtonTypes) => {
-  const OPTIONS = filterName === 'sortFilter' ? SORT_OPTIONS : CATEGORY_OPTIONS;
+const {
+  categoryOptionsKOKeys,
+  transformCategoryOptionsKO,
+  transformCategoryOptionsEN,
+} = categoryOption;
+
+const FilterButton = ({
+  filterName,
+  selectedOption,
+  onFilterChange,
+}: FilterButtonProps) => {
+  const isSortFilter = filterName === 'sortFilter';
+  const OPTIONS = isSortFilter ? sortOptionsKOKeys : categoryOptionsKOKeys;
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [selectedFilterOption, setSelectedFilterOption] = useState(
+    isSortFilter
+      ? transformSortOptionsEN(selectedOption as sortOptionsENType)
+      : transformCategoryOptionsEN(selectedOption as categoryOptionsENType)
+  );
 
-  // @TODO url의 category에 따라 정해지는 것으로 개선될 예정 OR 전체를 기본값
-  const [selectedFilterOption, setSelectedFilterOption] = useState(OPTIONS[0]);
-
-  const handleFilterButtonClick = (selectedOption: string) => {
+  const handleFilterButtonClick = (
+    selectedOption: sortOptionsKOType | categoryOptionsKOType
+  ) => {
     setSelectedFilterOption(selectedOption);
+    onFilterChange(
+      isSortFilter
+        ? transformSortOptionsKO(selectedOption as sortOptionsKOType)
+        : transformCategoryOptionsKO(selectedOption as categoryOptionsKOType)
+    );
     onClose();
   };
 
@@ -64,7 +87,7 @@ const FilterButton = ({ filterName }: FilterButtonTypes) => {
                     {optionName}
                   </Text>
                   {index !== OPTIONS.length - 1 ? (
-                    <Divider margin="10px 0" />
+                    <Divider margin="5px 0" />
                   ) : undefined}
                 </Fragment>
               );

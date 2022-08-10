@@ -1,23 +1,62 @@
-import { Divider, Flex, Text } from '@chakra-ui/react';
-import type { NextPage } from 'next';
+import { Center, Divider, Flex, Spinner, Text } from '@chakra-ui/react';
+import type {
+  GetServerSideProps,
+  InferGetServerSidePropsType,
+  NextPage,
+} from 'next';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
+import userAPI from 'apis/api/user';
 import { GoBackIcon, Header, SEO, SideBar } from 'components/common';
 import {
   ProductMenuList,
   UserProfileEditButton,
   UserProfileInformation,
+  UserSetting,
 } from 'components/User';
+import useLoginUser from 'hooks/useLoginUser';
 
-const UserId: NextPage = () => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { userId } = context.query;
+  let user = {};
+
+  try {
+    const { data } = await userAPI.getUser(parseInt(userId as string, 10));
+
+    user = data;
+  } catch (error) {
+    console.error(error);
+  }
+
+  return {
+    props: {
+      user,
+    },
+  };
+};
+
+const UserId: NextPage = ({
+  user: { id, profileImage, username },
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
   const { userId } = router.query;
-  // TODO: url의 id와 로그인 중인 id를 비교해서 마이 페이지인지 사용자 페이지 확인
-  const isMyPage = true;
-  const dummyProfile = {
-    nickname: '물안경',
-    profileImageUrl: 'https://bit.ly/code-beast',
-  };
+  const { id: authUserId } = useLoginUser();
+  const isMyPage = id === authUserId;
+
+  useEffect(() => {
+    if (!id) {
+      router.replace('/404');
+    }
+  }, [id, router]);
+
+  if (!id) {
+    return (
+      <Center height="100%">
+        <Spinner size="xl" />
+      </Center>
+    );
+  }
 
   return (
     <>
@@ -33,24 +72,34 @@ const UserId: NextPage = () => {
             fontStyle="normal"
             color="barnd.dark"
           >
-            {isMyPage ? '마이페이지' : '사용자 닉네임'}
+            {isMyPage ? '마이페이지' : ''}
           </Text>
         }
-        rightContent={<SideBar />}
-      ></Header>
+      />
       <Flex width="100%" flexDirection="column" gap="29px">
         <UserProfileInformation
-          profileImageUrl={dummyProfile.profileImageUrl}
-          nickname={dummyProfile.nickname}
+          profileImageUrl={profileImage}
+          nickname={username}
         />
-        {isMyPage ? (
+        {isMyPage && (
           <UserProfileEditButton
             onClick={() => router.push(`./${userId}/edit`)}
           />
-        ) : undefined}
+        )}
       </Flex>
-      <Divider height="7px" marginTop="27px" backgroundColor="#F2F2F2" />
       <ProductMenuList userId={userId as string} />
+      {isMyPage ? (
+        <>
+          <Divider
+            width="100%"
+            height="7px"
+            background="#F8F8F8"
+            boxShadow="inset 0px 1px 3px rgba(0, 0, 0, 0.03)"
+            marginTop="25px"
+          />
+          <UserSetting />
+        </>
+      ) : undefined}
     </>
   );
 };

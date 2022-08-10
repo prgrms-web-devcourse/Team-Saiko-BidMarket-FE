@@ -1,4 +1,3 @@
-import { ChevronRightIcon } from '@chakra-ui/icons';
 import { Flex, Divider, Text, Image } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 
@@ -21,23 +20,36 @@ const ProductMenuItem = ({
     <>
       <Flex
         width="100%"
+        flexDirection="column"
         alignItems="center"
-        gap="17px"
+        gap="13px"
         onClick={() => router.push(routingUrl)}
       >
-        <Image src={iconUrl} alt={`${title} 아이콘`} />
+        <Image
+          width="33.92px"
+          height="38px"
+          src={iconUrl}
+          alt={`${title} 아이콘`}
+        />
         <Text
           flexGrow="1"
+          color="brand.dark"
           fontFamily="Roboto"
           fontStyle="normal"
           fontWeight="400"
-          fontSize="16"
+          fontSize="14"
+          lineHeight="128.19%"
         >
           {title}
         </Text>
-        <ChevronRightIcon justifySelf="flex-end" />
       </Flex>
-      {!isLastItem ? <Divider /> : undefined}
+      {!isLastItem && (
+        <Divider
+          orientation="vertical"
+          border="3px solid #EFEFEF"
+          height="20px"
+        />
+      )}
     </>
   );
 };
