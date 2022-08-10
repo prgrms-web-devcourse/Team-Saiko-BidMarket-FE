@@ -26,7 +26,6 @@ const Home: NextPage = () => {
       <MainHeader />
       <Flex direction="column" width="100%">
         <Banner />
-        <Divider marginTop="15px" />
         <form onSubmit={handleFormSubmit}>
           <SearchInput keyword={title} onChange={setTitle} />
         </form>
