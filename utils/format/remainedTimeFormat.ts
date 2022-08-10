@@ -16,7 +16,10 @@ const remainedTimeFormat = (expiredTime: Date) => {
     end: expiredTime,
   });
 
-  return formatDuration(remainedTime, { locale: ko });
+  return formatDuration(remainedTime, {
+    format: ['days', 'hours', 'minutes'],
+    locale: ko,
+  });
 };
 
 export default remainedTimeFormat;
