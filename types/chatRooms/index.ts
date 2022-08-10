@@ -2,11 +2,11 @@ export interface ChatRoomData {
   chatRoomId: number;
   productInfo: {
     productId: number;
-    thumbnailImg: string;
+    thumbnailImage: string;
   };
   opponentUserInfo: {
     username: string;
-    profileImg: string;
+    profileImage: string;
   };
   lastMessage: string;
   lastMessageDate: Date;
