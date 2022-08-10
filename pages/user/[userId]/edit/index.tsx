@@ -1,15 +1,60 @@
-import { Flex } from '@chakra-ui/react';
-import type { NextPage } from 'next';
+import { Center, Flex, Spinner } from '@chakra-ui/react';
+import type {
+  GetServerSideProps,
+  InferGetServerSidePropsType,
+  NextPage,
+} from 'next';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
+import userAPI from 'apis/api/user';
 import { SEO } from 'components/common';
 import { ProfileEditHeader } from 'components/ProfileEdit';
 import EditProfileForm from 'components/ProfileEdit/EditForm';
+import useLoginUser from 'hooks/useLoginUser';
 
-const Edit: NextPage = () => {
-  const dummyProps = {
-    nickname: '물안경',
-    profileImageUrl: 'https://bit.ly/code-beast',
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { userId } = context.query;
+  let user = {};
+
+  try {
+    user = (await userAPI.getUser(parseInt(userId as string, 10))).data;
+  } catch (error) {
+    console.error(error);
+  }
+
+  return {
+    props: {
+      user,
+    },
   };
+};
+
+const Edit: NextPage = ({
+  user: { id, profileImage, username },
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const router = useRouter();
+  const { id: authUserId } = useLoginUser();
+
+  useEffect(() => {
+    if (authUserId === -1) {
+      return;
+    }
+
+    if (!id || id !== authUserId) {
+      router.replace('/');
+
+      return;
+    }
+  }, [id, authUserId, router]);
+
+  if (!authUserId || authUserId !== id) {
+    return (
+      <Center height="100%">
+        <Spinner size="xl" />
+      </Center>
+    );
+  }
 
   return (
     <>
@@ -17,7 +62,7 @@ const Edit: NextPage = () => {
       <Flex flexDirection="column" width="100%" height="100%">
         <ProfileEditHeader />
         <Flex width="100%" height="100%" marginTop="48px">
-          <EditProfileForm {...dummyProps} />
+          <EditProfileForm nickname={username} profileImageUrl={profileImage} />
         </Flex>
       </Flex>
     </>

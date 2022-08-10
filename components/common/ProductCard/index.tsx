@@ -1,14 +1,19 @@
 import { StarIcon } from '@chakra-ui/icons';
 import { Flex, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
-import CardImage from './CardImage';
+import { CardProductData } from 'types/product';
+import { priceFormat, remainedTimeFormat } from 'utils';
 
-interface CardProps {
-  productId: number;
+import ProductCardImage from './ProductCardImage';
+
+interface ProductCardProps {
+  productInfo: CardProductData;
 }
 
-const Card = ({ productId }: CardProps) => {
+const ProductCard = ({ productInfo }: ProductCardProps) => {
+  const { id, title, thumbnailImage, minimumPrice, expireAt } = productInfo;
   const router = useRouter();
 
   return (
@@ -17,11 +22,14 @@ const Card = ({ productId }: CardProps) => {
       width="100%"
       height="144px"
       cursor="pointer"
-      onClick={() => router.push(`/products/${productId}`)}
+      onClick={() => router.push(`/products/${id}`)}
     >
-      <CardImage alt="abc" src="https://bit.ly/code-beast" />
+      <ProductCardImage
+        alt={`${id}-product-image`}
+        src={thumbnailImage || '/svg/basket.svg'}
+      />
       <Flex direction="column" paddingLeft="15px" width="100%" gap="5px">
-        <Text fontSize="lg">먹다 남은 케이크</Text>
+        <Text fontSize="lg">{title}</Text>
         <Flex justifyContent="space-between" alignItems="center">
           <Text fontSize="sm" color="brand.primary-900">
             시작가
@@ -34,7 +42,7 @@ const Card = ({ productId }: CardProps) => {
             borderRadius="20px"
             fontWeight="bold"
           >
-            10,000원
+            {priceFormat(minimumPrice)}원
           </Text>
         </Flex>
         <Flex justifyContent="space-between" alignItems="center">
@@ -45,7 +53,7 @@ const Card = ({ productId }: CardProps) => {
             padding="3px 10px"
             borderRadius="20px"
           >
-            01일 22시간 22분 40초
+            {remainedTimeFormat(expireAt)}
           </Text>
         </Flex>
         <Flex justifyContent="flex-end" alignItems="center">
@@ -59,4 +67,4 @@ const Card = ({ productId }: CardProps) => {
   );
 };
 
-export default Card;
+export default ProductCard;

@@ -2,7 +2,7 @@ import { Center, Text } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 
 import { GoBackIcon, Header, SEO } from 'components/common';
-import { NoLikeProducts } from 'components/User';
+import { NoProducts } from 'components/User';
 
 // @ TODO 데이터 가져와서 연결 작업
 const DUMMY = [];
@@ -18,7 +18,7 @@ const Like: NextPage = () => {
       />
       {DUMMY.length === 0 ? (
         <Center flexDirection="column" height="100%">
-          <NoLikeProducts />
+          <NoProducts pageName="userLikeProducts" />
         </Center>
       ) : (
         <Text>list of Product Cards</Text>

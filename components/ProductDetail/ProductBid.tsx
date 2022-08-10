@@ -6,25 +6,48 @@ import {
   Divider,
   useDisclosure,
   Image,
+  useToast,
 } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
-import { priceFormat, remainedTimeFormat } from 'utils';
-
-import ProductBidProgress from './ProductBidDrawer';
+import {
+  ProductBidProgress,
+  ProductBidRemainedTime,
+} from 'components/ProductDetail';
+import { priceFormat } from 'utils';
 
 interface ProductBidProps {
+  writerId: number;
+  authUserId: number;
   minimumPrice: number;
   expireAt: Date;
 }
 
-const ProductBid = ({ minimumPrice, expireAt }: ProductBidProps) => {
+const ProductBid = ({
+  writerId,
+  authUserId,
+  minimumPrice,
+  expireAt,
+}: ProductBidProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [remainedTime, setRemainedTime] = useState('0초');
+  const router = useRouter();
+  const toast = useToast();
 
-  useEffect(() => {
-    setRemainedTime(remainedTimeFormat(expireAt));
-  }, [remainedTime]);
+  const handleBidButtonClick = () => {
+    if (authUserId === -1) {
+      toast({
+        position: 'top',
+        title: '입찰은 로그인 후 이용 가능합니다.',
+        status: 'warning',
+        duration: 1500,
+      });
+
+      router.push('/login');
+      return;
+    }
+
+    onOpen();
+  };
 
   return (
     <Box
@@ -61,25 +84,26 @@ const ProductBid = ({ minimumPrice, expireAt }: ProductBidProps) => {
             <Image src="/svg/time.svg" alt="remained-time" />
             <Text>남은 시간</Text>
           </Flex>
-          <Text
-            fontSize="sm"
-            bg="#EFEFEF"
-            padding="3px 10px"
-            borderRadius="20px"
-          >
-            {remainedTime}
-          </Text>
+          <ProductBidRemainedTime expireAt={expireAt} />
         </Flex>
         <Button
           backgroundColor="brand.primary-900"
           cursor="pointer"
           borderRadius="50px"
           marginBottom="15px"
-          onClick={onOpen}
+          onClick={handleBidButtonClick}
+          _active={{
+            borderColor: '#brand.primary-900',
+          }}
+          disabled={writerId === authUserId}
         >
           <Text color="white">입찰하기</Text>
         </Button>
-        <ProductBidProgress onClose={onClose} isOpen={isOpen} />
+        <ProductBidProgress
+          minimumPrice={minimumPrice}
+          onClose={onClose}
+          isOpen={isOpen}
+        />
       </Flex>
     </Box>
   );
