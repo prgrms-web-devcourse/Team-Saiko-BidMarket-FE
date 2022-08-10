@@ -39,7 +39,7 @@ const AddProductImageUpload = ({
 
     const changedImageFile = files[0];
 
-    await uploadImage(changedImageFile);
+    await [...files].forEach((file) => uploadImage(file));
 
     const uploadedUrl = `${BUCKET_URL}/${FOLDER_NAME}/${changedImageFile.name}`;
     setProductImageArray([...productImageArray, uploadedUrl]);
@@ -69,6 +69,7 @@ const AddProductImageUpload = ({
     }
   };
 
+  // const handleClickDeleteButton = () => {};
   return (
     <>
       <Input
@@ -77,6 +78,7 @@ const AddProductImageUpload = ({
         type="file"
         name={name}
         accept="image/*"
+        multiple
         data-url={productImageUrl}
         onChange={handleChange}
       />
@@ -84,6 +86,7 @@ const AddProductImageUpload = ({
       <AddProductImage
         productImageUrl={productImageUrl}
         productImageArray={productImageArray}
+        onRemove={''}
         onClick={handleChooseFile}
       />
     </>
