@@ -10,7 +10,7 @@ const getProductsAPI = async ({ pageParam = 0 }) => {
   return {
     data,
     currentPage: pageParam,
-    isLast: data.length ? true : false,
+    isLast: data.length ? false : true,
   };
 };
 
