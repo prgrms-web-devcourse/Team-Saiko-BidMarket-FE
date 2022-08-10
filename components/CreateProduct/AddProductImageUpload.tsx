@@ -31,21 +31,25 @@ const AddProductImageUpload = ({
     inputRef.current && inputRef.current.click();
   };
   const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
+    const files = e.target.files as FileList;
 
     if (!files || files.length === 0) {
       return;
     }
 
-    const changedImageFile = files[0];
+    Array(files.length)
+      .fill(0)
+      .forEach(async (_, index) => {
+        const file = files[index];
+        if (file) {
+          await uploadImage(file);
+          const uploadedUrl = `${BUCKET_URL}/${FOLDER_NAME}/${file.name}`;
+          setProductImageArray([...productImageArray, uploadedUrl]);
+          e.target.dataset.url = uploadedUrl;
+          setProductImageUrl(uploadedUrl);
+        }
+      });
 
-    await [...files].forEach((file) => uploadImage(file));
-
-    const uploadedUrl = `${BUCKET_URL}/${FOLDER_NAME}/${changedImageFile.name}`;
-    setProductImageArray([...productImageArray, uploadedUrl]);
-    e.target.dataset.url = uploadedUrl;
-
-    setProductImageUrl(uploadedUrl);
     onChange(e);
   };
 
