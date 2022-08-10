@@ -14,12 +14,7 @@ interface ProductCardProps {
 
 const ProductCard = ({ productInfo }: ProductCardProps) => {
   const { id, title, thumbnailImage, minimumPrice, expireAt } = productInfo;
-  const [remainedTime, setRemainedTime] = useState('0초');
   const router = useRouter();
-
-  useEffect(() => {
-    setRemainedTime(remainedTimeFormat(expireAt));
-  }, [remainedTime]);
 
   return (
     <Flex
@@ -58,7 +53,7 @@ const ProductCard = ({ productInfo }: ProductCardProps) => {
             padding="3px 10px"
             borderRadius="20px"
           >
-            {remainedTime}
+            {remainedTimeFormat(expireAt)}
           </Text>
         </Flex>
         <Flex justifyContent="flex-end" alignItems="center">
