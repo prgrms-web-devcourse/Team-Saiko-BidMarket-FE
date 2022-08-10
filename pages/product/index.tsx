@@ -45,7 +45,11 @@ const Product: NextPage = () => {
         category: categoryEN as categoryOptionsENType,
         description: description.trim(),
       };
+<<<<<<< HEAD
       // await productAPI.createProduct(data)
+=======
+      // await productAPI.createProduct(data);
+>>>>>>> 9738158d2a255c7e484d1fbb327a4bee5839abc0
       console.log(data);
     },
 
