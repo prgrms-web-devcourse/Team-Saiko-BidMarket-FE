@@ -1,51 +1,56 @@
 import { Text } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 
-import useIntervalValue from 'hooks/useIntervalValue';
+import useIntervalComparedValue from 'hooks/useIntervalComparedValue';
 
 interface ProductBidRemainedTimeProps {
   expireAt: Date;
 }
 
+const DAY_TO_SECONDS = 1000 * 60 * 60 * 24;
+const HOUR_TO_SECONDS = 1000 * 60 * 60;
+const MINUTE_TO_SECONDS = 1000 * 60;
+const SECONDS = 1000;
+
 const ProductBidRemainedTime = ({ expireAt }: ProductBidRemainedTimeProps) => {
   const [remainedTime, setRemainedTime] = useState('계산중입니다.');
 
-  const remainedDayTime = useIntervalValue(
+  const remainedDayTime = useIntervalComparedValue(
     () =>
       Math.floor(
-        (new Date(expireAt).getTime() - new Date().getTime()) /
-          (1000 * 60 * 60 * 24)
+        (new Date(expireAt).getTime() - new Date().getTime()) / DAY_TO_SECONDS
       ),
-    1000
+    SECONDS
   );
 
-  const remainedHourTime = useIntervalValue(
+  const remainedHourTime = useIntervalComparedValue(
     () =>
       Math.floor(
         ((new Date(expireAt).getTime() - new Date().getTime()) %
-          (1000 * 60 * 60 * 24)) /
-          (1000 * 60 * 60)
+          DAY_TO_SECONDS) /
+          HOUR_TO_SECONDS
       ),
-    1000
+    SECONDS
   );
 
-  const remainedMinuteTime = useIntervalValue(
+  const remainedMinuteTime = useIntervalComparedValue(
     () =>
       Math.floor(
         ((new Date(expireAt).getTime() - new Date().getTime()) %
-          (1000 * 60 * 60)) /
-          (1000 * 60)
+          HOUR_TO_SECONDS) /
+          MINUTE_TO_SECONDS
       ),
-    1000
+    SECONDS
   );
 
-  const remainedSecondTime = useIntervalValue(
+  const remainedSecondTime = useIntervalComparedValue(
     () =>
       Math.floor(
-        ((new Date(expireAt).getTime() - new Date().getTime()) % (1000 * 60)) /
-          1000
+        ((new Date(expireAt).getTime() - new Date().getTime()) %
+          MINUTE_TO_SECONDS) /
+          SECONDS
       ),
-    1000
+    SECONDS
   );
 
   useEffect(() => {
