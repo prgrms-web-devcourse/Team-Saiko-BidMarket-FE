@@ -12,10 +12,10 @@ const Login: NextPage = () => {
         leftContent={<GoBackIcon />}
         middleContent={<Text>비드마켓</Text>}
       />
-      <Flex direction="column" alignItems="center" marginTop="20px">
+      <Flex direction="column" alignItems="center" marginTop="50px">
         <Phrases />
         <Image
-          src="/svg/basket.svg"
+          src="/svg/bidmarket-login.svg"
           alt="basket"
           marginTop="20px"
           marginBottom="45px"
