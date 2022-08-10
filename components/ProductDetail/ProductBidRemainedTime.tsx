@@ -49,7 +49,6 @@ const ProductBidRemainedTime = ({ expireAt }: ProductBidRemainedTimeProps) => {
   );
 
   useEffect(() => {
-    console.log(remainedSecondTime);
     if (remainedSecondTime < 0) {
       setRemainedTime('이미 경매가 종료된 상품입니다.');
       return;
