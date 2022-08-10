@@ -45,7 +45,8 @@ const Product: NextPage = () => {
         category: categoryEN as categoryOptionsENType,
         description: description.trim(),
       };
-      await productAPI.createProduct(data);
+      // await productAPI.createProduct(data)
+      console.log(data);
     },
 
     validate: ({
@@ -79,7 +80,7 @@ const Product: NextPage = () => {
       //   error.minimumPrice = '100원 단위로 입력 가능합니다.';
       // }
 
-      if (productImageArray.length) {
+      if (productImageArray.length === 0) {
         error.images = '사진 1개 이상 필요합니다.';
       }
 
