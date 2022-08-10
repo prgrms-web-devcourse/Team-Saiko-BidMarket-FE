@@ -117,7 +117,7 @@ const ProductBidDrawer = ({
                 >
                   <FormErrorMessage>
                     {errors.biddingPrice as string}
-                  </FormErrorMessage>{' '}
+                  </FormErrorMessage>
                   <Text fontSize="sm" color="#007C14" marginTop="8px">
                     {priceFormat(biddingPrice)}원
                   </Text>

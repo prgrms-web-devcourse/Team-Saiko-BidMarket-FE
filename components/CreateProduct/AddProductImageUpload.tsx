@@ -6,10 +6,8 @@ import AddProductImage from './AddProductImage';
 
 interface ImageUploadProps {
   name: string;
-  productImageUrl: string;
   productImageArray: string[];
-  setProductImageArray: any;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  setProductImageArray: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 // const BUCKET_URL = process.env.BUCKET_URL;
@@ -18,39 +16,41 @@ const FOLDER_NAME = 'products';
 
 const AddProductImageUpload = ({
   name,
-  productImageUrl: defaultProductImageUrl,
   productImageArray,
   setProductImageArray,
-  onChange,
 }: ImageUploadProps) => {
-  const [productImageUrl, setProductImageUrl] = useState<string>(
-    defaultProductImageUrl
-  );
   const inputRef = useRef<HTMLInputElement>(null);
+  const [productImageUrls, setProductImageUrls] = useState<Array<string>>([]);
+
   const handleChooseFile = () => {
     inputRef.current && inputRef.current.click();
   };
+
   const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files as FileList;
+    const imageUrls = [] as Array<string>;
 
     if (!files || files.length === 0) {
       return;
     }
 
-    Array(files.length)
-      .fill(0)
-      .forEach(async (_, index) => {
-        const file = files[index];
-        if (file) {
-          await uploadImage(file);
-          const uploadedUrl = `${BUCKET_URL}/${FOLDER_NAME}/${file.name}`;
-          setProductImageArray([...productImageArray, uploadedUrl]);
-          e.target.dataset.url = uploadedUrl;
-          setProductImageUrl(uploadedUrl);
-        }
-      });
+    [...files].forEach(async (file) => {
+      await uploadImage(file);
+      const uploadedUrl = `${BUCKET_URL}/${FOLDER_NAME}/${file.name}`;
+      imageUrls.push(uploadedUrl);
+    });
 
-    onChange(e);
+    setProductImageUrls(
+      [...files].map((file) => {
+        return `${BUCKET_URL}/${FOLDER_NAME}/${file.name}`;
+      })
+    );
+
+    setProductImageArray(
+      [...files].map((file) => {
+        return `${BUCKET_URL}/${FOLDER_NAME}/${file.name}`;
+      })
+    );
   };
 
   const uploadImage = async (imageFile: File) => {
@@ -73,7 +73,20 @@ const AddProductImageUpload = ({
     }
   };
 
-  // const handleClickDeleteButton = () => {};
+  const handleClickDeleteButton = (ImageURL: string) => {
+    setProductImageUrls(
+      [...productImageUrls].filter(
+        (productImageUrl) => productImageUrl !== ImageURL
+      )
+    );
+
+    setProductImageArray(
+      [...productImageArray].filter(
+        (productImageUrl) => productImageUrl !== ImageURL
+      )
+    );
+  };
+
   return (
     <>
       <Input
@@ -83,15 +96,13 @@ const AddProductImageUpload = ({
         name={name}
         accept="image/*"
         multiple
-        data-url={productImageUrl}
         onChange={handleChange}
       />
 
       <AddProductImage
-        productImageUrl={productImageUrl}
-        productImageArray={productImageArray}
-        onRemove={''}
+        productImageUrls={productImageArray}
         onClick={handleChooseFile}
+        onRemove={handleClickDeleteButton}
       />
     </>
   );

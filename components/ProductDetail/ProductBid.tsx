@@ -9,11 +9,12 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
 
-import { priceFormat, remainedTimeFormat } from 'utils';
-
-import ProductBidProgress from './ProductBidDrawer';
+import {
+  ProductBidProgress,
+  ProductBidRemainedTime,
+} from 'components/ProductDetail';
+import { priceFormat } from 'utils';
 
 interface ProductBidProps {
   writerId: number;
@@ -29,13 +30,8 @@ const ProductBid = ({
   expireAt,
 }: ProductBidProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [remainedTime, setRemainedTime] = useState('0초');
   const router = useRouter();
   const toast = useToast();
-
-  useEffect(() => {
-    setRemainedTime(remainedTimeFormat(expireAt));
-  }, [remainedTime]);
 
   const handleBidButtonClick = () => {
     if (authUserId === -1) {
@@ -88,14 +84,7 @@ const ProductBid = ({
             <Image src="/svg/time.svg" alt="remained-time" />
             <Text>남은 시간</Text>
           </Flex>
-          <Text
-            fontSize="sm"
-            bg="#EFEFEF"
-            padding="3px 10px"
-            borderRadius="20px"
-          >
-            {remainedTime}
-          </Text>
+          <ProductBidRemainedTime expireAt={expireAt} />
         </Flex>
         <Button
           backgroundColor="brand.primary-900"

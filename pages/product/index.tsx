@@ -9,7 +9,7 @@ import type { NextPage } from 'next';
 import { useState } from 'react';
 
 import { productAPI } from 'apis';
-import { Category, Header, GoBackIcon } from 'components/common';
+import { Header, GoBackIcon } from 'components/common';
 import { SEO } from 'components/common';
 import {
   AddProductTitle,
@@ -19,35 +19,30 @@ import {
   AddProductDescription,
   SubmitButton,
   ProductLabel,
+  AddProductCategory,
 } from 'components/CreateProduct';
 import useForm from 'hooks/useForm';
+import { categoryOptionsENType } from 'types/categoryOption';
 
 const Product: NextPage = () => {
   const [productImageArray, setProductImageArray] = useState<string[]>([]);
+  const [categoryEN, setCategoryEN] = useState<string>('');
   const { values, errors, isLoading, handleChange, handleSubmit } = useForm({
     initialValues: {
       title: '',
       minimumPrice: 0,
       location: '',
       images: [''],
-      category: 'DIGITAL_DEVICE',
+      category: '',
       description: '',
     },
-    onSubmit: async ({
-      title,
-      minimumPrice,
-      location,
-      images,
-      category,
-      description,
-      e,
-    }) => {
+    onSubmit: async ({ title, minimumPrice, location, description, e }) => {
       const data = {
         title: title.trim(),
         minimumPrice,
         location: location.trim(),
         images: productImageArray,
-        category,
+        category: categoryEN as categoryOptionsENType,
         description: description.trim(),
       };
       // await productAPI.createProduct(data);
@@ -84,6 +79,10 @@ const Product: NextPage = () => {
       // else if (minimumPrice && Math.floor(minimumPrice / 100) * 100) {
       //   error.minimumPrice = '100원 단위로 입력 가능합니다.';
       // }
+
+      if (productImageArray.length) {
+        error.images = '사진 1개 이상 필요합니다.';
+      }
 
       if (!location.trim()) {
         error.location = '희망 거래지역을 입력해주세요.';
@@ -134,8 +133,6 @@ const Product: NextPage = () => {
               name="productImage"
               productImageArray={productImageArray}
               setProductImageArray={setProductImageArray}
-              productImageUrl={values.images}
-              onChange={handleChange}
             />
             <FormErrorMessage paddingLeft="19px">
               {errors.images as string}
@@ -187,7 +184,8 @@ const Product: NextPage = () => {
             />
             <Flex flexDirection="row" justifyContent="space-between" w="100%">
               <FormControl w="47%" h="20%">
-                <Category onChange={handleChange} />
+                <AddProductCategory onChange={setCategoryEN} />
+                {/* @TODO */}
                 <FormErrorMessage paddingLeft="19px">
                   {errors.category as string}
                 </FormErrorMessage>
