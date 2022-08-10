@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import useInterval from './useInterval';
 
-const useIntervalValue = (callback: any, delay: number) => {
+const useIntervalComparedValue = (callback: any, delay: number) => {
   const [result, setResult] = useState(callback());
 
   useInterval(() => {
@@ -13,4 +13,4 @@ const useIntervalValue = (callback: any, delay: number) => {
   return result;
 };
 
-export default useIntervalValue;
+export default useIntervalComparedValue;
