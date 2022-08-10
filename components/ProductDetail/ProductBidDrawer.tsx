@@ -41,8 +41,6 @@ const ProductBidDrawer = ({
       createBiddingAuthUser();
     },
     //TODO
-    // 1. n원 이상 입력할 수 없도록 추가
-    // 2. Drawer를 닫았을 때에도 입찰 금액이 보이는 버그 수정
     validate: biddingPriceValidation,
   });
 
@@ -71,8 +69,14 @@ const ProductBidDrawer = ({
     setBiddingPrice(Number(e.target.value));
   };
 
+  const handleClose = () => {
+    errors.biddingPrice = '';
+    setBiddingPrice(0);
+    onClose();
+  };
+
   return (
-    <Drawer placement="bottom" isOpen={isOpen} onClose={onClose}>
+    <Drawer placement="bottom" isOpen={isOpen} onClose={handleClose}>
       <DrawerOverlay />
       <DrawerContent borderTopRadius="20px">
         <form>
