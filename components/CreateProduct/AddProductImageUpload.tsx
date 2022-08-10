@@ -73,6 +73,7 @@ const AddProductImageUpload = ({
     }
   };
 
+  // const handleClickDeleteButton = () => {};
   return (
     <>
       <Input
@@ -81,6 +82,7 @@ const AddProductImageUpload = ({
         type="file"
         name={name}
         accept="image/*"
+        multiple
         data-url={productImageUrl}
         onChange={handleChange}
       />
@@ -88,6 +90,7 @@ const AddProductImageUpload = ({
       <AddProductImage
         productImageUrl={productImageUrl}
         productImageArray={productImageArray}
+        onRemove={''}
         onClick={handleChooseFile}
       />
     </>

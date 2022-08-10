@@ -1,5 +1,6 @@
 import { AddIcon, CloseIcon } from '@chakra-ui/icons';
 import { Box, Divider, Flex, IconButton, Image, Text } from '@chakra-ui/react';
+import { useState } from 'react';
 
 import ProductLabel from './ProductLabel';
 
@@ -7,14 +8,15 @@ interface AddProductImageProps {
   productImageUrl: string;
   productImageArray: string[];
   onClick: () => void;
+  onRemove: any;
 }
 //TODO: 이미지 추가/삭제 기능 추가 예정
 const AddProductImage = ({
   productImageUrl,
   productImageArray,
   onClick,
+  onRemove,
 }: AddProductImageProps) => {
-  console.log(productImageArray);
   return (
     <Flex direction="column" w="100%" gap="1">
       <ProductLabel

@@ -50,7 +50,8 @@ const Product: NextPage = () => {
         category,
         description: description.trim(),
       };
-      await productAPI.createProduct(data);
+      // await productAPI.createProduct(data);
+      console.log(data);
     },
 
     validate: ({
