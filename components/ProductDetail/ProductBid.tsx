@@ -9,8 +9,10 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
-import { priceFormat, remainedTimeFormat } from 'utils';
+import useIntervalValue from 'hooks/useIntervalValue';
+import { priceFormat, remainedTimeFormat, remainedTimer } from 'utils';
 
 import ProductBidProgress from './ProductBidDrawer';
 
@@ -28,6 +30,10 @@ const ProductBid = ({
   expireAt,
 }: ProductBidProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const remainedTime = useIntervalValue(
+    () => (new Date(expireAt).getTime() - new Date().getTime()) / 100,
+    1000
+  );
   const router = useRouter();
   const toast = useToast();
 
@@ -88,7 +94,7 @@ const ProductBid = ({
             padding="3px 10px"
             borderRadius="20px"
           >
-            {remainedTimeFormat(expireAt)}
+            {remainedTime}
           </Text>
         </Flex>
         <Button
