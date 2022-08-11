@@ -1,5 +1,4 @@
-import { DownloadIcon } from '@chakra-ui/icons';
-import { Box, Button, Divider, Flex } from '@chakra-ui/react';
+import { Box, Divider, Flex } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { Fragment, useEffect, useState } from 'react';
@@ -56,19 +55,6 @@ const Home: NextPage = () => {
             );
           });
         })}
-        {/* {hasNextPage && (
-          <Button
-            alignSelf="center"
-            w="100px"
-            marginTop="20px"
-            borderRadius="30px"
-            color="white"
-            backgroundColor="brand.primary-900"
-            onClick={() => fetchNextPage()}
-          >
-            <DownloadIcon w="5" h="5" />
-          </Button>
-        )} */}
       </Flex>
       <Box alignSelf="flex-end" position="sticky" bottom="15px" right="15px">
         <ProductAddButton />
