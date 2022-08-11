@@ -89,7 +89,7 @@ const Chats: NextPage = ({
   const getChatRooms = async () => {
     try {
       // TODO: offset 적용 필요
-      const { data } = await userAPI.getChatRooms({ offset: 0, limit: 10 });
+      const { data } = await userAPI.getChatRooms(0, 10);
 
       setChatRooms(data);
     } catch (error) {

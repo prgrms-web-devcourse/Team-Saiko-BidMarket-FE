@@ -10,11 +10,6 @@ interface GetBiddingProductsType {
   sort?: string;
 }
 
-interface GetChatRooms {
-  offset: number;
-  limit: number;
-}
-
 const userAPI = {
   getAuthUser: () => authInstance.get<User>('users/auth'),
   getUser: (id: number) => baseInstance.get<User>(`/users/${id}`),
@@ -26,7 +21,7 @@ const userAPI = {
     authInstance.get<ProductsResponseType>(
       `/users/biddings?offset=${offset}&limit=${limit}&sort=${sort}`
     ),
-  getChatRooms: ({ offset, limit }: GetChatRooms) =>
+  getChatRooms: (offset: number, limit: number) =>
     authInstance.get<ChatRoomResponseType>(
       `/chatRooms?offset=${offset}&limit=${limit}`
     ),
