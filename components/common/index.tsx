@@ -10,3 +10,5 @@ export { default as SearchInput } from './SearchInput';
 export { default as SEO } from './SEO';
 
 export { default as Category } from './Category';
+
+export { default as Toast } from './Toast';
