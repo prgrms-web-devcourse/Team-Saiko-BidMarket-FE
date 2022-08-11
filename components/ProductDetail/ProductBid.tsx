@@ -32,6 +32,9 @@ import { priceFormat } from 'utils';
 ////////  낙찰된 입찰자(채팅하기 버튼 - 입찰 성공)
 ////////  낙찰 안된 입찰자( )
 ////////  입찰 안한 사용자(404 -> 입찰 종료된 상품입니다.)
+
+const SELLER = '판매자';
+const BIDDER = '압찰자';
 interface ProductBidProps {
   writerId: number;
   authUserId: number;
@@ -65,7 +68,7 @@ const ProductBid = ({
   useEffect(() => {
     if (isExpiredBidding) {
       //TODO: 비딩 결과 조회 API 요청
-      console.log('만료됨');
+      getBiddingResultByRole();
     } else {
       ////// 입찰 금액 조회 API
       ////////  => 200: 입찰한 사람(입찰 금액 확인 버튼) => 입찰한 금액 보이도록 진행 O
@@ -73,6 +76,32 @@ const ProductBid = ({
       getBiddingPrice();
     }
   }, [isExpiredBidding]);
+
+  const getBiddingResultByRole = async () => {
+    try {
+      const { role, biddingSucceed, chatRoomId } = (
+        await bidAPI.getBiddingResult(parseInt(productId as string, 10))
+      ).data;
+      if (role === SELLER) {
+        setSeller(getBiddingResult(biddingSucceed, chatRoomId));
+      } else if (role === BIDDER) {
+        setBidder({
+          ...bidder,
+          ...getBiddingResult(biddingSucceed, chatRoomId),
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getBiddingResult = (biddingSucceed: boolean, chatRoomId: number) => {
+    if (biddingSucceed) {
+      return { biddingSucceed: true, chatRoomId };
+    } else {
+      return { biddingSucceed: false, chatRoomId: 0 };
+    }
+  };
 
   const getBiddingPrice = async () => {
     try {
