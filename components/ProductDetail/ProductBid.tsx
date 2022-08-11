@@ -60,7 +60,7 @@ const ProductBid = ({
   });
   const [bidder, setBidder] = useState({
     biddingPrice: 0,
-    successfulBidder: false,
+    biddingSucceed: false,
     chatRoomId: 0,
   });
 
@@ -183,6 +183,8 @@ const ProductBid = ({
           minimumPrice={minimumPrice}
           onClose={onClose}
           isOpen={isOpen}
+          seller={seller}
+          bidder={bidder}
         />
       </Flex>
     </Box>
