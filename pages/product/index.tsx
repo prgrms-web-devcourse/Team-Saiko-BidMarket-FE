@@ -23,6 +23,7 @@ import {
 } from 'components/CreateProduct';
 import useForm from 'hooks/useForm';
 import { categoryOptionsENType } from 'types/categoryOption';
+import productFormValidation from 'utils/validation/productFormValidation';
 
 const Product: NextPage = () => {
   const [productImageArray, setProductImageArray] = useState<string[]>([]);
@@ -49,54 +50,7 @@ const Product: NextPage = () => {
       await productAPI.createProduct(data);
     },
 
-    validate: ({
-      title,
-      minimumPrice,
-      location,
-      images,
-      category,
-      description,
-    }) => {
-      const error: {
-        title?: string;
-        minimumPrice?: string;
-        location?: string;
-        category?: string;
-        images?: string;
-        description?: string;
-      } = {};
-      if (!title.trim()) {
-        error.title = '상품 제목을 입력해주세요.';
-      }
-
-      // if (!images) {
-      //   error.images = '상품 이미지를 넣어주세요.';
-      // }
-
-      if (minimumPrice && parseInt(minimumPrice, 10) < 1000) {
-        error.minimumPrice = '1000원 이상 입력 가능합니다.';
-      }
-      // else if (minimumPrice && Math.floor(minimumPrice / 100) * 100) {
-      //   error.minimumPrice = '100원 단위로 입력 가능합니다.';
-      // }
-
-      if (productImageArray.length === 0) {
-        error.images = '사진 1개 이상 필요합니다.';
-      }
-
-      if (!location.trim()) {
-        error.location = '희망 거래지역을 입력해주세요.';
-      }
-
-      // if (category === '') {
-      //   error.category = '카테고리를 선택해주세요.';
-      // }
-      if (!description.trim()) {
-        error.description = '상세 내용을 입력해주세요.';
-      }
-
-      return error;
-    },
+    validate: productFormValidation,
   });
   return (
     <>
@@ -170,7 +124,7 @@ const Product: NextPage = () => {
             <ProductLabel
               LabelImage={
                 <Image
-                  src="/CreateProduct/cp5.png"
+                  src="/svg/setting.svg"
                   alt="select"
                   width="21px"
                   height="22px"
@@ -185,7 +139,6 @@ const Product: NextPage = () => {
             <Flex flexDirection="row" justifyContent="space-between" w="100%">
               <FormControl w="47%" h="20%">
                 <AddProductCategory onChange={setCategoryEN} />
-                {/* @TODO */}
                 <FormErrorMessage paddingLeft="19px">
                   {errors.category as string}
                 </FormErrorMessage>
