@@ -2,16 +2,24 @@ import { DownloadIcon } from '@chakra-ui/icons';
 import { Box, Button, Divider, Flex } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
 
-import { ProductCardContainer, SearchInput, SEO } from 'components/common';
+import { ProductCard, SearchInput, SEO } from 'components/common';
 import { Banner, MainHeader, ProductAddButton } from 'components/Main';
 import { useGetProducts } from 'hooks/queries';
 
 const Home: NextPage = () => {
   const { data: productPages, fetchNextPage, hasNextPage } = useGetProducts();
+  const [ref, isView] = useInView();
   const router = useRouter();
   const [title, setTitle] = useState('');
+
+  useEffect(() => {
+    if (isView && hasNextPage) {
+      fetchNextPage();
+    }
+  }, [isView, productPages]);
 
   const handleFormSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -29,12 +37,26 @@ const Home: NextPage = () => {
         <form onSubmit={handleFormSubmit}>
           <SearchInput keyword={title} onChange={setTitle} />
         </form>
-        {productPages?.pages.map(({ data }) => {
-          return data.map((product) => {
-            return <ProductCardContainer key={product.id} product={product} />;
+        {productPages?.pages.map(({ data }, pageIndex) => {
+          return data.map((product, productIndex) => {
+            const lastPageIndex = productPages.pages.length - 1;
+            const lastProductIndex = data.length - 1;
+            return (
+              <Fragment key={product.id}>
+                {lastPageIndex === pageIndex &&
+                lastProductIndex === productIndex ? (
+                  <div ref={ref}>
+                    <ProductCard productInfo={product} />
+                  </div>
+                ) : (
+                  <ProductCard productInfo={product} />
+                )}
+                <Divider />
+              </Fragment>
+            );
           });
         })}
-        {hasNextPage && (
+        {/* {hasNextPage && (
           <Button
             alignSelf="center"
             w="100px"
@@ -46,7 +68,7 @@ const Home: NextPage = () => {
           >
             <DownloadIcon w="5" h="5" />
           </Button>
-        )}
+        )} */}
       </Flex>
       <Box alignSelf="flex-end" position="sticky" bottom="15px" right="15px">
         <ProductAddButton />
