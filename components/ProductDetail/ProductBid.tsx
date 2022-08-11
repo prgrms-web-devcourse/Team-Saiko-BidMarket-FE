@@ -18,6 +18,8 @@ import {
 } from 'components/ProductDetail';
 import { priceFormat } from 'utils';
 
+// 로그인 X
+// 로그인 O
 //1. 상품 상세 정보 조회 API O
 //2. 비딩 만료 시간 => 만료가 되었는지 확인
 //// 비딩 진행 중
@@ -30,7 +32,7 @@ import { priceFormat } from 'utils';
 ////////  낙찰된 상품의 판매자(채팅하기 버튼 - 구매자와 첫 대화)
 ////////  낙찰 안된 상품의 판매자(상품 재등록하기)
 ////////  낙찰된 입찰자(채팅하기 버튼 - 입찰 성공)
-////////  낙찰 안된 입찰자( )
+////////  낙찰 안된 입찰자()
 ////////  입찰 안한 사용자(404 -> 입찰 종료된 상품입니다.)
 
 const SELLER = '판매자';
@@ -68,12 +70,12 @@ const ProductBid = ({
     if (isExpiredBidding) {
       //TODO: 비딩 결과 조회 API 요청
       getBiddingResultByRole();
-    } else {
-      ////// 입찰 금액 조회 API
-      ////////  => 200: 입찰한 사람(입찰 금액 확인 버튼) => 입찰한 금액 보이도록 진행 O
-      ////////  => 404: 입찰 안함(입찰하기 버튼) => 입찰 할 수 있도록 O
-      getBiddingPrice();
+      return;
     }
+    ////// 입찰 금액 조회 API
+    ////////  => 200: 입찰한 사람(입찰 금액 확인 버튼) => 입찰한 금액 보이도록 진행 O
+    ////////  => 404: 입찰 안함(입찰하기 버튼) => 입찰 할 수 있도록 O
+    getBiddingPrice();
   }, [isExpiredBidding]);
 
   const getBiddingResultByRole = async () => {
@@ -96,9 +98,9 @@ const ProductBid = ({
 
   const getBiddingResult = (biddingSucceed: boolean, chatRoomId: number) => {
     if (biddingSucceed) {
-      return { biddingSucceed: true, chatRoomId };
+      return { biddingSucceed, chatRoomId };
     } else {
-      return { biddingSucceed: false, chatRoomId: 0 };
+      return { biddingSucceed, chatRoomId: 0 };
     }
   };
 
@@ -116,6 +118,36 @@ const ProductBid = ({
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const isBidButtonDisabled = () => {
+    if (isExpiredBidding) {
+      // 비딩 만료 시
+      // 낙찰 안된 사용자 + 입찰 안한 사용자 때만 버튼 disabled
+      //
+      return;
+    }
+    // 비딩 진행중일 경우
+    //
+  };
+
+  const getButtonNameByStatus = () => {
+    let name = '';
+    if (!isExpiredBidding) {
+      if (isSeller) {
+        name = '입찰이 진행중입니다.'; // disabled
+      } else {
+        name = bidder.biddingPrice ? '입찰 금액 확인하기' : '입찰하기';
+      }
+    }
+
+    if (isSeller) {
+      name = seller.biddingSucceed ? '채팅하기' : '상품 재등록하기';
+    } else {
+      name = seller.biddingSucceed ? '채팅하기' : '입찰 종료된 상품입니다.';
+    }
+
+    return name;
   };
 
   const handleBidButtonClick = () => {
@@ -175,9 +207,9 @@ const ProductBid = ({
           _active={{
             borderColor: '#brand.primary-900',
           }}
-          disabled={isSeller}
+          // disabled={isBidButtonDisabled}
         >
-          <Text color="white">입찰하기</Text>
+          <Text color="white">{getButtonNameByStatus()}</Text>
         </Button>
         <ProductBidProgress
           minimumPrice={minimumPrice}
