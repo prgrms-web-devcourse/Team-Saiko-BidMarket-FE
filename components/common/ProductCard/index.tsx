@@ -1,7 +1,6 @@
 import { StarIcon } from '@chakra-ui/icons';
 import { Flex, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
 
 import { CardProductData } from 'types/product';
 import { priceFormat, remainedTimeFormat } from 'utils';
