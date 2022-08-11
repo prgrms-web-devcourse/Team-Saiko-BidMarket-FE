@@ -32,12 +32,7 @@ const AddProductMinimumPrice = ({
     <Flex direction="column" w="100%" gap="3">
       <ProductLabel
         LabelImage={
-          <Image
-            src="/CreateProduct/cp1.png"
-            alt="amount"
-            width="25px"
-            height="15px"
-          />
+          <Image src="/svg/price.svg" alt="amount" width="25px" height="15px" />
         }
         LabelTitle={
           <Text fontSize="lg" fontWeight="semibold">

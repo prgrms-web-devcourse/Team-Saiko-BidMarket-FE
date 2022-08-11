@@ -16,7 +16,7 @@ const AddProductTitle = ({ inputTitle, onChange }: AddProductTitleProps) => {
       <ProductLabel
         LabelImage={
           <Image
-            src="/CreateProduct/cp2.png"
+            src="/svg/title.svg"
             alt="title"
             width="30px"
             height="30px"

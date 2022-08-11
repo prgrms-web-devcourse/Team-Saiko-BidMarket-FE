@@ -8,7 +8,7 @@ interface AddProductImageProps {
   onClick: () => void;
   onRemove: (index: string) => void;
 }
-//TODO: 이미지 추가/삭제 기능 추가 예정
+
 const AddProductImage = ({
   productImageUrls,
   onClick,
@@ -17,9 +17,7 @@ const AddProductImage = ({
   return (
     <Flex direction="column" w="100%" gap="1">
       <ProductLabel
-        LabelImage={
-          <Image src="/CreateProduct/cp4.png" alt="picture" width="22px" />
-        }
+        LabelImage={<Image src="/svg/image.svg" alt="picture" width="22px" />}
         LabelTitle={
           <Text fontSize="lg" fontWeight="semibold">
             사진
@@ -40,7 +38,7 @@ const AddProductImage = ({
         />
         <Divider orientation="vertical" w="24px" />
         {productImageUrls &&
-          productImageUrls.map((ImageURL) => {
+          productImageUrls?.map((ImageURL) => {
             return (
               <Box key={ImageURL}>
                 <IconButton
