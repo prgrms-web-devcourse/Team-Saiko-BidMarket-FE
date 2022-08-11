@@ -6,12 +6,12 @@ import {
   Divider,
   useDisclosure,
   Image,
-  useToast,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import { bidAPI } from 'apis';
+import { Toast } from 'components/common';
 import {
   ProductBidProgress,
   ProductBidRemainedTime,
@@ -50,7 +50,6 @@ const ProductBid = ({
 }: ProductBidProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const router = useRouter();
-  const toast = useToast();
   const { productId } = router.query;
   const isExpiredBidding =
     Math.floor(new Date(expireAt).getTime() - new Date().getTime()) < 0;
@@ -121,12 +120,7 @@ const ProductBid = ({
 
   const handleBidButtonClick = () => {
     if (authUserId === -1) {
-      toast({
-        position: 'top',
-        title: '입찰은 로그인 후 이용 가능합니다.',
-        status: 'warning',
-        duration: 1500,
-      });
+      Toast('입찰은 로그인 후 이용 가능합니다.', 'warning');
 
       router.push('/login');
       return;
