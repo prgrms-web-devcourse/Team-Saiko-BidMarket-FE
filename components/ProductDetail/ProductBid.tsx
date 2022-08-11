@@ -22,6 +22,13 @@ import ProductBidEndTextByStatus from './ProductBidEndTextByStatus';
 
 const SELLER = '판매자';
 const BIDDER = '압찰자';
+const BIDDING_PROGRESS_TEXT = '입찰이 진행중입니다.';
+const BIDDING_PRICE_SHOW_TEXT = '입찰 금액 보기';
+const BIDDING_TEXT = '입찰하기';
+const CHATTING_TEXT = '채팅하기';
+const PRODUCT_RECREATE_TEXT = '상품 재등록하기';
+const BIDDING_END_PRODUCT_TEXT = '입찰 종료된 상품입니다.';
+
 interface ProductBidProps {
   writerId: number;
   authUserId: number;
@@ -115,28 +122,23 @@ const ProductBid = ({
     if (isSeller) {
       return true;
     }
-
     return false;
   };
 
   const getButtonNameByStatus = () => {
-    let name = '';
     if (!isExpiredBidding) {
       if (isSeller) {
-        name = '입찰이 진행중입니다.';
+        return BIDDING_PROGRESS_TEXT;
       } else {
-        name = bidder.biddingPrice ? '입찰 금액 보기' : '입찰하기';
+        return bidder.biddingPrice ? BIDDING_PRICE_SHOW_TEXT : BIDDING_TEXT;
       }
-      return name;
     }
 
     if (isSeller) {
-      name = seller.biddingSucceed ? '채팅하기' : '상품 재등록하기';
+      return seller.biddingSucceed ? CHATTING_TEXT : PRODUCT_RECREATE_TEXT;
     } else {
-      name = bidder.biddingSucceed ? '채팅하기' : '입찰 종료된 상품입니다.';
+      return bidder.biddingSucceed ? CHATTING_TEXT : BIDDING_END_PRODUCT_TEXT;
     }
-
-    return name;
   };
 
   const handleBidButtonClick = () => {
@@ -148,7 +150,6 @@ const ProductBid = ({
       router.push('/login');
       return;
     }
-
     onOpen();
   };
 
