@@ -17,6 +17,7 @@ import { useRouter } from 'next/router';
 import { ChangeEvent, useState } from 'react';
 
 import { bidAPI } from 'apis';
+import { Toast } from 'components/common';
 import useForm from 'hooks/useForm';
 import { biddingPriceValidation, priceFormat } from 'utils';
 
@@ -53,21 +54,14 @@ const ProductBidDrawer = ({
   const createBiddingAuthUser = async () => {
     try {
       await bidAPI.createBid(parseInt(productId as string, 10), biddingPrice);
-      toast({
-        position: 'top',
-        title: `${biddingPrice}원에 입찰하였습니다.`,
-        status: 'success',
-        duration: 1500,
-      });
+      Toast(`${biddingPrice}원에 입찰하였습니다.`, 'success');
       onClose();
     } catch (error) {
       console.log(error);
-      toast({
-        position: 'top',
-        title: `입찰에 실패하였습니다.`,
-        status: 'error',
-        duration: 1500,
-      });
+      Toast(
+        '입찰에 실패하였습니다. 잠시 후에 다시 시도 부탁드립니다.',
+        'error'
+      );
     }
   };
 
