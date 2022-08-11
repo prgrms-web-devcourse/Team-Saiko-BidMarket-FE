@@ -122,13 +122,16 @@ const ProductBid = ({
 
   const isBidButtonDisabled = () => {
     if (isExpiredBidding) {
-      // 비딩 만료 시
-      // 낙찰 안된 사용자 + 입찰 안한 사용자 때만 버튼 disabled
-      //
-      return;
+      if (!isSeller && !bidder.biddingSucceed) {
+        return true;
+      }
     }
-    // 비딩 진행중일 경우
-    //
+
+    if (isSeller) {
+      return true;
+    }
+
+    return false;
   };
 
   const getButtonNameByStatus = () => {
@@ -139,12 +142,14 @@ const ProductBid = ({
       } else {
         name = bidder.biddingPrice ? '입찰 금액 확인하기' : '입찰하기';
       }
+      return name;
     }
 
     if (isSeller) {
+      console.log(seller);
       name = seller.biddingSucceed ? '채팅하기' : '상품 재등록하기';
     } else {
-      name = seller.biddingSucceed ? '채팅하기' : '입찰 종료된 상품입니다.';
+      name = bidder.biddingSucceed ? '채팅하기' : '입찰 종료된 상품입니다.';
     }
 
     return name;
@@ -207,7 +212,7 @@ const ProductBid = ({
           _active={{
             borderColor: '#brand.primary-900',
           }}
-          // disabled={isBidButtonDisabled}
+          disabled={isBidButtonDisabled()}
         >
           <Text color="white">{getButtonNameByStatus()}</Text>
         </Button>
