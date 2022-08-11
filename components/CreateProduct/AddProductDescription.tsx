@@ -1,10 +1,19 @@
 import { Flex, Image, Text, Textarea } from '@chakra-ui/react';
+import { ChangeEvent, useRef, useState } from 'react';
 
 import ProductLabel from './ProductLabel';
 
-const AddProductDescription = () => {
+interface AddProductTitleProps {
+  inputTitle: string;
+  onChange: any;
+}
+const AddProductDescription = ({
+  inputTitle,
+  onChange,
+}: AddProductTitleProps) => {
+  const [visible, setVisible] = useState(true);
   return (
-    <Flex direction="column" w="100%" gap="3" marginBottom="30px">
+    <Flex direction="column" w="100%" gap="3">
       <ProductLabel
         LabelImage={
           <Image
@@ -21,8 +30,12 @@ const AddProductDescription = () => {
         }
       />
       <Textarea
+        name={inputTitle}
+        onFocus={() => setVisible(false)}
+        onBlur={() => setVisible(true)}
         placeholder="상품 내용 작성"
         border="1px"
+        onChange={onChange}
         borderColor="#B6B6B6"
         h="240px"
         maxLength={300}

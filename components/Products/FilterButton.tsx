@@ -16,7 +16,8 @@ import {
   categoryOptionsKOType,
 } from 'types/categoryOption';
 import { sortOptionsENType, sortOptionsKOType } from 'types/sortOption';
-import { categoryOption, sortOption } from 'utils';
+import categoryOption from 'utils/transform/transformCategoryOptions';
+import sortOption from 'utils/transform/transformSortOptions';
 
 interface FilterButtonProps {
   filterName: 'sortFilter' | 'categoryFilter';
