@@ -32,7 +32,7 @@ const Products = ({
   const [selectedCategoryOption, setSelectedCategoryOption] =
     useState<categoryOptionsENType>(category as categoryOptionsENType);
   const [isProgressed, setIsProgressed] = useState<boolean>(
-    Boolean(progressed)
+    Boolean(JSON.parse(progressed))
   );
   const {
     data: productPages,
