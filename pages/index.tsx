@@ -1,10 +1,10 @@
-import { Box, Divider, Flex } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { Fragment, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
-import { ProductCard, SearchInput, SEO } from 'components/common';
+import { ProductCardContainer, SearchInput, SEO } from 'components/common';
 import { Banner, MainHeader, ProductAddButton } from 'components/Main';
 import { useGetProducts } from 'hooks/queries';
 
@@ -40,18 +40,13 @@ const Home: NextPage = () => {
           return data.map((product, productIndex) => {
             const lastPageIndex = productPages.pages.length - 1;
             const lastProductIndex = data.length - 1;
-            return (
-              <Fragment key={product.id}>
-                {lastPageIndex === pageIndex &&
-                lastProductIndex === productIndex ? (
-                  <div ref={ref}>
-                    <ProductCard productInfo={product} />
-                  </div>
-                ) : (
-                  <ProductCard productInfo={product} />
-                )}
-                <Divider />
-              </Fragment>
+            return lastPageIndex === pageIndex &&
+              lastProductIndex === productIndex ? (
+              <div ref={ref} key={product.id}>
+                <ProductCardContainer product={product} />
+              </div>
+            ) : (
+              <ProductCardContainer key={product.id} product={product} />
             );
           });
         })}

@@ -1,7 +1,7 @@
 import { Center, Divider, Flex, Image, Text } from '@chakra-ui/react';
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useRouter } from 'next/router';
-import { Fragment, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import {
@@ -9,7 +9,7 @@ import {
   Header,
   SearchInput,
   SEO,
-  ProductCard,
+  ProductCardContainer,
 } from 'components/common';
 import { BidFilterCheckBox, FilterButton } from 'components/Products';
 import { useGetProductsByKeyword } from 'hooks/queries';
@@ -123,18 +123,13 @@ const Products = ({
           return data.map((product, productIndex) => {
             const lastPageIndex = productPages.pages.length - 1;
             const lastProductIndex = data.length - 1;
-            return (
-              <Fragment key={product.id}>
-                {lastPageIndex === pageIndex &&
-                lastProductIndex === productIndex ? (
-                  <div ref={ref}>
-                    <ProductCard productInfo={product} />
-                  </div>
-                ) : (
-                  <ProductCard productInfo={product} />
-                )}
-                <Divider />
-              </Fragment>
+            return lastPageIndex === pageIndex &&
+              lastProductIndex === productIndex ? (
+              <div ref={ref} key={product.id}>
+                <ProductCardContainer product={product} />
+              </div>
+            ) : (
+              <ProductCardContainer key={product.id} product={product} />
             );
           });
         })}
