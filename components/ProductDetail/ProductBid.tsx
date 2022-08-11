@@ -7,6 +7,7 @@ import {
   useDisclosure,
   Image,
   useToast,
+  Center,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -17,6 +18,8 @@ import {
   ProductBidRemainedTime,
 } from 'components/ProductDetail';
 import { priceFormat, setToastInfo } from 'utils';
+
+import ProductBidEndTextByStatus from './ProductBidEndTextByStatus';
 
 // 로그인 X
 // 로그인 O
@@ -117,6 +120,10 @@ const ProductBid = ({
     }
   };
 
+  const isShowBiddingEndText = () => {
+    return isExpiredBidding && (isSeller || bidder.biddingSucceed);
+  };
+
   const isBidButtonDisabled = () => {
     if (isExpiredBidding) {
       if (!isSeller && !bidder.biddingSucceed) {
@@ -179,28 +186,39 @@ const ProductBid = ({
     >
       <Flex direction="column" gap="10px">
         <Divider />
-        <Flex justifyContent="space-between" alignItems="center">
-          <Flex alignItems="center" gap="10px">
-            <Image src="/svg/price.svg" alt="start-price" />
-            <Text>시작가</Text>
-          </Flex>
-          <Text
-            bg="brand.primary-100"
-            color="brand.primary-900"
-            padding="3px 10px"
-            borderRadius="20px"
-            fontWeight="bold"
-          >
-            {priceFormat(minimumPrice)}원
-          </Text>
-        </Flex>
-        <Flex justifyContent="space-between" alignItems="center">
-          <Flex alignItems="center" gap="10px">
-            <Image src="/svg/time.svg" alt="remained-time" />
-            <Text>남은 시간</Text>
-          </Flex>
-          <ProductBidRemainedTime expireAt={expireAt} />
-        </Flex>
+        {isShowBiddingEndText() ? (
+          <ProductBidEndTextByStatus
+            isSeller={isSeller}
+            seller={seller}
+            bidder={bidder}
+          />
+        ) : (
+          <>
+            <Flex justifyContent="space-between" alignItems="center">
+              <Flex alignItems="center" gap="10px">
+                <Image src="/svg/price.svg" alt="start-price" />
+                <Text>시작가</Text>
+              </Flex>
+              <Text
+                bg="brand.primary-100"
+                color="brand.primary-900"
+                padding="3px 10px"
+                borderRadius="20px"
+                fontWeight="bold"
+              >
+                {priceFormat(minimumPrice)}원
+              </Text>
+            </Flex>
+            <Flex justifyContent="space-between" alignItems="center">
+              <Flex alignItems="center" gap="10px">
+                <Image src="/svg/time.svg" alt="remained-time" />
+                <Text>남은 시간</Text>
+              </Flex>
+              <ProductBidRemainedTime expireAt={expireAt} />
+            </Flex>
+          </>
+        )}
+
         <Button
           backgroundColor="brand.primary-900"
           cursor="pointer"
