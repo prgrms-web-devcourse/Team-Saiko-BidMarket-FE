@@ -68,13 +68,9 @@ const ProductBid = ({
 
   useEffect(() => {
     if (isExpiredBidding) {
-      //TODO: 비딩 결과 조회 API 요청
       getBiddingResultByRole();
       return;
     }
-    ////// 입찰 금액 조회 API
-    ////////  => 200: 입찰한 사람(입찰 금액 확인 버튼) => 입찰한 금액 보이도록 진행 O
-    ////////  => 404: 입찰 안함(입찰하기 버튼) => 입찰 할 수 있도록 O
     getBiddingPrice();
   }, [isExpiredBidding]);
 
@@ -138,7 +134,7 @@ const ProductBid = ({
     let name = '';
     if (!isExpiredBidding) {
       if (isSeller) {
-        name = '입찰이 진행중입니다.'; // disabled
+        name = '입찰이 진행중입니다.';
       } else {
         name = bidder.biddingPrice ? '입찰 금액 확인하기' : '입찰하기';
       }
@@ -146,7 +142,6 @@ const ProductBid = ({
     }
 
     if (isSeller) {
-      console.log(seller);
       name = seller.biddingSucceed ? '채팅하기' : '상품 재등록하기';
     } else {
       name = bidder.biddingSucceed ? '채팅하기' : '입찰 종료된 상품입니다.';
@@ -181,6 +176,7 @@ const ProductBid = ({
     >
       <Flex direction="column" gap="10px">
         <Divider />
+
         <Flex justifyContent="space-between" alignItems="center">
           <Flex alignItems="center" gap="10px">
             <Image src="/svg/price.svg" alt="start-price" />
