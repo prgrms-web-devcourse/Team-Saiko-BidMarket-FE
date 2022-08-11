@@ -5,6 +5,8 @@ const bidAPI = {
     authInstance.post(`/biddings`, { productId, biddingPrice }),
   getBiddingPrice: (productId: number) =>
     authInstance.get(`/biddngs/products/${productId}`),
+  getBiddingResult: (productId: number) =>
+    authInstance.get(`/products/${productId}/result`),
 };
 
 export default bidAPI;
