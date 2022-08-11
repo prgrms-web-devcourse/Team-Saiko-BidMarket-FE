@@ -3,7 +3,7 @@ import { baseInstance } from 'apis/utils/baseInstance';
 import { categoryOptionsENType } from 'types/categoryOption';
 import { ProductResponse, ProductsResponseType } from 'types/product';
 
-interface PostData {
+interface ProductData {
   images: string[];
   title: string;
   minimumPrice: number;
@@ -20,7 +20,7 @@ const productAPI = {
   getProduct: (productId: number) =>
     baseInstance.get<ProductResponse>(`/products/${productId}`),
 
-  createProduct: async (data: PostData) => {
+  createProduct: async (data: ProductData) => {
     return await authInstance.post(`/products`, data);
   },
 };
