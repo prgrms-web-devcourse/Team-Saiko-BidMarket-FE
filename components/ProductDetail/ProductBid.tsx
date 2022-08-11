@@ -9,13 +9,29 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
+import { bidAPI } from 'apis';
 import {
   ProductBidProgress,
   ProductBidRemainedTime,
 } from 'components/ProductDetail';
 import { priceFormat } from 'utils';
 
+//1. 상품 상세 정보 조회 API O
+//2. 비딩 만료 시간 => 만료가 되었는지 확인
+//// 비딩 진행 중
+////// 판매자: 아무것도 안함(입찰이 진행중입니다.)
+////// 입찰 금액 조회 API
+////////  => 200: 입찰한 사람(입찰 금액 확인 버튼) => 입찰한 금액 보이도록 진행
+////////  => 404: 입찰 안함(입찰하기 버튼) => 입찰 할 수 있도록
+//// 비딩 종료
+////// 비딩 결과 조회 API
+////////  낙찰된 상품의 판매자(채팅하기 버튼 - 구매자와 첫 대화)
+////////  낙찰 안된 상품의 판매자(상품 재등록하기)
+////////  낙찰된 입찰자(채팅하기 버튼 - 입찰 성공)
+////////  낙찰 안된 입찰자( )
+////////  입찰 안한 사용자(404 -> 입찰 종료된 상품입니다.)
 interface ProductBidProps {
   writerId: number;
   authUserId: number;
@@ -32,6 +48,47 @@ const ProductBid = ({
   const { isOpen, onOpen, onClose } = useDisclosure();
   const router = useRouter();
   const toast = useToast();
+  const { productId } = router.query;
+  const isExpiredBidding =
+    Math.floor(new Date(expireAt).getTime() - new Date().getTime()) < 0;
+  const isSeller = writerId === authUserId;
+  const [seller, setSeller] = useState({
+    biddingSucceed: false,
+    chatRoomId: 0,
+  });
+  const [bidder, setBidder] = useState({
+    biddingPrice: 0,
+    successfulBidder: false,
+    chatRoomId: 0,
+  });
+
+  useEffect(() => {
+    if (isExpiredBidding) {
+      //TODO: 비딩 결과 조회 API 요청
+      console.log('만료됨');
+    } else {
+      ////// 입찰 금액 조회 API
+      ////////  => 200: 입찰한 사람(입찰 금액 확인 버튼) => 입찰한 금액 보이도록 진행 O
+      ////////  => 404: 입찰 안함(입찰하기 버튼) => 입찰 할 수 있도록 O
+      getBiddingPrice();
+    }
+  }, [isExpiredBidding]);
+
+  const getBiddingPrice = async () => {
+    try {
+      const { biddingPrice } = (
+        await bidAPI.getBiddingPrice(parseInt(productId as string, 10))
+      ).data;
+
+      setBidder({
+        ...bidder,
+        biddingPrice,
+      });
+      console.log(biddingPrice);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleBidButtonClick = () => {
     if (authUserId === -1) {
@@ -95,7 +152,7 @@ const ProductBid = ({
           _active={{
             borderColor: '#brand.primary-900',
           }}
-          disabled={writerId === authUserId}
+          disabled={isSeller}
         >
           <Text color="white">입찰하기</Text>
         </Button>
