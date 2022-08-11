@@ -6,17 +6,17 @@ import {
   Divider,
   useDisclosure,
   Image,
+  useToast,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import { bidAPI } from 'apis';
-import { Toast } from 'components/common';
 import {
   ProductBidProgress,
   ProductBidRemainedTime,
 } from 'components/ProductDetail';
-import { priceFormat } from 'utils';
+import { priceFormat, setToastInfo } from 'utils';
 
 // 로그인 X
 // 로그인 O
@@ -52,6 +52,7 @@ const ProductBid = ({
 }: ProductBidProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const router = useRouter();
+  const toast = useToast();
   const { productId } = router.query;
   const isExpiredBidding =
     Math.floor(new Date(expireAt).getTime() - new Date().getTime()) < 0;
@@ -152,7 +153,9 @@ const ProductBid = ({
 
   const handleBidButtonClick = () => {
     if (authUserId === -1) {
-      Toast('입찰은 로그인 후 이용 가능합니다.', 'warning');
+      toast(
+        setToastInfo('top', '입찰은 로그인 후 이용 가능합니다.', 'warning')
+      );
 
       router.push('/login');
       return;
@@ -176,7 +179,6 @@ const ProductBid = ({
     >
       <Flex direction="column" gap="10px">
         <Divider />
-
         <Flex justifyContent="space-between" alignItems="center">
           <Flex alignItems="center" gap="10px">
             <Image src="/svg/price.svg" alt="start-price" />

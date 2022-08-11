@@ -17,12 +17,11 @@ import { useRouter } from 'next/router';
 import { ChangeEvent, useState } from 'react';
 
 import { bidAPI } from 'apis';
-import { Toast } from 'components/common';
 import useForm from 'hooks/useForm';
-import { biddingPriceValidation, priceFormat } from 'utils';
+import { biddingPriceValidation, priceFormat, setToastInfo } from 'utils';
 
 interface BidUser {
-  bidPrice?: number;
+  biddingPrice?: number;
   biddingSucceed: boolean;
   chatRoomId: number;
 }
@@ -38,6 +37,8 @@ const ProductBidDrawer = ({
   minimumPrice,
   isOpen,
   onClose,
+  bidder,
+  seller,
 }: ProductBidDrawerProps) => {
   const toast = useToast();
   const router = useRouter();
@@ -54,14 +55,13 @@ const ProductBidDrawer = ({
   const createBiddingAuthUser = async () => {
     try {
       await bidAPI.createBid(parseInt(productId as string, 10), biddingPrice);
-      Toast(`${biddingPrice}원에 입찰하였습니다.`, 'success');
+      toast(
+        setToastInfo('top', `${biddingPrice}원에 입찰하였습니다.`, 'success')
+      );
       onClose();
     } catch (error) {
       console.log(error);
-      Toast(
-        '입찰에 실패하였습니다. 잠시 후에 다시 시도 부탁드립니다.',
-        'error'
-      );
+      toast(setToastInfo('top', '입찰에 실패하였습니다.', 'error'));
     }
   };
 
@@ -107,6 +107,7 @@ const ProductBidDrawer = ({
                 <Input
                   name="biddingPrice"
                   type="number"
+                  disabled={bidder.biddingPrice !== 0}
                   placeholder={`${priceFormat(
                     minimumPrice
                   )}원 이상 입력해주세요`}
