@@ -1,14 +1,15 @@
-import { Center, Spinner, Text } from '@chakra-ui/react';
+import { DownloadIcon } from '@chakra-ui/icons';
+import { Button, Center, Spinner, Text } from '@chakra-ui/react';
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
-import { notificationAPI, userAPI } from 'apis';
+import { userAPI } from 'apis';
 import { getItem } from 'apis/utils/storage';
 import { GoBackIcon, Header } from 'components/common';
 import { NoNotifications, NotificationCard } from 'components/User';
+import { useGetNotifications } from 'hooks/queries';
 import useLoginUser from 'hooks/useLoginUser';
-import { NotificationsResponseType } from 'types/notification';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { userId } = context.query;
@@ -32,11 +33,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 const Notifications = ({
   user: { id },
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const {
+    data: notificationPages,
+    fetchNextPage,
+    hasNextPage,
+  } = useGetNotifications();
   const router = useRouter();
   const { id: authUserId } = useLoginUser();
-  const [notifications, setNotifications] = useState<NotificationsResponseType>(
-    []
-  );
 
   // @TODO 인증하는 부분 분리하기 (반복되는 코드)
   useEffect(() => {
@@ -54,20 +57,7 @@ const Notifications = ({
 
       return;
     }
-
-    getNotifications();
   }, [id, authUserId, router]);
-
-  useEffect(() => {
-    console.log(notifications);
-  }, [notifications]);
-
-  const getNotifications = async () => {
-    const newNotifications = (
-      await notificationAPI.getNotifications({ offset: 0 })
-    ).data;
-    setNotifications([...notifications, ...newNotifications]);
-  };
 
   if (!authUserId || authUserId !== id) {
     return (
@@ -80,19 +70,34 @@ const Notifications = ({
   return (
     <>
       <Header leftContent={<GoBackIcon />} middleContent={<Text>알림</Text>} />
-      {notifications.length ? (
-        notifications.map(
-          ({ id, productId, type, content, thumbnailImage, createdAt }) => (
-            <NotificationCard
-              key={id}
-              title={type}
-              description={content}
-              productId={productId}
-              productImage={thumbnailImage}
-              createdAt={createdAt}
-            />
-          )
-        )
+      {notificationPages?.pages.map(({ data }) => {
+        return data.map(
+          ({ id, productId, type, content, thumbnailImage, createdAt }) => {
+            return (
+              <NotificationCard
+                key={id}
+                title={type}
+                description={content}
+                productId={productId}
+                productImage={thumbnailImage}
+                createdAt={createdAt}
+              />
+            );
+          }
+        );
+      })}
+      {hasNextPage ? (
+        <Button
+          alignSelf="center"
+          w="100px"
+          marginTop="20px"
+          borderRadius="30px"
+          color="white"
+          backgroundColor="brand.primary-900"
+          onClick={() => fetchNextPage()}
+        >
+          <DownloadIcon w="5" h="5" />
+        </Button>
       ) : (
         <Center flexDirection="column" height="100%">
           <NoNotifications />
