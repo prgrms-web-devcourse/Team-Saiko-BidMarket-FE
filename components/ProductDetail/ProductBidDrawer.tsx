@@ -14,7 +14,7 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 
 import { bidAPI } from 'apis';
 import useForm from 'hooks/useForm';
@@ -22,15 +22,12 @@ import { biddingPriceValidation, priceFormat, setToastInfo } from 'utils';
 
 interface BidUser {
   biddingPrice?: number;
-  biddingSucceed: boolean;
-  chatRoomId: number;
 }
 interface ProductBidDrawerProps {
   minimumPrice: number;
   isOpen: boolean;
   onClose: () => void;
   bidder: BidUser;
-  seller: BidUser;
 }
 
 const ProductBidDrawer = ({
@@ -38,7 +35,6 @@ const ProductBidDrawer = ({
   isOpen,
   onClose,
   bidder,
-  seller,
 }: ProductBidDrawerProps) => {
   const toast = useToast();
   const router = useRouter();
@@ -51,6 +47,12 @@ const ProductBidDrawer = ({
     },
     validate: biddingPriceValidation,
   });
+
+  useEffect(() => {
+    if (bidder.biddingPrice) {
+      setBiddingPrice(bidder.biddingPrice);
+    }
+  }, [bidder]);
 
   const createBiddingAuthUser = async () => {
     try {
@@ -94,6 +96,7 @@ const ProductBidDrawer = ({
                 size="sm"
                 onClick={handleSubmit}
                 isLoading={isLoading}
+                disabled={bidder.biddingPrice ? true : false}
               >
                 입찰
               </Button>
@@ -108,9 +111,11 @@ const ProductBidDrawer = ({
                   name="biddingPrice"
                   type="number"
                   disabled={bidder.biddingPrice !== 0}
-                  placeholder={`${priceFormat(
-                    minimumPrice
-                  )}원 이상 입력해주세요`}
+                  placeholder={
+                    bidder.biddingPrice !== 0
+                      ? bidder.biddingPrice?.toString()
+                      : `${priceFormat(minimumPrice)}원 이상 입력해주세요`
+                  }
                   focusBorderColor="brand.primary-900"
                   onChange={handleChange}
                   onInput={handleInput}

@@ -113,7 +113,6 @@ const ProductBid = ({
         ...bidder,
         biddingPrice,
       });
-      console.log(biddingPrice);
     } catch (error) {
       console.log(error);
     }
@@ -143,7 +142,7 @@ const ProductBid = ({
       if (isSeller) {
         name = '입찰이 진행중입니다.';
       } else {
-        name = bidder.biddingPrice ? '입찰 금액 확인하기' : '입찰하기';
+        name = bidder.biddingPrice ? '입찰 금액 보기' : '입찰하기';
       }
       return name;
     }
@@ -217,7 +216,6 @@ const ProductBid = ({
             </Flex>
           </>
         )}
-
         <Button
           backgroundColor="brand.primary-900"
           cursor="pointer"
@@ -235,7 +233,6 @@ const ProductBid = ({
           minimumPrice={minimumPrice}
           onClose={onClose}
           isOpen={isOpen}
-          seller={seller}
           bidder={bidder}
         />
       </Flex>
