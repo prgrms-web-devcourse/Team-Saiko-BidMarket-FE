@@ -1,15 +1,15 @@
-import { DownloadIcon } from '@chakra-ui/icons';
-import { Button, Center, Divider, Flex, Image, Text } from '@chakra-ui/react';
+import { Center, Divider, Flex, Image, Text } from '@chakra-ui/react';
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
 
 import {
   GoBackIcon,
   Header,
   SearchInput,
   SEO,
-  ProductCardContainer,
+  ProductCard,
 } from 'components/common';
 import { BidFilterCheckBox, FilterButton } from 'components/Products';
 import { useGetProductsByKeyword } from 'hooks/queries';
@@ -34,6 +34,7 @@ const Products = ({
   const [isProgressed, setIsProgressed] = useState<boolean>(
     Boolean(JSON.parse(progressed))
   );
+  // @TODO 쿼리스트링이 누락된 경우 메인페이지로 이동하는 예외처리
   const {
     data: productPages,
     fetchNextPage,
@@ -45,6 +46,13 @@ const Products = ({
     category: selectedCategoryOption,
     sort: selectedSortOption,
   });
+  const [ref, isView] = useInView();
+
+  useEffect(() => {
+    if (isView && hasNextPage) {
+      fetchNextPage();
+    }
+  }, [isView, productPages]);
 
   useEffect(() => {
     // @TODO router 주소 분리 작업 (for 가독성)
@@ -111,24 +119,25 @@ const Products = ({
             onBidFilterChange={handleBidFilterCheckBoxChange}
           />
         </Flex>
-        {productPages?.pages.map(({ data }) => {
-          return data.map((product) => {
-            return <ProductCardContainer key={product.id} product={product} />;
+        {productPages?.pages.map(({ data }, pageIndex) => {
+          return data.map((product, productIndex) => {
+            const lastPageIndex = productPages.pages.length - 1;
+            const lastProductIndex = data.length - 1;
+            return (
+              <Fragment key={product.id}>
+                {lastPageIndex === pageIndex &&
+                lastProductIndex === productIndex ? (
+                  <div ref={ref}>
+                    <ProductCard productInfo={product} />
+                  </div>
+                ) : (
+                  <ProductCard productInfo={product} />
+                )}
+                <Divider />
+              </Fragment>
+            );
           });
         })}
-        {hasNextPage && (
-          <Button
-            alignSelf="center"
-            w="100px"
-            margin="20px 0"
-            borderRadius="30px"
-            color="white"
-            backgroundColor="brand.primary-900"
-            onClick={() => fetchNextPage()}
-          >
-            <DownloadIcon w="5" h="5" />
-          </Button>
-        )}
         {productPages?.pages[0].data.length === 0 && (
           <Center flexDirection="column" height="100%">
             <Image src="/svg/noneProductOther.svg" alt="None Product" />
