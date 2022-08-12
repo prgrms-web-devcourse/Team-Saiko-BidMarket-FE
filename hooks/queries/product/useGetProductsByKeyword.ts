@@ -41,7 +41,7 @@ const useGetProductsByKeyword = (searchContent: {
   sort: sortOptionsENType;
 }) => {
   return useInfiniteQuery(
-    ['products'],
+    ['productsByKeyword'],
     ({ pageParam = 0 }) => getProductsAPI({ ...searchContent, pageParam }),
     {
       getNextPageParam: (lastPage) => {
