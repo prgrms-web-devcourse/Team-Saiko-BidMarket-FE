@@ -1,4 +1,4 @@
-import { Center, Divider, Spinner, Text } from '@chakra-ui/react';
+import { Center, Divider, Spinner } from '@chakra-ui/react';
 import type {
   GetServerSideProps,
   InferGetServerSidePropsType,
@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 import { Fragment, useEffect, useState } from 'react';
 
 import { userAPI } from 'apis';
-import { GoBackIcon, Header } from 'components/common';
+import { GoBackIcon, Header, HeaderTitle } from 'components/common';
 import { NoChatting, ChattingCard } from 'components/User';
 import useLoginUser from 'hooks/useLoginUser';
 import { ChatRoomData, ChatRoomResponseType } from 'types/chatRooms';
@@ -107,7 +107,10 @@ const Chats: NextPage = ({
 
   return (
     <>
-      <Header leftContent={<GoBackIcon />} middleContent={<Text>채팅</Text>} />
+      <Header
+        leftContent={<GoBackIcon />}
+        middleContent={<HeaderTitle title="채팅" />}
+      />
       {chatRooms.length ? (
         chatRooms.map(
           ({

@@ -1,7 +1,7 @@
-import { Flex, Image, Text } from '@chakra-ui/react';
+import { Flex, Image } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 
-import { Header, GoBackIcon, SEO } from 'components/common';
+import { Header, GoBackIcon, SEO, HeaderTitle } from 'components/common';
 import { GoogleLoginButton, Phrases } from 'components/Login';
 
 const Login: NextPage = () => {
@@ -10,7 +10,7 @@ const Login: NextPage = () => {
       <SEO title="로그인" />
       <Header
         leftContent={<GoBackIcon />}
-        middleContent={<Text>비드마켓</Text>}
+        middleContent={<HeaderTitle title="비드마켓" />}
       />
       <Flex direction="column" alignItems="center" marginTop="50px">
         <Phrases />

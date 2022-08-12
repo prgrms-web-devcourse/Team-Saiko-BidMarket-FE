@@ -8,7 +8,13 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import userAPI from 'apis/api/user';
-import { GoBackIcon, Header, SEO, SideBar } from 'components/common';
+import {
+  GoBackIcon,
+  Header,
+  HeaderTitle,
+  SEO,
+  SideBar,
+} from 'components/common';
 import {
   ProductMenuList,
   UserProfileEditButton,
@@ -63,18 +69,7 @@ const UserId: NextPage = ({
       <SEO title="회원 정보 페이지" />
       <Header
         leftContent={<GoBackIcon />}
-        middleContent={
-          <Text
-            fontFamily="Roboto"
-            fontSize="20px"
-            fontWeight="bold"
-            lineHeight="23px"
-            fontStyle="normal"
-            color="barnd.dark"
-          >
-            {isMyPage ? '마이페이지' : ''}
-          </Text>
-        }
+        middleContent={<HeaderTitle title={isMyPage ? '마이페이지' : ''} />}
       />
       <Flex width="100%" flexDirection="column" gap="29px">
         <UserProfileInformation
