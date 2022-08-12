@@ -135,6 +135,7 @@ const ProductBid = ({
       if (!isSeller && !bidder.biddingSucceed) {
         return true;
       }
+      return false;
     }
 
     if (isSeller) {
