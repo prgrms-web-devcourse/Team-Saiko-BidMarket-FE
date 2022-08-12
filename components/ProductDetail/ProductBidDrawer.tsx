@@ -20,14 +20,13 @@ import { bidAPI } from 'apis';
 import useForm from 'hooks/useForm';
 import { biddingPriceValidation, priceFormat, setToastInfo } from 'utils';
 
-interface BidUser {
-  biddingPrice?: number;
-}
 interface ProductBidDrawerProps {
   minimumPrice: number;
   isOpen: boolean;
   onClose: () => void;
-  bidder: BidUser;
+  bidder: {
+    biddingPrice?: number;
+  };
 }
 
 const ProductBidDrawer = ({
