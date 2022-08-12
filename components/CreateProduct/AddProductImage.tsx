@@ -1,16 +1,18 @@
-import { AddIcon } from '@chakra-ui/icons';
-import { Divider, Flex, IconButton, Image, Text } from '@chakra-ui/react';
+import { AddIcon, CloseIcon } from '@chakra-ui/icons';
+import { Box, Divider, Flex, IconButton, Image, Text } from '@chakra-ui/react';
 
 import ProductLabel from './ProductLabel';
 
 interface AddProductImageProps {
-  productImageUrl: string;
+  productImageUrls: string[];
   onClick: () => void;
+  onRemove: (index: string) => void;
 }
 //TODO: 이미지 추가/삭제 기능 추가 예정
 const AddProductImage = ({
-  productImageUrl,
+  productImageUrls,
   onClick,
+  onRemove,
 }: AddProductImageProps) => {
   return (
     <Flex direction="column" w="100%" gap="1">
@@ -37,9 +39,33 @@ const AddProductImage = ({
           icon={<AddIcon color="#FF4370" />}
         />
         <Divider orientation="vertical" w="24px" />
-        {productImageUrl && (
-          <Image alt="image" width="82px" src={productImageUrl} />
-        )}
+        {productImageUrls &&
+          productImageUrls.map((ImageURL) => {
+            return (
+              <Box key={ImageURL}>
+                <IconButton
+                  position="absolute"
+                  transform="translate(300%, -40%)"
+                  borderRadius="2xl"
+                  boxSize="22px"
+                  variant="outline"
+                  minWidth="1"
+                  aria-label="Delete Button"
+                  bg="#FF4370"
+                  icon={<CloseIcon w="8px" h="8px" color="#FFFFFF" />}
+                  onClick={() => onRemove(ImageURL)}
+                />
+                <Image
+                  alt="image"
+                  w="82px"
+                  h="82px"
+                  borderRadius="5px"
+                  marginRight="15px"
+                  src={ImageURL}
+                />
+              </Box>
+            );
+          })}
       </Flex>
     </Flex>
   );
