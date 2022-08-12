@@ -33,7 +33,7 @@ const MainHeader = () => {
               w="24px"
               h="24px"
               _hover={{ cursor: 'pointer' }}
-              onClick={() => router.push(`/user/${userId}/chattings`)}
+              onClick={() => router.push(`/user/${userId}/chat`)}
             />
             <BellIcon
               w="32px"
