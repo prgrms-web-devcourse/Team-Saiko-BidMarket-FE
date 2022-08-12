@@ -23,6 +23,7 @@ const productAPI = {
     category: categoryOptionsENType;
     sort: sortOptionsENType;
   }) =>
+    // @TODO 쿼리스트링, limit을 상수로 분리하기
     baseInstance.get<ProductsResponseType>(
       `/products?title=${title}&progressed=${progressed}&category=${category}&sort=${sort}&offset=${offset}&limit=10`
     ),

@@ -36,6 +36,7 @@ const Home: NextPage = () => {
         <form onSubmit={handleFormSubmit}>
           <SearchInput keyword={title} onChange={setTitle} />
         </form>
+        {/* @TODO 컴포넌트로 분리해보기 */}
         {productPages?.pages.map(({ data }, pageIndex) => {
           return data.map((product, productIndex) => {
             const lastPageIndex = productPages.pages.length - 1;
