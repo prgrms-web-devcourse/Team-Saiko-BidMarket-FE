@@ -2,6 +2,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 
 import { notificationAPI } from 'apis';
 
+// @TODO 공통로직 재사용되게 만들기
 const LIMIT = 10;
 
 const getNotificationsAPI = async ({ pageParam = 0 }) => {
