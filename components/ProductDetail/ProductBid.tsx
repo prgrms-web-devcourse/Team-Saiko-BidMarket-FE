@@ -28,6 +28,7 @@ const BIDDING_TEXT = '입찰하기';
 const CHATTING_TEXT = '채팅하기';
 const PRODUCT_RECREATE_TEXT = '상품 재등록하기';
 const BIDDING_END_PRODUCT_TEXT = '입찰 종료된 상품입니다.';
+const MINUTE_TO_SECONDS = 60000;
 
 interface ProductBidProps {
   writerId: number;
@@ -46,8 +47,10 @@ const ProductBid = ({
   const router = useRouter();
   const toast = useToast();
   const { productId } = router.query;
-  const isExpiredBidding =
-    Math.floor(new Date(expireAt).getTime() - new Date().getTime()) < 0;
+  const remainedBiddingTime = Math.floor(
+    new Date(expireAt).getTime() - new Date().getTime()
+  );
+  const isExpiredBidding = Math.floor(remainedBiddingTime) < 0;
   const isSeller = writerId === authUserId;
   const [seller, setSeller] = useState({
     biddingSucceed: false,
@@ -58,13 +61,17 @@ const ProductBid = ({
     biddingSucceed: false,
     chatRoomId: 0,
   });
+  const [isCalculatingBiddingResult, setIsCalculatingBiddingResult] =
+    useState(false);
 
   useEffect(() => {
     if (isExpiredBidding) {
       getBiddingResultByRole();
       return;
     }
+
     getBiddingPrice();
+    calculateBiddingResult();
   }, [isExpiredBidding]);
 
   const getBiddingResultByRole = async () => {
@@ -106,6 +113,17 @@ const ProductBid = ({
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const calculateBiddingResult = () => {
+    setTimeout(() => {
+      setIsCalculatingBiddingResult(true);
+    }, remainedBiddingTime);
+
+    setTimeout(() => {
+      setIsCalculatingBiddingResult(false);
+      router.reload();
+    }, remainedBiddingTime + MINUTE_TO_SECONDS);
   };
 
   const isShowBiddingEndText = () => {
@@ -209,9 +227,13 @@ const ProductBid = ({
           _active={{
             borderColor: '#brand.primary-900',
           }}
-          disabled={isBidButtonDisabled()}
+          disabled={isCalculatingBiddingResult ? true : isBidButtonDisabled()}
         >
-          <Text color="white">{getButtonNameByStatus()}</Text>
+          <Text color="white">
+            {isCalculatingBiddingResult
+              ? '잠시 후에 낙찰 결과가 공개됩니다.'
+              : getButtonNameByStatus()}
+          </Text>
         </Button>
         <ProductBidProgress
           minimumPrice={minimumPrice}
