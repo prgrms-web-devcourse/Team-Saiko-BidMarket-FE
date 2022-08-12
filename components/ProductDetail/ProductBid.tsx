@@ -69,20 +69,9 @@ const ProductBid = ({
       return;
     }
 
-    calculatingBiddingResult();
     getBiddingPrice();
+    calculateBiddingResult();
   }, [isExpiredBidding]);
-
-  const calculatingBiddingResult = () => {
-    setTimeout(() => {
-      setIsCalculatingBiddingResult(true);
-    }, remainedBiddingTime);
-
-    setTimeout(() => {
-      setIsCalculatingBiddingResult(false);
-      router.reload();
-    }, remainedBiddingTime + MINUTE_TO_SECONDS);
-  };
 
   const getBiddingResultByRole = async () => {
     try {
@@ -123,6 +112,17 @@ const ProductBid = ({
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const calculateBiddingResult = () => {
+    setTimeout(() => {
+      setIsCalculatingBiddingResult(true);
+    }, remainedBiddingTime);
+
+    setTimeout(() => {
+      setIsCalculatingBiddingResult(false);
+      router.reload();
+    }, remainedBiddingTime + MINUTE_TO_SECONDS);
   };
 
   const isShowBiddingEndText = () => {
