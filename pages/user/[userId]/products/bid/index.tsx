@@ -1,10 +1,16 @@
 import { DownloadIcon } from '@chakra-ui/icons';
-import { Button, Center, Divider, Spinner, Text } from '@chakra-ui/react';
+import { Button, Center, Divider, Spinner } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 import { Fragment, useEffect, useState } from 'react';
 
 import { userAPI } from 'apis';
-import { GoBackIcon, Header, ProductCard, SEO } from 'components/common';
+import {
+  GoBackIcon,
+  Header,
+  HeaderTitle,
+  ProductCard,
+  SEO,
+} from 'components/common';
 import { NoProducts } from 'components/User';
 import { ProductsResponseType } from 'types/product';
 
@@ -50,17 +56,7 @@ const Bid: NextPage = () => {
       <SEO title="사용자 이름" />
       <Header
         leftContent={<GoBackIcon />}
-        middleContent={
-          <Text
-            fontFamily="Roboto"
-            fontSize="20px"
-            fontWeight="700"
-            lineHeight="23px"
-            color="barnd.dark"
-          >
-            입찰한 상품
-          </Text>
-        }
+        middleContent={<HeaderTitle title="입찰한 상품" />}
       />
       {biddingProducts.length === 0 ? (
         <Center flexDirection="column" height="100%">
