@@ -12,7 +12,7 @@ const AddProductTitle = ({ inputTitle, onChange }: AddProductTitleProps) => {
   const [visible, setVisible] = useState(true);
   const inputRef = useRef<HTMLInputElement>(null);
   return (
-    <Flex direction="column" w="100%" gap="3" marginTop="3">
+    <Flex direction="column" w="100%" gap="3" marginTop="-3">
       <ProductLabel
         LabelImage={
           <Image
