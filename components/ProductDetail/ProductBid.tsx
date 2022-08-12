@@ -21,7 +21,7 @@ import { priceFormat, setToastInfo } from 'utils';
 import ProductBidEndTextByStatus from './ProductBidEndTextByStatus';
 
 const SELLER = '판매자';
-const BIDDER = '압찰자';
+const BIDDER = '입찰자';
 const BIDDING_PROGRESS_TEXT = '입찰이 진행중입니다.';
 const BIDDING_PRICE_SHOW_TEXT = '입찰 금액 보기';
 const BIDDING_TEXT = '입찰하기';
