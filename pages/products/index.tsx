@@ -10,6 +10,7 @@ import {
   SearchInput,
   SEO,
   ProductCardContainer,
+  HeaderTitle,
 } from 'components/common';
 import { BidFilterCheckBox, FilterButton } from 'components/Products';
 import { useGetProductsByKeyword } from 'hooks/queries';
@@ -95,7 +96,10 @@ const Products = ({
   return (
     <>
       <SEO title="검색" />
-      <Header leftContent={<GoBackIcon />} middleContent={<Text>검색</Text>} />
+      <Header
+        leftContent={<GoBackIcon />}
+        middleContent={<HeaderTitle title="검색" />}
+      />
       <Flex direction="column" w="100%" h="100%">
         <form onSubmit={(event) => handleFormSubmit(event)}>
           <SearchInput keyword={keyword} onChange={setKeyword} />
