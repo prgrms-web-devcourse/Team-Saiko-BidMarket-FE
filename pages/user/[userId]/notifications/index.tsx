@@ -1,8 +1,8 @@
-import { DownloadIcon } from '@chakra-ui/icons';
-import { Button, Center, Spinner, Text } from '@chakra-ui/react';
+import { Center, Spinner, Text } from '@chakra-ui/react';
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
 
 import { userAPI } from 'apis';
 import { getItem } from 'apis/utils/storage';
@@ -38,6 +38,7 @@ const Notifications = ({
     fetchNextPage,
     hasNextPage,
   } = useGetNotifications();
+  const [ref, isView] = useInView();
   const router = useRouter();
   const { id: authUserId } = useLoginUser();
 
@@ -59,6 +60,12 @@ const Notifications = ({
     }
   }, [id, authUserId, router]);
 
+  useEffect(() => {
+    if (isView && hasNextPage) {
+      fetchNextPage();
+    }
+  }, [isView, notificationPages]);
+
   if (!authUserId || authUserId !== id) {
     return (
       <Center height="100%">
@@ -70,10 +77,27 @@ const Notifications = ({
   return (
     <>
       <Header leftContent={<GoBackIcon />} middleContent={<Text>알림</Text>} />
-      {notificationPages?.pages.map(({ data }) => {
+      {/* @TODO 컴포넌트로 분리해보기 */}
+      {notificationPages?.pages.map(({ data }, pageIndex) => {
         return data.map(
-          ({ id, productId, type, content, thumbnailImage, createdAt }) => {
-            return (
+          (
+            { id, productId, type, content, thumbnailImage, createdAt },
+            notificationIndex
+          ) => {
+            const lastPageIndex = notificationPages.pages.length - 1;
+            const lastNotificationIndex = data.length - 1;
+            return lastPageIndex === pageIndex &&
+              lastNotificationIndex === notificationIndex ? (
+              <div ref={ref} key={id}>
+                <NotificationCard
+                  title={type}
+                  description={content}
+                  productId={productId}
+                  productImage={thumbnailImage}
+                  createdAt={createdAt}
+                />
+              </div>
+            ) : (
               <NotificationCard
                 key={id}
                 title={type}
@@ -86,19 +110,7 @@ const Notifications = ({
           }
         );
       })}
-      {hasNextPage ? (
-        <Button
-          alignSelf="center"
-          w="100px"
-          marginTop="20px"
-          borderRadius="30px"
-          color="white"
-          backgroundColor="brand.primary-900"
-          onClick={() => fetchNextPage()}
-        >
-          <DownloadIcon w="5" h="5" />
-        </Button>
-      ) : (
+      {notificationPages?.pages[0].data.length === 0 && (
         <Center flexDirection="column" height="100%">
           <NoNotifications />
         </Center>
