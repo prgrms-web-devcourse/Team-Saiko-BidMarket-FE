@@ -60,6 +60,8 @@ const ProductBid = ({
     biddingSucceed: false,
     chatRoomId: 0,
   });
+  const [isCalculatingBiddingResult, setIsCalculatingBiddingResult] =
+    useState(false);
 
   useEffect(() => {
     if (isExpiredBidding) {
@@ -67,12 +69,20 @@ const ProductBid = ({
       return;
     }
 
-    setTimeout(() => {
-      router.reload();
-    }, remainedBiddingTime + MINUTE_TO_SECONDS);
-
+    calculatingBiddingResult();
     getBiddingPrice();
   }, [isExpiredBidding]);
+
+  const calculatingBiddingResult = () => {
+    setTimeout(() => {
+      setIsCalculatingBiddingResult(true);
+    }, remainedBiddingTime);
+
+    setTimeout(() => {
+      setIsCalculatingBiddingResult(false);
+      router.reload();
+    }, remainedBiddingTime + MINUTE_TO_SECONDS);
+  };
 
   const getBiddingResultByRole = async () => {
     try {
@@ -216,9 +226,13 @@ const ProductBid = ({
           _active={{
             borderColor: '#brand.primary-900',
           }}
-          disabled={isBidButtonDisabled()}
+          disabled={isCalculatingBiddingResult ? true : isBidButtonDisabled()}
         >
-          <Text color="white">{getButtonNameByStatus()}</Text>
+          <Text color="white">
+            {isCalculatingBiddingResult
+              ? '잠시 후에 낙찰 결과가 공개됩니다.'
+              : getButtonNameByStatus()}
+          </Text>
         </Button>
         <ProductBidProgress
           minimumPrice={minimumPrice}
