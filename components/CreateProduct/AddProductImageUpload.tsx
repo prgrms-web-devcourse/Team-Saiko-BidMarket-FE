@@ -1,38 +1,90 @@
 import { Input } from '@chakra-ui/react';
+import axios from 'axios';
 import { ChangeEvent, useRef, useState } from 'react';
 
 import AddProductImage from './AddProductImage';
 
 interface ImageUploadProps {
   name: string;
-  productImageUrl: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  productImageArray: string[];
+  setProductImageArray: React.Dispatch<React.SetStateAction<string[]>>;
 }
+
+// const BUCKET_URL = process.env.BUCKET_URL;
+const BUCKET_URL = 'https://bid-market-bucket.s3.ap-northeast-2.amazonaws.com';
+const FOLDER_NAME = 'products';
 
 const AddProductImageUpload = ({
   name,
-  productImageUrl,
-  onChange,
+  productImageArray,
+  setProductImageArray,
 }: ImageUploadProps) => {
-  const [previewImageUrl, setPreviewImageUrl] =
-    useState<string>(productImageUrl);
   const inputRef = useRef<HTMLInputElement>(null);
+  const [productImageUrls, setProductImageUrls] = useState<Array<string>>([]);
+
   const handleChooseFile = () => {
     inputRef.current && inputRef.current.click();
   };
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
 
-    if (!files) {
+  const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files as FileList;
+    const imageUrls = [] as Array<string>;
+
+    if (!files || files.length === 0) {
       return;
     }
 
-    const url = URL.createObjectURL(files[0]);
-    // TODO: S3에서 받아오는 값 넣어주기
-    e.target.dataset.url = url;
+    [...files].forEach(async (file) => {
+      await uploadImage(file);
+      const uploadedUrl = `${BUCKET_URL}/${FOLDER_NAME}/${file.name}`;
+      imageUrls.push(uploadedUrl);
+    });
 
-    setPreviewImageUrl(url);
-    onChange(e);
+    setProductImageUrls(
+      [...files].map((file) => {
+        return `${BUCKET_URL}/${FOLDER_NAME}/${file.name}`;
+      })
+    );
+
+    setProductImageArray(
+      [...files].map((file) => {
+        return `${BUCKET_URL}/${FOLDER_NAME}/${file.name}`;
+      })
+    );
+  };
+
+  const uploadImage = async (imageFile: File) => {
+    try {
+      const { data } = await axios.post('/api/s3/image', {
+        name: `${FOLDER_NAME}/${imageFile.name}`,
+        type: imageFile.type,
+      });
+
+      const { signedUrl } = data;
+
+      await axios.put(signedUrl, imageFile, {
+        headers: {
+          'Content-Type': imageFile.type,
+          'Access-Control-Allow-Origin': '*',
+        },
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const handleClickDeleteButton = (ImageURL: string) => {
+    setProductImageUrls(
+      [...productImageUrls].filter(
+        (productImageUrl) => productImageUrl !== ImageURL
+      )
+    );
+
+    setProductImageArray(
+      [...productImageArray].filter(
+        (productImageUrl) => productImageUrl !== ImageURL
+      )
+    );
   };
 
   return (
@@ -43,12 +95,14 @@ const AddProductImageUpload = ({
         type="file"
         name={name}
         accept="image/*"
-        data-url={previewImageUrl}
+        multiple
         onChange={handleChange}
       />
+
       <AddProductImage
-        productImageUrl={previewImageUrl}
+        productImageUrls={productImageArray}
         onClick={handleChooseFile}
+        onRemove={handleClickDeleteButton}
       />
     </>
   );

@@ -1,5 +1,6 @@
 import { authInstance } from 'apis/utils/authInstance';
 import { baseInstance } from 'apis/utils/baseInstance';
+import { ChatRoomResponseType } from 'types/chatRooms';
 import { ProductsResponseType } from 'types/product';
 import { User } from 'types/user';
 
@@ -19,6 +20,10 @@ const userAPI = {
   }: GetBiddingProductsType) =>
     authInstance.get<ProductsResponseType>(
       `/users/biddings?offset=${offset}&limit=${limit}&sort=${sort}`
+    ),
+  getChatRooms: (offset: number, limit: number) =>
+    authInstance.get<ChatRoomResponseType>(
+      `/chatRooms?offset=${offset}&limit=${limit}`
     ),
   updateUser: (username: string, profileImage: string) =>
     authInstance.patch('users', { username, profileImage }),
