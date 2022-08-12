@@ -1,5 +1,4 @@
-import { DownloadIcon } from '@chakra-ui/icons';
-import { Button, Center, Spinner } from '@chakra-ui/react';
+import { Center, Spinner } from '@chakra-ui/react';
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
@@ -77,7 +76,10 @@ const Notifications = ({
 
   return (
     <>
-      <Header leftContent={<GoBackIcon />} middleContent={<Text>알림</Text>} />
+      <Header
+        leftContent={<GoBackIcon />}
+        middleContent={<HeaderTitle title="알림" />}
+      />
       {/* @TODO 컴포넌트로 분리해보기 */}
       {notificationPages?.pages.map(({ data }, pageIndex) => {
         return data.map(
