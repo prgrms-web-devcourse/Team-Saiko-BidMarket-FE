@@ -29,6 +29,7 @@ const CHATTING_TEXT = '채팅하기';
 const PRODUCT_RECREATE_TEXT = '상품 재등록하기';
 const BIDDING_END_PRODUCT_TEXT = '입찰 종료된 상품입니다.';
 const MINUTE_TO_SECONDS = 60000;
+
 interface ProductBidProps {
   writerId: number;
   authUserId: number;
