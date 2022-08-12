@@ -26,7 +26,7 @@ const Products = ({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
   const { title, sort, category, progressed } = queryDatas;
-  const [keyword, setKeyword] = useState<string>(String(title));
+  const [keyword, setKeyword] = useState<string>(title);
   const [selectedSortOption, setSelectedSortOption] =
     useState<sortOptionsENType>(sort as sortOptionsENType);
   const [selectedCategoryOption, setSelectedCategoryOption] =
