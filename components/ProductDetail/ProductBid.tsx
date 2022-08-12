@@ -28,7 +28,7 @@ const BIDDING_TEXT = '입찰하기';
 const CHATTING_TEXT = '채팅하기';
 const PRODUCT_RECREATE_TEXT = '상품 재등록하기';
 const BIDDING_END_PRODUCT_TEXT = '입찰 종료된 상품입니다.';
-
+const MINUTE_TO_SECONDS = 60000;
 interface ProductBidProps {
   writerId: number;
   authUserId: number;
@@ -46,8 +46,10 @@ const ProductBid = ({
   const router = useRouter();
   const toast = useToast();
   const { productId } = router.query;
-  const isExpiredBidding =
-    Math.floor(new Date(expireAt).getTime() - new Date().getTime()) < 0;
+  const remainedBiddingTime = Math.floor(
+    new Date(expireAt).getTime() - new Date().getTime()
+  );
+  const isExpiredBidding = Math.floor(remainedBiddingTime) < 0;
   const isSeller = writerId === authUserId;
   const [seller, setSeller] = useState({
     biddingSucceed: false,
@@ -64,6 +66,11 @@ const ProductBid = ({
       getBiddingResultByRole();
       return;
     }
+
+    setTimeout(() => {
+      router.reload();
+    }, remainedBiddingTime + MINUTE_TO_SECONDS);
+
     getBiddingPrice();
   }, [isExpiredBidding]);
 
