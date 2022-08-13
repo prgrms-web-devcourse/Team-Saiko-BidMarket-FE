@@ -33,12 +33,12 @@ const Reports = ({
   queryDatas,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { productId, userId } = queryDatas;
-  const [reportContent, setReportContent] = useState('');
+  const [reason, setReason] = useState('');
   const { errors, isLoading, handleChange, handleSubmit } = useForm({
-    initialValues: { reportContent },
-    onSubmit: async ({ reportContent }) => {
-      await createReport(reportContent);
-      setReportContent(reportContent);
+    initialValues: { reason },
+    onSubmit: async ({ reason }) => {
+      await createReport(reason);
+      setReason(reason);
     },
     validate: reportsValidation,
   });
@@ -68,20 +68,16 @@ const Reports = ({
           )}
           <Divider />
           <ReportTitle />
-          <FormControl
-            isInvalid={(errors.reportContent as string) ? true : false}
-          >
+          <FormControl isInvalid={(errors.reason as string) ? true : false}>
             <Textarea
-              name="reportContent"
+              name="reason"
               onChange={handleChange}
               placeholder="신고사유를 정확하게 기재해주실수록 원활한 처리에 도움이 됩니다:)"
               border="1px"
               borderColor="#B6B6B6"
               h="240px"
             />
-            <FormErrorMessage>
-              {errors.reportContent as string}
-            </FormErrorMessage>
+            <FormErrorMessage>{errors.reason as string}</FormErrorMessage>
           </FormControl>
           <ReportCondition />
         </Flex>
