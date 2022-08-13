@@ -27,6 +27,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
 const ProductDetail = ({
   product: {
+    id,
     title,
     description,
     minimumPrice,
@@ -47,6 +48,7 @@ const ProductDetail = ({
       {
         pathname: `/reports`,
         query: {
+          id,
           isProduct: true,
           title,
           image: images[0].url,
