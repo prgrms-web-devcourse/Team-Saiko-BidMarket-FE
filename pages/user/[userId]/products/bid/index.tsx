@@ -1,48 +1,44 @@
 import { DownloadIcon } from '@chakra-ui/icons';
 import { Button, Center, Divider, Spinner } from '@chakra-ui/react';
 import type { NextPage } from 'next';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
 
-import { userAPI } from 'apis';
 import {
   GoBackIcon,
   Header,
   HeaderTitle,
   ProductCard,
+  ProductCardContainer,
   SEO,
 } from 'components/common';
 import { NoProducts } from 'components/User';
-import { ProductsResponseType } from 'types/product';
-
-const LIMIT = 5;
+import { useGetUserBidProducts } from 'hooks/queries';
+import useLoginUser from 'hooks/useLoginUser';
 
 const Bid: NextPage = () => {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [biddingProducts, setBiddingProducts] = useState<ProductsResponseType>(
-    []
-  );
-  const [offset, setOffset] = useState(0);
+  const { id: authUserId, username } = useLoginUser();
+  const {
+    data: productPages,
+    fetchNextPage,
+    hasNextPage,
+  } = useGetUserBidProducts();
+  const [ref, isView] = useInView();
 
   useEffect(() => {
-    getBiddingProducts();
-  }, []);
-
-  const getBiddingProducts = async () => {
-    try {
-      const { data } = await userAPI.getBiddingProducts({
-        offset,
-        limit: LIMIT,
-      });
-
-      setIsLoaded(true);
-      setBiddingProducts([...biddingProducts, ...data]);
-      setOffset(offset + LIMIT);
-    } catch (error) {
-      console.error(error);
+    console.log(authUserId);
+    if (authUserId === -1) {
+      return;
     }
-  };
+  }, [authUserId]);
 
-  if (!isLoaded) {
+  useEffect(() => {
+    if (isView && hasNextPage) {
+      fetchNextPage();
+    }
+  }, [isView, productPages]);
+
+  if (!authUserId) {
     return (
       <Center height="100%">
         <Spinner size="xl" />
@@ -52,39 +48,29 @@ const Bid: NextPage = () => {
 
   return (
     <>
-      {/* @ TODO 실제 사용자 닉네임으로 교체 예정 */}
-      <SEO title="사용자 이름" />
+      <SEO title={username + '입찰한 상품'} />
       <Header
         leftContent={<GoBackIcon />}
         middleContent={<HeaderTitle title="입찰한 상품" />}
       />
-      {biddingProducts.length === 0 ? (
+      {productPages?.pages.map(({ data }, pageIndex) => {
+        return data.map((product, productIndex) => {
+          const lastPageIndex = productPages.pages.length - 1;
+          const lastProductIndex = data.length - 1;
+          return lastPageIndex === pageIndex &&
+            lastProductIndex === productIndex ? (
+            <div ref={ref} key={product.id}>
+              <ProductCardContainer product={product} />
+            </div>
+          ) : (
+            <ProductCardContainer key={product.id} product={product} />
+          );
+        });
+      })}
+      {productPages?.pages[0].data.length === 0 && (
         <Center flexDirection="column" height="100%">
           <NoProducts pageName="userBidProducts" />
         </Center>
-      ) : (
-        <>
-          {biddingProducts.map((product) => {
-            return (
-              <Fragment key={product.id}>
-                <ProductCard productInfo={product} />
-                <Divider />
-              </Fragment>
-            );
-          })}
-          <Button
-            alignSelf="center"
-            w="100px"
-            marginTop="20px"
-            borderRadius="30px"
-            color="white"
-            backgroundColor="brand.primary-900"
-            _hover={{ bg: 'brand.primary-900' }}
-            onClick={getBiddingProducts}
-          >
-            <DownloadIcon w="5" h="5" />
-          </Button>
-        </>
       )}
     </>
   );
