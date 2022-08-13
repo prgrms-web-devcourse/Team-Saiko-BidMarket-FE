@@ -37,11 +37,11 @@ const Reports = ({
       <Button
         position="fixed"
         bottom="0"
-        width="100%"
+        w="100%"
         maxWidth="768px"
         z-index="10"
         backgroundColor="brand.primary-900"
-        color="white"
+        color="#ffffff"
       >
         보내기
       </Button>
