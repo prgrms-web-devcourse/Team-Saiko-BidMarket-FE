@@ -56,7 +56,20 @@ const ProductDetail = ({
         right="15px"
         top="20px"
         cursor="pointer"
-        onClick={() => router.push(`/report`)}
+        onClick={() =>
+          router.push(
+            {
+              pathname: `/reports`,
+              query: {
+                title,
+                image: images[0],
+                writer: writer.username,
+                createdAt,
+              },
+            },
+            '/reports'
+          )
+        }
       >
         {!isSeller && <Image src="/svg/siren.svg" alt="siren-icon" />}
       </Box>

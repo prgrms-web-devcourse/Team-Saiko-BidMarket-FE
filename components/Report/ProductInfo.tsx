@@ -2,7 +2,7 @@ import { Divider, Flex, Image, Text } from '@chakra-ui/react';
 
 const ProductInfo = () => {
   return (
-    <Flex gap="15px">
+    <Flex gap="15px" alignItems="center">
       <Image
         w="90px"
         h="90px"
@@ -12,9 +12,6 @@ const ProductInfo = () => {
       />
       <Flex direction="column">
         <Text>춘식이가 먹다 남긴 귤</Text>
-        <Text fontSize="sm" color="brand.dark-light">
-          라이언이 키우는 춘식이! 고구마를 제일 좋아아아아아아아아아ㅏㅇ...
-        </Text>
         <Flex marginTop="5px" gap="10px">
           <Text fontSize="sm" color="brand.dark-light">
             워터
