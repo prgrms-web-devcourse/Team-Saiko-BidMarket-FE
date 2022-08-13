@@ -1,31 +1,44 @@
 import { Box, Flex, Image, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 
+import { notificationAPI } from 'apis';
 import distanceTimeFormat from 'utils/format/distanceTimeFormat';
 
-interface NotificationProps {
+interface NotificationCardProps {
+  id: number;
   title: string;
   description: string;
   productId: number;
   productImage: string;
   createdAt: Date;
+  checked: boolean;
 }
 
-const Notification = ({
+const NotificationCard = ({
+  id,
   title,
   description,
   productId,
   productImage,
   createdAt,
-}: NotificationProps) => {
+  checked,
+}: NotificationCardProps) => {
   const router = useRouter();
+
+  const handleNotificationCardClick = async () => {
+    await notificationAPI.putCheckNotification({ notificationId: id });
+    router.push(`/products/${productId}`);
+  };
 
   return (
     <Box
       cursor="pointer"
       w="100%"
-      _hover={{ bg: '#FFF6F7' }}
-      onClick={() => router.push(`/products/${productId}`)}
+      bg={checked ? '#FFFFFF' : 'brand.primary-100'}
+      _hover={{
+        bg: 'brand.primary-100',
+      }}
+      onClick={handleNotificationCardClick}
     >
       <Flex width="100%" padding="15px 0">
         <Image
@@ -62,4 +75,4 @@ const Notification = ({
   );
 };
 
-export default Notification;
+export default NotificationCard;

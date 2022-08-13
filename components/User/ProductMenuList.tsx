@@ -27,13 +27,7 @@ const ProductMenuList = ({ userId }: ProductMenuListProps) => {
   ];
 
   return (
-    <Flex
-      width="100%"
-      justifyContent="center"
-      alignItems="center"
-      gap="12px"
-      marginTop="21px"
-    >
+    <Flex direction="column" width="100%" gap="12px" marginTop="21px">
       {productMenu.map((currentMenu, index) => (
         <Fragment key={index}>
           <ProductMenuItem

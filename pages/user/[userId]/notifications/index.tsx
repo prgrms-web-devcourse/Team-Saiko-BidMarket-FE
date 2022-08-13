@@ -84,7 +84,15 @@ const Notifications = ({
       {notificationPages?.pages.map(({ data }, pageIndex) => {
         return data.map(
           (
-            { id, productId, type, content, thumbnailImage, createdAt },
+            {
+              id,
+              productId,
+              type,
+              content,
+              thumbnailImage,
+              createdAt,
+              checked,
+            },
             notificationIndex
           ) => {
             const lastPageIndex = notificationPages.pages.length - 1;
@@ -93,21 +101,25 @@ const Notifications = ({
               lastNotificationIndex === notificationIndex ? (
               <div ref={ref} key={id}>
                 <NotificationCard
+                  id={id}
                   title={type}
                   description={content}
                   productId={productId}
                   productImage={thumbnailImage}
                   createdAt={createdAt}
+                  checked={checked}
                 />
               </div>
             ) : (
               <NotificationCard
                 key={id}
+                id={id}
                 title={type}
                 description={content}
                 productId={productId}
                 productImage={thumbnailImage}
                 createdAt={createdAt}
+                checked={checked}
               />
             );
           }
