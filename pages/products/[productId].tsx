@@ -1,5 +1,6 @@
 import { StarIcon } from '@chakra-ui/icons';
 import { Divider, Flex, Box, Image } from '@chakra-ui/react';
+import { format } from 'date-fns';
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useRouter } from 'next/router';
 
@@ -61,10 +62,11 @@ const ProductDetail = ({
             {
               pathname: `/reports`,
               query: {
+                isProduct: true,
                 title,
-                image: images[0],
+                image: images[0].url,
                 writer: writer.username,
-                createdAt,
+                createdAt: format(new Date(createdAt), 'M월 d일'),
               },
             },
             '/reports'
