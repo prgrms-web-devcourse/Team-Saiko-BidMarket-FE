@@ -44,7 +44,13 @@ const ProductDetail = ({
       <Box position="absolute" maxWidth="768px" width="100%">
         <ProductImage images={images} />
       </Box>
-      <Box position="absolute" left="15px" top="20px" cursor="pointer">
+      <Box
+        position="absolute"
+        zIndex={3}
+        left="15px"
+        top="20px"
+        cursor="pointer"
+      >
         {/* //TODO 색상 props 적용 */}
         <GoBackIcon />
       </Box>
