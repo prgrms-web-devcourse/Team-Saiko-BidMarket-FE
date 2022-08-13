@@ -5,9 +5,10 @@ import { ProductMenuItem } from '.';
 
 interface ProductMenuListProps {
   userId: string;
+  isMyPage: boolean;
 }
 
-const ProductMenuList = ({ userId }: ProductMenuListProps) => {
+const ProductMenuList = ({ userId, isMyPage }: ProductMenuListProps) => {
   const productMenu = [
     {
       iconUrl: '/svg/sellProductMenuIcon.svg',
@@ -25,6 +26,14 @@ const ProductMenuList = ({ userId }: ProductMenuListProps) => {
       routingUrl: `./${userId}/products/like`,
     },
   ];
+
+  if (!isMyPage) {
+    return (
+      <Flex direction="column" width="100%" gap="12px" marginTop="21px">
+        <ProductMenuItem {...productMenu[0]} isLastItem={true} />
+      </Flex>
+    );
+  }
 
   return (
     <Flex direction="column" width="100%" gap="12px" marginTop="21px">

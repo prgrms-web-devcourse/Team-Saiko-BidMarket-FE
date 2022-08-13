@@ -97,7 +97,7 @@ const UserId: NextPage = ({
           />
         )}
       </Flex>
-      <ProductMenuList userId={userId as string} />
+      <ProductMenuList userId={userId as string} isMyPage={isMyPage} />
       {isMyPage ? (
         <>
           <Divider
