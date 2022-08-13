@@ -126,7 +126,7 @@ const Chats: NextPage = ({
                 profileImage={opponentUserInfo.profileImage}
                 previewChat={lastMessage}
                 productImage={productInfo.thumbnailImage}
-                createdAt={lastMessageDate}
+                createdAt={new Date(lastMessageDate)}
               />
               <Divider />
             </Fragment>
