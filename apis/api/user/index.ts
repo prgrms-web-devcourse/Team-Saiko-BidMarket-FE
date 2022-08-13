@@ -7,7 +7,6 @@ import { User } from 'types/user';
 interface GetSellProductsType {
   userId: number;
   offset: number;
-  limit?: number;
   sort?: string;
 }
 
@@ -23,7 +22,6 @@ const userAPI = {
   getSellProducts: ({
     userId,
     offset,
-    limit,
     sort = 'END_DATE_ASC',
   }: GetSellProductsType) =>
     baseInstance.get<ProductsResponseType>(
