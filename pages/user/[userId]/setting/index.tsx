@@ -8,9 +8,8 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import { userAPI } from 'apis';
-import { removeItem } from 'apis/utils/storage';
+import { getItem, removeItem } from 'apis/utils/storage';
 import { GoBackIcon, Header, SEO } from 'components/common';
-import useLoginUser from 'hooks/useLoginUser';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { userId } = context.query;
@@ -35,13 +34,9 @@ const Setting: NextPage = ({
   user: { id },
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
-  const { userId } = router.query;
-  const { id: authUserId } = useLoginUser();
-  const isMyPage = id === authUserId;
-  // @TODO 회원탈퇴 구현 예정
 
   useEffect(() => {
-    if (!id) {
+    if (!id || !getItem('token')) {
       router.replace('/404');
     }
   }, [id, router]);
@@ -84,6 +79,11 @@ const Setting: NextPage = ({
           fontSize="14px"
           textDecoration="underline"
           cursor="pointer"
+          onClick={async () => {
+            await userAPI.deleteUser();
+            removeItem('token');
+            router.push('/');
+          }}
         >
           회원탈퇴
         </Text>
