@@ -24,6 +24,7 @@ const ProductMenuItem = ({
         alignItems="center"
         gap="13px"
         onClick={() => router.push(routingUrl)}
+        cursor="pointer"
       >
         <Flex justifyContent="space-between" alignItems="center" gap="10px">
           <Image
