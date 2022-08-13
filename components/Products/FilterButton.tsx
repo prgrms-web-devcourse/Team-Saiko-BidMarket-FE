@@ -1,4 +1,4 @@
-import { ChevronDownIcon } from '@chakra-ui/icons';
+import { CheckIcon, ChevronDownIcon } from '@chakra-ui/icons';
 import {
   Button,
   Divider,
@@ -82,9 +82,16 @@ const FilterButton = ({
               return (
                 <Fragment key={index}>
                   <Text
-                    _hover={{ cursor: 'pointer' }}
+                    _hover={{
+                      cursor: 'pointer',
+                      bgGradient:
+                        'linear(to-b, #FFFFFF, brand.primary-500, #FFFFFF)',
+                    }}
                     onClick={() => handleFilterButtonClick(optionName)}
                   >
+                    {selectedFilterOption === optionName && (
+                      <CheckIcon color="brand.primary-900" marginRight="10px" />
+                    )}
                     {optionName}
                   </Text>
                   {index !== OPTIONS.length - 1 ? (
