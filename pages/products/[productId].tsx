@@ -41,7 +41,7 @@ const ProductDetail = ({
   return (
     <>
       <SEO title={title} description={description} />
-      <Box position="absolute">
+      <Box position="absolute" maxWidth="768px" width="100%">
         <ProductImage images={images} />
       </Box>
       <Box position="absolute" left="15px" top="20px" cursor="pointer">
