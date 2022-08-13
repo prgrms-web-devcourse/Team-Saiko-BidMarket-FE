@@ -63,7 +63,9 @@ const UserId: NextPage = ({
       <SEO title="회원 정보 페이지" />
       <Header
         leftContent={<GoBackIcon />}
-        middleContent={<HeaderTitle title={isMyPage ? '마이페이지' : ''} />}
+        middleContent={
+          <HeaderTitle title={isMyPage ? '마이페이지' : '회원 정보'} />
+        }
       />
       <Flex width="100%" flexDirection="column" gap="29px">
         <UserProfileInformation
