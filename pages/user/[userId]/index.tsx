@@ -1,20 +1,14 @@
-import { Center, Divider, Flex, Spinner, Text } from '@chakra-ui/react';
+import { Center, Divider, Flex, Spinner } from '@chakra-ui/react';
 import type {
   GetServerSideProps,
   InferGetServerSidePropsType,
   NextPage,
 } from 'next';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import userAPI from 'apis/api/user';
-import {
-  GoBackIcon,
-  Header,
-  HeaderTitle,
-  SEO,
-  SideBar,
-} from 'components/common';
+import { GoBackIcon, Header, HeaderTitle, SEO } from 'components/common';
 import {
   ProductMenuList,
   UserProfileEditButton,
@@ -76,8 +70,15 @@ const UserId: NextPage = ({
           profileImageUrl={profileImage}
           nickname={username}
         />
-        {isMyPage && (
+        {isMyPage ? (
           <UserProfileEditButton
+            text={'edit'}
+            onClick={() => router.push(`./${userId}/edit`)}
+          />
+        ) : (
+          <UserProfileEditButton
+            text={'report'}
+            // @NOTE 신고하기 페이지로 이동으로 코드 변경 매우 필요
             onClick={() => router.push(`./${userId}/edit`)}
           />
         )}
@@ -92,7 +93,7 @@ const UserId: NextPage = ({
             boxShadow="inset 0px 1px 3px rgba(0, 0, 0, 0.03)"
             marginTop="25px"
           />
-          <UserSetting />
+          <UserSetting userId={authUserId} />
         </>
       ) : undefined}
     </>
