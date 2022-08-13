@@ -1,8 +1,14 @@
-import { Button, Divider, Flex } from '@chakra-ui/react';
+import { Button, Divider, Flex, Textarea } from '@chakra-ui/react';
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 
 import { Header, GoBackIcon, SEO, HeaderTitle } from 'components/common';
-import { ProductInfo, UserInfo, ReportForm } from 'components/Report';
+import {
+  ProductInfo,
+  UserInfo,
+  ReportCondition,
+  ReportTitle,
+} from 'components/Report';
+import useForm from 'hooks/useForm';
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   return {
@@ -31,9 +37,16 @@ const Reports = ({
           <UserInfo userInfo={queryDatas} />
         )}
         <Divider />
-        <ReportForm />
+        <ReportTitle />
+        <Textarea
+          placeholder="신고사유를 정확하게 기재해주실수록 원활한 처리에 
+        도움이 됩니다:)"
+          border="1px"
+          borderColor="#B6B6B6"
+          h="240px"
+        />
+        <ReportCondition />
       </Flex>
-      {/* 신고하기 API 연동 */}
       <Button
         position="fixed"
         bottom="0"
@@ -42,6 +55,7 @@ const Reports = ({
         z-index="10"
         backgroundColor="brand.primary-900"
         color="#ffffff"
+        loadingText="신고 접수중"
       >
         보내기
       </Button>
