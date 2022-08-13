@@ -1,10 +1,22 @@
 import { Button, Divider, Flex } from '@chakra-ui/react';
-import type { NextPage } from 'next';
+import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 
 import { Header, GoBackIcon, SEO, HeaderTitle } from 'components/common';
 import { ProductInfo, UserInfo, ReportForm } from 'components/Report';
 
-const Reports: NextPage = () => {
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  return {
+    props: {
+      queryDatas: query,
+    },
+  };
+};
+
+const Reports = ({
+  queryDatas,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const { isProduct } = queryDatas;
+
   return (
     <>
       <SEO title="게시글 신고" />
@@ -13,12 +25,15 @@ const Reports: NextPage = () => {
         middleContent={<HeaderTitle title="게시글 신고" />}
       />
       <Flex direction="column" width="100%" gap="15px">
-        <ProductInfo />
-        <Divider />
-        <UserInfo />
+        {isProduct ? (
+          <ProductInfo productInfo={queryDatas} />
+        ) : (
+          <UserInfo userInfo={queryDatas} />
+        )}
         <Divider />
         <ReportForm />
       </Flex>
+      {/* 신고하기 API 연동 */}
       <Button
         position="fixed"
         bottom="0"
