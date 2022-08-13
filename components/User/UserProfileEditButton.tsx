@@ -1,14 +1,26 @@
-import { EditIcon } from '@chakra-ui/icons';
+import { EditIcon, WarningTwoIcon } from '@chakra-ui/icons';
 import { Button, Text } from '@chakra-ui/react';
 
 interface UserProfileEditButtonProps {
+  text: 'edit' | 'report';
   onClick: () => void;
 }
 
-const UserProfileEditButton = ({ onClick }: UserProfileEditButtonProps) => {
+const UserProfileEditButton = ({
+  text,
+  onClick,
+}: UserProfileEditButtonProps) => {
+  const isMyPage = text === 'edit';
+  const buttonText = isMyPage ? '프로필 수정하기' : '신고하기';
+  const buttonIcon = isMyPage ? (
+    <EditIcon color="brand.primary-900" />
+  ) : (
+    <WarningTwoIcon color="brand.primary-900" />
+  );
+
   return (
     <Button
-      leftIcon={<EditIcon color="brand.primary-900" />}
+      leftIcon={buttonIcon}
       width="100%"
       border="1.5px dashed"
       borderColor="brand.primary-900"
@@ -23,7 +35,7 @@ const UserProfileEditButton = ({ onClick }: UserProfileEditButtonProps) => {
         fontWeight="400"
         fontSize="15"
       >
-        프로필 수정하기
+        {buttonText}
       </Text>
     </Button>
   );
