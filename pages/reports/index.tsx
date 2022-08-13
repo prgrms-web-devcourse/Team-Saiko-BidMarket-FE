@@ -108,6 +108,7 @@ const Reports = ({
           loadingText="신고 접수중"
           backgroundColor="brand.primary-900"
           type="submit"
+          borderRadius="0"
         >
           보내기
         </Button>
