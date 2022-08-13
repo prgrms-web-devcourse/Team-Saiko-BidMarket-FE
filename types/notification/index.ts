@@ -4,6 +4,7 @@ interface Notification {
   title: string;
   thumbnailImage: string;
   type: string;
+  checked: boolean;
   content: string;
   createdAt: Date;
   updatedAt: Date;

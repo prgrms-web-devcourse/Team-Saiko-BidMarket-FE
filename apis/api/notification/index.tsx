@@ -6,6 +6,9 @@ const notificationAPI = {
     authInstance.get<NotificationsResponseType>(
       `/notifications?offset=${offset}&limit=10`
     ),
+  putCheckNotification: ({ notificationId }: { notificationId: number }) => {
+    authInstance.put(`/notifications/${notificationId}`);
+  },
 };
 
 export default notificationAPI;
