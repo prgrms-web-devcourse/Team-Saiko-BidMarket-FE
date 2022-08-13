@@ -13,41 +13,6 @@ import { NoChatting, ChattingCard } from 'components/User';
 import useLoginUser from 'hooks/useLoginUser';
 import { ChatRoomData, ChatRoomResponseType } from 'types/chatRooms';
 
-//TODO : 데이터 연결
-const DUMMY = [
-  {
-    chatRoomId: 1,
-    productInfo: {
-      productId: 1,
-      thumbnailImage:
-        'https://user-images.githubusercontent.com/61923768/182772718-258fa024-b207-4203-8e8a-2dc1f3bc21f2.png',
-    },
-    opponentUserInfo: {
-      username: '물안경',
-      profileImage:
-        'https://bid-market-bucket.s3.ap-northeast-2.amazonaws.com/profiles/%E1%84%80%E1%85%A1%E1%86%B7%E1%84%8C%E1%85%A1.png',
-    },
-    lastMessage:
-      '어쩜 이렇게 하늘은 더 파란 건지? 오늘따라 왜 바람은 또 완벽한지? ',
-    lastMessageDate: new Date('2022-07-20T14:36:00'),
-  },
-  {
-    chatRoomId: 2,
-    productInfo: {
-      productId: 1,
-      thumbnailImage:
-        'https://user-images.githubusercontent.com/61923768/182772718-258fa024-b207-4203-8e8a-2dc1f3bc21f2.png',
-    },
-    opponentUserInfo: {
-      username: '물안경',
-      profileImage:
-        'https://bid-market-bucket.s3.ap-northeast-2.amazonaws.com/profiles/%E1%84%80%E1%85%A1%E1%86%B7%E1%84%8C%E1%85%A1.png',
-    },
-    lastMessage: '눈물이 차올라서 고갤 들어 흐르지 못하게 또 살짝 웃어',
-    lastMessageDate: new Date('2022-07-20T14:36:00'),
-  },
-];
-
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { userId } = context.query;
   let user = {};
@@ -127,6 +92,7 @@ const Chats: NextPage = ({
                 previewChat={lastMessage}
                 productImage={productInfo.thumbnailImage}
                 createdAt={new Date(lastMessageDate)}
+                onClick={() => router.push(`/user/${id}/chat/${chatRoomId}`)}
               />
               <Divider />
             </Fragment>

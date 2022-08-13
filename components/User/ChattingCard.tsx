@@ -8,6 +8,7 @@ interface ChattingProps {
   previewChat: string;
   productImage: string;
   createdAt: Date;
+  onClick: () => void;
 }
 
 const ChattingCard = ({
@@ -16,9 +17,10 @@ const ChattingCard = ({
   previewChat,
   productImage,
   createdAt,
+  onClick,
 }: ChattingProps) => {
   return (
-    <Box cursor="pointer" width="100%">
+    <Box cursor="pointer" width="100%" onClick={onClick}>
       <Flex width="100%" padding="15px 0">
         <Image
           src={profileImage}
