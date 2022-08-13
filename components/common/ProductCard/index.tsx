@@ -52,7 +52,9 @@ const ProductCard = ({ productInfo }: ProductCardProps) => {
             padding="3px 10px"
             borderRadius="20px"
           >
-            {remainedTimeFormat(expireAt)}
+            {remainedTimeFormat(expireAt) === ''
+              ? '0분'
+              : remainedTimeFormat(expireAt)}
           </Text>
         </Flex>
         <Flex justifyContent="flex-end" alignItems="center">
