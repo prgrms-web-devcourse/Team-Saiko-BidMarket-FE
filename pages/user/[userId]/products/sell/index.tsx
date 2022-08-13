@@ -64,7 +64,6 @@ const Sell: NextPage = ({
 
   return (
     <>
-      {/* @ TODO 실제 사용자 닉네임으로 교체 예정 */}
       <SEO title={username + '판매한 상품'} />
       <Header
         leftContent={<GoBackIcon />}
