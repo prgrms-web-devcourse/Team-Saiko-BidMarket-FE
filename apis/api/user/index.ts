@@ -4,6 +4,13 @@ import { ChatRoomResponseType } from 'types/chatRooms';
 import { ProductsResponseType } from 'types/product';
 import { User } from 'types/user';
 
+interface GetSellProductsType {
+  userId: number;
+  offset: number;
+  limit?: number;
+  sort?: string;
+}
+
 interface GetBiddingProductsType {
   offset: number;
   limit: number;
@@ -13,6 +20,15 @@ interface GetBiddingProductsType {
 const userAPI = {
   getAuthUser: () => authInstance.get<User>('users/auth'),
   getUser: (id: number) => baseInstance.get<User>(`/users/${id}`),
+  getSellProducts: ({
+    userId,
+    offset,
+    limit,
+    sort = 'END_DATE_ASC',
+  }: GetSellProductsType) =>
+    baseInstance.get<ProductsResponseType>(
+      `/users/${userId}/products?offset=${offset}&limit=10&sort=${sort}`
+    ),
   getBiddingProducts: ({
     offset,
     limit,
