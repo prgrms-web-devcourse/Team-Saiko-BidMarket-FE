@@ -76,6 +76,7 @@ const ProductDetail = ({
         <GoBackIcon />
       </Box>
       <Box
+        z-index="1"
         position="absolute"
         right="15px"
         top="20px"

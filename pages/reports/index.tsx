@@ -1,11 +1,11 @@
 import {
-  Box,
   Button,
   Divider,
   Flex,
   FormControl,
   FormErrorMessage,
   Textarea,
+  useToast,
 } from '@chakra-ui/react';
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useState } from 'react';
@@ -19,6 +19,7 @@ import {
   ReportTitle,
 } from 'components/Report';
 import useForm from 'hooks/useForm';
+import { setToastInfo } from 'utils';
 import reportsValidation from 'utils/validation/reportsValidation';
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
@@ -32,6 +33,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 const Reports = ({
   queryDatas,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const toast = useToast();
   const { productId, userId } = queryDatas;
   const [reason, setReason] = useState('');
   const { errors, isLoading, handleChange, handleSubmit } = useForm({
@@ -44,12 +46,23 @@ const Reports = ({
   });
 
   const createReport = async (reason: string) => {
-    if (productId) {
-      await reportAPI.createReportByProduct(productId, reason);
-      return;
+    try {
+      if (productId) {
+        await reportAPI.createReportByProduct(productId, reason);
+      } else if (userId) {
+        await reportAPI.createReportByUser(userId, reason);
+      }
+      toast(setToastInfo('top', '신고가 접수되었습니다.', 'success'));
+    } catch (error) {
+      toast(
+        setToastInfo(
+          'top',
+          '신고가 접수되지 않았습니다. 다시 시도해주세요',
+          'error'
+        )
+      );
+      console.log(error);
     }
-
-    await reportAPI.createReportByUser(userId, reason);
   };
 
   return (
