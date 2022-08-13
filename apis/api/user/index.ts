@@ -12,7 +12,6 @@ interface GetSellProductsType {
 
 interface GetBiddingProductsType {
   offset: number;
-  limit: number;
   sort?: string;
 }
 
@@ -29,11 +28,10 @@ const userAPI = {
     ),
   getBiddingProducts: ({
     offset,
-    limit,
     sort = 'END_DATE_ASC',
   }: GetBiddingProductsType) =>
     authInstance.get<ProductsResponseType>(
-      `/users/biddings?offset=${offset}&limit=${limit}&sort=${sort}`
+      `/users/biddings?offset=${offset}&limit=10&sort=${sort}`
     ),
   getChatRooms: (offset: number, limit: number) =>
     authInstance.get<ChatRoomResponseType>(
