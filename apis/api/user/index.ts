@@ -26,7 +26,8 @@ const userAPI = {
       `/chatRooms?offset=${offset}&limit=${limit}`
     ),
   updateUser: (username: string, profileImage: string) =>
-    authInstance.patch('users', { username, profileImage }),
+    authInstance.patch('/users', { username, profileImage }),
+  deleteUser: () => authInstance.delete('/users'),
 };
 
 export default userAPI;
