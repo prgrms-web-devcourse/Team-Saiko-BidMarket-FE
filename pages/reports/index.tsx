@@ -3,7 +3,7 @@ import type { NextPage } from 'next';
 import { Header, GoBackIcon, SEO, HeaderTitle } from 'components/common';
 import { ProductReport } from 'components/Report';
 
-const Report: NextPage = () => {
+const Reports: NextPage = () => {
   return (
     <>
       <SEO title="게시글 신고" />
@@ -16,4 +16,4 @@ const Report: NextPage = () => {
   );
 };
 
-export default Report;
+export default Reports;
