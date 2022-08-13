@@ -3,28 +3,33 @@ import { useRouter } from 'next/router';
 
 import distanceTimeFormat from 'utils/format/distanceTimeFormat';
 
-interface NotificationProps {
+interface NotificationCardProps {
   title: string;
   description: string;
   productId: number;
   productImage: string;
   createdAt: Date;
+  checked: boolean;
 }
 
-const Notification = ({
+const NotificationCard = ({
   title,
   description,
   productId,
   productImage,
   createdAt,
-}: NotificationProps) => {
+  checked,
+}: NotificationCardProps) => {
   const router = useRouter();
 
   return (
     <Box
       cursor="pointer"
       w="100%"
-      _hover={{ bg: '#FFF6F7' }}
+      bg={checked ? '#FFFFFF' : 'brand.primary-100'}
+      _hover={{
+        bg: 'brand.primary-100',
+      }}
       onClick={() => router.push(`/products/${productId}`)}
     >
       <Flex width="100%" padding="15px 0">
@@ -62,4 +67,4 @@ const Notification = ({
   );
 };
 
-export default Notification;
+export default NotificationCard;
