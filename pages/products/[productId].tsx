@@ -42,6 +42,22 @@ const ProductDetail = ({
   const { id: authUserId } = useLoginUser();
   const isSeller = authUserId === writer.id;
 
+  const handleReportSirenIconClick = () => {
+    router.push(
+      {
+        pathname: `/reports`,
+        query: {
+          isProduct: true,
+          title,
+          image: images[0].url,
+          writer: writer.username,
+          createdAt: format(new Date(createdAt), 'M월 d일'),
+        },
+      },
+      '/reports'
+    );
+  };
+
   return (
     <>
       <SEO title={title} description={description} />
@@ -63,21 +79,7 @@ const ProductDetail = ({
         right="15px"
         top="20px"
         cursor="pointer"
-        onClick={() =>
-          router.push(
-            {
-              pathname: `/reports`,
-              query: {
-                isProduct: true,
-                title,
-                image: images[0].url,
-                writer: writer.username,
-                createdAt: format(new Date(createdAt), 'M월 d일'),
-              },
-            },
-            '/reports'
-          )
-        }
+        onClick={handleReportSirenIconClick}
       >
         {!isSeller && <Image src="/svg/siren.svg" alt="siren-icon" />}
       </Box>
