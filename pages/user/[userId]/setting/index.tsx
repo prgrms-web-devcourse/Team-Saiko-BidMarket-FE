@@ -1,4 +1,11 @@
-import { Center, Divider, Flex, Spinner, Text } from '@chakra-ui/react';
+import {
+  Center,
+  Divider,
+  Flex,
+  Spinner,
+  Text,
+  useToast,
+} from '@chakra-ui/react';
 import {
   GetServerSideProps,
   InferGetServerSidePropsType,
@@ -8,9 +15,9 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import { userAPI } from 'apis';
-import { removeItem } from 'apis/utils/storage';
+import { getItem, removeItem } from 'apis/utils/storage';
 import { GoBackIcon, Header, SEO } from 'components/common';
-import useLoginUser from 'hooks/useLoginUser';
+import { setToastInfo } from 'utils';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { userId } = context.query;
@@ -35,13 +42,10 @@ const Setting: NextPage = ({
   user: { id },
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
-  const { userId } = router.query;
-  const { id: authUserId } = useLoginUser();
-  const isMyPage = id === authUserId;
-  // @TODO 회원탈퇴 구현 예정
+  const toast = useToast();
 
   useEffect(() => {
-    if (!id) {
+    if (!id || !getItem('token')) {
       router.replace('/404');
     }
   }, [id, router]);
@@ -53,6 +57,28 @@ const Setting: NextPage = ({
       </Center>
     );
   }
+
+  const handleLogoutClick = () => {
+    removeItem('token');
+    router.push('/');
+  };
+
+  const handleQuitClick = async () => {
+    try {
+      await userAPI.deleteUser();
+      removeItem('token');
+      router.push('/');
+    } catch (error) {
+      console.log(error);
+      toast(
+        setToastInfo(
+          'top',
+          '회원탈퇴 중 문제가 생겼습니다.\n다시 시도바랍니다.',
+          'warning'
+        )
+      );
+    }
+  };
 
   return (
     <>
@@ -70,10 +96,7 @@ const Setting: NextPage = ({
             fontSize="16px"
             margin="16px 0"
             cursor="pointer"
-            onClick={() => {
-              removeItem('token');
-              router.push('/');
-            }}
+            onClick={handleLogoutClick}
           >
             로그아웃
           </Text>
@@ -84,6 +107,7 @@ const Setting: NextPage = ({
           fontSize="14px"
           textDecoration="underline"
           cursor="pointer"
+          onClick={handleQuitClick}
         >
           회원탈퇴
         </Text>
