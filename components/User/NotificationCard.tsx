@@ -1,9 +1,11 @@
 import { Box, Flex, Image, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 
+import { notificationAPI } from 'apis';
 import distanceTimeFormat from 'utils/format/distanceTimeFormat';
 
 interface NotificationCardProps {
+  id: number;
   title: string;
   description: string;
   productId: number;
@@ -13,6 +15,7 @@ interface NotificationCardProps {
 }
 
 const NotificationCard = ({
+  id,
   title,
   description,
   productId,
@@ -22,6 +25,11 @@ const NotificationCard = ({
 }: NotificationCardProps) => {
   const router = useRouter();
 
+  const handleNotificationCardClick = async () => {
+    await notificationAPI.putCheckNotification({ notificationId: id });
+    router.push(`/products/${productId}`);
+  };
+
   return (
     <Box
       cursor="pointer"
@@ -30,7 +38,7 @@ const NotificationCard = ({
       _hover={{
         bg: 'brand.primary-100',
       }}
-      onClick={() => router.push(`/products/${productId}`)}
+      onClick={handleNotificationCardClick}
     >
       <Flex width="100%" padding="15px 0">
         <Image
