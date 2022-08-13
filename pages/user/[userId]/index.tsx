@@ -1,23 +1,17 @@
-import { Center, Divider, Flex, Spinner, Text } from '@chakra-ui/react';
+import { Center, Divider, Flex, Spinner } from '@chakra-ui/react';
 import type {
   GetServerSideProps,
   InferGetServerSidePropsType,
   NextPage,
 } from 'next';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import userAPI from 'apis/api/user';
-import {
-  GoBackIcon,
-  Header,
-  HeaderTitle,
-  SEO,
-  SideBar,
-} from 'components/common';
+import { GoBackIcon, Header, HeaderTitle, SEO } from 'components/common';
 import {
   ProductMenuList,
-  UserProfileEditButton,
+  UserProfileEditOrReportButton,
   UserProfileInformation,
   UserSetting,
 } from 'components/User';
@@ -69,15 +63,24 @@ const UserId: NextPage = ({
       <SEO title="회원 정보 페이지" />
       <Header
         leftContent={<GoBackIcon />}
-        middleContent={<HeaderTitle title={isMyPage ? '마이페이지' : ''} />}
+        middleContent={
+          <HeaderTitle title={isMyPage ? '마이페이지' : '회원 정보'} />
+        }
       />
       <Flex width="100%" flexDirection="column" gap="29px">
         <UserProfileInformation
           profileImageUrl={profileImage}
           nickname={username}
         />
-        {isMyPage && (
-          <UserProfileEditButton
+        {isMyPage ? (
+          <UserProfileEditOrReportButton
+            text={'edit'}
+            onClick={() => router.push(`./${userId}/edit`)}
+          />
+        ) : (
+          <UserProfileEditOrReportButton
+            text={'report'}
+            // @NOTE 신고하기 페이지로 이동으로 코드 변경 매우 필요
             onClick={() => router.push(`./${userId}/edit`)}
           />
         )}
@@ -92,7 +95,7 @@ const UserId: NextPage = ({
             boxShadow="inset 0px 1px 3px rgba(0, 0, 0, 0.03)"
             marginTop="25px"
           />
-          <UserSetting />
+          <UserSetting userId={authUserId} />
         </>
       ) : undefined}
     </>
