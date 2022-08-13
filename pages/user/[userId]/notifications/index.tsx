@@ -101,6 +101,7 @@ const Notifications = ({
               lastNotificationIndex === notificationIndex ? (
               <div ref={ref} key={id}>
                 <NotificationCard
+                  id={id}
                   title={type}
                   description={content}
                   productId={productId}
@@ -112,6 +113,7 @@ const Notifications = ({
             ) : (
               <NotificationCard
                 key={id}
+                id={id}
                 title={type}
                 description={content}
                 productId={productId}
