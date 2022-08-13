@@ -135,6 +135,7 @@ const ProductBid = ({
       if (!isSeller && !bidder.biddingSucceed) {
         return true;
       }
+      return false;
     }
 
     if (isSeller) {
@@ -160,14 +161,29 @@ const ProductBid = ({
   };
 
   const handleBidButtonClick = () => {
+    if (isSeller && !seller.biddingSucceed) {
+      router.push(`/product`);
+      return;
+    }
+
+    if (seller.biddingSucceed) {
+      router.push(`/user/${authUserId}/chat/${seller.chatRoomId}`);
+      return;
+    }
+
+    if (bidder.biddingSucceed) {
+      router.push(`/user/${authUserId}/chat/${bidder.chatRoomId}`);
+      return;
+    }
+
     if (authUserId === -1) {
       toast(
         setToastInfo('top', '입찰은 로그인 후 이용 가능합니다.', 'warning')
       );
-
       router.push('/login');
       return;
     }
+
     onOpen();
   };
 
