@@ -48,8 +48,7 @@ const ProductDetail = ({
       {
         pathname: `/reports`,
         query: {
-          id,
-          isProduct: true,
+          productId: id,
           title,
           image: images[0].url,
           writer: writer.username,

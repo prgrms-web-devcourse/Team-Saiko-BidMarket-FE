@@ -63,7 +63,7 @@ const UserId: NextPage = ({
       {
         pathname: `/reports`,
         query: {
-          id: authUserId,
+          userId: authUserId,
           profileImage,
           username,
         },
