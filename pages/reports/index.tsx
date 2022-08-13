@@ -10,6 +10,7 @@ import {
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useState } from 'react';
 
+import { reportAPI } from 'apis';
 import { Header, GoBackIcon, SEO, HeaderTitle } from 'components/common';
 import {
   ProductInfo,
@@ -31,15 +32,25 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 const Reports = ({
   queryDatas,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const { isProduct, id } = queryDatas;
+  const { productId, userId } = queryDatas;
   const [reportContent, setReportContent] = useState('');
   const { errors, isLoading, handleChange, handleSubmit } = useForm({
     initialValues: { reportContent },
-    onSubmit: () => {
+    onSubmit: async ({ reportContent }) => {
+      await createReport(reportContent);
       setReportContent(reportContent);
     },
     validate: reportsValidation,
   });
+
+  const createReport = async (reason: string) => {
+    if (productId) {
+      await reportAPI.createReportByProduct(productId, reason);
+      return;
+    }
+
+    await reportAPI.createReportByUser(userId, reason);
+  };
 
   return (
     <>
@@ -50,7 +61,7 @@ const Reports = ({
       />
       <form style={{ width: '100%', height: '100%' }} onSubmit={handleSubmit}>
         <Flex direction="column" width="100%" gap="15px">
-          {isProduct ? (
+          {productId ? (
             <ProductInfo productInfo={queryDatas} />
           ) : (
             <UserInfo userInfo={queryDatas} />
