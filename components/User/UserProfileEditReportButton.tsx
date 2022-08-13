@@ -1,15 +1,15 @@
 import { EditIcon, WarningTwoIcon } from '@chakra-ui/icons';
 import { Button, Text } from '@chakra-ui/react';
 
-interface UserProfileEditButtonProps {
+interface UserProfileEditReportButtonProps {
   text: 'edit' | 'report';
   onClick: () => void;
 }
 
-const UserProfileEditButton = ({
+const UserProfileEditReportButton = ({
   text,
   onClick,
-}: UserProfileEditButtonProps) => {
+}: UserProfileEditReportButtonProps) => {
   const isMyPage = text === 'edit';
   const buttonText = isMyPage ? '프로필 수정하기' : '신고하기';
   const buttonIcon = isMyPage ? (
@@ -41,4 +41,4 @@ const UserProfileEditButton = ({
   );
 };
 
-export default UserProfileEditButton;
+export default UserProfileEditReportButton;

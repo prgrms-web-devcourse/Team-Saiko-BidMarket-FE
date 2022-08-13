@@ -11,7 +11,7 @@ import userAPI from 'apis/api/user';
 import { GoBackIcon, Header, HeaderTitle, SEO } from 'components/common';
 import {
   ProductMenuList,
-  UserProfileEditButton,
+  UserProfileEditReportButton,
   UserProfileInformation,
   UserSetting,
 } from 'components/User';
@@ -71,12 +71,12 @@ const UserId: NextPage = ({
           nickname={username}
         />
         {isMyPage ? (
-          <UserProfileEditButton
+          <UserProfileEditReportButton
             text={'edit'}
             onClick={() => router.push(`./${userId}/edit`)}
           />
         ) : (
-          <UserProfileEditButton
+          <UserProfileEditReportButton
             text={'report'}
             // @NOTE 신고하기 페이지로 이동으로 코드 변경 매우 필요
             onClick={() => router.push(`./${userId}/edit`)}
