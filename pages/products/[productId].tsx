@@ -1,6 +1,7 @@
 import { StarIcon } from '@chakra-ui/icons';
-import { Divider, Flex, Box } from '@chakra-ui/react';
+import { Divider, Flex, Box, Image } from '@chakra-ui/react';
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import { useRouter } from 'next/router';
 
 import { productAPI } from 'apis';
 import { GoBackIcon, SEO } from 'components/common';
@@ -36,7 +37,9 @@ const ProductDetail = ({
     createdAt,
   },
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const router = useRouter();
   const { id: authUserId } = useLoginUser();
+  const isSeller = authUserId === writer.id;
 
   return (
     <>
@@ -47,6 +50,15 @@ const ProductDetail = ({
       <Box position="absolute" left="15px" top="20px" cursor="pointer">
         {/* //TODO 색상 props 적용 */}
         <GoBackIcon />
+      </Box>
+      <Box
+        position="absolute"
+        right="15px"
+        top="20px"
+        cursor="pointer"
+        onClick={() => router.push(`/report`)}
+      >
+        {!isSeller && <Image src="/svg/siren.svg" alt="siren-icon" />}
       </Box>
       <Flex direction="column" width="100%" marginTop="317px">
         <Flex justifyContent="space-between" alignItems="center">
