@@ -1,16 +1,25 @@
 import { Flex, Image, Text } from '@chakra-ui/react';
 
-const UserInfo = () => {
+interface UserInfoProps {
+  userInfo: {
+    profileImage: string;
+    username: string;
+  };
+}
+
+const UserInfo = ({ userInfo }: UserInfoProps) => {
+  const { profileImage, username } = userInfo;
+
   return (
     <Flex gap="15px" alignItems="center">
       <Image
         w="90px"
         h="90px"
-        src="/svg/basket.svg"
-        alt={`image`}
+        src={profileImage}
+        alt={`${username}-프로필-이미지`}
         borderRadius="50%"
       />
-      <Text fontSize="lg">물안경</Text>
+      <Text fontSize="lg">{username}</Text>
     </Flex>
   );
 };

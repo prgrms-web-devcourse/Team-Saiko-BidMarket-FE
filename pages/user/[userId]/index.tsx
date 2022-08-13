@@ -58,6 +58,19 @@ const UserId: NextPage = ({
     );
   }
 
+  const handleReportsButtonClick = () => {
+    router.push(
+      {
+        pathname: `/reports`,
+        query: {
+          profileImage,
+          username,
+        },
+      },
+      '/reports'
+    );
+  };
+
   return (
     <>
       <SEO title="회원 정보 페이지" />
@@ -80,8 +93,7 @@ const UserId: NextPage = ({
         ) : (
           <UserProfileEditOrReportButton
             text={'report'}
-            // @NOTE 신고하기 페이지로 이동으로 코드 변경 매우 필요
-            onClick={() => router.push(`./${userId}/edit`)}
+            onClick={handleReportsButtonClick}
           />
         )}
       </Flex>
