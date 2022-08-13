@@ -23,7 +23,11 @@ const MainHeader = () => {
   return (
     <Header
       leftContent={
-        <Image src="/svg/bimadrket-logo.svg" alt="bidmarket" height="32px" />
+        <Image
+          src="/svg/bidmarket-logo.svg"
+          alt="bidmarket logo"
+          height="32px"
+        />
       }
       // @TODO 컴포넌트로 분리 (BM-184 참고)
       rightContent={
