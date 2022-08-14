@@ -10,8 +10,9 @@ import { userAPI } from 'apis';
 import useStomp from 'hooks/useStomp';
 import { ChatMeesageResponseType } from 'types/chatMessages';
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { userId, chatRoomId } = context.query;
+export const getServerSideProps: GetServerSideProps = async ({
+  query: { userId, chatRoomId },
+}) => {
   let userInfo = {};
 
   try {
@@ -49,13 +50,15 @@ const ChatRoom: NextPage = ({
   }, []);
 
   const getMessages = async () => {
-    const { data } = await userAPI.getChatMessagesByChatRoomId({
-      chatRoomId,
-      offset: 0,
-      limit: 10,
-    });
+    const chatMessages = (
+      await userAPI.getChatMessagesByChatRoomId({
+        chatRoomId,
+        offset: 0,
+        limit: 100,
+      })
+    ).data;
 
-    setMessages([...data.reverse(), ...messages]);
+    setMessages([...chatMessages.reverse(), ...messages]);
   };
 
   const handleKeyup = (e: React.KeyboardEvent) => {
