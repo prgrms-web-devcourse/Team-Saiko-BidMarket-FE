@@ -9,7 +9,12 @@ interface SendingMessageProps {
 
 const SendingMessage = ({ content, createdAt }: SendingMessageProps) => {
   return (
-    <Flex width="100%" justifyContent="flex-end" alignItems="center">
+    <Flex
+      width="100%"
+      justifyContent="flex-end"
+      alignItems="center"
+      paddingRight="1px"
+    >
       <ChatTimeText createdAt={createdAt} />
       <Box
         maxWidth="55%"
