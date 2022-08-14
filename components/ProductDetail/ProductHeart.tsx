@@ -1,7 +1,7 @@
 import { StarIcon } from '@chakra-ui/icons';
 import { useToast } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { heartAPI } from 'apis';
 import { setToastInfo } from 'utils';
@@ -12,37 +12,49 @@ interface ProductHeartProps {
   title: string;
 }
 
-// TODO: 유저가 찜을 했는지에 대한 여부에 따라 찜 하기와 찜 취소하기 분기 처리
 const ProductHeart = ({ productId, userId, title }: ProductHeartProps) => {
   const [isHeartProduct, setIsHeartHeartProduct] = useState(false);
   const toast = useToast();
   const router = useRouter();
 
-  const handleHeartClick = async () => {
+  useEffect(() => {
+    getProductHeartAuthUser();
+  }, []);
+
+  const getProductHeartAuthUser = async () => {
+    try {
+      const { heart } = (await heartAPI.getHeartAuthUser(productId)).data;
+      setIsHeartHeartProduct(heart);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleHeartClick = () => {
+    checkLoginAuthUser();
+    toggleHeartProduct();
+  };
+
+  const checkLoginAuthUser = () => {
     if (userId === -1) {
       toast(setToastInfo('top', '찜은 로그인 후 이용 가능합니다.', 'warning'));
       router.push('/login');
       return;
     }
+  };
 
-    if (!isHeartProduct) {
-      try {
-        await heartAPI.putHeart(userId, productId);
-        setIsHeartHeartProduct(true);
-        toast(setToastInfo('top', `${title} 상품을 찜했습니다!`, 'success'));
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      try {
-        await heartAPI.deleteHeart(productId);
-        setIsHeartHeartProduct(false);
-        toast(
-          setToastInfo('top', `${title} 상품의 찜을 취소하였습니다.`, 'success')
-        );
-      } catch (error) {
-        console.log(error);
-      }
+  const toggleHeartProduct = async () => {
+    try {
+      await heartAPI.updateHeart(productId);
+      setIsHeartHeartProduct(!isHeartProduct);
+
+      isHeartProduct
+        ? toast(
+            setToastInfo('top', `${title}의 찜을 취소하였습니다.`, 'success')
+          )
+        : toast(setToastInfo('top', `${title}를 찜했습니다!`, 'success'));
+    } catch (error) {
+      console.log(error);
     }
   };
 
