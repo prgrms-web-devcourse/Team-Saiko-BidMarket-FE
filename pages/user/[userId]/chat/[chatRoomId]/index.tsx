@@ -88,32 +88,33 @@ const ChatRoom: NextPage = ({
 
   // TODO: ... 아이콘에 채팅방 나가기, 신고하기 기능
   return (
-    <Flex width="100%" flexDirection="column">
+    <Flex width="100%" height="100%" flexDirection="column">
       <Header
         leftContent={<GoBackIcon />}
         middleContent={<HeaderTitle title={chattingUsername} />}
       />
-      <Flex flexDirection="column" gap={'16px'}>
+      <Flex height="100%" flexDirection="column" gap="16px">
         <Center>
           <ChatDateBox />
         </Center>
-        {messages.map(
-          ({ userInfo: userInfoInMessage, content, createdAt }, index) => {
-            return userInfo.id === userInfoInMessage.userId ? (
-              <Flex key={index} width="100%">
-                <SendingMessage content={content} createdAt={createdAt} />
-              </Flex>
-            ) : (
-              <Flex key={index} width="100%">
-                <RecievedMessage
-                  userInfo={userInfoInMessage}
-                  content={content}
-                  createdAt={createdAt}
-                />
-              </Flex>
-            );
-          }
-        )}
+        <Flex flexDirection="column" flexGrow="1" gap="16px">
+          {messages.map(
+            ({ userInfo: userInfoInMessage, content, createdAt }, index) =>
+              userInfo.id === userInfoInMessage.userId ? (
+                <Flex key={index} width="100%">
+                  <SendingMessage content={content} createdAt={createdAt} />
+                </Flex>
+              ) : (
+                <Flex key={index} width="100%">
+                  <RecievedMessage
+                    userInfo={userInfoInMessage}
+                    content={content}
+                    createdAt={createdAt}
+                  />
+                </Flex>
+              )
+          )}
+        </Flex>
         <Flex position="sticky" bottom="0" width="100%" marginTop="16px">
           <ChatInput onSubmit={publish} />
         </Flex>
