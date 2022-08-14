@@ -12,7 +12,8 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ productInfo }: ProductCardProps) => {
-  const { id, title, thumbnailImage, minimumPrice, expireAt } = productInfo;
+  const { id, title, thumbnailImage, minimumPrice, expireAt, heartCount } =
+    productInfo;
   const router = useRouter();
 
   return (
@@ -60,7 +61,7 @@ const ProductCard = ({ productInfo }: ProductCardProps) => {
         <Flex justifyContent="flex-end" alignItems="center">
           <StarIcon color="#BFBFBF" />
           <Text fontSize="sm" marginLeft="5px">
-            3
+            {heartCount}
           </Text>
         </Flex>
       </Flex>
