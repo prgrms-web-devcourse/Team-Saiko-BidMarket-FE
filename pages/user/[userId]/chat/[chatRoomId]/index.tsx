@@ -1,21 +1,17 @@
 import { Flex, Input, Text } from '@chakra-ui/react';
-import { Client } from '@stomp/stompjs';
 import {
   GetServerSideProps,
   InferGetServerSidePropsType,
   NextPage,
 } from 'next';
-import getConfig from 'next/config';
-import { useCallback, useEffect, useState } from 'react';
-import SockJS from 'sockjs-client';
+import { useEffect, useState } from 'react';
 
 import { userAPI } from 'apis';
 import useStomp from 'hooks/useStomp';
-import { ChatMeesageResponseType, ChatMessageData } from 'types/chatMessages';
+import { ChatMeesageResponseType } from 'types/chatMessages';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { userId, chatRoomId } = context.query;
-  console.log(context.query);
   let userInfo = {};
 
   try {
