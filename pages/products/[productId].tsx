@@ -27,6 +27,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
 const ProductDetail = ({
   product: {
+    id,
     title,
     description,
     minimumPrice,
@@ -47,7 +48,7 @@ const ProductDetail = ({
       {
         pathname: `/reports`,
         query: {
-          isProduct: true,
+          productId: id,
           title,
           image: images[0].url,
           writer: writer.username,
@@ -75,6 +76,7 @@ const ProductDetail = ({
         <GoBackIcon />
       </Box>
       <Box
+        z-index="1"
         position="absolute"
         right="15px"
         top="20px"
