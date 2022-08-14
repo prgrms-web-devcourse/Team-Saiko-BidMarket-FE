@@ -1,33 +1,97 @@
-import { Center, Text } from '@chakra-ui/react';
-import type { NextPage } from 'next';
+import { Center } from '@chakra-ui/react';
+import type {
+  GetServerSideProps,
+  InferGetServerSidePropsType,
+  NextPage,
+} from 'next';
+import { useEffect, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
 
-import { GoBackIcon, Header, HeaderTitle, SEO } from 'components/common';
+import { userAPI } from 'apis';
+import {
+  GoBackIcon,
+  Header,
+  HeaderTitle,
+  ProductCardContainer,
+  SEO,
+} from 'components/common';
 import { NoProducts } from 'components/User';
+import { useGetUserSellProducts } from 'hooks/queries';
+import useLoginUser from 'hooks/useLoginUser';
 
-// @ TODO 데이터 가져와서 연결 작업
-const DUMMY = [];
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  const { userId } = query;
+  let user = {};
 
-const Sell: NextPage = () => {
-  // @ TODO 유저 정보와 접속자 정보 비교하는 작업 필요
-  const isOwnerUser = false;
+  try {
+    user = (await userAPI.getUser(parseInt(userId as string, 10))).data;
+  } catch (error) {
+    console.error(error);
+  }
+
+  return {
+    props: {
+      user,
+    },
+  };
+};
+
+const Sell: NextPage = ({
+  user: { id, username },
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const userId = parseInt(id, 10);
+  const { id: authUserId } = useLoginUser();
+  const [isMyPage, setIsMyPage] = useState(false);
+
+  const {
+    data: productPages,
+    fetchNextPage,
+    hasNextPage,
+  } = useGetUserSellProducts({ userId });
+  const [ref, isView] = useInView();
+
+  useEffect(() => {
+    if (userId === authUserId) {
+      setIsMyPage(true);
+    }
+  }, [authUserId]);
+
+  useEffect(() => {
+    if (isView && hasNextPage) {
+      fetchNextPage();
+    }
+  }, [isView, productPages]);
+
   return (
     <>
-      {/* @ TODO 실제 사용자 닉네임으로 교체 예정 */}
-      <SEO title="사용자 이름" />
+      <SEO title={`${username}의 판매한 상품`} />
       <Header
         leftContent={<GoBackIcon />}
         middleContent={<HeaderTitle title="판매한 상품" />}
       />
-      {DUMMY.length === 0 ? (
+      {productPages?.pages.map(({ data }, pageIndex) => {
+        return data.map((product, productIndex) => {
+          const lastPageIndex = productPages.pages.length - 1;
+          const lastProductIndex = data.length - 1;
+          const isLastProduct =
+            lastPageIndex === pageIndex && lastProductIndex === productIndex;
+          return isLastProduct ? (
+            <div ref={ref} key={product.id}>
+              <ProductCardContainer product={product} />
+            </div>
+          ) : (
+            <ProductCardContainer key={product.id} product={product} />
+          );
+        });
+      })}
+      {productPages?.pages[0].data.length === 0 && (
         <Center flexDirection="column" height="100%">
-          {isOwnerUser ? (
+          {isMyPage ? (
             <NoProducts pageName="userSellProducts" />
           ) : (
             <NoProducts pageName="userSellProductsOther" />
           )}
         </Center>
-      ) : (
-        <Text>list of Product Cards</Text>
       )}
     </>
   );

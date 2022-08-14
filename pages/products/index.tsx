@@ -35,6 +35,7 @@ const Products = ({
   const [isProgressed, setIsProgressed] = useState<boolean>(
     Boolean(JSON.parse(progressed))
   );
+
   // @TODO 쿼리스트링이 누락된 경우 메인페이지로 이동하는 예외처리
   const {
     data: productPages,
@@ -127,8 +128,9 @@ const Products = ({
           return data.map((product, productIndex) => {
             const lastPageIndex = productPages.pages.length - 1;
             const lastProductIndex = data.length - 1;
-            return lastPageIndex === pageIndex &&
-              lastProductIndex === productIndex ? (
+            const isLastProduct =
+              lastPageIndex === pageIndex && lastProductIndex === productIndex;
+            return isLastProduct ? (
               <div ref={ref} key={product.id}>
                 <ProductCardContainer product={product} />
               </div>
