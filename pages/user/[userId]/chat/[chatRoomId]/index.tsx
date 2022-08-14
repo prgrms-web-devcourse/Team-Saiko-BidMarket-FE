@@ -1,4 +1,4 @@
-import { Center, Flex, Input } from '@chakra-ui/react';
+import { Center, Flex } from '@chakra-ui/react';
 import {
   GetServerSideProps,
   InferGetServerSidePropsType,
@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import { userAPI } from 'apis';
 import {
   ChatDateBox,
+  ChatInput,
   RecievedMessage,
   SendingMessage,
 } from 'components/ChatRoom';
@@ -68,17 +69,6 @@ const ChatRoom: NextPage = ({
     setMessages([...chatMessages.reverse(), ...messages]);
   };
 
-  const handleKeyup = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') {
-      const target = e.target as HTMLInputElement;
-
-      publish(target.value);
-      target.value = '';
-
-      return;
-    }
-  };
-
   return (
     <Flex flexDirection="column">
       <Header
@@ -107,7 +97,9 @@ const ChatRoom: NextPage = ({
           }
         )}
       </Flex>
-      <Input onKeyUp={handleKeyup} />
+      <Flex position="sticky" bottom="0" width="100%" marginTop="16px">
+        <ChatInput onSubmit={publish} />
+      </Flex>
     </Flex>
   );
 };
