@@ -128,8 +128,9 @@ const Products = ({
           return data.map((product, productIndex) => {
             const lastPageIndex = productPages.pages.length - 1;
             const lastProductIndex = data.length - 1;
-            return lastPageIndex === pageIndex &&
-              lastProductIndex === productIndex ? (
+            const isLastProduct =
+              lastPageIndex === pageIndex && lastProductIndex === productIndex;
+            return isLastProduct ? (
               <div ref={ref} key={product.id}>
                 <ProductCardContainer product={product} />
               </div>

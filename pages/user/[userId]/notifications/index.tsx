@@ -97,8 +97,10 @@ const Notifications = ({
           ) => {
             const lastPageIndex = notificationPages.pages.length - 1;
             const lastNotificationIndex = data.length - 1;
-            return lastPageIndex === pageIndex &&
-              lastNotificationIndex === notificationIndex ? (
+            const isLastNotification =
+              lastPageIndex === pageIndex &&
+              lastNotificationIndex === notificationIndex;
+            return isLastNotification ? (
               <div ref={ref} key={id}>
                 <NotificationCard
                   id={id}
