@@ -47,11 +47,9 @@ const useStomp = ({ chatRoomId, userInfo, setMessages }: UseStompProps) => {
         }
 
         if (message.body) {
-          const { chatUserInfo, content, createdAt } = JSON.parse(message.body);
-
           setMessages((prevMessages) => [
             ...prevMessages,
-            { userInfo: chatUserInfo, content, createdAt },
+            JSON.parse(message.body),
           ]);
         }
       }
