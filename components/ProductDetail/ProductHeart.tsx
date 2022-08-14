@@ -27,7 +27,7 @@ const ProductHeart = ({ productId, userId, title }: ProductHeartProps) => {
 
     if (!isHeartProduct) {
       try {
-        await heartAPI.putHeart(productId, userId);
+        await heartAPI.putHeart(userId, productId);
         setIsHeartHeartProduct(true);
         toast(setToastInfo('top', `${title} 상품을 찜했습니다!`, 'success'));
       } catch (error) {
