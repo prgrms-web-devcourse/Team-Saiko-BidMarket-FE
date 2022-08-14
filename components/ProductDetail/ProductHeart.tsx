@@ -12,6 +12,7 @@ interface ProductHeartProps {
   title: string;
 }
 
+// TODO: 유저가 찜을 했는지에 대한 여부에 따라 찜 하기와 찜 취소하기 분기 처리
 const ProductHeart = ({ productId, userId, title }: ProductHeartProps) => {
   const [isHeartProduct, setIsHeartHeartProduct] = useState(false);
   const toast = useToast();
