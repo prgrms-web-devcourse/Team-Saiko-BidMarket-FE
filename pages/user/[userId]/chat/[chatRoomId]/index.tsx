@@ -1,4 +1,4 @@
-import { Flex, Input, Text } from '@chakra-ui/react';
+import { Center, Flex, Input, Text } from '@chakra-ui/react';
 import {
   GetServerSideProps,
   InferGetServerSidePropsType,
@@ -7,6 +7,8 @@ import {
 import { useEffect, useState } from 'react';
 
 import { userAPI } from 'apis';
+import { ChatDateBox } from 'components/ChatRoom';
+import { GoBackIcon, Header, HeaderTitle } from 'components/common';
 import useStomp from 'hooks/useStomp';
 import { ChatMeesageResponseType } from 'types/chatMessages';
 
@@ -73,9 +75,15 @@ const ChatRoom: NextPage = ({
   };
 
   return (
-    <Flex flexDirection="column" gap={'16px'}>
-      <h1>임시 채팅방이요!</h1>
+    <Flex flexDirection="column">
+      <Header
+        leftContent={<GoBackIcon />}
+        middleContent={<HeaderTitle title="유저네임" />}
+      />
       <Flex flexDirection="column" gap={'16px'}>
+        <Center>
+          <ChatDateBox />
+        </Center>
         {messages.map(({ userInfo, content, createdAt }, index) => (
           <Flex key={index} flexDirection="row" gap={'16px'}>
             <Text>{userInfo.username}</Text>
