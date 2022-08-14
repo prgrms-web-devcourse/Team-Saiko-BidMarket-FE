@@ -82,6 +82,7 @@ const ChatRoom: NextPage = ({
     });
   }, [lastRef, messages]);
 
+  // TODO: ... 아이콘에 채팅방 나가기, 신고하기 기능
   return (
     <Flex flexDirection="column">
       <Header

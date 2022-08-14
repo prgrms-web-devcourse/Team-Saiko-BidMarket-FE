@@ -4,6 +4,7 @@ interface ChatInputProps {
   onSubmit: (nextMessage: string) => void;
 }
 
+// TODO: 비행기? 아이콘 추가 왼쪽에 + 버튼도??
 const ChatInput = ({ onSubmit }: ChatInputProps) => {
   const handleKeyup = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {

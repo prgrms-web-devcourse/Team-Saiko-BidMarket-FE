@@ -1,5 +1,6 @@
 import { Center, Text } from '@chakra-ui/react';
 
+// TODO: 메세지 날짜별로 구분하고 날짜를 prop으로 받기
 const ChatDateBox = () => {
   return (
     <Center
