@@ -67,7 +67,6 @@ const ChatRoom: NextPage = ({
         limit: 100,
       })
     ).data;
-    console.log(chatMessages);
 
     setMessages([...chatMessages.reverse(), ...messages]);
   };
