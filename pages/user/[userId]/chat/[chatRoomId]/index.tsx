@@ -15,17 +15,17 @@ import { ChatMeesageResponseType } from 'types/chatMessages';
 export const getServerSideProps: GetServerSideProps = async ({
   query: { userId, chatRoomId, chattingUsername = '' },
 }) => {
-  let userInfo = {};
+  let user = {};
 
   try {
-    userInfo = (await userAPI.getUser(parseInt(userId as string, 10))).data;
+    user = (await userAPI.getUser(parseInt(userId as string, 10))).data;
   } catch (error) {
     console.error(error);
   }
 
   return {
     props: {
-      userInfo,
+      user,
       chatRoomId: parseInt(chatRoomId as string, 10),
       chattingUsername,
     },
@@ -33,7 +33,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 };
 
 const ChatRoom: NextPage = ({
-  userInfo,
+  user,
   chatRoomId,
   chattingUsername,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
@@ -41,9 +41,9 @@ const ChatRoom: NextPage = ({
   const { connect, disConnect, publish } = useStomp({
     chatRoomId,
     userInfo: {
-      userId: userInfo.id,
-      username: userInfo.username,
-      profileImage: userInfo.profileImage,
+      userId: user.id,
+      username: user.username,
+      profileImage: user.profileImage,
     },
     setMessages,
   });
@@ -93,7 +93,7 @@ const ChatRoom: NextPage = ({
           <ChatDateBox />
         </Center>
         <Flex flexDirection="column" flexGrow="1">
-          <MessageList userId={userInfo.id} messages={messages} />
+          <MessageList userId={user.id} messages={messages} />
         </Flex>
         <Flex position="sticky" bottom="0" width="100%" marginTop="16px">
           <ChatInput onSubmit={publish} />
