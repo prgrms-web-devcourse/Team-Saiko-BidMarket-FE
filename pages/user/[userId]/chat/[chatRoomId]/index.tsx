@@ -7,12 +7,7 @@ import {
 import { useEffect, useRef, useState } from 'react';
 
 import { userAPI } from 'apis';
-import {
-  ChatDateBox,
-  ChatInput,
-  RecievedMessage,
-  SendingMessage,
-} from 'components/ChatRoom';
+import { ChatDateBox, ChatInput, MessageList } from 'components/ChatRoom';
 import { GoBackIcon, Header, HeaderTitle } from 'components/common';
 import useStomp from 'hooks/useStomp';
 import { ChatMeesageResponseType } from 'types/chatMessages';
@@ -97,23 +92,8 @@ const ChatRoom: NextPage = ({
         <Center>
           <ChatDateBox />
         </Center>
-        <Flex flexDirection="column" flexGrow="1" gap="16px">
-          {messages.map(
-            ({ userInfo: userInfoInMessage, content, createdAt }, index) =>
-              userInfo.id === userInfoInMessage.userId ? (
-                <Flex key={index} width="100%">
-                  <SendingMessage content={content} createdAt={createdAt} />
-                </Flex>
-              ) : (
-                <Flex key={index} width="100%">
-                  <RecievedMessage
-                    userInfo={userInfoInMessage}
-                    content={content}
-                    createdAt={createdAt}
-                  />
-                </Flex>
-              )
-          )}
+        <Flex flexDirection="column" flexGrow="1">
+          <MessageList userId={userInfo.id} messages={messages} />
         </Flex>
         <Flex position="sticky" bottom="0" width="100%" marginTop="16px">
           <ChatInput onSubmit={publish} />
