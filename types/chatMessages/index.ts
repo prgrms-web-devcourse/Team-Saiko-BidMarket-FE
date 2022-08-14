@@ -1,5 +1,7 @@
+import { User } from 'types/user';
+
 export interface ChatMessageData {
-  userId: number;
+  userInfo: User;
   content: string;
   createdAt: Date;
 }

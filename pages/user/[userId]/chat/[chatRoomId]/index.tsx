@@ -1,38 +1,52 @@
-import { Center, Flex, Input, Text } from '@chakra-ui/react';
+import { Flex, Input, Text } from '@chakra-ui/react';
+import { Client } from '@stomp/stompjs';
 import {
   GetServerSideProps,
   InferGetServerSidePropsType,
   NextPage,
 } from 'next';
-import { useEffect, useState } from 'react';
+import getConfig from 'next/config';
+import { useCallback, useEffect, useState } from 'react';
+import SockJS from 'sockjs-client';
 
 import { userAPI } from 'apis';
-import { ChatMeesageResponseType } from 'types/chatMessages';
+import useStomp from 'hooks/useStomp';
+import { ChatMeesageResponseType, ChatMessageData } from 'types/chatMessages';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { userId, chatRoomId } = context.query;
   console.log(context.query);
-  let user = {};
+  let userInfo = {};
 
   try {
-    user = (await userAPI.getUser(parseInt(userId as string, 10))).data;
+    userInfo = (await userAPI.getUser(parseInt(userId as string, 10))).data;
   } catch (error) {
     console.error(error);
   }
 
   return {
     props: {
-      user,
+      userInfo,
       chatRoomId: parseInt(chatRoomId as string, 10),
     },
   };
 };
 
 const ChatRoom: NextPage = ({
-  user: { id },
+  userInfo,
   chatRoomId,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [messages, setMessages] = useState<ChatMeesageResponseType>([]);
+  const { connect, disConnect, publish } = useStomp({
+    chatRoomId,
+    userInfo,
+    setMessages,
+  });
+
+  useEffect(() => {
+    connect();
+    return () => disConnect();
+  }, []);
 
   useEffect(() => {
     getMessages();
@@ -45,23 +59,34 @@ const ChatRoom: NextPage = ({
       limit: 10,
     });
 
-    setMessages([...messages, ...data.reverse()]);
+    setMessages([...data.reverse(), ...messages]);
+  };
+
+  const handleKeyup = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      const target = e.target as HTMLInputElement;
+
+      publish(target.value);
+      target.value = '';
+
+      return;
+    }
   };
 
   return (
     <Flex flexDirection="column" gap={'16px'}>
       <h1>임시 채팅방이요!</h1>
       <Flex flexDirection="column" gap={'16px'}>
-        {messages.map(({ userId, content, createdAt }, index) => (
+        {messages.map(({ userInfo, content, createdAt }, index) => (
           <Flex key={index} flexDirection="row" gap={'16px'}>
-            <Text>{userId}</Text>
+            <Text>{userInfo.username}</Text>
             <Text color="red">{content}</Text>
             <Text>{String(createdAt)}</Text>
           </Flex>
         ))}
       </Flex>
 
-      <Input />
+      <Input onKeyUp={handleKeyup} />
     </Flex>
   );
 };

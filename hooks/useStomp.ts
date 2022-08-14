@@ -1,0 +1,86 @@
+import { Client } from '@stomp/stompjs';
+import getConfig from 'next/config';
+import { Dispatch, SetStateAction, useCallback } from 'react';
+import SockJS from 'sockjs-client';
+
+import { ChatMeesageResponseType } from 'types/chatMessages';
+import { User } from 'types/user';
+
+const { publicRuntimeConfig } = getConfig();
+let client: Client | null = null;
+
+export interface UseStompProps {
+  chatRoomId: number;
+  userInfo: User;
+  setMessages: Dispatch<SetStateAction<ChatMeesageResponseType>>;
+}
+
+const useStomp = ({ chatRoomId, userInfo, setMessages }: UseStompProps) => {
+  const connect = () => {
+    if (client !== null) {
+      return;
+    }
+
+    client = new Client({
+      webSocketFactory: () => new SockJS(publicRuntimeConfig.stompUrl),
+      debug: function (str) {
+        console.log(str);
+      },
+      onConnect: () => {
+        subscribe();
+      },
+    });
+
+    client.activate();
+  };
+
+  const subscribe = () => {
+    if (client === null || !client.connected) {
+      return;
+    }
+
+    client?.subscribe(
+      `/chat/room/${chatRoomId}`,
+      (message: { body: string }) => {
+        if (!message.body) {
+          return;
+        }
+
+        if (message.body) {
+          const { chatUserInfo, content, createdAt } = JSON.parse(message.body);
+
+          setMessages((prevMessages) => [
+            ...prevMessages,
+            { userInfo: chatUserInfo, content, createdAt },
+          ]);
+        }
+      }
+    );
+
+    client?.activate();
+  };
+
+  const disConnect = () => {
+    if (client !== null && client.connected) {
+      client.deactivate();
+    }
+  };
+
+  const publish = useCallback(
+    (message: string) => {
+      if (client === null || !client.connected) {
+        return;
+      }
+
+      client?.publish({
+        destination: `/message/room/${chatRoomId}`,
+        body: JSON.stringify({ userId: userInfo.id, content: message }),
+      });
+    },
+    [chatRoomId, userInfo]
+  );
+
+  return { connect, disConnect, publish };
+};
+
+export default useStomp;
