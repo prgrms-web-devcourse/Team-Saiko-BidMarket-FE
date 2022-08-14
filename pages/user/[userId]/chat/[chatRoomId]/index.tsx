@@ -4,7 +4,7 @@ import {
   InferGetServerSidePropsType,
   NextPage,
 } from 'next';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { userAPI } from 'apis';
 import {
@@ -46,6 +46,7 @@ const ChatRoom: NextPage = ({
     userInfo,
     setMessages,
   });
+  const lastRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     connect();
@@ -68,6 +69,17 @@ const ChatRoom: NextPage = ({
 
     setMessages([...chatMessages.reverse(), ...messages]);
   };
+
+  useEffect(() => {
+    if (!lastRef.current) {
+      return;
+    }
+
+    lastRef.current.scrollIntoView({
+      behavior: 'smooth',
+      block: 'end',
+    });
+  }, [lastRef, messages]);
 
   return (
     <Flex flexDirection="column">
@@ -96,9 +108,10 @@ const ChatRoom: NextPage = ({
             );
           }
         )}
-      </Flex>
-      <Flex position="sticky" bottom="0" width="100%" marginTop="16px">
-        <ChatInput onSubmit={publish} />
+        <Flex position="sticky" bottom="0" width="100%" marginTop="16px">
+          <ChatInput onSubmit={publish} />
+        </Flex>
+        <div ref={lastRef} />
       </Flex>
     </Flex>
   );
