@@ -64,7 +64,7 @@ const Sell: NextPage = ({
 
   return (
     <>
-      <SEO title={username + '판매한 상품'} />
+      <SEO title={`${username}의 판매한 상품`} />
       <Header
         leftContent={<GoBackIcon />}
         middleContent={<HeaderTitle title="판매한 상품" />}
