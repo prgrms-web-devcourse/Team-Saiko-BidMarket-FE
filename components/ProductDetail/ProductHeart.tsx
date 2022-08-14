@@ -36,11 +36,12 @@ const ProductHeart = ({ productId, userId, title }: ProductHeartProps) => {
   };
 
   const checkLoginAuthUser = () => {
-    if (userId === -1) {
-      toast(setToastInfo('top', '찜은 로그인 후 이용 가능합니다.', 'warning'));
-      router.push('/login');
+    if (userId !== -1) {
       return;
     }
+
+    toast(setToastInfo('top', '찜은 로그인 후 이용 가능합니다.', 'warning'));
+    router.push('/login');
   };
 
   const toggleHeartProduct = async () => {
