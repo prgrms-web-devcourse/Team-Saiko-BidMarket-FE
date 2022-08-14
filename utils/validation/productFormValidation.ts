@@ -37,7 +37,6 @@ const productFormValidation = ({
   if (minimumPrice && minimumPrice < 1000) {
     error.minimumPrice = '1000원 이상 입력 가능합니다.';
   }
-  console.log(minimumPrice % 100);
   if (minimumPrice && minimumPrice % 100 !== 0) {
     error.minimumPrice = '100원 단위로 입력 가능합니다.';
   }

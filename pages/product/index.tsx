@@ -46,9 +46,12 @@ const Product: NextPage = () => {
         category: categoryEN as categoryOptionsENType,
         description: description.trim(),
       };
-
-      // await productAPI.createProduct(data);
-      console.log(data);
+      try {
+        await productAPI.createProduct(data);
+        // e.target.redirect(`/products/${productId}`);
+      } catch (err) {
+        console.log('안됐습니다.');
+      }
     },
 
     validate: productFormValidation,
