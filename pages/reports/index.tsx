@@ -49,7 +49,7 @@ const Reports = ({
     try {
       if (productId) {
         await reportAPI.createReportByProduct(productId, reason);
-      } else if (userId) {
+      } else {
         await reportAPI.createReportByUser(userId, reason);
       }
       toast(setToastInfo('top', '신고가 접수되었습니다.', 'success'));
