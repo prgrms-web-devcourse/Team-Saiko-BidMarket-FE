@@ -7,7 +7,11 @@ import {
 import { useEffect, useState } from 'react';
 
 import { userAPI } from 'apis';
-import { ChatDateBox, SendingMessage } from 'components/ChatRoom';
+import {
+  ChatDateBox,
+  RecievedMessage,
+  SendingMessage,
+} from 'components/ChatRoom';
 import { GoBackIcon, Header, HeaderTitle } from 'components/common';
 import useStomp from 'hooks/useStomp';
 import { ChatMeesageResponseType } from 'types/chatMessages';
@@ -59,6 +63,7 @@ const ChatRoom: NextPage = ({
         limit: 100,
       })
     ).data;
+    console.log(chatMessages);
 
     setMessages([...chatMessages.reverse(), ...messages]);
   };
@@ -84,13 +89,24 @@ const ChatRoom: NextPage = ({
         <Center>
           <ChatDateBox />
         </Center>
-        {messages.map(({ userInfo, content, createdAt }, index) => (
-          <Flex key={index} width="100%">
-            <SendingMessage content={content} createdAt={createdAt} />
-          </Flex>
-        ))}
+        {messages.map(
+          ({ userInfo: userInfoInMessage, content, createdAt }, index) => {
+            return userInfo.id === userInfoInMessage.userId ? (
+              <Flex key={index} width="100%">
+                <SendingMessage content={content} createdAt={createdAt} />
+              </Flex>
+            ) : (
+              <Flex key={index} width="100%">
+                <RecievedMessage
+                  userInfo={userInfoInMessage}
+                  content={content}
+                  createdAt={createdAt}
+                />
+              </Flex>
+            );
+          }
+        )}
       </Flex>
-
       <Input onKeyUp={handleKeyup} />
     </Flex>
   );
