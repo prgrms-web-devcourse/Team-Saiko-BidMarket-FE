@@ -18,7 +18,7 @@ import useStomp from 'hooks/useStomp';
 import { ChatMeesageResponseType } from 'types/chatMessages';
 
 export const getServerSideProps: GetServerSideProps = async ({
-  query: { userId, chatRoomId, chattingUsername },
+  query: { userId, chatRoomId, chattingUsername = '' },
 }) => {
   let userInfo = {};
 
@@ -45,7 +45,11 @@ const ChatRoom: NextPage = ({
   const [messages, setMessages] = useState<ChatMeesageResponseType>([]);
   const { connect, disConnect, publish } = useStomp({
     chatRoomId,
-    userInfo,
+    userInfo: {
+      userId: userInfo.id,
+      username: userInfo.username,
+      profileImage: userInfo.profileImage,
+    },
     setMessages,
   });
   const lastRef = useRef<HTMLDivElement>(null);
@@ -84,7 +88,7 @@ const ChatRoom: NextPage = ({
 
   // TODO: ... 아이콘에 채팅방 나가기, 신고하기 기능
   return (
-    <Flex flexDirection="column">
+    <Flex width="100%" flexDirection="column">
       <Header
         leftContent={<GoBackIcon />}
         middleContent={<HeaderTitle title={chattingUsername} />}

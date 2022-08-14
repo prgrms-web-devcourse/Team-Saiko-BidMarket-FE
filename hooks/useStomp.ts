@@ -4,14 +4,14 @@ import { Dispatch, SetStateAction, useCallback } from 'react';
 import SockJS from 'sockjs-client';
 
 import { ChatMeesageResponseType } from 'types/chatMessages';
-import { User } from 'types/user';
+import { UserInfo } from 'types/user';
 
 const { publicRuntimeConfig } = getConfig();
 let client: Client | null = null;
 
 export interface UseStompProps {
   chatRoomId: number;
-  userInfo: User;
+  userInfo: UserInfo;
   setMessages: Dispatch<SetStateAction<ChatMeesageResponseType>>;
 }
 
@@ -72,7 +72,7 @@ const useStomp = ({ chatRoomId, userInfo, setMessages }: UseStompProps) => {
 
       client?.publish({
         destination: `/message/room/${chatRoomId}`,
-        body: JSON.stringify({ userId: userInfo.id, content: message }),
+        body: JSON.stringify({ userId: userInfo.userId, content: message }),
       });
     },
     [chatRoomId, userInfo]

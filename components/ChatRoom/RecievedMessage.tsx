@@ -1,11 +1,11 @@
 import { Avatar, Box, Flex, Text } from '@chakra-ui/react';
 
-import { User } from 'types/user';
+import { UserInfo } from 'types/user';
 
 import { ChatTimeText } from '.';
 
 interface RecievedMessageProps {
-  userInfo: User;
+  userInfo: UserInfo;
   content: string;
   createdAt: Date;
 }
