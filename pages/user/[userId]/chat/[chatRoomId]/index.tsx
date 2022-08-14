@@ -95,11 +95,17 @@ const ChatRoom: NextPage = ({
         <Flex flexDirection="column" flexGrow="1">
           <MessageList userId={user.id} messages={messages} />
         </Flex>
-        <Flex position="sticky" bottom="0" width="100%" marginTop="16px">
-          <ChatInput onSubmit={publish} />
-        </Flex>
-        <div ref={lastRef} />
       </Flex>
+      <Flex
+        position="sticky"
+        bottom="0px"
+        width="100%"
+        marginTop="16px"
+        bgColor="white"
+      >
+        <ChatInput onSubmit={publish} />
+      </Flex>
+      <div ref={lastRef} />
     </Flex>
   );
 };
