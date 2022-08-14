@@ -92,7 +92,19 @@ const Chats: NextPage = ({
                 previewChat={lastMessage}
                 productImage={productInfo.thumbnailImage}
                 createdAt={new Date(lastMessageDate)}
-                onClick={() => router.push(`/user/${id}/chat/${chatRoomId}`)}
+                onClick={() =>
+                  router.push(
+                    {
+                      pathname: `/user/${id}/chat/${chatRoomId}`,
+                      query: {
+                        id,
+                        chatRoomId,
+                        chattingUsername: opponentUserInfo.username,
+                      },
+                    },
+                    `/user/${id}/chat/${chatRoomId}`
+                  )
+                }
               />
               <Divider />
             </Fragment>

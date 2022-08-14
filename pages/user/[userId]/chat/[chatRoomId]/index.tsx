@@ -1,44 +1,53 @@
-import { Flex, Input, Text } from '@chakra-ui/react';
+import { Center, Flex } from '@chakra-ui/react';
 import {
   GetServerSideProps,
   InferGetServerSidePropsType,
   NextPage,
 } from 'next';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { userAPI } from 'apis';
+import { ChatDateBox, ChatInput, MessageList } from 'components/ChatRoom';
+import { GoBackIcon, Header, HeaderTitle } from 'components/common';
 import useStomp from 'hooks/useStomp';
 import { ChatMeesageResponseType } from 'types/chatMessages';
 
 export const getServerSideProps: GetServerSideProps = async ({
-  query: { userId, chatRoomId },
+  query: { userId, chatRoomId, chattingUsername = '' },
 }) => {
-  let userInfo = {};
+  let user = {};
 
   try {
-    userInfo = (await userAPI.getUser(parseInt(userId as string, 10))).data;
+    user = (await userAPI.getUser(parseInt(userId as string, 10))).data;
   } catch (error) {
     console.error(error);
   }
 
   return {
     props: {
-      userInfo,
+      user,
       chatRoomId: parseInt(chatRoomId as string, 10),
+      chattingUsername,
     },
   };
 };
 
 const ChatRoom: NextPage = ({
-  userInfo,
+  user,
   chatRoomId,
+  chattingUsername,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [messages, setMessages] = useState<ChatMeesageResponseType>([]);
   const { connect, disConnect, publish } = useStomp({
     chatRoomId,
-    userInfo,
+    userInfo: {
+      userId: user.id,
+      username: user.username,
+      profileImage: user.profileImage,
+    },
     setMessages,
   });
+  const lastRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     connect();
@@ -61,31 +70,42 @@ const ChatRoom: NextPage = ({
     setMessages([...chatMessages.reverse(), ...messages]);
   };
 
-  const handleKeyup = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') {
-      const target = e.target as HTMLInputElement;
-
-      publish(target.value);
-      target.value = '';
-
+  useEffect(() => {
+    if (!lastRef.current) {
       return;
     }
-  };
 
+    lastRef.current.scrollIntoView({
+      behavior: 'smooth',
+      block: 'end',
+    });
+  }, [lastRef, messages]);
+
+  // TODO: ... 아이콘에 채팅방 나가기, 신고하기 기능
   return (
-    <Flex flexDirection="column" gap={'16px'}>
-      <h1>임시 채팅방이요!</h1>
-      <Flex flexDirection="column" gap={'16px'}>
-        {messages.map(({ userInfo, content, createdAt }, index) => (
-          <Flex key={index} flexDirection="row" gap={'16px'}>
-            <Text>{userInfo.username}</Text>
-            <Text color="red">{content}</Text>
-            <Text>{String(createdAt)}</Text>
-          </Flex>
-        ))}
+    <Flex width="100%" height="100%" flexDirection="column">
+      <Header
+        leftContent={<GoBackIcon />}
+        middleContent={<HeaderTitle title={chattingUsername} />}
+      />
+      <Flex height="100%" flexDirection="column" gap="16px">
+        <Center>
+          <ChatDateBox />
+        </Center>
+        <Flex flexDirection="column" flexGrow="1">
+          <MessageList userId={user.id} messages={messages} />
+        </Flex>
       </Flex>
-
-      <Input onKeyUp={handleKeyup} />
+      <Flex
+        position="sticky"
+        bottom="0px"
+        width="100%"
+        marginTop="16px"
+        bgColor="white"
+      >
+        <ChatInput onSubmit={publish} />
+      </Flex>
+      <div ref={lastRef} />
     </Flex>
   );
 };
