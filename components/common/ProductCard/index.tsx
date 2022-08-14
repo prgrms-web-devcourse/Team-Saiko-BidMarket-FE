@@ -12,7 +12,8 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ productInfo }: ProductCardProps) => {
-  const { id, title, thumbnailImage, minimumPrice, expireAt } = productInfo;
+  const { id, title, thumbnailImage, minimumPrice, expireAt, heartCount } =
+    productInfo;
   const router = useRouter();
 
   return (
@@ -58,9 +59,11 @@ const ProductCard = ({ productInfo }: ProductCardProps) => {
           </Text>
         </Flex>
         <Flex justifyContent="flex-end" alignItems="center">
-          <StarIcon color="#BFBFBF" />
-          <Text fontSize="sm" marginLeft="5px">
-            3
+          <StarIcon color="#BFBFBF" w="3" />
+          <Text fontSize="xs" marginLeft="5px" paddingRight="5px">
+            {heartCount
+              ? `${heartCount}명이 이 상품을 찜했어요!`
+              : `아직 아무도 찜하지 않았어요!`}
           </Text>
         </Flex>
       </Flex>

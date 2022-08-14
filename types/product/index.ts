@@ -5,6 +5,7 @@ export interface CardProductData {
   title: string;
   thumbnailImage: string;
   minimumPrice: number;
+  heartCount: number;
   expireAt: Date;
   createdAt: Date;
   updatedAt: Date;
