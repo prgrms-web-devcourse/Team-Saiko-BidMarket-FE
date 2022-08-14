@@ -47,7 +47,8 @@ const Product: NextPage = () => {
         description: description.trim(),
       };
 
-      await productAPI.createProduct(data);
+      // await productAPI.createProduct(data);
+      console.log(data);
     },
 
     validate: productFormValidation,
@@ -137,7 +138,11 @@ const Product: NextPage = () => {
               }
             />
             <Flex flexDirection="row" justifyContent="space-between" w="100%">
-              <FormControl w="47%" h="20%">
+              <FormControl
+                w="47%"
+                h="20%"
+                isInvalid={categoryEN === '' ? true : false}
+              >
                 <AddProductCategory onChange={setCategoryEN} />
                 <FormErrorMessage paddingLeft="19px">
                   {errors.category as string}

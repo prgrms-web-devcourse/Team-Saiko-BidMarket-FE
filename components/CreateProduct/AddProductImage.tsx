@@ -39,25 +39,27 @@ const AddProductImage = ({
           minW="82px"
         />
         <Divider orientation="vertical" w="24px" />
-        <Flex w="70%" overflowX="hidden">
-          <Flex
-            w="100%"
-            position="relative"
-            overflowX="scroll"
-            whiteSpace="nowrap"
-            css={{
-              '&::-webkit-scrollbar': {
-                display: 'none',
-              },
-            }}
-          >
+        <Flex
+          w="100%"
+          h="100%"
+          position="relative"
+          top="-23.5px"
+          overflowX="scroll"
+          whiteSpace="nowrap"
+          css={{
+            '&::-webkit-scrollbar': {
+              display: 'none',
+            },
+          }}
+        >
+          <Flex w="200px">
             {productImageUrls &&
               productImageUrls?.map((ImageURL) => {
                 return (
-                  <Box key={ImageURL} minW="82px" marginRight="15px">
+                  <Box key={ImageURL} marginRight="15px" minW="82px">
                     <IconButton
-                      position="absolute"
-                      transform="translate(300%, -25%)"
+                      position="relative"
+                      transform="translate(300%, 50%)"
                       borderRadius="2xl"
                       boxSize="22px"
                       variant="outline"
