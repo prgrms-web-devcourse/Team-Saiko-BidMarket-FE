@@ -16,7 +16,9 @@ import useLoginUser from 'hooks/useLoginUser';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { productId } = context.query;
-  const { data } = await productAPI.getProduct(Number(productId));
+  const { data } = await productAPI.getProduct(
+    parseInt(productId as string, 10)
+  );
 
   return {
     props: {
