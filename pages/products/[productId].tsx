@@ -1,4 +1,3 @@
-import { StarIcon } from '@chakra-ui/icons';
 import { Divider, Flex, Box, Image } from '@chakra-ui/react';
 import { format } from 'date-fns';
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
@@ -11,6 +10,7 @@ import {
   ProductImage,
   ProductInfo,
   ProductSeller,
+  ProductHeart,
 } from 'components/ProductDetail';
 import useLoginUser from 'hooks/useLoginUser';
 
@@ -92,7 +92,7 @@ const ProductDetail = ({
             name={writer.username}
             profileImage={writer.profileImage}
           />
-          <StarIcon w="23px" color="brand.primary-900" />
+          <ProductHeart productId={id} userId={authUserId} title={title} />
         </Flex>
         <Divider />
         <ProductInfo
