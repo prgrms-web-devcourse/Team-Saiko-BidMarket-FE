@@ -18,7 +18,7 @@ import useStomp from 'hooks/useStomp';
 import { ChatMeesageResponseType } from 'types/chatMessages';
 
 export const getServerSideProps: GetServerSideProps = async ({
-  query: { userId, chatRoomId },
+  query: { userId, chatRoomId, chattingUsername },
 }) => {
   let userInfo = {};
 
@@ -32,6 +32,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     props: {
       userInfo,
       chatRoomId: parseInt(chatRoomId as string, 10),
+      chattingUsername,
     },
   };
 };
@@ -39,6 +40,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 const ChatRoom: NextPage = ({
   userInfo,
   chatRoomId,
+  chattingUsername,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [messages, setMessages] = useState<ChatMeesageResponseType>([]);
   const { connect, disConnect, publish } = useStomp({
@@ -85,7 +87,7 @@ const ChatRoom: NextPage = ({
     <Flex flexDirection="column">
       <Header
         leftContent={<GoBackIcon />}
-        middleContent={<HeaderTitle title="유저네임" />}
+        middleContent={<HeaderTitle title={chattingUsername} />}
       />
       <Flex flexDirection="column" gap={'16px'}>
         <Center>
