@@ -1,9 +1,10 @@
-# TEAM-SAIKO-BIDMARKET-FE (2022.07 ~)
+# TEAM-SAIKO-BIDMARKET-FE
 
 ## <img height="25px" src="https://user-images.githubusercontent.com/50071076/184506573-ed624123-2e8f-430c-9165-0bce79d1e13d.png" /> 비딩을 통한 현명한 중고 거래, 비드마켓
 
 **온라인 비딩 시스템을 이용한 중고 물품 거래 서비스**입니다.
 
+<br/>
 ## <img height="25px" src="https://user-images.githubusercontent.com/50071076/184506573-ed624123-2e8f-430c-9165-0bce79d1e13d.png" /> 사이코팀 소개
 
 ## FE
@@ -109,6 +110,39 @@
   </tr>
 </table>
 
+<br/>
+## <img height="25px" src="https://user-images.githubusercontent.com/50071076/184506573-ed624123-2e8f-430c-9165-0bce79d1e13d.png" /> 개발 기간 & 일정
+
+> 2022/07/15 ~ 진행중
+
+<table>
+  <tr>
+    <td align="center" width="150px">주차</td>
+    <td align="center" width="500px">주요 일정</td>
+  </tr>
+  <tr>
+    <td align="center">1</td>
+    <td align="center">세부 기획, 요구사항 명세</td>
+  </tr>
+  <tr>
+    <td align="center">2</td>
+    <td align="center">소셜 로그인, 회원 정보, 상품 목록 조회</td>
+  </tr>
+  <tr>
+    <td align="center">3</td>
+    <td align="center">상품 등록, 경매 입찰, 낙찰 핵심 로직 구현</td>
+  </tr>
+  <tr>
+    <td align="center">4</td>
+    <td align="center">알림, 채팅, 신고하기, 찜하기 기능 구현</td>
+  </tr>
+  <tr>
+    <td align="center">5 ~ 진행중</td>
+    <td align="center">리팩토링과 추가 기능 구현</td>
+  </tr>
+</table>
+
+<br/>
 ## <img height="25px" src="https://user-images.githubusercontent.com/50071076/184506573-ed624123-2e8f-430c-9165-0bce79d1e13d.png" /> 기술 스택
 
 ### 프레임워크
@@ -125,15 +159,15 @@
 
 ### 커뮤니케이션
 
-<img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=Notion&logoColor=white"> <img src="https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=Slack&logoColor=white"> <img src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=Discord&logoColor=white">
+<img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=Notion&logoColor=white"> <img src="https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=Slack&logoColor=white"> <img src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=Discord&logoColor=white"> <img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=Discord&logoColor=white">
 
-### 디자인
-
-<img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=Discord&logoColor=white">
+<br />
 
 ## <img height="25px" src="https://user-images.githubusercontent.com/50071076/184506573-ed624123-2e8f-430c-9165-0bce79d1e13d.png" /> 디자인 및 와이어프레임
 
 - [비드마켓 Figma 보러가기](https://www.figma.com/file/bKGr5M3qtpqkE9FRBq6Sax/%EB%B9%84%EB%93%9C%EB%A7%88%EC%BC%93?node-id=0%3A1)
+
+<br />
 
 ## <img height="25px" src="https://user-images.githubusercontent.com/50071076/184506573-ed624123-2e8f-430c-9165-0bce79d1e13d.png" /> 프로젝트 개요
 
@@ -165,6 +199,8 @@
 - 구매자는 자신이 지불하고 싶은 금액 이하로 상품을 구매할 수 있다.
 
 > **비딩**: 입찰자(비더, Bidder)는 **비공개 입찰 방식**으로 구매를 희망하는 최고가를 적어 내게 된다. 경매 종료시점에서 가장 높은 비딩 금액을 제시한 순서대로 낙찰이 결정되며, 낙찰가는 공개 입찰방식으로 **차상위**금액에 1호가를 더한 가격으로 결정된다.
+
+<br/>
 
 ## <img height="25px" src="https://user-images.githubusercontent.com/50071076/184506573-ed624123-2e8f-430c-9165-0bce79d1e13d.png" /> 프로젝트 주요 타겟
 
