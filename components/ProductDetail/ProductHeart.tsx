@@ -49,11 +49,10 @@ const ProductHeart = ({ productId, userId, title }: ProductHeartProps) => {
       await heartAPI.updateHeart(productId);
       setIsHeartHeartProduct(!isHeartProduct);
 
-      isHeartProduct
-        ? toast(
-            setToastInfo('top', `${title}의 찜을 취소하였습니다.`, 'success')
-          )
-        : toast(setToastInfo('top', `${title}를 찜했습니다!`, 'success'));
+      const toastContent = isHeartProduct
+        ? `${title}의 찜을 취소하였습니다.`
+        : `${title}를 찜했습니다!`;
+      toast(setToastInfo('top', toastContent, 'success'));
     } catch (error) {
       console.log(error);
     }
