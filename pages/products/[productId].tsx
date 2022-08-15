@@ -74,8 +74,7 @@ const ProductDetail = ({
         top="20px"
         cursor="pointer"
       >
-        {/* //TODO 색상 props 적용 */}
-        <GoBackIcon />
+        <GoBackIcon color="#dddddd" />
       </Box>
       <Box
         zIndex={3}
@@ -85,7 +84,9 @@ const ProductDetail = ({
         cursor="pointer"
         onClick={handleReportSirenIconClick}
       >
-        {!isSeller && <Image src="/svg/siren.svg" alt="siren-icon" />}
+        {!isSeller && (
+          <Image src="/svg/siren-light.svg" alt="siren-light-icon" />
+        )}
       </Box>
       <Flex direction="column" width="100%" marginTop="317px">
         <Flex justifyContent="space-between" alignItems="center">

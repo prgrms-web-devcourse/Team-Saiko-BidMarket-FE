@@ -1,7 +1,11 @@
 import { ChevronLeftIcon } from '@chakra-ui/icons';
 import { useRouter } from 'next/router';
 
-const GoBackIcon = () => {
+interface GoBackIconProps {
+  color?: string;
+}
+
+const GoBackIcon = ({ color = '#000000' }: GoBackIconProps) => {
   const router = useRouter();
 
   const switchRouter = () => {
@@ -15,6 +19,7 @@ const GoBackIcon = () => {
 
   return (
     <ChevronLeftIcon
+      color={color}
       _hover={{ cursor: 'pointer' }}
       boxSize="8"
       onClick={() => switchRouter()}

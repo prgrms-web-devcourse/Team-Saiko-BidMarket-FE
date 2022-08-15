@@ -60,6 +60,7 @@ const ProductBidDrawer = ({
         setToastInfo('top', `${biddingPrice}원에 입찰하였습니다.`, 'success')
       );
       onClose();
+      router.reload();
     } catch (error) {
       console.log(error);
       toast(setToastInfo('top', '입찰에 실패하였습니다.', 'error'));
