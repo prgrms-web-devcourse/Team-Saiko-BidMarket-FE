@@ -8,6 +8,7 @@ interface ImageUploadProps {
   name: string;
   productImageArray: string[];
   setProductImageArray: React.Dispatch<React.SetStateAction<string[]>>;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 // TODO: 환경변수로 빼놓을 예정
@@ -19,6 +20,7 @@ const AddProductImageUpload = ({
   name,
   productImageArray,
   setProductImageArray,
+  handleChange: onChange,
 }: ImageUploadProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [productImageUrls, setProductImageUrls] = useState<Array<string>>([]);
@@ -49,6 +51,7 @@ const AddProductImageUpload = ({
         return `${BUCKET_URL}/${FOLDER_NAME}/${file.name}`;
       })
     );
+    onChange(e);
   };
 
   const uploadImage = async (imageFile: File) => {
