@@ -10,6 +10,7 @@ interface ImageUploadProps {
   setProductImageArray: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
+// TODO: 환경변수로 빼놓을 예정
 // const BUCKET_URL = process.env.BUCKET_URL;
 const BUCKET_URL = 'https://bid-market-bucket.s3.ap-northeast-2.amazonaws.com';
 const FOLDER_NAME = 'products';
@@ -28,7 +29,6 @@ const AddProductImageUpload = ({
 
   const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files as FileList;
-    const imageUrls = [] as Array<string>;
 
     if (!files || files.length === 0) {
       return;
@@ -36,8 +36,6 @@ const AddProductImageUpload = ({
 
     [...files].forEach(async (file) => {
       await uploadImage(file);
-      const uploadedUrl = `${BUCKET_URL}/${FOLDER_NAME}/${file.name}`;
-      imageUrls.push(uploadedUrl);
     });
 
     setProductImageUrls(

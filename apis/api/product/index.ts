@@ -4,7 +4,7 @@ import { categoryOptionsENType } from 'types/categoryOption';
 import { ProductResponse, ProductsResponseType } from 'types/product';
 import { sortOptionsENType } from 'types/sortOption';
 
-interface PostData {
+interface ProductData {
   images: string[];
   title: string;
   minimumPrice: number;
@@ -20,6 +20,7 @@ const productAPI = {
     ),
   getProduct: (productId: number) =>
     baseInstance.get<ProductResponse>(`/products/${productId}`),
+
   getProductsByKeyword: ({
     offset,
     title,
@@ -37,7 +38,7 @@ const productAPI = {
     baseInstance.get<ProductsResponseType>(
       `/products?title=${title}&progressed=${progressed}&category=${category}&sort=${sort}&offset=${offset}&limit=10`
     ),
-  createProduct: async (data: PostData) => {
+  createProduct: async (data: ProductData) => {
     return await authInstance.post(`/products`, data);
   },
 };
