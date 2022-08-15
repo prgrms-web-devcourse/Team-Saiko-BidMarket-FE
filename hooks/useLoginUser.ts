@@ -63,14 +63,7 @@ const useTempLoginUser = ({
     }
 
     handleAuthUser && handleAuthUser({ isAuthUser, authUser });
-  }, [
-    isAuthFinished,
-    isAuthUser,
-    setAuthUser,
-    handleAuthUser,
-    handleNotAuthUser,
-    authUser,
-  ]);
+  }, [isAuthFinished, isAuthUser, setAuthUser, authUser]);
 
   return { authUser, isAuthUser, isAuthFinished };
 };
