@@ -41,8 +41,10 @@ const Bid: NextPage = ({
   user: { id, username },
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
-  const userId = parseInt(id, 10);
-  const { id: authUserId } = useLoginUser();
+  const { isAuthFinished, authUser } = useLoginUser({
+    handleAuthUser: ({ authUser }) => authUser?.id !== id && router.push('/'),
+    handleNotAuthUser: () => router.push('/'),
+  });
   const {
     data: productPages,
     fetchNextPage,
@@ -51,28 +53,15 @@ const Bid: NextPage = ({
   const [ref, isView] = useInView();
 
   useEffect(() => {
-    if (authUserId === -1) {
-      return;
-    }
-
-    if (userId !== authUserId) {
-      router.push('/');
-      return;
-    }
-  }, [authUserId]);
-
-  useEffect(() => {
     if (isView && hasNextPage) {
       fetchNextPage();
     }
   }, [isView, productPages]);
 
-  // @TODO 토큰이 없는 경우 계속 Spinner 렌더링 현상 개선 필요
-  // useLoginUser 내부에 토큰여부에 의해서든 API에 의해서든 업데이트 되었다는 신호가 필요
   // @TODO 페이지에 진입 후 판단하는 문제 존재
   // 따라서 찰나의 순간 목록이 렌더링된다 -> 불필요한 작업으로 성능 다운
   // cf) 토큰은 있지만 다른 회원인 경우 메인페이지로 이동
-  if (authUserId === -1) {
+  if (!isAuthFinished || authUser.id !== id) {
     return (
       <Center height="100%">
         <Spinner size="xl" />

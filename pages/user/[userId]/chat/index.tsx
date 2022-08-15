@@ -34,22 +34,13 @@ const Chats: NextPage = ({
   user: { id },
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
-  const { id: authUserId } = useLoginUser();
+  const { isAuthFinished, authUser } = useLoginUser({
+    handleAuthUser: ({ authUser }) => {
+      authUser?.id === id ? getChatRooms() : router.replace('/');
+    },
+    handleNotAuthUser: () => router.replace('/'),
+  });
   const [chatRooms, setChatRooms] = useState<ChatRoomResponseType>([]);
-
-  useEffect(() => {
-    if (authUserId === -1) {
-      return;
-    }
-
-    if (!id || id !== authUserId) {
-      router.replace('/');
-
-      return;
-    }
-
-    getChatRooms();
-  }, [id, authUserId, router]);
 
   const getChatRooms = async () => {
     try {
@@ -62,7 +53,13 @@ const Chats: NextPage = ({
     }
   };
 
-  if (!authUserId || authUserId !== id) {
+  useEffect(() => {
+    if (!id) {
+      router.replace('/');
+    }
+  }, [id, router]);
+
+  if (!isAuthFinished || id !== authUser.id) {
     return (
       <Center height="100%">
         <Spinner size="xl" />

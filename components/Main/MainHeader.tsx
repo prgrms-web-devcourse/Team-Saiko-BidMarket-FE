@@ -1,7 +1,7 @@
 import { BellIcon, ChatIcon } from '@chakra-ui/icons';
 import { Avatar, Circle, Flex, Image } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { Header } from 'components/common';
 import useLoginUser from 'hooks/useLoginUser';
@@ -11,14 +11,11 @@ import LoginButton from './LoginButton';
 const MainHeader = () => {
   const router = useRouter();
   const [isLogin, setIsLogin] = useState(false);
-  const { id: userId, profileImage: profileImageUrl } = useLoginUser();
-
-  // @TODO HOOK으로 개선 (BM-184 참고)
-  useEffect(() => {
-    if (userId !== -1) {
-      setIsLogin(true);
-    }
-  }, [userId]);
+  const {
+    authUser: { id: userId, profileImage },
+  } = useLoginUser({
+    handleAuthUser: ({ isAuthUser }) => setIsLogin(isAuthUser),
+  });
 
   return (
     <Header
@@ -51,7 +48,7 @@ const MainHeader = () => {
               _hover={{ cursor: 'pointer' }}
               onClick={() => router.push(`/user/${userId}`)}
             >
-              <Avatar name="프로필 이미지" size="sm" src={profileImageUrl} />
+              <Avatar name="프로필 이미지" size="sm" src={profileImage} />
             </Circle>
           </Flex>
         ) : (

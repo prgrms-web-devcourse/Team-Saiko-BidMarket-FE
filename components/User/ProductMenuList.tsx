@@ -4,7 +4,7 @@ import { Fragment } from 'react';
 import { ProductMenuItem } from '.';
 
 interface ProductMenuListProps {
-  userId: string;
+  userId: number;
   isMyPage: boolean;
 }
 

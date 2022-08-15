@@ -5,7 +5,7 @@ import type {
   NextPage,
 } from 'next';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import userAPI from 'apis/api/user';
 import { SEO } from 'components/common';
@@ -34,21 +34,19 @@ const Edit: NextPage = ({
   user: { id, profileImage, username },
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
-  const { id: authUserId } = useLoginUser();
+  const { isAuthFinished, authUser } = useLoginUser({
+    handleAuthUser: ({ authUser }) =>
+      authUser?.id !== id && router.replace('/'),
+    handleNotAuthUser: () => router.push('/'),
+  });
 
   useEffect(() => {
-    if (authUserId === -1) {
-      return;
-    }
-
-    if (!id || id !== authUserId) {
+    if (!id) {
       router.replace('/');
-
-      return;
     }
-  }, [id, authUserId, router]);
+  }, [id, router]);
 
-  if (!authUserId || authUserId !== id) {
+  if (!isAuthFinished || authUser.id !== id) {
     return (
       <Center height="100%">
         <Spinner size="xl" />
