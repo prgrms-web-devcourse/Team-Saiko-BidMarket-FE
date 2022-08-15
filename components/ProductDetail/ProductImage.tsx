@@ -19,7 +19,7 @@ const ProductImage = ({ images }: ProductImageProps) => {
         display={order === showImage ? 'visible' : 'none'}
         width="100%"
         height="317px"
-        objectFit="contain"
+        objectFit="cover"
         alt="product-image"
         src={url ?? '/svg/basket.svg'}
       />
@@ -49,6 +49,7 @@ const ProductImage = ({ images }: ProductImageProps) => {
             h={5}
             _hover={{ transform: 'scale(2)' }}
             transition="all ease 0.2s 0s"
+            color="#dddddd"
           />
         }
         onClick={() => setShowImage(showImage - 1)}
@@ -63,7 +64,7 @@ const ProductImage = ({ images }: ProductImageProps) => {
               opacity={order === showImage ? '1' : '0'}
               width="100%"
               height="317px"
-              objectFit="contain"
+              objectFit="cover"
               alt="product-image"
               src={url ?? '/svg/basket.svg'}
               transition="all ease 0.3s 0s"
@@ -102,6 +103,7 @@ const ProductImage = ({ images }: ProductImageProps) => {
             h={5}
             _hover={{ transform: 'scale(2)' }}
             transition="all ease 0.2s 0s"
+            color="#dddddd"
           />
         }
         onClick={() => setShowImage(showImage + 1)}
