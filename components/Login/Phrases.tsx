@@ -7,9 +7,9 @@ const Phrases = () => {
         <Text as="span" color="brand.primary-900">
           비딩
         </Text>
-        을 통한
+        으로 기다리는
       </Text>
-      <Text fontSize="3xl">현명한 중고거래</Text>
+      <Text fontSize="3xl">설렘을 느껴봐</Text>
     </>
   );
 };
