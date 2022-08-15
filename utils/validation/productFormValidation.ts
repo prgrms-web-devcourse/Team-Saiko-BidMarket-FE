@@ -27,10 +27,9 @@ const productFormValidation = ({
     error.title = '상품 제목을 입력해주세요.';
   }
 
-  if (!images) {
+  if (images.length === 0) {
     error.images = '상품 이미지를 넣어주세요.';
   }
-
   if (minimumPrice === 0) {
     error.minimumPrice = '금액을 입력해주세요.';
   }
@@ -40,10 +39,6 @@ const productFormValidation = ({
   if (minimumPrice && minimumPrice % 100 !== 0) {
     error.minimumPrice = '100원 단위로 입력 가능합니다.';
   }
-
-  // if (productImageArray.length === 0) {
-  //   error.images = '사진 1개 이상 필요합니다.';
-  // }
 
   if (!location.trim()) {
     error.location = '희망 거래지역을 입력해주세요.';
