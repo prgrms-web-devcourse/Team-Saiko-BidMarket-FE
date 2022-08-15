@@ -8,8 +8,8 @@ export interface ChatRoomData {
     username: string;
     profileImage: string;
   };
-  lastMessage: string;
-  lastMessageDate: Date;
+  lastMessage: string | null;
+  lastMessageDate: Date | null;
 }
 
 export type ChatRoomResponseType = Array<ChatRoomData>;
