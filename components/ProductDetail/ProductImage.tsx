@@ -98,6 +98,7 @@ const ProductImage = ({ images }: ProductImageProps) => {
         disabled={showImage === images.length}
         aria-label="Next Product Image"
         icon={
+          //TODO #dddddd 색 브랜드 색으로 변경 예정
           <ChevronRightIcon
             w={5}
             h={5}
