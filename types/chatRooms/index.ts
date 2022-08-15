@@ -8,7 +8,7 @@ export interface ChatRoomData {
     username: string;
     profileImage: string;
   };
-  lastMessage: string;
+  lastMessage: string | null;
   lastMessageDate: Date | null;
 }
 

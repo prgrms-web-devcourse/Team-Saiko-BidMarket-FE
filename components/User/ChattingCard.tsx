@@ -5,7 +5,7 @@ import distanceTimeFormat from 'utils/format/distanceTimeFormat';
 interface ChattingProps {
   username: string;
   profileImage: string;
-  previewChat: string;
+  previewChat: string | null;
   productImage: string;
   createdAt: Date | null;
   onClick: () => void;
@@ -37,7 +37,13 @@ const ChattingCard = ({
               {createdAt ? distanceTimeFormat(createdAt) : ''}
             </Text>
           </Flex>
-          <Text paddingTop="5px">{previewChat}</Text>
+          {previewChat ? (
+            <Text paddingTop="5px">{previewChat}</Text>
+          ) : (
+            <Text paddingTop="5px" color="brand.primary-900">
+              채팅방이 연결 됐습니다.
+            </Text>
+          )}
         </Flex>
         {/* TODO: 채팅 읽지 않으면 Badge표시해주기 */}
         <Image
