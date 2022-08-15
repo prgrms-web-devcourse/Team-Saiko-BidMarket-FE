@@ -63,6 +63,8 @@ const ProductBid = ({
   });
   const [isCalculatingBiddingResult, setIsCalculatingBiddingResult] =
     useState(false);
+  const [isExpiredAndCalculatedBidding, setIsExpiredAndCalculatedBidding] =
+    useState(false);
 
   useEffect(() => {
     if (isExpiredBidding) {
@@ -122,12 +124,13 @@ const ProductBid = ({
 
     setTimeout(() => {
       setIsCalculatingBiddingResult(false);
+      setIsExpiredAndCalculatedBidding(true);
       router.reload();
     }, remainedBiddingTime + MINUTE_TO_SECONDS);
   };
 
   const isShowBiddingEndText = () => {
-    return isExpiredBidding && (isSeller || bidder.biddingSucceed);
+    return isExpiredAndCalculatedBidding && (isSeller || bidder.biddingSucceed);
   };
 
   const isBidButtonDisabled = () => {
