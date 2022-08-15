@@ -39,6 +39,7 @@ const AddProductDescription = ({
         borderColor="#B6B6B6"
         h="240px"
         maxLength={300}
+        focusBorderColor="brand.primary-900"
       />
     </Flex>
   );

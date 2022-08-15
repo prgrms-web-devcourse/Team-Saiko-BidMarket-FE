@@ -24,6 +24,7 @@ const AddProductLocation = ({
       w="100%"
       h="50px"
       maxLength={20}
+      focusBorderColor="brand.primary-900"
     />
   );
 };

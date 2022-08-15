@@ -68,6 +68,7 @@ const Setting: NextPage = ({
       await userAPI.deleteUser();
       removeItem('token');
       router.push('/');
+      toast(setToastInfo('top', '탈퇴되었습니다.', 'success'));
     } catch (error) {
       console.log(error);
       toast(

@@ -1,7 +1,9 @@
 import { Input } from '@chakra-ui/react';
 import axios from 'axios';
+import getConfig from 'next/config';
 import { ChangeEvent, useRef, useState } from 'react';
 
+const { publicRuntimeConfig } = getConfig();
 import { ProfileImage } from '.';
 
 interface ImageUploadProps {
@@ -9,7 +11,8 @@ interface ImageUploadProps {
   profileImageUrl: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
-const BUCKET_URL = 'https://bid-market-bucket.s3.ap-northeast-2.amazonaws.com';
+
+const BUCKET_URL = publicRuntimeConfig.bucketUrl;
 const FOLDER_NAME = 'profiles';
 
 const ProfileImageUpload = ({
