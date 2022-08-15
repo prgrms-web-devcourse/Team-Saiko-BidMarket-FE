@@ -1,17 +1,17 @@
-import { Center, Divider, Flex, Spinner, Text } from '@chakra-ui/react';
+import { Center, Divider, Flex, Spinner } from '@chakra-ui/react';
 import type {
   GetServerSideProps,
   InferGetServerSidePropsType,
   NextPage,
 } from 'next';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import userAPI from 'apis/api/user';
-import { GoBackIcon, Header, SEO, SideBar } from 'components/common';
+import { GoBackIcon, Header, HeaderTitle, SEO } from 'components/common';
 import {
   ProductMenuList,
-  UserProfileEditButton,
+  UserProfileEditOrReportButton,
   UserProfileInformation,
   UserSetting,
 } from 'components/User';
@@ -58,22 +58,27 @@ const UserId: NextPage = ({
     );
   }
 
+  const handleReportsButtonClick = () => {
+    router.push(
+      {
+        pathname: `/reports`,
+        query: {
+          userId: authUserId,
+          profileImage,
+          username,
+        },
+      },
+      '/reports'
+    );
+  };
+
   return (
     <>
       <SEO title="회원 정보 페이지" />
       <Header
         leftContent={<GoBackIcon />}
         middleContent={
-          <Text
-            fontFamily="Roboto"
-            fontSize="20px"
-            fontWeight="bold"
-            lineHeight="23px"
-            fontStyle="normal"
-            color="barnd.dark"
-          >
-            {isMyPage ? '마이페이지' : ''}
-          </Text>
+          <HeaderTitle title={isMyPage ? '마이페이지' : '회원 정보'} />
         }
       />
       <Flex width="100%" flexDirection="column" gap="29px">
@@ -81,13 +86,19 @@ const UserId: NextPage = ({
           profileImageUrl={profileImage}
           nickname={username}
         />
-        {isMyPage && (
-          <UserProfileEditButton
+        {isMyPage ? (
+          <UserProfileEditOrReportButton
+            text={'edit'}
             onClick={() => router.push(`./${userId}/edit`)}
+          />
+        ) : (
+          <UserProfileEditOrReportButton
+            text={'report'}
+            onClick={handleReportsButtonClick}
           />
         )}
       </Flex>
-      <ProductMenuList userId={userId as string} />
+      <ProductMenuList userId={userId as string} isMyPage={isMyPage} />
       {isMyPage ? (
         <>
           <Divider
@@ -97,7 +108,7 @@ const UserId: NextPage = ({
             boxShadow="inset 0px 1px 3px rgba(0, 0, 0, 0.03)"
             marginTop="25px"
           />
-          <UserSetting />
+          <UserSetting userId={authUserId} />
         </>
       ) : undefined}
     </>

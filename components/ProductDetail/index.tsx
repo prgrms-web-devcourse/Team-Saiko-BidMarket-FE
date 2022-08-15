@@ -4,3 +4,4 @@ export { default as ProductBidRemainedTime } from './ProductBidRemainedTime';
 export { default as ProductImage } from './ProductImage';
 export { default as ProductInfo } from './ProductInfo';
 export { default as ProductSeller } from './ProductSeller';
+export { default as ProductHeart } from './ProductHeart';

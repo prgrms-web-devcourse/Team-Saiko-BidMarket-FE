@@ -11,7 +11,9 @@ const useForm = ({ initialValues, onSubmit, validate }: UseFormProps<any>) => {
   const [errors, setErrors] = useState<Record<string, unknown>>({});
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
 
     setValues({ ...values, [name]: value });

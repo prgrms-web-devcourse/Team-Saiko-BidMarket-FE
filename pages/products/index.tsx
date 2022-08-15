@@ -1,57 +1,71 @@
-import { DownloadIcon } from '@chakra-ui/icons';
-import { Button, Divider, Flex, Text } from '@chakra-ui/react';
-import type {
-  GetServerSideProps,
-  InferGetServerSidePropsType,
-  NextPage,
-} from 'next';
+import { Center, Divider, Flex, Image, Text } from '@chakra-ui/react';
+import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useRouter } from 'next/router';
-import { Fragment, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
 
-import { productAPI } from 'apis';
 import {
-  ProductCard,
   GoBackIcon,
   Header,
   SearchInput,
   SEO,
+  ProductCardContainer,
+  HeaderTitle,
 } from 'components/common';
 import { BidFilterCheckBox, FilterButton } from 'components/Products';
+import { useGetProductsByKeyword } from 'hooks/queries';
 import { categoryOptionsENType } from 'types/categoryOption';
-import { ProductsResponseType } from 'types/product';
 import { sortOptionsENType } from 'types/sortOption';
 import { categoryOption, sortOption } from 'utils';
 
-let offset = 0;
-let limit = 10;
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { data } = await productAPI.getProducts({ offset: 0 });
-  return { props: { queryDatas: context.query, productsDatas: data } };
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  return { props: { queryDatas: query } };
 };
 
-const Products: NextPage = ({
+const Products = ({
   queryDatas,
-  productsDatas,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
   const { title, sort, category, progressed } = queryDatas;
   const [keyword, setKeyword] = useState<string>(title);
   const [selectedSortOption, setSelectedSortOption] =
-    useState<sortOptionsENType>(sort);
+    useState<sortOptionsENType>(sort as sortOptionsENType);
   const [selectedCategoryOption, setSelectedCategoryOption] =
-    useState<categoryOptionsENType>(category);
-  const [isProgressed, setIsProgressed] = useState<boolean>(progressed);
-  const [products, setProducts] = useState<ProductsResponseType>(productsDatas);
-  const [isMoreButtonLoading, setIsMoreButtonLoading] = useState(false);
+    useState<categoryOptionsENType>(category as categoryOptionsENType);
+  const [isProgressed, setIsProgressed] = useState<boolean>(
+    Boolean(JSON.parse(progressed))
+  );
 
-  offset = queryDatas.offset;
-  limit = queryDatas.limit;
+  // @TODO 쿼리스트링이 누락된 경우 메인페이지로 이동하는 예외처리
+  const {
+    data: productPages,
+    fetchNextPage,
+    hasNextPage,
+    refetch,
+  } = useGetProductsByKeyword({
+    title: keyword,
+    progressed: isProgressed,
+    category: selectedCategoryOption,
+    sort: selectedSortOption,
+  });
+  const [ref, isView] = useInView();
 
   useEffect(() => {
+    if (isView && hasNextPage) {
+      fetchNextPage();
+    }
+  }, [isView, productPages]);
+
+  useEffect(() => {
+    // @TODO router 주소 분리 작업 (for 가독성)
     router.push(
       `/products?title=${keyword}&sort=${selectedSortOption}&category=${selectedCategoryOption}&progressed=${isProgressed}&offset=0&limit=10`
     );
-  }, [keyword, selectedSortOption, selectedCategoryOption, isProgressed]);
+  }, [selectedSortOption, selectedCategoryOption, isProgressed]);
+
+  useEffect(() => {
+    refetch();
+  }, [router.asPath]);
 
   const handleFormSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -80,26 +94,14 @@ const Products: NextPage = ({
     setIsProgressed(!isProgressed);
   };
 
-  // @TODO 메인페이지와 동일한 코드이며 무한 스크롤과 함께 개선 예정
-  const handleMoreProductClick = async () => {
-    setIsMoreButtonLoading(true);
-    offset = offset + 1;
-    try {
-      const { data } = await productAPI.getProducts({ offset });
-      setProducts([...products, ...data]);
-      setIsMoreButtonLoading(false);
-    } catch (error) {
-      offset = offset - 1;
-      console.log(error);
-      setIsMoreButtonLoading(false);
-    }
-  };
-
   return (
     <>
       <SEO title="검색" />
-      <Header leftContent={<GoBackIcon />} middleContent={<Text>검색</Text>} />
-      <Flex direction="column" w="100%">
+      <Header
+        leftContent={<GoBackIcon />}
+        middleContent={<HeaderTitle title="검색" />}
+      />
+      <Flex direction="column" w="100%" h="100%">
         <form onSubmit={(event) => handleFormSubmit(event)}>
           <SearchInput keyword={keyword} onChange={setKeyword} />
         </form>
@@ -122,26 +124,27 @@ const Products: NextPage = ({
             onBidFilterChange={handleBidFilterCheckBoxChange}
           />
         </Flex>
-        {products.map((product) => {
-          return (
-            <Fragment key={product.id}>
-              <ProductCard productInfo={product} />
-              <Divider />
-            </Fragment>
-          );
+        {productPages?.pages.map(({ data }, pageIndex) => {
+          return data.map((product, productIndex) => {
+            const lastPageIndex = productPages.pages.length - 1;
+            const lastProductIndex = data.length - 1;
+            const isLastProduct =
+              lastPageIndex === pageIndex && lastProductIndex === productIndex;
+            return isLastProduct ? (
+              <div ref={ref} key={product.id}>
+                <ProductCardContainer product={product} />
+              </div>
+            ) : (
+              <ProductCardContainer key={product.id} product={product} />
+            );
+          });
         })}
-        <Button
-          alignSelf="center"
-          w="100px"
-          margin="20px 0"
-          borderRadius="30px"
-          color="white"
-          backgroundColor="brand.primary-900"
-          isLoading={isMoreButtonLoading}
-          onClick={() => handleMoreProductClick()}
-        >
-          <DownloadIcon w="5" h="5" />
-        </Button>
+        {productPages?.pages[0].data.length === 0 && (
+          <Center flexDirection="column" height="100%">
+            <Image src="/svg/noneProductOther.svg" alt="None Product" />
+            <Text marginTop="34px">찾으시는 상품이 없습니다:(</Text>
+          </Center>
+        )}
       </Flex>
     </>
   );

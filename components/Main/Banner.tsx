@@ -1,4 +1,4 @@
-import { Flex, Image, Text } from '@chakra-ui/react';
+import { Box, Flex, Image, Text } from '@chakra-ui/react';
 
 const Banner = () => {
   //TODO: 슬로건 수정하기
@@ -16,7 +16,9 @@ const Banner = () => {
           원하는 가격에 팔고, 좋은 물건은 싸게 산다!
         </Text>
       </Flex>
-      <Image src="/svg/banner.svg" alt="banner" height="65" />
+      <Box position="relative" top="15px" right="20px">
+        <Image src="/svg/bidmarket-bibi.svg" alt="banner" height="65" />
+      </Box>
     </Flex>
   );
 };

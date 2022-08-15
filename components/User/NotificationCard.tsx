@@ -1,35 +1,61 @@
 import { Box, Flex, Image, Text } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
 
+import { notificationAPI } from 'apis';
 import distanceTimeFormat from 'utils/format/distanceTimeFormat';
 
-interface NotificationProps {
+interface NotificationCardProps {
+  id: number;
   title: string;
   description: string;
-  iconImage: string;
+  productId: number;
   productImage: string;
   createdAt: Date;
+  checked: boolean;
 }
 
-const Notification = ({
+const NotificationCard = ({
+  id,
   title,
   description,
-  iconImage,
+  productId,
   productImage,
   createdAt,
-}: NotificationProps) => {
+  checked,
+}: NotificationCardProps) => {
+  const router = useRouter();
+
+  const handleNotificationCardClick = async () => {
+    await notificationAPI.putCheckNotification({ notificationId: id });
+    router.push(`/products/${productId}`);
+  };
+
   return (
-    <Box cursor="pointer" _hover={{ bg: '#FFF6F7' }}>
+    <Box
+      cursor="pointer"
+      w="100%"
+      bg={checked ? '#FFFFFF' : 'brand.primary-100'}
+      _hover={{
+        bg: 'brand.primary-100',
+      }}
+      onClick={handleNotificationCardClick}
+    >
       <Flex width="100%" padding="15px 0">
-        <Image src={iconImage} alt="icon-image" w="44px" h="44px" />
+        <Image
+          src="/svg/bidProductMenuIcon.svg"
+          alt="notification-icon"
+          w="44px"
+          h="44px"
+        />
         <Flex width="100%" direction="column" paddingLeft="10px">
           <Text fontWeight="bold">{title}</Text>
           <Flex>
-            <Flex direction="column">
+            <Flex direction="column" flexGrow="1">
               <Text width="100%" paddingTop="5px">
                 {description}
               </Text>
               <Text color="brand.dark-light">
-                {distanceTimeFormat(createdAt)}
+                {distanceTimeFormat(new Date(createdAt))}
               </Text>
             </Flex>
             <Image
@@ -49,4 +75,4 @@ const Notification = ({
   );
 };
 
-export default Notification;
+export default NotificationCard;

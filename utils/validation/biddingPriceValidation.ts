@@ -21,6 +21,10 @@ const biddingPriceValidation = ({
     error.biddingPrice = '100원 단위로 입력해주세요!';
   }
 
+  if (biddingPrice > 10000000) {
+    error.biddingPrice = '1000만원 이상 입찰 할 수 없습니다.';
+  }
+
   return error;
 };
 

@@ -23,7 +23,11 @@ const MainHeader = () => {
   return (
     <Header
       leftContent={
-        <Image src="/svg/bidMarket.svg" alt="bidmarket" height="20px" />
+        <Image
+          src="/svg/bidmarket-logo.svg"
+          alt="bidmarket logo"
+          height="32px"
+        />
       }
       // @TODO 컴포넌트로 분리 (BM-184 참고)
       rightContent={
@@ -33,7 +37,7 @@ const MainHeader = () => {
               w="24px"
               h="24px"
               _hover={{ cursor: 'pointer' }}
-              onClick={() => router.push(`/user/${userId}/chattings`)}
+              onClick={() => router.push(`/user/${userId}/chat`)}
             />
             <BellIcon
               w="32px"

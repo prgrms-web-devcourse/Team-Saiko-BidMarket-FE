@@ -1,52 +1,133 @@
-import { Center, Text } from '@chakra-ui/react';
-import type { NextPage } from 'next';
+import { Center, Spinner } from '@chakra-ui/react';
+import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
 
-import { GoBackIcon, Header } from 'components/common';
+import { userAPI } from 'apis';
+import { getItem } from 'apis/utils/storage';
+import { GoBackIcon, Header, HeaderTitle } from 'components/common';
 import { NoNotifications, NotificationCard } from 'components/User';
+import { useGetNotifications } from 'hooks/queries';
+import useLoginUser from 'hooks/useLoginUser';
 
-//TODO : 데이터 연결
-const DUMMY = [
-  {
-    id: 1,
-    title: '입찰 종료',
-    description:
-      '“래쉬가드 M s...” 상품의 입찰 기간이 종료되었습니다. 등록하신 게시글을 확인해주세요!',
-    iconImage: '/svg/sellProductMenuIcon.svg',
-    productImage:
-      'https://user-images.githubusercontent.com/61923768/182772718-258fa024-b207-4203-8e8a-2dc1f3bc21f2.png',
-    createdAt: new Date('2022-07-20T14:36:00'),
-  },
-  {
-    id: 1,
-    title: '입찰 종료',
-    description:
-      '축하드립니다       “래쉬가드 M s...” 상품 입찰에 성공하셨어요. 게시글을 확인하고 거래 일정을 잡아보세요!',
-    iconImage: '/svg/sellProductMenuIcon.svg',
-    productImage:
-      'https://user-images.githubusercontent.com/61923768/182772718-258fa024-b207-4203-8e8a-2dc1f3bc21f2.png',
-    createdAt: new Date('2022-08-02T14:51:00'),
-  },
-];
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { userId } = context.query;
+  let user = {};
 
-const Notifications: NextPage = () => {
-  //TODO 인증된 사용자만 페이지 보이도록 구현
+  try {
+    const { data } = await userAPI.getUser(parseInt(userId as string, 10));
+
+    user = data;
+  } catch (error) {
+    console.error(error);
+  }
+
+  return {
+    props: {
+      user,
+    },
+  };
+};
+
+const Notifications = ({
+  user: { id },
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const {
+    data: notificationPages,
+    fetchNextPage,
+    hasNextPage,
+  } = useGetNotifications();
+  const [ref, isView] = useInView();
+  const router = useRouter();
+  const { id: authUserId } = useLoginUser();
+
+  // @TODO 인증하는 부분 분리하기 (반복되는 코드)
+  useEffect(() => {
+    if (!getItem('token')) {
+      router.replace('/');
+      return;
+    }
+
+    if (authUserId === -1) {
+      return;
+    }
+
+    if (!id || id !== authUserId) {
+      router.replace('/');
+
+      return;
+    }
+  }, [id, authUserId, router]);
+
+  useEffect(() => {
+    if (isView && hasNextPage) {
+      fetchNextPage();
+    }
+  }, [isView, notificationPages]);
+
+  if (!authUserId || authUserId !== id) {
+    return (
+      <Center height="100%">
+        <Spinner size="xl" />
+      </Center>
+    );
+  }
+
   return (
     <>
-      <Header leftContent={<GoBackIcon />} middleContent={<Text>알림</Text>} />
-      {DUMMY.length ? (
-        DUMMY.map(
-          ({ id, title, description, iconImage, productImage, createdAt }) => (
-            <NotificationCard
-              key={id}
-              title={title}
-              description={description}
-              iconImage={iconImage}
-              productImage={productImage}
-              createdAt={createdAt}
-            />
-          )
-        )
-      ) : (
+      <Header
+        leftContent={<GoBackIcon />}
+        middleContent={<HeaderTitle title="알림" />}
+      />
+      {/* @TODO 컴포넌트로 분리해보기 */}
+      {notificationPages?.pages.map(({ data }, pageIndex) => {
+        return data.map(
+          (
+            {
+              id,
+              productId,
+              type,
+              content,
+              thumbnailImage,
+              createdAt,
+              checked,
+            },
+            notificationIndex
+          ) => {
+            const lastPageIndex = notificationPages.pages.length - 1;
+            const lastNotificationIndex = data.length - 1;
+            const isLastNotification =
+              lastPageIndex === pageIndex &&
+              lastNotificationIndex === notificationIndex;
+            return isLastNotification ? (
+              <div ref={ref} key={id}>
+                <NotificationCard
+                  id={id}
+                  title={type}
+                  description={content}
+                  productId={productId}
+                  productImage={thumbnailImage}
+                  createdAt={createdAt}
+                  checked={checked}
+                />
+              </div>
+            ) : (
+              <NotificationCard
+                key={id}
+                id={id}
+                title={type}
+                description={content}
+                productId={productId}
+                productImage={thumbnailImage}
+                createdAt={createdAt}
+                checked={checked}
+              />
+            );
+          }
+        );
+      })}
+      {notificationPages?.pages[0].data.length === 0 && (
         <Center flexDirection="column" height="100%">
           <NoNotifications />
         </Center>

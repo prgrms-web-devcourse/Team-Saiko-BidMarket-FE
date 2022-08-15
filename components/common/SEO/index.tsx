@@ -11,6 +11,7 @@ const SEO = ({ title, description, image }: SEOProps) => {
   return (
     <Head>
       <title>{titleContent}</title>
+      <link rel="shortcut icon" href="/favicon.ico" />
       <meta
         name="description"
         content={description || '비딩을 통한 현명한 중고 거래'}

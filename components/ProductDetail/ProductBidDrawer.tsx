@@ -14,22 +14,26 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 
 import { bidAPI } from 'apis';
 import useForm from 'hooks/useForm';
-import { biddingPriceValidation, priceFormat } from 'utils';
+import { biddingPriceValidation, priceFormat, setToastInfo } from 'utils';
 
 interface ProductBidDrawerProps {
   minimumPrice: number;
   isOpen: boolean;
   onClose: () => void;
+  bidder: {
+    biddingPrice?: number;
+  };
 }
 
 const ProductBidDrawer = ({
   minimumPrice,
   isOpen,
   onClose,
+  bidder,
 }: ProductBidDrawerProps) => {
   const toast = useToast();
   const router = useRouter();
@@ -40,30 +44,25 @@ const ProductBidDrawer = ({
     onSubmit: () => {
       createBiddingAuthUser();
     },
-    //TODO
-    // 1. n원 이상 입력할 수 없도록 추가
-    // 2. Drawer를 닫았을 때에도 입찰 금액이 보이는 버그 수정
     validate: biddingPriceValidation,
   });
+
+  useEffect(() => {
+    if (bidder.biddingPrice) {
+      setBiddingPrice(bidder.biddingPrice);
+    }
+  }, [bidder]);
 
   const createBiddingAuthUser = async () => {
     try {
       await bidAPI.createBid(parseInt(productId as string, 10), biddingPrice);
-      toast({
-        position: 'top',
-        title: `${biddingPrice}원에 입찰하였습니다.`,
-        status: 'success',
-        duration: 1500,
-      });
+      toast(
+        setToastInfo('top', `${biddingPrice}원에 입찰하였습니다.`, 'success')
+      );
       onClose();
     } catch (error) {
       console.log(error);
-      toast({
-        position: 'top',
-        title: `입찰에 실패하였습니다.`,
-        status: 'error',
-        duration: 1500,
-      });
+      toast(setToastInfo('top', '입찰에 실패하였습니다.', 'error'));
     }
   };
 
@@ -71,8 +70,14 @@ const ProductBidDrawer = ({
     setBiddingPrice(Number(e.target.value));
   };
 
+  const handleClose = () => {
+    errors.biddingPrice = '';
+    setBiddingPrice(0);
+    onClose();
+  };
+
   return (
-    <Drawer placement="bottom" isOpen={isOpen} onClose={onClose}>
+    <Drawer placement="bottom" isOpen={isOpen} onClose={handleClose}>
       <DrawerOverlay />
       <DrawerContent borderTopRadius="20px">
         <form>
@@ -90,6 +95,7 @@ const ProductBidDrawer = ({
                 size="sm"
                 onClick={handleSubmit}
                 isLoading={isLoading}
+                disabled={bidder.biddingPrice ? true : false}
               >
                 입찰
               </Button>
@@ -103,9 +109,12 @@ const ProductBidDrawer = ({
                 <Input
                   name="biddingPrice"
                   type="number"
-                  placeholder={`${priceFormat(
-                    minimumPrice
-                  )}원 이상 입력해주세요`}
+                  disabled={bidder.biddingPrice !== 0}
+                  placeholder={
+                    bidder.biddingPrice !== 0
+                      ? bidder.biddingPrice?.toString()
+                      : `${priceFormat(minimumPrice)}원 이상 입력해주세요`
+                  }
                   focusBorderColor="brand.primary-900"
                   onChange={handleChange}
                   onInput={handleInput}

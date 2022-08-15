@@ -9,7 +9,7 @@ import type { NextPage } from 'next';
 import { useState } from 'react';
 
 import { productAPI } from 'apis';
-import { Header, GoBackIcon } from 'components/common';
+import { Header, GoBackIcon, HeaderTitle } from 'components/common';
 import { SEO } from 'components/common';
 import {
   AddProductTitle,
@@ -62,11 +62,7 @@ const Product: NextPage = () => {
       <form style={{ width: '100%', height: '100%' }} onSubmit={handleSubmit}>
         <Header
           leftContent={<GoBackIcon />}
-          middleContent={
-            <Text fontWeight="bold" fontSize="20px">
-              상품등록
-            </Text>
-          }
+          middleContent={<HeaderTitle title="상품 등록" />}
           rightContent={
             <SubmitButton isLoading={isLoading} loadingText={'전송 중'} />
           }

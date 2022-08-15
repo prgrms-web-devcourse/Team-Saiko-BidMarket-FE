@@ -3,3 +3,9 @@ export interface User {
   username: string;
   profileImage: string;
 }
+
+export interface UserInfo {
+  userId: number;
+  username: string;
+  profileImage: string;
+}
