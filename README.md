@@ -2,7 +2,7 @@
 
 ![banner](https://user-images.githubusercontent.com/50071076/184594236-ab66f09a-aa2b-4187-9e17-b96f85dfe974.jpg)
 
-## <img height="25px" src="https://user-images.githubusercontent.com/50071076/184506573-ed624123-2e8f-430c-9165-0bce79d1e13d.png" /> 비딩을 통한 현명한 중고 거래, 비드마켓
+## <img height="25px" src="https://user-images.githubusercontent.com/50071076/184506573-ed624123-2e8f-430c-9165-0bce79d1e13d.png" /> 요새 중고거래는 경매가 대세, 비드마켓
 
 **온라인 비딩 시스템을 이용한 중고 물품 거래 서비스**입니다.
 

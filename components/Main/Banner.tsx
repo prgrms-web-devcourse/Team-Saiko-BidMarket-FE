@@ -9,11 +9,11 @@ const Banner = () => {
           <Text as="span" color="brand.primary-900">
             비딩
           </Text>
-          을 통한
+          으로
         </Text>
-        <Text fontSize="lg">현명한 중고 거래</Text>
+        <Text fontSize="lg">기다리는 설렘을 느껴봐!</Text>
         <Text fontSize="sm" color="#666666">
-          원하는 가격에 팔고, 좋은 물건은 싸게 산다!
+          거레는 중고지만 경험은 새롭게!
         </Text>
       </Flex>
       <Box position="relative" top="15px" right="20px">
