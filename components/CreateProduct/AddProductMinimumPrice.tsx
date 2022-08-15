@@ -55,6 +55,7 @@ const AddProductMinimumPrice = ({
           max="10000000000"
           h="50px"
           maxLength={13}
+          focusBorderColor="brand.primary-900"
         />
         <Text fontSize="sm" color="#007C14" marginRight="3">
           {format}원
