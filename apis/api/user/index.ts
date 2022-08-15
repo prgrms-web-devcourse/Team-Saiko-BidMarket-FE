@@ -16,6 +16,11 @@ interface GetBiddingProductsType {
   sort?: string;
 }
 
+interface GetLikeProductsType {
+  offset: number;
+  sort?: string;
+}
+
 interface GetChatRoomMessagesType {
   chatRoomId: number;
   offset: number;
@@ -39,6 +44,10 @@ const userAPI = {
   }: GetBiddingProductsType) =>
     authInstance.get<ProductsResponseType>(
       `/users/biddings?offset=${offset}&limit=10&sort=${sort}`
+    ),
+  getLikeProducts: ({ offset, sort = 'END_DATE_ASC' }: GetLikeProductsType) =>
+    authInstance.get<ProductsResponseType>(
+      `/users/hearts?offset=${offset}&limit=10&sort=${sort}`
     ),
   getChatRooms: (offset: number, limit: number) =>
     authInstance.get<ChatRoomResponseType>(
