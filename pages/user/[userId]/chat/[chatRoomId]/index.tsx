@@ -102,6 +102,7 @@ const ChatRoom: NextPage = ({
         width="100%"
         marginTop="16px"
         bgColor="white"
+        padding="10px 0"
       >
         <ChatInput onSubmit={publish} />
       </Flex>

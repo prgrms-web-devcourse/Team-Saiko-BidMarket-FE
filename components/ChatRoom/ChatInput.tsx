@@ -1,13 +1,16 @@
 import { ArrowUpIcon } from '@chakra-ui/icons';
-import { Input, InputGroup, InputRightElement } from '@chakra-ui/react';
-import { useState } from 'react';
+import {
+  IconButton,
+  Input,
+  InputGroup,
+  InputRightElement,
+} from '@chakra-ui/react';
 
 interface ChatInputProps {
   onSubmit: (nextMessage: string) => void;
 }
 
 const ChatInput = ({ onSubmit }: ChatInputProps) => {
-  const [visible, setVisible] = useState(true);
   const handleKeyup = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
       const target = e.target as HTMLInputElement;
@@ -22,8 +25,6 @@ const ChatInput = ({ onSubmit }: ChatInputProps) => {
   return (
     <InputGroup size="md">
       <Input
-        width="100%"
-        height="48px"
         bgColor="#EFEFEF"
         border="0.7px solid #EFEFEF"
         borderRadius="30px"
@@ -37,15 +38,17 @@ const ChatInput = ({ onSubmit }: ChatInputProps) => {
           lineHeight: '120%',
         }}
         focusBorderColor="brand.primary-900"
-        onFocus={() => setVisible(false)}
-        onBlur={() => setVisible(true)}
         onKeyUp={handleKeyup}
       />
-      {visible && (
-        <InputRightElement pointerEvents="none" paddingRight="16px">
-          <ArrowUpIcon width="22px" height="22px" alignSelf="center" />
-        </InputRightElement>
-      )}
+      <InputRightElement width="4.5rem">
+        <IconButton
+          h="1.75rem"
+          size="lg"
+          aria-label="arrow-icon"
+          icon={<ArrowUpIcon />}
+          backgroundColor="#EFEFEF"
+        />
+      </InputRightElement>
     </InputGroup>
   );
 };
