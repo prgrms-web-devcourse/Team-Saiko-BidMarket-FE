@@ -30,12 +30,12 @@ const Product: NextPage = () => {
   const router = useRouter();
   const [productImageArray, setProductImageArray] = useState<string[]>([]);
   const [categoryEN, setCategoryEN] = useState<string>('');
-  const { values, errors, isLoading, handleChange, handleSubmit } = useForm({
+  const { errors, isLoading, handleChange, handleSubmit } = useForm({
     initialValues: {
       title: '',
       minimumPrice: 0,
       location: '',
-      images: [''],
+      images: [],
       category: '',
       description: '',
     },
@@ -50,9 +50,9 @@ const Product: NextPage = () => {
       };
       try {
         const { data: productData } = await productAPI.createProduct(data);
-        router.push(`/products/${productData.productId}`);
+        router.push(`/products/${productData.id}`);
       } catch (err) {
-        console.log('안됐습니다.');
+        console.log('업로드 실패!.');
       }
     },
 
@@ -83,12 +83,13 @@ const Product: NextPage = () => {
             display="flex"
             flexDirection="column"
             height="20%"
-            isInvalid={(values.images as string[])?.length > 0 ? false : true}
+            isInvalid={(errors.images as string)?.length > 0 ? true : false}
           >
             <AddProductImageUpload
-              name="productImage"
+              name="images"
               productImageArray={productImageArray}
               setProductImageArray={setProductImageArray}
+              handleChange={handleChange}
             />
             <FormErrorMessage paddingLeft="19px">
               {errors.images as string}
@@ -99,7 +100,7 @@ const Product: NextPage = () => {
             display="flex"
             flexDirection="column"
             height="20%"
-            isInvalid={(values.title as string)?.length > 0 ? false : true}
+            isInvalid={(errors.title as string)?.length > 0 ? true : false}
           >
             <AddProductTitle inputTitle="title" onChange={handleChange} />
             <FormErrorMessage paddingLeft="19px">
@@ -112,7 +113,9 @@ const Product: NextPage = () => {
             display="flex"
             flexDirection="column"
             height="20%"
-            isInvalid={Number(values.minimumPrice) > 1000 ? false : true}
+            isInvalid={
+              (errors.minimumPrice as string)?.length > 0 ? true : false
+            }
           >
             <AddProductMinimumPrice
               inputMinimumPrice="minimumPrice"
@@ -153,7 +156,7 @@ const Product: NextPage = () => {
                 w="47%"
                 h="20%"
                 isInvalid={
-                  (values.location as string)?.length > 0 ? false : true
+                  (errors.location as string)?.length > 0 ? true : false
                 }
               >
                 <AddProductLocation
@@ -172,7 +175,7 @@ const Product: NextPage = () => {
             flexDirection="column"
             height="20%"
             isInvalid={
-              (values.description as string)?.length > 0 ? false : true
+              (errors.description as string)?.length > 0 ? true : false
             }
           >
             <AddProductDescription
