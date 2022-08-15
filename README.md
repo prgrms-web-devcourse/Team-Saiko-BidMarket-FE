@@ -49,10 +49,10 @@
   </tr>
 </table>
 
-## BE
-
-#### [Repository Link](https://github.com/prgrms-web-devcourse/Team-Saiko-BidMarket-BE)
-
+<details>
+<summary>
+ BE - <a href="https://github.com/prgrms-web-devcourse/Team-Saiko-BidMarket-BE">Repository</a>
+</summary>
 <table>
   <tr>
     <td>
@@ -95,10 +95,14 @@
     <td align="center"><b>Back-End</b></td>
     <td align="center"><b>Back-End</b></td>
   </tr>
-</table>
+</table>  
+</details>
 
-## Designer
 
+<details>
+<summary>
+  Designer
+</summary>
 <table>
   <tr>
     <td>
@@ -112,6 +116,8 @@
     <td align="center"><b>디자이너</b></td>
   </tr>
 </table>
+</details>
+
 
 <br/>
 
