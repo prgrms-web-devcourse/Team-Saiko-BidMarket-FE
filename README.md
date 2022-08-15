@@ -170,5 +170,3 @@
 
 - 가치 측정하기 애매한 중고 물품을 판매하고 싶은 중고 물품 판매자
 - 시간과 장소 제한 없이 비딩을 통해 구매할 수 있는 중고 물품 구매자
-
-## <img height="25px" src="https://user-images.githubusercontent.com/50071076/184506573-ed624123-2e8f-430c-9165-0bce79d1e13d.png" /
