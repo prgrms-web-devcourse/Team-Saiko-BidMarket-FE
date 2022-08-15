@@ -1,5 +1,7 @@
 # TEAM-SAIKO-BIDMARKET-FE
 
+![배너2,3](https://user-images.githubusercontent.com/50071076/184588485-b4dbad6d-8805-4937-b99f-1ff5b0cdcad1.jpg)
+
 ## <img height="25px" src="https://user-images.githubusercontent.com/50071076/184506573-ed624123-2e8f-430c-9165-0bce79d1e13d.png" /> 비딩을 통한 현명한 중고 거래, 비드마켓
 
 **온라인 비딩 시스템을 이용한 중고 물품 거래 서비스**입니다.
