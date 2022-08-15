@@ -120,7 +120,7 @@ const Product: NextPage = () => {
               inputMinimumPrice="minimumPrice"
               onChange={handleChange}
             />
-            <FormErrorMessage paddingLeft="19px">
+            <FormErrorMessage position="relative" top="-5" paddingLeft="19px">
               {errors.minimumPrice as string}
             </FormErrorMessage>
           </FormControl>
