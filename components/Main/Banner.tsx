@@ -13,7 +13,7 @@ const Banner = () => {
         </Text>
         <Text fontSize="lg">기다리는 설렘을 느껴봐!</Text>
         <Text fontSize="sm" color="#666666">
-          거레는 중고지만 경험은 새롭게!
+          거래는 중고지만 경험은 새롭게!
         </Text>
       </Flex>
       <Box position="relative" top="15px" right="20px">
