@@ -1,6 +1,6 @@
 # TEAM-SAIKO-BIDMARKET-FE
 
-![배너2,3](https://user-images.githubusercontent.com/50071076/184588485-b4dbad6d-8805-4937-b99f-1ff5b0cdcad1.jpg)
+![banner](https://user-images.githubusercontent.com/50071076/184594236-ab66f09a-aa2b-4187-9e17-b96f85dfe974.jpg)
 
 ## <img height="25px" src="https://user-images.githubusercontent.com/50071076/184506573-ed624123-2e8f-430c-9165-0bce79d1e13d.png" /> 비딩을 통한 현명한 중고 거래, 비드마켓
 
@@ -211,3 +211,7 @@
 
 - 가치 측정하기 애매한 중고 물품을 판매하고 싶은 중고 물품 판매자
 - 시간과 장소 제한 없이 비딩을 통해 구매할 수 있는 중고 물품 구매자
+
+<br/>
+
+![배너](https://user-images.githubusercontent.com/50071076/184588485-b4dbad6d-8805-4937-b99f-1ff5b0cdcad1.jpg)
