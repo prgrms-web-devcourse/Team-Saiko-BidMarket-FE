@@ -21,8 +21,6 @@ const productAPI = {
   getProduct: (productId: number) =>
     baseInstance.get<ProductResponse>(`/products/${productId}`),
 
-  createProduct: async (data: ProductData) => {
-
   getProductsByKeyword: ({
     offset,
     title,
@@ -40,8 +38,7 @@ const productAPI = {
     baseInstance.get<ProductsResponseType>(
       `/products?title=${title}&progressed=${progressed}&category=${category}&sort=${sort}&offset=${offset}&limit=10`
     ),
-  createProduct: async (data: PostData) => {
-
+  createProduct: async (data: ProductData) => {
     return await authInstance.post(`/products`, data);
   },
 };
