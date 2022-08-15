@@ -1,8 +1,10 @@
 import { Input } from '@chakra-ui/react';
 import axios from 'axios';
+import getConfig from 'next/config';
 import { ChangeEvent, useRef, useState } from 'react';
 
 import AddProductImage from './AddProductImage';
+const { publicRuntimeConfig } = getConfig();
 
 interface ImageUploadProps {
   name: string;
@@ -11,9 +13,7 @@ interface ImageUploadProps {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-// TODO: 환경변수로 빼놓을 예정
-// const BUCKET_URL = process.env.BUCKET_URL;
-const BUCKET_URL = 'https://bid-market-bucket.s3.ap-northeast-2.amazonaws.com';
+const BUCKET_URL = publicRuntimeConfig.bucketUrl;
 const FOLDER_NAME = 'products';
 
 const AddProductImageUpload = ({
