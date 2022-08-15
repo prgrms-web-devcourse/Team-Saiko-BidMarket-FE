@@ -1,5 +1,5 @@
 import { BellIcon, ChatIcon } from '@chakra-ui/icons';
-import { Avatar, Circle, Flex, Image } from '@chakra-ui/react';
+import { Avatar, Center, Circle, Flex, Image, Spinner } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
@@ -12,10 +12,20 @@ const MainHeader = () => {
   const router = useRouter();
   const [isLogin, setIsLogin] = useState(false);
   const {
+    isAuthFinished,
+    isAuthUser,
     authUser: { id: userId, profileImage },
   } = useLoginUser({
     handleAuthUser: ({ isAuthUser }) => setIsLogin(isAuthUser),
   });
+
+  if (!isAuthFinished || isAuthUser !== isLogin) {
+    return (
+      <Center height="100%">
+        <Spinner size="xl" />
+      </Center>
+    );
+  }
 
   return (
     <Header

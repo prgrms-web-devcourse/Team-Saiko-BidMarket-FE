@@ -72,7 +72,7 @@ const useTempLoginUser = ({
     authUser,
   ]);
 
-  return { authUser, isAuthFinished };
+  return { authUser, isAuthUser, isAuthFinished };
 };
 
 export default useTempLoginUser;
