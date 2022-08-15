@@ -70,10 +70,12 @@ const Reports = ({
 
   return (
     <>
-      <SEO title="게시글 신고" />
+      <SEO title="신고하기" />
       <Header
         leftContent={<GoBackIcon />}
-        middleContent={<HeaderTitle title="게시글 신고" />}
+        middleContent={
+          <HeaderTitle title={productId ? '게시글 신고' : '사용자 신고'} />
+        }
       />
       <form style={{ width: '100%', height: '100%' }} onSubmit={handleSubmit}>
         <Flex direction="column" width="100%" gap="15px">
