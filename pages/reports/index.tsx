@@ -17,7 +17,7 @@ import {
   UserInfo,
   ReportCondition,
   ReportTitle,
-} from 'components/Report';
+} from 'components/ReportForm';
 import useForm from 'hooks/useForm';
 import { setToastInfo } from 'utils';
 import reportsValidation from 'utils/validation/reportsValidation';
@@ -30,6 +30,9 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   };
 };
 
+const PRODUCT = 'PRODUCT';
+const USER = 'USER';
+
 const Reports = ({
   queryDatas,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
@@ -39,25 +42,25 @@ const Reports = ({
   const { errors, isLoading, handleChange, handleSubmit } = useForm({
     initialValues: { reason },
     onSubmit: async ({ reason }) => {
-      await createReport(reason);
+      await createReportByStatus(reason);
       setReason(reason);
     },
     validate: reportsValidation,
   });
 
-  const createReport = async (reason: string) => {
+  const createReportByStatus = async (reason: string) => {
     try {
       if (productId) {
-        await reportAPI.createReportByProduct(productId, reason);
+        await reportAPI.createReport(PRODUCT, parseInt(productId, 10), reason);
       } else {
-        await reportAPI.createReportByUser(userId, reason);
+        await reportAPI.createReport(USER, parseInt(userId, 10), reason);
       }
       toast(setToastInfo('top', '신고가 접수되었습니다.', 'success'));
     } catch (error) {
       toast(
         setToastInfo(
           'top',
-          '신고가 접수되지 않았습니다. 다시 시도해주세요',
+          '신고가 접수되지 않았습니다. 이미 신고했던 사용자인지 확인해주세요!',
           'error'
         )
       );
@@ -67,10 +70,12 @@ const Reports = ({
 
   return (
     <>
-      <SEO title="게시글 신고" />
+      <SEO title="신고하기" />
       <Header
         leftContent={<GoBackIcon />}
-        middleContent={<HeaderTitle title="게시글 신고" />}
+        middleContent={
+          <HeaderTitle title={productId ? '게시글 신고' : '사용자 신고'} />
+        }
       />
       <form style={{ width: '100%', height: '100%' }} onSubmit={handleSubmit}>
         <Flex direction="column" width="100%" gap="15px">
