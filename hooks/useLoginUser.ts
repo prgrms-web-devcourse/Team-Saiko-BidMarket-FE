@@ -9,7 +9,7 @@ export interface HandleAuthUserType {
   authUser?: User;
 }
 
-interface UseTempLoginUserProps {
+interface UseLoginUserProps {
   handleAuthUser?: ({ isAuthUser, authUser }: HandleAuthUserType) => void;
   handleNotAuthUser?: () => void;
 }
@@ -17,7 +17,7 @@ interface UseTempLoginUserProps {
 const useTempLoginUser = ({
   handleAuthUser,
   handleNotAuthUser,
-}: UseTempLoginUserProps) => {
+}: UseLoginUserProps) => {
   const [isAuthFinished, setIsAuthFinished] = useState(false);
   const [isAuthUser, setIsAuthUser] = useState(false);
   const [authUser, setAuthUser] = useState<User>({
