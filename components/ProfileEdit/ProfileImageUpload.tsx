@@ -20,8 +20,6 @@ const ProfileImageUpload = ({
   profileImageUrl: defaultProfileImageUrl,
   onChange,
 }: ImageUploadProps) => {
-  console.log(BUCKET_URL);
-
   const [profileImageUrl, setProfileImageUrl] = useState<string>(
     defaultProfileImageUrl
   );
