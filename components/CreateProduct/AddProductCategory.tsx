@@ -65,9 +65,9 @@ const AddProductCategory = ({ onChange }: AddProductCategoryProps) => {
                   >
                     {optionName}
                   </Text>
-                  {index !== categoryOptions.length - 1 ? (
+                  {index !== categoryOptions.length - 1 && (
                     <Divider margin="5px 0" />
-                  ) : undefined}
+                  )}
                 </Fragment>
               );
             })}

@@ -17,7 +17,7 @@ const AddProductDescription = ({
       <ProductLabel
         LabelImage={
           <Image
-            src="/CreateProduct/cp3.png"
+            src="/svg/description.svg"
             alt="contents"
             width="20px"
             height="21px"
