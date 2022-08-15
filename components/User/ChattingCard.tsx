@@ -7,7 +7,7 @@ interface ChattingProps {
   profileImage: string;
   previewChat: string;
   productImage: string;
-  createdAt: Date;
+  createdAt: Date | null;
   onClick: () => void;
 }
 
@@ -34,7 +34,7 @@ const ChattingCard = ({
             <Text fontWeight="bold">{username}</Text>
             <Text fontSize="sm" color="brand.dark-light" paddingLeft="10px">
               {/* TODO: 채팅 내용 길어지면 '...' 표시해주기  */}
-              {distanceTimeFormat(createdAt)}
+              {createdAt ? distanceTimeFormat(createdAt) : ''}
             </Text>
           </Flex>
           <Text paddingTop="5px">{previewChat}</Text>

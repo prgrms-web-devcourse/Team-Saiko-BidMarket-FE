@@ -9,7 +9,7 @@ export interface ChatRoomData {
     profileImage: string;
   };
   lastMessage: string;
-  lastMessageDate: Date;
+  lastMessageDate: Date | null;
 }
 
 export type ChatRoomResponseType = Array<ChatRoomData>;

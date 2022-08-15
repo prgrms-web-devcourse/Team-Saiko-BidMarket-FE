@@ -88,7 +88,11 @@ const Chats: NextPage = ({
                 profileImage={opponentUserInfo.profileImage}
                 previewChat={lastMessage}
                 productImage={productInfo.thumbnailImage}
-                createdAt={new Date(lastMessageDate)}
+                createdAt={
+                  lastMessage === null
+                    ? null
+                    : new Date(lastMessageDate as Date)
+                }
                 onClick={() =>
                   router.push(
                     {
