@@ -19,8 +19,8 @@ const ProductCard = ({ productInfo }: ProductCardProps) => {
   return (
     <Flex
       padding="15px 0"
-      width="100%"
-      height="144px"
+      w="100%"
+      h="144px"
       cursor="pointer"
       onClick={() => router.push(`/products/${id}`)}
     >
@@ -28,8 +28,21 @@ const ProductCard = ({ productInfo }: ProductCardProps) => {
         alt={`${id}-product-image`}
         src={thumbnailImage || '/svg/basket.svg'}
       />
-      <Flex direction="column" paddingLeft="15px" width="100%" gap="5px">
-        <Text fontSize="lg">{title}</Text>
+      <Flex
+        direction="column"
+        paddingLeft="15px"
+        w="100%"
+        gap="5px"
+        overflow="hidden"
+      >
+        <Text
+          fontSize="lg"
+          whiteSpace="nowrap"
+          overflow="hidden"
+          textOverflow="ellipsis"
+        >
+          {title}
+        </Text>
         <Flex justifyContent="space-between" alignItems="center">
           <Text fontSize="sm" color="brand.primary-900">
             시작가
