@@ -111,13 +111,25 @@
 
 ## <img height="25px" src="https://user-images.githubusercontent.com/50071076/184506573-ed624123-2e8f-430c-9165-0bce79d1e13d.png" /> 기술 스택
 
-#### 개발
+### 프레임워크
 
-<img src="https://img.shields.io/badge/TypeScript-3776AB?style=for-the-badge&logo=TypeScript&logoColor=white"> <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white"> <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=Next.js&logoColor=white"> <img src="https://img.shields.io/badge/React Query-FF4154?style=for-the-badge&logo=React Query&logoColor=white"> <img src="https://img.shields.io/badge/Eslint-4B32C3?style=for-the-badge&logo=Eslint&logoColor=white"> <img src="https://img.shields.io/badge/Prettier-F7B93E?style=for-the-badge&logo=Prettier&logoColor=white"> <img src="https://img.shields.io/badge/Chakra UI-319795?style=for-the-badge&logo=Chakra UI&logoColor=white"> <img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=Vercel&logoColor=white">
+<img src="https://img.shields.io/badge/Typescript-4.7.4-3776AB?style=for-the-badge"> <img src="https://img.shields.io/badge/React-18.2.0-61DAFB?style=for-the-badge"> <img src="https://img.shields.io/badge/Next.js-12.2.3-000000?style=for-the-badge">
 
-#### 커뮤니케이션
+### 라이브러리
 
-<img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=Notion&logoColor=white"><img src="https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=Slack&logoColor=white"> <img src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=Discord&logoColor=white">
+<img src="https://img.shields.io/badge/React Query-4.0.10-FF4154?style=for-the-badge"> <img src="https://img.shields.io/badge/Eslint-8.20.0-4B32C3?style=for-the-badge"> <img src="https://img.shields.io/badge/Prettier-2.7.1-F7B93E?style=for-the-badge"> <img src="https://img.shields.io/badge/Chakra UI-2.0.4-319795?style=for-the-badge">
+
+### 개발 환경
+
+<img src="https://img.shields.io/badge/VSCODE-007ACC?style=for-the-badge&logo=visual studio code&logoColor=white"> <img src="https://img.shields.io/badge/NPM-^8-CB3837?style=for-the-badge"> <img src="https://img.shields.io/badge/Node.js-^16-339933?style=for-the-badge"> <img src="https://img.shields.io/badge/Webpack-^5-8DD6F9?style=for-the-badge">
+
+### 커뮤니케이션
+
+<img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=Notion&logoColor=white"> <img src="https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=Slack&logoColor=white"> <img src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=Discord&logoColor=white">
+
+### 디자인
+
+<img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=Discord&logoColor=white">
 
 ## <img height="25px" src="https://user-images.githubusercontent.com/50071076/184506573-ed624123-2e8f-430c-9165-0bce79d1e13d.png" /> 디자인 및 와이어프레임
 
@@ -125,7 +137,7 @@
 
 ## <img height="25px" src="https://user-images.githubusercontent.com/50071076/184506573-ed624123-2e8f-430c-9165-0bce79d1e13d.png" /> 프로젝트 개요
 
-#### 중고거래 현황
+### 중고거래 현황
 
 ![중고시장](https://thumb.mt.co.kr/06/2021/08/2021080212122825737_1.jpg/dims/optimize/)
 
@@ -134,7 +146,7 @@
 - 국내 온라인 중고거래 시장은 급속도로 성장중이다. 온라인 중고 시장에서 명품이나 중고차, 대형가전 같은 고가의 물품 거래가 빠르게 확산하고 있다. 과거 패션잡화나 생활용품 같은 소액 상품을 넘어 최근에는 수천만원 이상, 심지어는 수억원대에 이르는 고가 제품들의 거래량이 급속도로 늘어나고 있다.
 - 하지만 기존 중고 물품 판매시장에서는 판매자가 중고물품의 수요대비 물품의 가격을 정확히 예상할 수 없어 이러한 고가의 제품들을 싼값에 제품을 판매하는 경우가 존재한다.
 
-#### 기획 배경(문제)
+### 기획 배경(문제)
 
 - 판매자 입장
   - 판매자 입장에서는 제품의 수요대비 정확한 가격을 예측하기 어렵다.
@@ -145,7 +157,7 @@
 
 ### 해결
 
-##### 비딩을 통해 사고파는 중고 거래
+#### 비딩을 통해 사고파는 중고 거래
 
 - 판매자는 중고 물품을 올릴 때 시작가를 정해 놓고 올린다.
 - 구매자는 구매하고 싶은 가격을 설정하여 낙찰받아 거래할 수 있다.
@@ -158,3 +170,5 @@
 
 - 가치 측정하기 애매한 중고 물품을 판매하고 싶은 중고 물품 판매자
 - 시간과 장소 제한 없이 비딩을 통해 구매할 수 있는 중고 물품 구매자
+
+## <img height="25px" src="https://user-images.githubusercontent.com/50071076/184506573-ed624123-2e8f-430c-9165-0bce79d1e13d.png" /
