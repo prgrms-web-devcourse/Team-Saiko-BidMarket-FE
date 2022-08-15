@@ -6,6 +6,7 @@ import {
   Image,
 } from '@chakra-ui/react';
 import type { NextPage } from 'next';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 import { productAPI } from 'apis';
@@ -26,6 +27,7 @@ import { categoryOptionsENType } from 'types/categoryOption';
 import productFormValidation from 'utils/validation/productFormValidation';
 
 const Product: NextPage = () => {
+  const router = useRouter();
   const [productImageArray, setProductImageArray] = useState<string[]>([]);
   const [categoryEN, setCategoryEN] = useState<string>('');
   const { values, errors, isLoading, handleChange, handleSubmit } = useForm({
@@ -47,8 +49,8 @@ const Product: NextPage = () => {
         description: description.trim(),
       };
       try {
-        await productAPI.createProduct(data);
-        // e.target.redirect(`/products/${productId}`);
+        const { data: productData } = await productAPI.createProduct(data);
+        router.push(`/products/${productData.productId}`);
       } catch (err) {
         console.log('안됐습니다.');
       }
