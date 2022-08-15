@@ -1,4 +1,4 @@
-import { Center } from '@chakra-ui/react';
+import { Center, Spinner } from '@chakra-ui/react';
 import type {
   GetServerSideProps,
   InferGetServerSidePropsType,
@@ -39,9 +39,11 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 const Sell: NextPage = ({
   user: { id, username },
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const userId = parseInt(id, 10);
-  const { id: authUserId } = useLoginUser();
   const [isMyPage, setIsMyPage] = useState(false);
+  const userId = parseInt(id, 10);
+  const { isAuthFinished } = useLoginUser({
+    handleAuthUser: ({ authUser }) => authUser?.id === id && setIsMyPage(true),
+  });
 
   const {
     data: productPages,
@@ -51,16 +53,18 @@ const Sell: NextPage = ({
   const [ref, isView] = useInView();
 
   useEffect(() => {
-    if (userId === authUserId) {
-      setIsMyPage(true);
-    }
-  }, [authUserId]);
-
-  useEffect(() => {
     if (isView && hasNextPage) {
       fetchNextPage();
     }
   }, [isView, productPages]);
+
+  if (!isAuthFinished) {
+    return (
+      <Center height="100%">
+        <Spinner size="xl" />
+      </Center>
+    );
+  }
 
   return (
     <>

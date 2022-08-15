@@ -4,8 +4,23 @@ import { userAPI } from 'apis';
 import { getItem } from 'apis/utils/storage';
 import { User } from 'types/user';
 
-const useLoginUser = () => {
-  const [userInfo, setUserInfo] = useState<User>({
+export interface HandleAuthUserType {
+  isAuthUser: boolean;
+  authUser?: User;
+}
+
+interface UseLoginUserProps {
+  handleAuthUser?: ({ isAuthUser, authUser }: HandleAuthUserType) => void;
+  handleNotAuthUser?: () => void;
+}
+
+const useTempLoginUser = ({
+  handleAuthUser,
+  handleNotAuthUser,
+}: UseLoginUserProps) => {
+  const [isAuthFinished, setIsAuthFinished] = useState(false);
+  const [isAuthUser, setIsAuthUser] = useState(false);
+  const [authUser, setAuthUser] = useState<User>({
     id: -1,
     username: '',
     profileImage: '',
@@ -13,6 +28,8 @@ const useLoginUser = () => {
 
   useEffect(() => {
     if (!getItem('token')) {
+      setIsAuthFinished(true);
+
       return;
     }
 
@@ -22,15 +39,40 @@ const useLoginUser = () => {
   const setAuthUserInformation = async () => {
     try {
       const { data } = await userAPI.getAuthUser();
-      setUserInfo(data);
+
+      setAuthUser(data);
+      setIsAuthUser(true);
     } catch (e) {
       console.error(e);
 
-      setUserInfo({} as User);
+      setAuthUser({} as User);
     }
+
+    setIsAuthFinished(true);
   };
 
-  return userInfo;
+  useEffect(() => {
+    if (!isAuthFinished) {
+      return;
+    }
+
+    if (!isAuthUser) {
+      handleNotAuthUser && handleNotAuthUser();
+
+      return;
+    }
+
+    handleAuthUser && handleAuthUser({ isAuthUser, authUser });
+  }, [
+    isAuthFinished,
+    isAuthUser,
+    setAuthUser,
+    handleAuthUser,
+    handleNotAuthUser,
+    authUser,
+  ]);
+
+  return { authUser, isAuthUser, isAuthFinished };
 };
 
-export default useLoginUser;
+export default useTempLoginUser;

@@ -41,8 +41,10 @@ const Like: NextPage = ({
   user: { id, username },
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
-  const userId = parseInt(id, 10);
-  const { id: authUserId } = useLoginUser();
+  const { isAuthFinished, authUser } = useLoginUser({
+    handleAuthUser: ({ authUser }) => authUser?.id !== id && router.push('/'),
+    handleNotAuthUser: () => router.push('/'),
+  });
   const {
     data: productPages,
     fetchNextPage,
@@ -51,23 +53,12 @@ const Like: NextPage = ({
   const [ref, isView] = useInView();
 
   useEffect(() => {
-    if (authUserId === -1) {
-      return;
-    }
-
-    if (userId !== authUserId) {
-      router.push('/');
-      return;
-    }
-  }, [authUserId]);
-
-  useEffect(() => {
     if (isView && hasNextPage) {
       fetchNextPage();
     }
   }, [isView, productPages]);
 
-  if (authUserId === -1) {
+  if (!isAuthFinished || authUser.id !== id) {
     return (
       <Center height="100%">
         <Spinner size="xl" />

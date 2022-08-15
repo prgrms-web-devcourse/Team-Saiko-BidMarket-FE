@@ -5,7 +5,6 @@ import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import { userAPI } from 'apis';
-import { getItem } from 'apis/utils/storage';
 import { GoBackIcon, Header, HeaderTitle } from 'components/common';
 import { NoNotifications, NotificationCard } from 'components/User';
 import { useGetNotifications } from 'hooks/queries';
@@ -40,25 +39,18 @@ const Notifications = ({
   } = useGetNotifications();
   const [ref, isView] = useInView();
   const router = useRouter();
-  const { id: authUserId } = useLoginUser();
+  const { isAuthFinished, authUser } = useLoginUser({
+    handleAuthUser: ({ authUser }) => authUser?.id !== id && router.push('/'),
+    handleNotAuthUser: () => router.push('/'),
+  });
 
-  // @TODO 인증하는 부분 분리하기 (반복되는 코드)
   useEffect(() => {
-    if (!getItem('token')) {
-      router.replace('/');
-      return;
-    }
-
-    if (authUserId === -1) {
-      return;
-    }
-
-    if (!id || id !== authUserId) {
-      router.replace('/');
+    if (!id) {
+      router.push('/');
 
       return;
     }
-  }, [id, authUserId, router]);
+  }, [id, router]);
 
   useEffect(() => {
     if (isView && hasNextPage) {
@@ -66,7 +58,7 @@ const Notifications = ({
     }
   }, [isView, notificationPages]);
 
-  if (!authUserId || authUserId !== id) {
+  if (!isAuthFinished || authUser.id !== id) {
     return (
       <Center height="100%">
         <Spinner size="xl" />

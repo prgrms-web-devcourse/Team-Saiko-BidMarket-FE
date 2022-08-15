@@ -5,7 +5,7 @@ import type {
   NextPage,
 } from 'next';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import userAPI from 'apis/api/user';
 import { GoBackIcon, Header, HeaderTitle, SEO } from 'components/common';
@@ -40,17 +40,24 @@ const UserId: NextPage = ({
   user: { id, profileImage, username },
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
-  const { userId } = router.query;
-  const { id: authUserId } = useLoginUser();
-  const isMyPage = id === authUserId;
+  const [isMyPage, setIsMyPage] = useState(false);
+  const { authUser, isAuthFinished } = useLoginUser({
+    handleAuthUser: ({ authUser }) => {
+      setIsMyPage(authUser?.id === id);
+    },
+  });
 
+  /**
+   * url 기준으로 SSR에서 user 정보를 prop으로 받아옴.
+   * id가 없다면 잘못된 url
+   */
   useEffect(() => {
     if (!id) {
       router.replace('/404');
     }
   }, [id, router]);
 
-  if (!id) {
+  if (!isAuthFinished || !id) {
     return (
       <Center height="100%">
         <Spinner size="xl" />
@@ -63,7 +70,7 @@ const UserId: NextPage = ({
       {
         pathname: `/reports`,
         query: {
-          userId: id,
+          userId: authUser.id,
           profileImage,
           username,
         },
@@ -89,7 +96,7 @@ const UserId: NextPage = ({
         {isMyPage ? (
           <UserProfileEditOrReportButton
             text={'edit'}
-            onClick={() => router.push(`./${userId}/edit`)}
+            onClick={() => router.push(`./${authUser.id}/edit`)}
           />
         ) : (
           <UserProfileEditOrReportButton
@@ -98,7 +105,7 @@ const UserId: NextPage = ({
           />
         )}
       </Flex>
-      <ProductMenuList userId={userId as string} isMyPage={isMyPage} />
+      <ProductMenuList userId={id} isMyPage={isMyPage} />
       {isMyPage ? (
         <>
           <Divider
@@ -108,7 +115,7 @@ const UserId: NextPage = ({
             boxShadow="inset 0px 1px 3px rgba(0, 0, 0, 0.03)"
             marginTop="25px"
           />
-          <UserSetting userId={authUserId} />
+          <UserSetting userId={authUser.id} />
         </>
       ) : undefined}
     </>

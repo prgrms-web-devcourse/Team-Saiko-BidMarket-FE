@@ -2,6 +2,7 @@ import { Divider, Flex, Box, Image } from '@chakra-ui/react';
 import { format } from 'date-fns';
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 
 import { productAPI } from 'apis';
 import { GoBackIcon, SEO } from 'components/common';
@@ -42,8 +43,12 @@ const ProductDetail = ({
   },
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
-  const { id: authUserId } = useLoginUser();
-  const isSeller = authUserId === writer.id;
+  const [isSeller, setIsSeller] = useState(false);
+  const {
+    authUser: { id: authUserId },
+  } = useLoginUser({
+    handleAuthUser: ({ authUser }) => setIsSeller(authUser?.id === writer.id),
+  });
 
   const handleReportSirenIconClick = () => {
     router.push(
