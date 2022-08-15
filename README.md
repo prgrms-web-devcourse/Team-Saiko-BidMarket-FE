@@ -1,12 +1,10 @@
-# TEAM-SAIKO-BIDMARKET-FE
+# TEAM-SAIKO-BIDMARKET-FE (2022.07 ~)
 
-## <img height="20px" src="https://user-images.githubusercontent.com/50071076/184506573-ed624123-2e8f-430c-9165-0bce79d1e13d.png" /> 비딩을 통한 현명한 중고 거래, 비드마켓
+## <img height="25px" src="https://user-images.githubusercontent.com/50071076/184506573-ed624123-2e8f-430c-9165-0bce79d1e13d.png" /> 비딩을 통한 현명한 중고 거래, 비드마켓
 
 **온라인 비딩 시스템을 이용한 중고 물품 거래 서비스**입니다.
 
-<br />
-
-## 🧚🏻사이코팀 소개
+## <img height="25px" src="https://user-images.githubusercontent.com/50071076/184506573-ed624123-2e8f-430c-9165-0bce79d1e13d.png" /> 사이코팀 소개
 
 ## FE
 
@@ -47,8 +45,10 @@
   </tr>
 </table>
 
-
 ## BE
+
+#### [Repository Link](https://github.com/prgrms-web-devcourse/Team-Saiko-BidMarket-BE)
+
 <table>
   <tr>
     <td>
@@ -92,3 +92,78 @@
     <td align="center"><b>Back-End</b></td>
   </tr>
 </table>
+
+## Designer
+
+<table>
+  <tr>
+    <td>
+      <img src="https://ca.slack-edge.com/T03S7V29UPJ-U03RX12ESP3-86a11c76c0d2-512" width="100px" />
+    </td>
+  </tr>
+   <tr>
+    <td align="center"><b>김샛별</b></td>
+  </tr>
+  <tr>
+    <td align="center"><b>디자이너</b></td>
+  </tr>
+</table>
+
+## <img height="25px" src="https://user-images.githubusercontent.com/50071076/184506573-ed624123-2e8f-430c-9165-0bce79d1e13d.png" /> 기술 스택
+
+#### 개발
+
+<img src="https://img.shields.io/badge/TypeScript-3776AB?style=for-the-badge&logo=TypeScript&logoColor=white">
+<img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white">
+<img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=Next.js&logoColor=white">
+<img src="https://img.shields.io/badge/React Query-FF4154?style=for-the-badge&logo=React Query&logoColor=white">
+<img src="https://img.shields.io/badge/Eslint-4B32C3?style=for-the-badge&logo=Eslint&logoColor=white">
+<img src="https://img.shields.io/badge/Prettier-F7B93E?style=for-the-badge&logo=Prettier&logoColor=white">
+<img src="https://img.shields.io/badge/Chakra UI-319795?style=for-the-badge&logo=Chakra UI&logoColor=white">
+<img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=Vercel&logoColor=white">
+
+#### 커뮤니케이션
+
+<img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=Notion&logoColor=white">
+<img src="https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=Slack&logoColor=white">
+<img src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=Discord&logoColor=white">
+
+## <img height="25px" src="https://user-images.githubusercontent.com/50071076/184506573-ed624123-2e8f-430c-9165-0bce79d1e13d.png" /> 디자인 및 와이어프레임
+
+- [비드마켓 Figma 보러가기](https://www.figma.com/file/bKGr5M3qtpqkE9FRBq6Sax/%EB%B9%84%EB%93%9C%EB%A7%88%EC%BC%93?node-id=0%3A1)
+
+## <img height="25px" src="https://user-images.githubusercontent.com/50071076/184506573-ed624123-2e8f-430c-9165-0bce79d1e13d.png" /> 프로젝트 개요
+
+#### 중고거래 현황
+
+![중고시장](https://thumb.mt.co.kr/06/2021/08/2021080212122825737_1.jpg/dims/optimize/)
+
+[출처 국내 - 중고거래 시장 규모](https://news.mt.co.kr/mtview.php?no=2021080212122825737)
+
+- 국내 온라인 중고거래 시장은 급속도로 성장중이다. 온라인 중고 시장에서 명품이나 중고차, 대형가전 같은 고가의 물품 거래가 빠르게 확산하고 있다. 과거 패션잡화나 생활용품 같은 소액 상품을 넘어 최근에는 수천만원 이상, 심지어는 수억원대에 이르는 고가 제품들의 거래량이 급속도로 늘어나고 있다.
+- 하지만 기존 중고 물품 판매시장에서는 판매자가 중고물품의 수요대비 물품의 가격을 정확히 예상할 수 없어 이러한 고가의 제품들을 싼값에 제품을 판매하는 경우가 존재한다.
+
+#### 기획 배경(문제)
+
+- 판매자 입장
+  - 판매자 입장에서는 제품의 수요대비 정확한 가격을 예측하기 어렵다.
+  - 물품이 오랫동안 팔리지 않을 경우 팔리기를 기다리다 물품 가격을 높게 책정했음을 깨닫고 물품가격을 낮추어 다시 등록하고, 물품을 올리자마자 구매 문의가 쇄도할 경우 물건 가격을 너무 낮게 책정했음을 깨닫고 물품 가격을 올려 제품을 다시 등록하는 과정이 불필요하게 반복된다.
+- 구매자 입장
+  - 구매자는 인기있는 중고 물품이 선착순으로 팔려나가서 구매하지 못하는 경우가 종종 발생한다.
+  - 과도하게 높은 가격으로 판매되는 중고 물품의 경우 대다수의 이용자가 판매자에게 제품가격이 높다는 피드백을 하지않기때문에 판매자는 제품 가격에 대해 재고하기 까지 시간이 걸린다.
+
+### 해결
+
+##### 비딩을 통해 사고파는 중고 거래
+
+- 판매자는 중고 물품을 올릴 때 시작가를 정해 놓고 올린다.
+- 구매자는 구매하고 싶은 가격을 설정하여 낙찰받아 거래할 수 있다.
+- 판매자는 자신이 원하는 최소가보다 높게 상품을 판매할 수 있다.
+- 구매자는 자신이 지불하고 싶은 금액 이하로 상품을 구매할 수 있다.
+
+> **비딩**: 입찰자(비더, Bidder)는 **비공개 입찰 방식**으로 구매를 희망하는 최고가를 적어 내게 된다. 경매 종료시점에서 가장 높은 비딩 금액을 제시한 순서대로 낙찰이 결정되며, 낙찰가는 공개 입찰방식으로 **차상위**금액에 1호가를 더한 가격으로 결정된다.
+
+## <img height="25px" src="https://user-images.githubusercontent.com/50071076/184506573-ed624123-2e8f-430c-9165-0bce79d1e13d.png" /> 프로젝트 주요 타겟
+
+- 가치 측정하기 애매한 중고 물품을 판매하고 싶은 중고 물품 판매자
+- 시간과 장소 제한 없이 비딩을 통해 구매할 수 있는 중고 물품 구매자
