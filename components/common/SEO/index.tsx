@@ -7,16 +7,17 @@ interface SEOProps {
 }
 
 const SEO = ({ title, description, image }: SEOProps) => {
-  const titleContent = `${title} | Bidmarket`;
+  const titleContent = `${title} | 비드마켓`;
   return (
     <Head>
       <title>{titleContent}</title>
       <link rel="shortcut icon" href="/favicon.ico" />
-      <meta httpEquiv="content-type" content="text/html; charset=UTF-8" />
+      <meta httpEquiv="content-type" content="text/html; charset=euc-kr" />
       <meta
         name="description"
         content={description || '비딩을 통한 현명한 중고 거래'}
       />
+      <meta property="og:url" content={'https://bidmarket.vercel.app/'} />
       <meta property="og:title" content={title || '비드마켓'} />
       <meta
         property="og:description"
