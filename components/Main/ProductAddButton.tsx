@@ -16,19 +16,20 @@ const ProductAddButton = () => {
     }
   }, [userId]);
 
-  return (
-    isLogin && (
-      <Button
-        w="60px"
-        h="60px"
-        borderRadius="50px"
-        backgroundColor="brand.primary-900"
-        aria-label="product-add-button"
-        onClick={() => router.push('/product')}
-      >
-        <AddIcon color="white" />
-      </Button>
-    )
+  // @TODO: 로그인 유무에 따른 버튼 유무를 메인 페이지에서 적용할 것
+  return isLogin ? (
+    <Button
+      w="60px"
+      h="60px"
+      borderRadius="50px"
+      backgroundColor="brand.primary-900"
+      aria-label="product-add-button"
+      onClick={() => router.push('/product')}
+    >
+      <AddIcon color="white" />
+    </Button>
+  ) : (
+    <></>
   );
 };
 
