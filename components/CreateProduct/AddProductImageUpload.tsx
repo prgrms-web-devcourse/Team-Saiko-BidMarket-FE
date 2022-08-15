@@ -36,6 +36,10 @@ const AddProductImageUpload = ({
       return;
     }
 
+    for (const file of files) {
+      await uploadImage(file);
+    }
+
     [...files].forEach(async (file) => {
       await uploadImage(file);
     });
