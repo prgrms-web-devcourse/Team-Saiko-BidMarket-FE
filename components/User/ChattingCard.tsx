@@ -40,8 +40,8 @@ const ChattingCard = ({
           {previewChat ? (
             <Text paddingTop="5px">{previewChat}</Text>
           ) : (
-            <Text paddingTop="5px" color="brand.primary-900">
-              채팅방이 연결 됐습니다.
+            <Text fontSize="sm" paddingTop="5px" color="brand.dark-light">
+              첫번째 채팅을 남겨주세요!
             </Text>
           )}
         </Flex>

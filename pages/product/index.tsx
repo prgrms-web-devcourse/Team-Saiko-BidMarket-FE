@@ -39,7 +39,7 @@ const Product: NextPage = () => {
       category: '',
       description: '',
     },
-    onSubmit: async ({ title, minimumPrice, location, description, e }) => {
+    onSubmit: async ({ title, minimumPrice, location, description }) => {
       const data = {
         title: title.trim(),
         minimumPrice,
@@ -49,8 +49,8 @@ const Product: NextPage = () => {
         description: description.trim(),
       };
       try {
-        const { data: productData } = await productAPI.createProduct(data);
-        router.push(`/products/${productData.id}`);
+        const { id } = (await productAPI.createProduct(data)).data;
+        router.replace(`/products/${id}`);
       } catch (err) {
         console.log('업로드 실패!.');
       }

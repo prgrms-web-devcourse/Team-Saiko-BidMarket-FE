@@ -40,6 +40,7 @@ const AddProductTitle = ({ inputTitle, onChange }: AddProductTitleProps) => {
         borderColor="#B6B6B6"
         maxLength={20}
         h="50px"
+        focusBorderColor="brand.primary-900"
       />
     </Flex>
   );
