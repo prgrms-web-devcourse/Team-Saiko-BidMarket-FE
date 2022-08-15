@@ -22,6 +22,7 @@ const ChatInput = ({ onSubmit }: ChatInputProps) => {
     }
   };
 
+  //TODO: Input 안에 IconButton클릭 시에도 채팅이 입력되도록 구현
   return (
     <InputGroup size="md">
       <Input
