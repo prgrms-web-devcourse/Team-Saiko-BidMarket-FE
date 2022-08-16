@@ -12,6 +12,11 @@ const GoBackIcon = ({ color = '#000000' }: GoBackIconProps) => {
     const pathName = router.pathname;
     if (pathName === '/products') {
       router.push('/');
+    } else if (router.pathname === '/user/[userId]/chat/[chatRoomId]') {
+      const userId = router.query.userId;
+      router.push(`/user/${userId}/chat`);
+    } else if (router.pathname === '/user/[userId]/chat') {
+      router.push('/');
     } else {
       router.back();
     }
