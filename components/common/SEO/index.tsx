@@ -16,24 +16,27 @@ const SEO = ({ title, description, image }: SEOProps) => {
       <meta
         name="description"
         content={
-          description ||
-          '거래는 중고지만 경험은 새롭게! 비딩으로 기다리는 설렘을 느껴봐!'
+          description
+            ? description
+            : '거래는 중고지만 경험은 새롭게! 비딩으로 기다리는 설렘을 느껴봐!'
         }
       />
       <meta property="og:url" content={'https://bidmarket.vercel.app/'} />
-      <meta property="og:title" content={title || '비드마켓'} />
+      <meta property="og:title" content={title ? title : '비드마켓'} />
       <meta
         property="og:description"
         content={
-          description ||
-          '거래는 중고지만 경험은 새롭게! 비딩으로 기다리는 설렘을 느껴봐!'
+          description
+            ? description
+            : '거래는 중고지만 경험은 새롭게! 비딩으로 기다리는 설렘을 느껴봐!'
         }
       />
       <meta
         property="og:image"
         content={
-          image ||
-          'https://user-images.githubusercontent.com/50071076/184589425-fc918624-3683-4e9c-824e-073ea6bdd60c.jpg'
+          image
+            ? image
+            : 'https://user-images.githubusercontent.com/50071076/184589425-fc918624-3683-4e9c-824e-073ea6bdd60c.jpg'
         }
       />
     </Head>
