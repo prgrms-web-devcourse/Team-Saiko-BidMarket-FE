@@ -18,7 +18,7 @@ const ProductSeller = ({ userId, name, profileImage }: ProductSellerProps) => {
       <Flex alignItems="center">
         <Image
           alt="profile-image"
-          src={profileImage}
+          src={profileImage || '/svg/bidmarket-bibi.svg'}
           w="45px"
           h="45px"
           borderRadius="50%"
@@ -28,7 +28,7 @@ const ProductSeller = ({ userId, name, profileImage }: ProductSellerProps) => {
           borderColor="brand.primary-900"
         />
         <Text fontWeight="bold" marginLeft="14px">
-          {name}
+          {name === 'UnKnown' ? '알 수 없음' : name}
         </Text>
       </Flex>
     </Box>

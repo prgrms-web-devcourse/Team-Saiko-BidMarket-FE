@@ -12,7 +12,11 @@ const UserProfileInformation = ({
   return (
     <Flex width="100%" gap="20px" alignItems="center" marginTop="12px">
       <Circle border="2px solid" borderColor="brand.primary-900">
-        <Avatar name="프로필 이미지" size="xl" src={profileImageUrl} />
+        <Avatar
+          name="프로필 이미지"
+          size="xl"
+          src={profileImageUrl || '/svg/bidmarket-bibi.svg'}
+        />
       </Circle>
       <Text
         fontFamily="Roboto"
