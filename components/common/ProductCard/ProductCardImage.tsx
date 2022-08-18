@@ -1,4 +1,4 @@
-import { Image } from '@chakra-ui/react';
+import Image from 'next/image';
 
 interface CardProductImageProps {
   alt: string;
@@ -7,7 +7,14 @@ interface CardProductImageProps {
 
 const CardProductImage = ({ alt, src }: CardProductImageProps) => {
   return (
-    <Image w="114px" objectFit="cover" borderRadius="5" alt={alt} src={src} />
+    <Image
+      layout="fixed"
+      width="114px"
+      height="114px"
+      loading="lazy"
+      alt={alt}
+      src={src}
+    />
   );
 };
 
