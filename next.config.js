@@ -8,6 +8,9 @@ const nextConfig = {
     stompUrl: `${process.env.STOMP_END_POINT}`,
     bucketUrl: `${process.env.BUCKET_URL}`,
   },
+  images: {
+    domains: [process.env.BUCKET_URL],
+  },
 };
 
 module.exports = nextConfig;
