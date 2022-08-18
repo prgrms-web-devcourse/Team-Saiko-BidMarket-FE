@@ -17,7 +17,7 @@ const Banner = () => {
         </Text>
       </Flex>
       <Box position="relative" top="15px" right="20px">
-        <Image src="/svg/bidmarket-bibi.svg" alt="banner" height="65" />
+        <Image src="/svg/bidmarket-bibi.svg" alt="banner" w="66" height="66" />
       </Box>
     </Flex>
   );
