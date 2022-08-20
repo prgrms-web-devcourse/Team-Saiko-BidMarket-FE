@@ -1,5 +1,5 @@
 import { StarIcon } from '@chakra-ui/icons';
-import { Flex, Text } from '@chakra-ui/react';
+import { Box, Flex, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 
 import { CardProductData } from 'types/product';
@@ -24,10 +24,12 @@ const ProductCard = ({ productInfo }: ProductCardProps) => {
       cursor="pointer"
       onClick={() => router.push(`/products/${id}`)}
     >
-      <ProductCardImage
-        alt={`${id}-product-image`}
-        src={thumbnailImage || '/svg/basket.svg'}
-      />
+      <Box>
+        <ProductCardImage
+          alt={`${id}-product-image`}
+          src={thumbnailImage || '/svg/basket.svg'}
+        />
+      </Box>
       <Flex
         direction="column"
         paddingLeft="15px"

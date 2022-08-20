@@ -7,14 +7,24 @@ interface CardProductImageProps {
 
 const CardProductImage = ({ alt, src }: CardProductImageProps) => {
   return (
-    <Image
-      layout="fixed"
-      width="114px"
-      height="114px"
-      loading="lazy"
-      alt={alt}
-      src={src}
-    />
+    <div
+      style={{
+        borderRadius: '5px',
+        overflow: 'hidden',
+        width: '114px',
+        height: '114px',
+      }}
+    >
+      <Image
+        layout="fixed"
+        objectFit="cover"
+        width={114}
+        height={114}
+        loading="lazy"
+        alt={alt}
+        src={src}
+      />
+    </div>
   );
 };
 
