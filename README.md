@@ -127,27 +127,27 @@
 
 <table>
   <tr>
-    <td align="center" width="150px">주차</td>
+    <td align="center" width="150px"></td>
     <td align="center" width="500px">주요 일정</td>
   </tr>
   <tr>
-    <td align="center">1</td>
+    <td align="center">1주차</td>
     <td align="center">세부 기획, 요구사항 명세</td>
   </tr>
   <tr>
-    <td align="center">2</td>
+    <td align="center">2주차</td>
     <td align="center">소셜 로그인, 회원 정보, 상품 목록 조회</td>
   </tr>
   <tr>
-    <td align="center">3</td>
+    <td align="center">3주차</td>
     <td align="center">상품 등록, 경매 입찰, 낙찰 핵심 로직 구현</td>
   </tr>
   <tr>
-    <td align="center">4</td>
+    <td align="center">4주차</td>
     <td align="center">알림, 채팅, 신고하기, 찜하기 기능 구현</td>
   </tr>
   <tr>
-    <td align="center">5 ~ 진행중</td>
+    <td align="center">5주차 ~ 진행중</td>
     <td align="center">리팩토링과 추가 기능 구현</td>
   </tr>
 </table>
