@@ -1,4 +1,5 @@
-import { Box, Flex, Image, Text } from '@chakra-ui/react';
+import { Box, Flex, Text } from '@chakra-ui/react';
+import Image from 'next/image';
 
 const Banner = () => {
   //TODO: 슬로건 수정하기
@@ -16,8 +17,13 @@ const Banner = () => {
           거래는 중고지만 경험은 새롭게!
         </Text>
       </Flex>
-      <Box position="relative" top="15px" right="20px">
-        <Image src="/svg/bidmarket-bibi.svg" alt="banner" w="66" height="66" />
+      <Box position="relative" top="22px" right="20px">
+        <Image
+          src="/svg/bidmarket-bibi.svg"
+          alt="banner"
+          width="66px"
+          height="66px"
+        />
       </Box>
     </Flex>
   );

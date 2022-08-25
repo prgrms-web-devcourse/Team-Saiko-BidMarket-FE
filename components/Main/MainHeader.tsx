@@ -1,5 +1,6 @@
 import { BellIcon, ChatIcon } from '@chakra-ui/icons';
-import { Avatar, Center, Circle, Flex, Image, Spinner } from '@chakra-ui/react';
+import { Avatar, Center, Circle, Flex, Spinner } from '@chakra-ui/react';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
@@ -33,8 +34,8 @@ const MainHeader = () => {
         <Image
           src="/svg/bidmarket-logo.svg"
           alt="bidmarket logo"
-          w="32px"
-          h="32px"
+          width="32px"
+          height="32px"
         />
       }
       // @TODO 컴포넌트로 분리 (BM-184 참고)
