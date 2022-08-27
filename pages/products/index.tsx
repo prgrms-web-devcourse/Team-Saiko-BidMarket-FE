@@ -1,5 +1,6 @@
-import { Center, Divider, Flex, Image, Text } from '@chakra-ui/react';
+import { Center, Divider, Flex, Text } from '@chakra-ui/react';
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
@@ -141,7 +142,12 @@ const Products = ({
         })}
         {productPages?.pages[0].data.length === 0 && (
           <Center flexDirection="column" height="100%">
-            <Image src="/svg/noneProductOther.svg" alt="None Product" />
+            <Image
+              src="/svg/noneProductOther.svg"
+              alt="None Product"
+              width="139px"
+              height="76px"
+            />
             <Text marginTop="34px">찾으시는 상품이 없습니다:(</Text>
           </Center>
         )}
