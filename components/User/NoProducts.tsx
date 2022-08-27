@@ -1,4 +1,5 @@
-import { Button, Image, Text } from '@chakra-ui/react';
+import { Button, Text } from '@chakra-ui/react';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { Fragment } from 'react';
 
@@ -35,7 +36,12 @@ const NoProducts = ({ pageName }: NoProducts) => {
   if (pageName === 'userSellProductsOther') {
     return (
       <Fragment>
-        <Image src="/svg/noneProductOther.svg" alt="None Product" />
+        <Image
+          src="/svg/noneProductOther.svg"
+          alt="None Product"
+          width="109px"
+          height="76px"
+        />
         <Text marginTop="34px">아직 판매하신 상품이 없어요:(</Text>
       </Fragment>
     );
@@ -43,7 +49,12 @@ const NoProducts = ({ pageName }: NoProducts) => {
 
   return (
     <>
-      <Image src="/svg/noneProduct.svg" alt="None Product" />
+      <Image
+        src="/svg/noneProduct.svg"
+        alt="None Product"
+        width="109px"
+        height="76px"
+      />
       <Text marginTop="34px">{errorMessage}</Text>
       <Text marginTop="10px" color="brand.dark-light">
         {guideMessage}
