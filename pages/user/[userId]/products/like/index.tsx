@@ -1,11 +1,11 @@
-import { Center, Spinner, Text } from '@chakra-ui/react';
+import { Center, Spinner } from '@chakra-ui/react';
 import type {
   GetServerSideProps,
   InferGetServerSidePropsType,
   NextPage,
 } from 'next';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import { userAPI } from 'apis';
@@ -17,7 +17,7 @@ import {
   SEO,
 } from 'components/common';
 import { NoProducts } from 'components/User';
-import { useGetUserLikeProducts } from 'hooks/queries';
+import useGetInfiniteQuery from 'hooks/queries/useGetInfiniteQuery';
 import useLoginUser from 'hooks/useLoginUser';
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
@@ -49,7 +49,7 @@ const Like: NextPage = ({
     data: productPages,
     fetchNextPage,
     hasNextPage,
-  } = useGetUserLikeProducts();
+  } = useGetInfiniteQuery({ queryKey: 'userLikeProducts' });
   const [ref, isView] = useInView();
 
   useEffect(() => {

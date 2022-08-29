@@ -17,7 +17,7 @@ import {
   SEO,
 } from 'components/common';
 import { NoProducts } from 'components/User';
-import { useGetUserBidProducts } from 'hooks/queries';
+import useGetInfiniteQuery from 'hooks/queries/useGetInfiniteQuery';
 import useLoginUser from 'hooks/useLoginUser';
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
@@ -49,7 +49,7 @@ const Bid: NextPage = ({
     data: productPages,
     fetchNextPage,
     hasNextPage,
-  } = useGetUserBidProducts();
+  } = useGetInfiniteQuery({ queryKey: 'userBidProducts' });
   const [ref, isView] = useInView();
 
   useEffect(() => {

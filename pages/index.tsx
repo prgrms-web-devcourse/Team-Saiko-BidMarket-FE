@@ -6,10 +6,14 @@ import { useInView } from 'react-intersection-observer';
 
 import { ProductCardContainer, SearchInput, SEO } from 'components/common';
 import { Banner, MainHeader, ProductAddButton } from 'components/Main';
-import { useGetProducts } from 'hooks/queries';
+import useGetInfiniteQuery from 'hooks/queries/useGetInfiniteQuery';
 
 const Home: NextPage = () => {
-  const { data: productPages, fetchNextPage, hasNextPage } = useGetProducts();
+  const {
+    data: productPages,
+    fetchNextPage,
+    hasNextPage,
+  } = useGetInfiniteQuery({ queryKey: 'products' });
   const [ref, isView] = useInView();
   const router = useRouter();
   const [title, setTitle] = useState('');
