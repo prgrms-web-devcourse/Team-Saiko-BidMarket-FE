@@ -1,11 +1,4 @@
-import {
-  Center,
-  Divider,
-  Flex,
-  Spinner,
-  Text,
-  useToast,
-} from '@chakra-ui/react';
+import { Divider, Flex, Text, useToast } from '@chakra-ui/react';
 import {
   GetServerSideProps,
   InferGetServerSidePropsType,
@@ -16,7 +9,7 @@ import { useEffect } from 'react';
 
 import { userAPI } from 'apis';
 import { getItem, removeItem } from 'apis/utils/storage';
-import { GoBackIcon, Header, SEO } from 'components/common';
+import { GoBackIcon, Header, Loading, SEO } from 'components/common';
 import { setToastInfo } from 'utils';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -51,11 +44,7 @@ const Setting: NextPage = ({
   }, [id, router]);
 
   if (!id) {
-    return (
-      <Center height="100%">
-        <Spinner size="xl" />
-      </Center>
-    );
+    return <Loading />;
   }
 
   const handleLogoutClick = () => {

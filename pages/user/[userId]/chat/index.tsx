@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 import { Fragment, useEffect, useState } from 'react';
 
 import { userAPI } from 'apis';
-import { GoBackIcon, Header, HeaderTitle } from 'components/common';
+import { GoBackIcon, Header, HeaderTitle, Loading } from 'components/common';
 import { NoChatting, ChattingCard } from 'components/User';
 import useLoginUser from 'hooks/useLoginUser';
 import { ChatRoomData, ChatRoomResponseType } from 'types/chatRooms';
@@ -60,11 +60,7 @@ const Chats: NextPage = ({
   }, [id, router]);
 
   if (!isAuthFinished || id !== authUser.id) {
-    return (
-      <Center height="100%">
-        <Spinner size="xl" />
-      </Center>
-    );
+    return <Loading />;
   }
 
   return (

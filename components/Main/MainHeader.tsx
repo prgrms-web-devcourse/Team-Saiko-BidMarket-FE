@@ -1,9 +1,9 @@
 import { BellIcon, ChatIcon } from '@chakra-ui/icons';
-import { Avatar, Center, Circle, Flex, Image, Spinner } from '@chakra-ui/react';
+import { Avatar, Circle, Flex, Image } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
-import { Header } from 'components/common';
+import { Header, Loading } from 'components/common';
 import useLoginUser from 'hooks/useLoginUser';
 
 import LoginButton from './LoginButton';
@@ -19,12 +19,9 @@ const MainHeader = () => {
     handleAuthUser: ({ isAuthUser }) => setIsLogin(isAuthUser),
   });
 
+  // TODO: 로딩은 메인 페이지에서 처리하도록 수정
   if (!isAuthFinished || isAuthUser !== isLogin) {
-    return (
-      <Center height="100%">
-        <Spinner size="xl" />
-      </Center>
-    );
+    return <Loading />;
   }
 
   return (
