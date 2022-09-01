@@ -2,15 +2,13 @@ import { productAPI, userAPI } from 'apis';
 import { queryKeyType } from 'types/infiniteQueryKey';
 import { ProductsResponseType } from 'types/product';
 
-type getQueryApiByQueryKeyReturnType = ({
-  pageParam,
-}: {
-  pageParam?: number;
-}) => Promise<{
-  data: ProductsResponseType;
-  currentPage: number;
-  isLast: boolean;
-}>;
+interface getQueryApiByQueryKeyReturnType {
+  ({ pageParam }: { pageParam?: number }): Promise<{
+    data: ProductsResponseType;
+    currentPage: number;
+    isLast: boolean;
+  }>;
+}
 
 // @TODO 중복 코드 제거 고민 필요
 const getProductsAPI = async ({ pageParam = 0 }) => {
