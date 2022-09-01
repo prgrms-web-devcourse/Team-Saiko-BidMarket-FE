@@ -19,6 +19,7 @@ import {
 import { NoProducts } from 'components/User';
 import useGetInfiniteQuery from 'hooks/queries/useGetInfiniteQuery';
 import useLoginUser from 'hooks/useLoginUser';
+import { QUERY_KEYS } from 'utils';
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const { userId } = query;
@@ -49,7 +50,7 @@ const Bid: NextPage = ({
     data: productPages,
     fetchNextPage,
     hasNextPage,
-  } = useGetInfiniteQuery({ queryKey: 'userBidProducts' });
+  } = useGetInfiniteQuery({ queryKey: QUERY_KEYS.USER_BID_PRODUCTS });
   const [ref, isView] = useInView();
 
   useEffect(() => {
