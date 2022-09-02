@@ -1,4 +1,4 @@
-import { Center, Flex, Spinner } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 import type {
   GetServerSideProps,
   InferGetServerSidePropsType,
@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import userAPI from 'apis/api/user';
-import { SEO } from 'components/common';
+import { Loading, SEO } from 'components/common';
 import { ProfileEditHeader } from 'components/ProfileEdit';
 import EditProfileForm from 'components/ProfileEdit/EditForm';
 import useLoginUser from 'hooks/useLoginUser';
@@ -47,11 +47,7 @@ const Edit: NextPage = ({
   }, [id, router]);
 
   if (!isAuthFinished || authUser.id !== id) {
-    return (
-      <Center height="100%">
-        <Spinner size="xl" />
-      </Center>
-    );
+    return <Loading />;
   }
 
   return (

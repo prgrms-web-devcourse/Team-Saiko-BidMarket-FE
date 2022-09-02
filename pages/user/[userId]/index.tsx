@@ -1,4 +1,4 @@
-import { Center, Divider, Flex, Spinner } from '@chakra-ui/react';
+import { Divider, Flex } from '@chakra-ui/react';
 import type {
   GetServerSideProps,
   InferGetServerSidePropsType,
@@ -8,7 +8,13 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import userAPI from 'apis/api/user';
-import { GoBackIcon, Header, HeaderTitle, SEO } from 'components/common';
+import {
+  GoBackIcon,
+  Header,
+  HeaderTitle,
+  Loading,
+  SEO,
+} from 'components/common';
 import {
   ProductMenuList,
   UserProfileEditOrReportButton,
@@ -58,11 +64,7 @@ const UserId: NextPage = ({
   }, [id, router]);
 
   if (!isAuthFinished || !id) {
-    return (
-      <Center height="100%">
-        <Spinner size="xl" />
-      </Center>
-    );
+    return <Loading />;
   }
 
   const handleReportsButtonClick = () => {

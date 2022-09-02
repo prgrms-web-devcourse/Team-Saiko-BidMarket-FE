@@ -1,4 +1,4 @@
-import { Center, Spinner } from '@chakra-ui/react';
+import { Center } from '@chakra-ui/react';
 import type {
   GetServerSideProps,
   InferGetServerSidePropsType,
@@ -13,6 +13,7 @@ import {
   GoBackIcon,
   Header,
   HeaderTitle,
+  Loading,
   ProductCardContainer,
   SEO,
 } from 'components/common';
@@ -60,11 +61,7 @@ const Like: NextPage = ({
   }, [isView, productPages]);
 
   if (!isAuthFinished || authUser.id !== id) {
-    return (
-      <Center height="100%">
-        <Spinner size="xl" />
-      </Center>
-    );
+    return <Loading />;
   }
 
   return (
