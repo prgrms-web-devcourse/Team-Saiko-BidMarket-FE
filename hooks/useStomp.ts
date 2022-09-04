@@ -62,6 +62,8 @@ const useStomp = ({ chatRoomId, userInfo, setMessages }: UseStompProps) => {
     if (client !== null && client.connected) {
       client.deactivate();
     }
+
+    client = null;
   };
 
   const publish = useCallback(
