@@ -97,7 +97,7 @@ const ChatRoom: NextPage = ({
             <Center>
               <ChatDateBox chatDate={chatDate} />
             </Center>
-            <Flex flexDirection="column" flexGrow="1">
+            <Flex flexDirection="column">
               <MessageList userId={user.id} messages={messages} />
             </Flex>
           </Fragment>
