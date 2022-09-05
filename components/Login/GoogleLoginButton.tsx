@@ -1,8 +1,7 @@
 import { Box } from '@chakra-ui/react';
 import getConfig from 'next/config';
 import { useRouter } from 'next/router';
-import Script from 'next/script';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 const { publicRuntimeConfig } = getConfig();
 
@@ -15,15 +14,29 @@ const GoogleLoginButton = () => {
     router.push(publicRuntimeConfig.googleLoginUrl);
   };
 
+  useEffect(() => {
+    const GOOGLE_GSI_SCRIPT_URL = 'https://accounts.google.com/gsi/client';
+    const script = document.createElement('script');
+
+    script.src = GOOGLE_GSI_SCRIPT_URL;
+    script.async = true;
+    script.defer = true;
+
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
   return (
     <>
-      <Script src="https://accounts.google.com/gsi/client" async defer />
       <Box
         id="g_id_onload"
         className="g_id_signin"
         data-type="standard"
         data-size="large"
-        data-theme="filled_blue"
+        data-theme="outline"
         data-text="sign_in_with"
         data-shape="rectangular"
         data-logo_alignment="left"
