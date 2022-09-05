@@ -1,7 +1,10 @@
 import { Center, Text } from '@chakra-ui/react';
 
-// TODO: 메세지 날짜별로 구분하고 날짜를 prop으로 받기
-const ChatDateBox = () => {
+interface ChatDateBoxProps {
+  chatDate: string;
+}
+
+const ChatDateBox = ({ chatDate }: ChatDateBoxProps) => {
   return (
     <Center
       bgColor="brand.primary-100"
@@ -17,7 +20,7 @@ const ChatDateBox = () => {
         fontSize="13px"
         lineHeight="15px"
       >
-        2022년 8월 14일
+        {chatDate}
       </Text>
     </Center>
   );
