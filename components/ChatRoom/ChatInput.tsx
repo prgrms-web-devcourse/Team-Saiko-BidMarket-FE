@@ -5,27 +5,30 @@ import {
   InputGroup,
   InputRightElement,
 } from '@chakra-ui/react';
+import { useState } from 'react';
 
 interface ChatInputProps {
   onSubmit: (nextMessage: string) => void;
 }
 
 const ChatInput = ({ onSubmit }: ChatInputProps) => {
+  const [chatMessage, setChatMessage] = useState('');
+  const sendChatMessage = () => {
+    onSubmit(chatMessage);
+    setChatMessage('');
+  };
   const handleKeyup = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
-      const target = e.target as HTMLInputElement;
-
-      onSubmit(target.value);
-      target.value = '';
+      sendChatMessage();
 
       return;
     }
   };
 
-  //TODO: Input 안에 IconButton클릭 시에도 채팅이 입력되도록 구현
   return (
     <InputGroup size="md">
       <Input
+        value={chatMessage}
         bgColor="#EFEFEF"
         border="0.7px solid #EFEFEF"
         borderRadius="30px"
@@ -40,6 +43,7 @@ const ChatInput = ({ onSubmit }: ChatInputProps) => {
         }}
         focusBorderColor="brand.primary-900"
         onKeyUp={handleKeyup}
+        onChange={(e) => setChatMessage(e.target.value)}
       />
       <InputRightElement width="4.5rem">
         <IconButton
@@ -48,6 +52,7 @@ const ChatInput = ({ onSubmit }: ChatInputProps) => {
           aria-label="arrow-icon"
           icon={<ArrowUpIcon />}
           backgroundColor="#EFEFEF"
+          onClick={sendChatMessage}
         />
       </InputRightElement>
     </InputGroup>
