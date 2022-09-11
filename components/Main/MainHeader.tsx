@@ -1,5 +1,6 @@
 import { BellIcon, ChatIcon } from '@chakra-ui/icons';
-import { Avatar, Circle, Flex, Image } from '@chakra-ui/react';
+import { Circle, Flex, Image as ChakraImage } from '@chakra-ui/react';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 import { Header } from 'components/common';
@@ -17,7 +18,7 @@ const MainHeader = ({ authUser: { id, profileImage } }: MainHeaderProps) => {
   return (
     <Header
       leftContent={
-        <Image
+        <ChakraImage
           src="/svg/bidmarket-logo.svg"
           alt="bidmarket logo"
           height="32px"
@@ -40,12 +41,21 @@ const MainHeader = ({ authUser: { id, profileImage } }: MainHeaderProps) => {
               onClick={() => router.push(`/user/${id}/notifications`)}
             />
             <Circle
+              position="relative"
+              minW="32px"
+              minH="32px"
               border="2px solid"
               borderColor="brand.primary-900"
+              overflow="hidden"
               _hover={{ cursor: 'pointer' }}
               onClick={() => router.push(`/user/${id}`)}
             >
-              <Avatar name="프로필 이미지" size="sm" src={profileImage} />
+              <Image
+                src={profileImage}
+                priority
+                alt="프로필 이미지"
+                layout="fill"
+              />
             </Circle>
           </Flex>
         ) : (
