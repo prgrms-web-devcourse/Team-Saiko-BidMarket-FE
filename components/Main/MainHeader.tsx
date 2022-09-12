@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 import { Header } from 'components/common';
+import { EMPTY_USERID } from 'hooks/useLoginUser';
 import { User } from 'types/user';
 
 import LoginButton from './LoginButton';
@@ -26,7 +27,7 @@ const MainHeader = ({ authUser: { id, profileImage } }: MainHeaderProps) => {
       }
       // @TODO 컴포넌트로 분리 (BM-184 참고)
       rightContent={
-        id !== -1 ? (
+        id !== EMPTY_USERID ? (
           <Flex gap="10px" alignItems="center">
             <ChatIcon
               w="24px"
