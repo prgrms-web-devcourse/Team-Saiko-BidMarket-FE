@@ -1,33 +1,25 @@
 import { BellIcon, ChatIcon } from '@chakra-ui/icons';
-import { Avatar, Circle, Flex, Image } from '@chakra-ui/react';
+import { Circle, Flex, Image as ChakraImage } from '@chakra-ui/react';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
 
-import { Header, Loading } from 'components/common';
-import useLoginUser from 'hooks/useLoginUser';
+import { Header } from 'components/common';
+import { EMPTY_USERID } from 'hooks/useLoginUser';
+import { User } from 'types/user';
 
 import LoginButton from './LoginButton';
 
-const MainHeader = () => {
-  const router = useRouter();
-  const [isLogin, setIsLogin] = useState(false);
-  const {
-    isAuthFinished,
-    isAuthUser,
-    authUser: { id: userId, profileImage },
-  } = useLoginUser({
-    handleAuthUser: ({ isAuthUser }) => setIsLogin(isAuthUser),
-  });
+interface MainHeaderProps {
+  authUser: User;
+}
 
-  // TODO: 로딩은 메인 페이지에서 처리하도록 수정
-  if (!isAuthFinished || isAuthUser !== isLogin) {
-    return <Loading />;
-  }
+const MainHeader = ({ authUser: { id, profileImage } }: MainHeaderProps) => {
+  const router = useRouter();
 
   return (
     <Header
       leftContent={
-        <Image
+        <ChakraImage
           src="/svg/bidmarket-logo.svg"
           alt="bidmarket logo"
           height="32px"
@@ -35,27 +27,36 @@ const MainHeader = () => {
       }
       // @TODO 컴포넌트로 분리 (BM-184 참고)
       rightContent={
-        isLogin ? (
+        id !== EMPTY_USERID ? (
           <Flex gap="10px" alignItems="center">
             <ChatIcon
               w="24px"
               h="24px"
               _hover={{ cursor: 'pointer' }}
-              onClick={() => router.push(`/user/${userId}/chat`)}
+              onClick={() => router.push(`/user/${id}/chat`)}
             />
             <BellIcon
               w="32px"
               h="32px"
               _hover={{ cursor: 'pointer' }}
-              onClick={() => router.push(`/user/${userId}/notifications`)}
+              onClick={() => router.push(`/user/${id}/notifications`)}
             />
             <Circle
+              position="relative"
+              minW="32px"
+              minH="32px"
               border="2px solid"
               borderColor="brand.primary-900"
+              overflow="hidden"
               _hover={{ cursor: 'pointer' }}
-              onClick={() => router.push(`/user/${userId}`)}
+              onClick={() => router.push(`/user/${id}`)}
             >
-              <Avatar name="프로필 이미지" size="sm" src={profileImage} />
+              <Image
+                src={profileImage}
+                priority
+                alt="프로필 이미지"
+                layout="fill"
+              />
             </Circle>
           </Flex>
         ) : (

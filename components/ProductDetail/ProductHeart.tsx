@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import { heartAPI } from 'apis';
+import { EMPTY_USERID } from 'hooks/useLoginUser';
 import { setToastInfo } from 'utils';
 
 interface ProductHeartProps {
@@ -36,7 +37,7 @@ const ProductHeart = ({ productId, userId, title }: ProductHeartProps) => {
   };
 
   const checkLoginAuthUser = () => {
-    if (userId !== -1) {
+    if (userId !== EMPTY_USERID) {
       return;
     }
 

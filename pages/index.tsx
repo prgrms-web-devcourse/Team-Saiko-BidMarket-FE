@@ -5,8 +5,10 @@ import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import { ProductCardContainer, SearchInput, SEO } from 'components/common';
+import Loading from 'components/common/Loading';
 import { Banner, MainHeader, ProductAddButton } from 'components/Main';
 import useGetInfiniteQuery from 'hooks/queries/useGetInfiniteQuery';
+import useLoginUser from 'hooks/useLoginUser';
 import { QUERY_KEYS } from 'utils';
 
 const Home: NextPage = () => {
@@ -18,6 +20,7 @@ const Home: NextPage = () => {
   const [ref, isView] = useInView();
   const router = useRouter();
   const [title, setTitle] = useState('');
+  const { isAuthFinished, authUser } = useLoginUser({});
 
   useEffect(() => {
     if (isView && hasNextPage) {
@@ -32,10 +35,14 @@ const Home: NextPage = () => {
     );
   };
 
+  if (!isAuthFinished) {
+    return <Loading />;
+  }
+
   return (
     <>
       <SEO title="비드마켓" />
-      <MainHeader />
+      <MainHeader authUser={authUser} />
       <Flex direction="column" width="100%">
         <Banner />
         <form onSubmit={handleFormSubmit}>

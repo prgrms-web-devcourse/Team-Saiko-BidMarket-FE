@@ -16,6 +16,7 @@ import {
   ProductBidProgress,
   ProductBidRemainedTime,
 } from 'components/ProductDetail';
+import { EMPTY_USERID } from 'hooks/useLoginUser';
 import { priceFormat, setToastInfo } from 'utils';
 
 import ProductBidEndTextByStatus from './ProductBidEndTextByStatus';
@@ -179,7 +180,7 @@ const ProductBid = ({
       return;
     }
 
-    if (authUserId === -1) {
+    if (authUserId === EMPTY_USERID) {
       toast(
         setToastInfo('top', '입찰은 로그인 후 이용 가능합니다.', 'warning')
       );
