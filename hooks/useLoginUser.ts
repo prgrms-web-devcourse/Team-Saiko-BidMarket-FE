@@ -14,6 +14,8 @@ interface UseLoginUserProps {
   handleNotAuthUser?: () => void;
 }
 
+export const EMPTY_USERID = -1;
+
 const useTempLoginUser = ({
   handleAuthUser,
   handleNotAuthUser,
@@ -21,7 +23,7 @@ const useTempLoginUser = ({
   const [isAuthFinished, setIsAuthFinished] = useState(false);
   const [isAuthUser, setIsAuthUser] = useState(false);
   const [authUser, setAuthUser] = useState<User>({
-    id: -1,
+    id: EMPTY_USERID,
     username: '',
     profileImage: '',
   });

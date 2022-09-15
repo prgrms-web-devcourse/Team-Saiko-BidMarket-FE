@@ -18,7 +18,7 @@ const getNotificationsAPI = async ({ pageParam = 0 }) => {
 };
 
 const useGetNotifications = () => {
-  return useInfiniteQuery(['notifications'], getNotificationsAPI, {
+  return useInfiniteQuery(['userNotifications'], getNotificationsAPI, {
     getNextPageParam: (lastPage) => {
       if (lastPage.isLast) {
         return undefined;

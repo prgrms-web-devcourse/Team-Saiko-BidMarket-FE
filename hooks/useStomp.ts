@@ -1,9 +1,9 @@
 import { Client } from '@stomp/stompjs';
 import getConfig from 'next/config';
-import { Dispatch, SetStateAction, useCallback } from 'react';
+import { useCallback } from 'react';
 import SockJS from 'sockjs-client';
 
-import { ChatMeesageResponseType } from 'types/chatMessages';
+import { ChatMessageData } from 'types/chatMessages';
 import { UserInfo } from 'types/user';
 
 const { publicRuntimeConfig } = getConfig();
@@ -12,10 +12,10 @@ let client: Client | null = null;
 export interface UseStompProps {
   chatRoomId: number;
   userInfo: UserInfo;
-  setMessages: Dispatch<SetStateAction<ChatMeesageResponseType>>;
+  addMessage: (message: ChatMessageData) => void;
 }
 
-const useStomp = ({ chatRoomId, userInfo, setMessages }: UseStompProps) => {
+const useStomp = ({ chatRoomId, userInfo, addMessage }: UseStompProps) => {
   const connect = () => {
     if (client !== null) {
       return;
@@ -46,12 +46,7 @@ const useStomp = ({ chatRoomId, userInfo, setMessages }: UseStompProps) => {
           return;
         }
 
-        if (message.body) {
-          setMessages((prevMessages) => [
-            ...prevMessages,
-            JSON.parse(message.body),
-          ]);
-        }
+        addMessage(JSON.parse(message.body));
       }
     );
 
@@ -62,6 +57,8 @@ const useStomp = ({ chatRoomId, userInfo, setMessages }: UseStompProps) => {
     if (client !== null && client.connected) {
       client.deactivate();
     }
+
+    client = null;
   };
 
   const publish = useCallback(

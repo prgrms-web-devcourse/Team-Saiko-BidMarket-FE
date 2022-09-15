@@ -4,13 +4,13 @@ import {
   InferGetServerSidePropsType,
   NextPage,
 } from 'next';
-import { useEffect, useRef, useState } from 'react';
+import { Fragment, useEffect, useRef } from 'react';
 
 import { userAPI } from 'apis';
 import { ChatDateBox, ChatInput, MessageList } from 'components/ChatRoom';
 import { GoBackIcon, Header, HeaderTitle } from 'components/common';
+import useChatMessages, { ChatMessagesType } from 'hooks/useChatMessages';
 import useStomp from 'hooks/useStomp';
-import { ChatMeesageResponseType } from 'types/chatMessages';
 
 export const getServerSideProps: GetServerSideProps = async ({
   query: { userId, chatRoomId, chattingUsername = '' },
@@ -37,7 +37,8 @@ const ChatRoom: NextPage = ({
   chatRoomId,
   chattingUsername,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const [messages, setMessages] = useState<ChatMeesageResponseType>([]);
+  const { chatMessages, setPrevMessagesFromApi, addMessage } =
+    useChatMessages();
   const { connect, disConnect, publish } = useStomp({
     chatRoomId,
     userInfo: {
@@ -45,7 +46,7 @@ const ChatRoom: NextPage = ({
       username: user.username,
       profileImage: user.profileImage,
     },
-    setMessages,
+    addMessage,
   });
   const lastRef = useRef<HTMLDivElement>(null);
 
@@ -67,7 +68,9 @@ const ChatRoom: NextPage = ({
       })
     ).data;
 
-    setMessages([...chatMessages.reverse(), ...messages]);
+    const nextMessages = [...chatMessages.reverse()];
+
+    setPrevMessagesFromApi(nextMessages);
   };
 
   useEffect(() => {
@@ -79,7 +82,7 @@ const ChatRoom: NextPage = ({
       behavior: 'smooth',
       block: 'end',
     });
-  }, [lastRef, messages]);
+  }, [lastRef, chatMessages]);
 
   // TODO: ... 아이콘에 채팅방 나가기, 신고하기 기능
   return (
@@ -89,12 +92,16 @@ const ChatRoom: NextPage = ({
         middleContent={<HeaderTitle title={chattingUsername} />}
       />
       <Flex height="100%" flexDirection="column" gap="16px">
-        <Center>
-          <ChatDateBox />
-        </Center>
-        <Flex flexDirection="column" flexGrow="1">
-          <MessageList userId={user.id} messages={messages} />
-        </Flex>
+        {chatMessages.map(({ chatDate, messages }: ChatMessagesType, index) => (
+          <Fragment key={index}>
+            <Center>
+              <ChatDateBox chatDate={chatDate} />
+            </Center>
+            <Flex flexDirection="column">
+              <MessageList userId={user.id} messages={messages} />
+            </Flex>
+          </Fragment>
+        ))}
       </Flex>
       <Flex
         position="sticky"

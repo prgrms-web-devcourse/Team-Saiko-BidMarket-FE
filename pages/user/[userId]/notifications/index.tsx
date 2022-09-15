@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import { userAPI } from 'apis';
-import { GoBackIcon, Header, HeaderTitle } from 'components/common';
+import { GoBackIcon, Header, HeaderTitle, Loading } from 'components/common';
 import { NoNotifications, NotificationCard } from 'components/User';
 import { useGetNotifications } from 'hooks/queries';
 import useLoginUser from 'hooks/useLoginUser';
@@ -59,11 +59,7 @@ const Notifications = ({
   }, [isView, notificationPages]);
 
   if (!isAuthFinished || authUser.id !== id) {
-    return (
-      <Center height="100%">
-        <Spinner size="xl" />
-      </Center>
-    );
+    return <Loading />;
   }
 
   return (

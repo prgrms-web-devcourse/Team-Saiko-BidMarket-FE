@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import { setItem } from 'apis/utils/storage';
+import { Loading } from 'components/common';
 
 const Auth = () => {
   const router = useRouter();
@@ -14,10 +15,6 @@ const Auth = () => {
     router.push('/');
   }, []);
 
-  return (
-    <Center height="100%">
-      <Spinner size="xl" />
-    </Center>
-  );
+  return <Loading />;
 };
 export default Auth;

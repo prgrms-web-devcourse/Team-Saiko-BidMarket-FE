@@ -22,7 +22,7 @@ const getUserSellProductsAPI = async ({
 
 const useGetUserSellProducts = ({ userId }: { userId: number }) => {
   return useInfiniteQuery(
-    ['products'],
+    ['userSellProducts'],
     ({ pageParam = 0 }) => getUserSellProductsAPI({ pageParam, userId }),
     {
       getNextPageParam: (lastPage) => {

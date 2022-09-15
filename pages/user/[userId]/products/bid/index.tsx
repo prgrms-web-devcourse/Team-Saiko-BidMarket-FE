@@ -1,4 +1,4 @@
-import { Center, Spinner } from '@chakra-ui/react';
+import { Center } from '@chakra-ui/react';
 import type {
   GetServerSideProps,
   InferGetServerSidePropsType,
@@ -13,12 +13,14 @@ import {
   GoBackIcon,
   Header,
   HeaderTitle,
+  Loading,
   ProductCardContainer,
   SEO,
 } from 'components/common';
 import { NoProducts } from 'components/User';
-import { useGetUserBidProducts } from 'hooks/queries';
+import useGetInfiniteQuery from 'hooks/queries/useGetInfiniteQuery';
 import useLoginUser from 'hooks/useLoginUser';
+import { QUERY_KEYS } from 'utils';
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const { userId } = query;
@@ -49,7 +51,7 @@ const Bid: NextPage = ({
     data: productPages,
     fetchNextPage,
     hasNextPage,
-  } = useGetUserBidProducts();
+  } = useGetInfiniteQuery({ queryKey: QUERY_KEYS.USER_BID_PRODUCTS });
   const [ref, isView] = useInView();
 
   useEffect(() => {
@@ -62,11 +64,7 @@ const Bid: NextPage = ({
   // 따라서 찰나의 순간 목록이 렌더링된다 -> 불필요한 작업으로 성능 다운
   // cf) 토큰은 있지만 다른 회원인 경우 메인페이지로 이동
   if (!isAuthFinished || authUser.id !== id) {
-    return (
-      <Center height="100%">
-        <Spinner size="xl" />
-      </Center>
-    );
+    return <Loading />;
   }
 
   return (

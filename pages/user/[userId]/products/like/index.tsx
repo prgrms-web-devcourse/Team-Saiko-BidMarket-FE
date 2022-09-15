@@ -1,11 +1,11 @@
-import { Center, Spinner, Text } from '@chakra-ui/react';
+import { Center } from '@chakra-ui/react';
 import type {
   GetServerSideProps,
   InferGetServerSidePropsType,
   NextPage,
 } from 'next';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import { userAPI } from 'apis';
@@ -13,12 +13,14 @@ import {
   GoBackIcon,
   Header,
   HeaderTitle,
+  Loading,
   ProductCardContainer,
   SEO,
 } from 'components/common';
 import { NoProducts } from 'components/User';
-import { useGetUserLikeProducts } from 'hooks/queries';
+import useGetInfiniteQuery from 'hooks/queries/useGetInfiniteQuery';
 import useLoginUser from 'hooks/useLoginUser';
+import { QUERY_KEYS } from 'utils';
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const { userId } = query;
@@ -49,7 +51,7 @@ const Like: NextPage = ({
     data: productPages,
     fetchNextPage,
     hasNextPage,
-  } = useGetUserLikeProducts();
+  } = useGetInfiniteQuery({ queryKey: QUERY_KEYS.USER_LIKE_PRODUCTS });
   const [ref, isView] = useInView();
 
   useEffect(() => {
@@ -59,11 +61,7 @@ const Like: NextPage = ({
   }, [isView, productPages]);
 
   if (!isAuthFinished || authUser.id !== id) {
-    return (
-      <Center height="100%">
-        <Spinner size="xl" />
-      </Center>
-    );
+    return <Loading />;
   }
 
   return (
