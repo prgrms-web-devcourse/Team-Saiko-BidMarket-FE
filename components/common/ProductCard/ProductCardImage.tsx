@@ -1,3 +1,4 @@
+import { Box } from '@chakra-ui/react';
 import Image from 'next/image';
 
 interface CardProductImageProps {
@@ -7,14 +8,7 @@ interface CardProductImageProps {
 
 const CardProductImage = ({ alt, src }: CardProductImageProps) => {
   return (
-    <div
-      style={{
-        borderRadius: '5px',
-        overflow: 'hidden',
-        width: '114px',
-        height: '114px',
-      }}
-    >
+    <Box borderRadius={'5px'} overflow="hidden" w="114px" h="114px">
       <Image
         layout="fixed"
         objectFit="cover"
@@ -24,7 +18,7 @@ const CardProductImage = ({ alt, src }: CardProductImageProps) => {
         alt={alt}
         src={src}
       />
-    </div>
+    </Box>
   );
 };
 
