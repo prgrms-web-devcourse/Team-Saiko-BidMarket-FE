@@ -14,7 +14,6 @@ const CardProductImage = ({ alt, src }: CardProductImageProps) => {
         objectFit="cover"
         width={114}
         height={114}
-        loading="lazy"
         alt={alt}
         src={src}
       />
