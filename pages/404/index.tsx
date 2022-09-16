@@ -1,4 +1,5 @@
-import { Flex, Image, Text, Button } from '@chakra-ui/react';
+import { Flex, Text, Button } from '@chakra-ui/react';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 const NotFound = () => {
@@ -12,7 +13,7 @@ const NotFound = () => {
       gap="5px"
       height="100%"
     >
-      <Image src="/svg/404.svg" alt="404-image" />
+      <Image src="/svg/404.svg" alt="404-image" width="205px" height="198px" />
       <Text fontSize="xl" fontWeight="bold" color="brand.primary-900">
         페이지를 찾을 수 없습니다.
       </Text>

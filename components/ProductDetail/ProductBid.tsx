@@ -5,9 +5,9 @@ import {
   Text,
   Divider,
   useDisclosure,
-  Image,
   useToast,
 } from '@chakra-ui/react';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
@@ -216,7 +216,12 @@ const ProductBid = ({
           <>
             <Flex justifyContent="space-between" alignItems="center">
               <Flex alignItems="center" gap="10px">
-                <Image src="/svg/price.svg" alt="start-price" />
+                <Image
+                  src="/svg/price.svg"
+                  alt="start-price"
+                  width="25px"
+                  height="25px"
+                />
                 <Text>시작가</Text>
               </Flex>
               <Text
@@ -231,7 +236,12 @@ const ProductBid = ({
             </Flex>
             <Flex justifyContent="space-between" alignItems="center">
               <Flex alignItems="center" gap="10px">
-                <Image src="/svg/time.svg" alt="remained-time" />
+                <Image
+                  src="/svg/time.svg"
+                  alt="remained-time"
+                  width="25px"
+                  height="25px"
+                />
                 <Text>남은 시간</Text>
               </Flex>
               <ProductBidRemainedTime expireAt={expireAt} />

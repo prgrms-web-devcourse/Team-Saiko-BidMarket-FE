@@ -1,4 +1,5 @@
-import { Flex, Image, Text, Button } from '@chakra-ui/react';
+import { Flex, Text, Button } from '@chakra-ui/react';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 const ERROR = () => {
@@ -12,7 +13,7 @@ const ERROR = () => {
       gap="5px"
       height="100%"
     >
-      <Image src="/svg/500.svg" alt="500-image" />
+      <Image src="/svg/500.svg" alt="500-image" width="205px" height="198px" />
       <Text fontSize="xl" fontWeight="bold" color="brand.primary-900">
         서비스에 접속할 수 없습니다.
       </Text>

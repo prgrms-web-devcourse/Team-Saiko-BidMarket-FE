@@ -1,4 +1,5 @@
-import { Flex, Image, Text, Textarea } from '@chakra-ui/react';
+import { Flex, Text, Textarea } from '@chakra-ui/react';
+import Image from 'next/image';
 import { ChangeEvent, useRef, useState } from 'react';
 
 import ProductLabel from './ProductLabel';

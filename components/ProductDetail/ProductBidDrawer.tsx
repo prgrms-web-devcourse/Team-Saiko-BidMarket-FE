@@ -1,7 +1,6 @@
 import {
   Text,
   Flex,
-  Image,
   Button,
   Drawer,
   DrawerBody,
@@ -13,6 +12,7 @@ import {
   FormErrorMessage,
   useToast,
 } from '@chakra-ui/react';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { ChangeEvent, useEffect, useState } from 'react';
 
@@ -85,7 +85,12 @@ const ProductBidDrawer = ({
           <DrawerHeader>
             <Flex justifyContent="space-between" alignItems="center">
               <Flex alignItems="center" gap="10px">
-                <Image src="/svg/price.svg" alt="bid-price" />
+                <Image
+                  src="/svg/price.svg"
+                  alt="bid-price"
+                  width="25px"
+                  height="25px"
+                />
                 <Text fontWeight="bold" fontSize="lg">
                   입찰 희망가
                 </Text>

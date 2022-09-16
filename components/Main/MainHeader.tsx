@@ -1,5 +1,5 @@
 import { BellIcon, ChatIcon } from '@chakra-ui/icons';
-import { Circle, Flex, Image as ChakraImage } from '@chakra-ui/react';
+import { Circle, Flex } from '@chakra-ui/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
@@ -19,9 +19,10 @@ const MainHeader = ({ authUser: { id, profileImage } }: MainHeaderProps) => {
   return (
     <Header
       leftContent={
-        <ChakraImage
+        <Image
           src="/svg/bidmarket-logo.svg"
           alt="bidmarket logo"
+          width="32px"
           height="32px"
         />
       }

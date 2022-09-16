@@ -9,7 +9,7 @@ const nextConfig = {
     bucketUrl: `${process.env.BUCKET_URL}`,
   },
   images: {
-    domains: ['lh3.googleusercontent.com'],
+    domains: [`${process.env.BUCKET_URL_CONFIG}`, 'lh3.googleusercontent.com'],
   },
 };
 
