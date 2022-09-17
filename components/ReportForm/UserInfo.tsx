@@ -12,7 +12,7 @@ const UserInfo = ({ userInfo }: UserInfoProps) => {
 
   return (
     <Flex gap="15px" alignItems="center">
-      <Circle borderRadius="7px" overflow="hidden" w="90px" h="90px">
+      <Circle overflow="hidden" maxW="90px" maxH="90px">
         <Image
           width="90px"
           height="90px"

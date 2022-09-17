@@ -23,7 +23,7 @@ const ChattingCard = ({
   return (
     <Box cursor="pointer" width="100%" onClick={onClick}>
       <Flex width="100%" padding="15px 0">
-        <Circle position="relative" overflow="hidden" w="44px" h="44px">
+        <Circle position="relative" overflow="hidden" maxW="44px" maxH="44px">
           <Image
             width="44px"
             height="44px"
