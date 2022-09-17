@@ -1,6 +1,7 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
-import { Box, IconButton, Image, Progress } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
+import { Box, IconButton, Progress } from '@chakra-ui/react';
+import Image from 'next/image';
+import { useState } from 'react';
 
 import { Image as ImageType } from 'types/product';
 
@@ -14,15 +15,19 @@ const ProductImage = ({ images }: ProductImageProps) => {
   if (images.length === 1) {
     const { order, url } = images[0];
     return (
-      <Image
+      <Box
         key={order}
         display={order === showImage ? 'visible' : 'none'}
         width="100%"
         height="317px"
-        objectFit="cover"
-        alt="product-image"
-        src={url ?? '/svg/basket.svg'}
-      />
+      >
+        <Image
+          layout="fill"
+          objectFit="cover"
+          alt="product-image"
+          src={url ?? '/svg/basket.svg'}
+        />
+      </Box>
     );
   }
 
@@ -57,18 +62,22 @@ const ProductImage = ({ images }: ProductImageProps) => {
       <Box position="relative" w="100%" h="317px">
         {images.map(({ order, url }) => {
           return (
-            <Image
+            <Box
               key={order}
               position="absolute"
               zIndex={1}
               opacity={order === showImage ? '1' : '0'}
               width="100%"
               height="317px"
-              objectFit="cover"
-              alt="product-image"
-              src={url ?? '/svg/basket.svg'}
               transition="all ease 0.3s 0s"
-            />
+            >
+              <Image
+                layout="fill"
+                objectFit="cover"
+                alt="product-image"
+                src={url ?? '/svg/basket.svg'}
+              />
+            </Box>
           );
         })}
       </Box>
