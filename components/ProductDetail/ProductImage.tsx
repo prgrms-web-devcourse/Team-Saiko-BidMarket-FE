@@ -75,7 +75,7 @@ const ProductImage = ({ images }: ProductImageProps) => {
                 layout="fill"
                 objectFit="cover"
                 alt="product-image"
-                src={url ?? '/svg/basket.svg'}
+                src={url}
               />
             </Box>
           );

@@ -29,7 +29,7 @@ const ProductSeller = ({ userId, name, profileImage }: ProductSellerProps) => {
         >
           <Image
             alt="profile-image"
-            src={profileImage || '/svg/bidmarket-bibi.svg'}
+            src={profileImage}
             width="45px"
             height="45px"
           />
