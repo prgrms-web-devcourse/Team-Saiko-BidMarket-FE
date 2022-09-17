@@ -1,4 +1,5 @@
-import { Box, Flex, Image, Text } from '@chakra-ui/react';
+import { Box, Circle, Flex, Text } from '@chakra-ui/react';
+import Image from 'next/image';
 
 import distanceTimeFormat from 'utils/format/distanceTimeFormat';
 
@@ -22,13 +23,14 @@ const ChattingCard = ({
   return (
     <Box cursor="pointer" width="100%" onClick={onClick}>
       <Flex width="100%" padding="15px 0">
-        <Image
-          src={profileImage}
-          alt="profile-image"
-          w="44px"
-          h="44px"
-          borderRadius="50%"
-        />
+        <Circle position="relative" overflow="hidden" w="44px" h="44px">
+          <Image
+            width="44px"
+            height="44px"
+            src={profileImage}
+            alt="profile-image"
+          />
+        </Circle>
         <Flex direction="column" width="100%" paddingLeft="10px">
           <Flex alignItems="center">
             <Text fontWeight="bold">{username}</Text>
@@ -46,16 +48,22 @@ const ChattingCard = ({
           )}
         </Flex>
         {/* TODO: 채팅 읽지 않으면 Badge표시해주기 */}
-        <Image
+        <Box
+          overflow="hidden"
+          borderRadius="7px"
+          marginLeft="15px"
+          minW="65px"
           w="65px"
           h="65px"
-          minWidth="65px"
-          src={productImage}
-          alt="product-image"
-          borderRadius="7px"
-          objectFit="cover"
-          marginLeft="15px"
-        />
+        >
+          <Image
+            width="65px"
+            height="65px"
+            src={productImage}
+            alt="product-image"
+            objectFit="cover"
+          />
+        </Box>
       </Flex>
     </Box>
   );
