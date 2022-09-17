@@ -1,6 +1,7 @@
-import { Divider, Flex, Box, Image } from '@chakra-ui/react';
+import { Divider, Flex, Box } from '@chakra-ui/react';
 import { format } from 'date-fns';
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
@@ -90,7 +91,12 @@ const ProductDetail = ({
         onClick={handleReportSirenIconClick}
       >
         {!isSeller && (
-          <Image src="/svg/siren-light.svg" alt="siren-light-icon" />
+          <Image
+            src="/svg/siren-light.svg"
+            alt="siren-light-icon"
+            width="25px"
+            height="25px"
+          />
         )}
       </Box>
       <Flex direction="column" width="100%" marginTop="317px">
