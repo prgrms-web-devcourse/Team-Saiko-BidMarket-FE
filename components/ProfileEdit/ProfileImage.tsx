@@ -1,4 +1,5 @@
-import { Avatar, Box, Circle, Text } from '@chakra-ui/react';
+import { Box, Circle, Text } from '@chakra-ui/react';
+import Image from 'next/image';
 
 interface ProfileImageProps {
   profileImageUrl: string;
@@ -15,7 +16,12 @@ const ProfileImage = ({ profileImageUrl, onClick }: ProfileImageProps) => (
     cursor="pointer"
     onClick={onClick}
   >
-    <Avatar name="profile-image" size="2xl" src={profileImageUrl} />
+    <Image
+      width="112px"
+      height="112px"
+      src={profileImageUrl}
+      alt="프로필이미지"
+    />
     <Box
       position="absolute"
       bottom="0"
