@@ -1,4 +1,5 @@
-import { Avatar, Circle, Flex, Text } from '@chakra-ui/react';
+import { Circle, Flex, Text } from '@chakra-ui/react';
+import Image from 'next/image';
 
 interface UserInformationProps {
   profileImageUrl: string;
@@ -11,11 +12,16 @@ const UserProfileInformation = ({
 }: UserInformationProps) => {
   return (
     <Flex width="100%" gap="20px" alignItems="center" marginTop="12px">
-      <Circle border="2px solid" borderColor="brand.primary-900">
-        <Avatar
-          name="프로필 이미지"
-          size="xl"
-          src={profileImageUrl || '/svg/bidmarket-bibi.svg'}
+      <Circle
+        overflow="hidden"
+        border="2px solid"
+        borderColor="brand.primary-900"
+      >
+        <Image
+          width="84px"
+          height="84px"
+          src={profileImageUrl}
+          alt={`${nickname}-프로필이미지`}
         />
       </Circle>
       <Text

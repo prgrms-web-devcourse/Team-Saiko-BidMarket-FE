@@ -1,4 +1,5 @@
-import { Divider, Flex, Image, Text } from '@chakra-ui/react';
+import { Box, Divider, Flex, Text } from '@chakra-ui/react';
+import Image from 'next/image';
 
 interface ProductInfoProps {
   productInfo: {
@@ -14,13 +15,9 @@ const ProductInfo = ({ productInfo }: ProductInfoProps) => {
 
   return (
     <Flex gap="15px" alignItems="center">
-      <Image
-        w="90px"
-        h="90px"
-        src={image}
-        alt={`${title}-image`}
-        borderRadius="7px"
-      />
+      <Box borderRadius="7px" overflow="hidden" w="90px" h="90px">
+        <Image width="90px" height="90px" src={image} alt={`${title}-image`} />
+      </Box>
       <Flex direction="column">
         <Text>{title}</Text>
         <Flex marginTop="5px" gap="10px">

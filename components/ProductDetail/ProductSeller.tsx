@@ -1,4 +1,5 @@
-import { Flex, Box, Image, Text } from '@chakra-ui/react';
+import { Flex, Box, Text } from '@chakra-ui/react';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 interface ProductSellerProps {
@@ -16,9 +17,7 @@ const ProductSeller = ({ userId, name, profileImage }: ProductSellerProps) => {
       onClick={() => router.push(`/user/${userId}`)}
     >
       <Flex alignItems="center">
-        <Image
-          alt="profile-image"
-          src={profileImage || '/svg/bidmarket-bibi.svg'}
+        <Box
           w="45px"
           h="45px"
           borderRadius="50%"
@@ -26,7 +25,15 @@ const ProductSeller = ({ userId, name, profileImage }: ProductSellerProps) => {
           marginBottom="14px"
           border="1px"
           borderColor="brand.primary-900"
-        />
+          overflow="hidden"
+        >
+          <Image
+            alt="profile-image"
+            src={profileImage}
+            width="45px"
+            height="45px"
+          />
+        </Box>
         <Text fontWeight="bold" marginLeft="14px">
           {name === 'UnKnown' ? '알 수 없음' : name}
         </Text>

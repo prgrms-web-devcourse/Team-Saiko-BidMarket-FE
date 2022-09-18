@@ -1,4 +1,5 @@
-import { Avatar, Box, Flex, Text } from '@chakra-ui/react';
+import { Box, Circle, Flex, Text } from '@chakra-ui/react';
+import Image from 'next/image';
 
 import { UserInfo } from 'types/user';
 
@@ -17,11 +18,14 @@ const RecievedMessage = ({
 }: RecievedMessageProps) => {
   return (
     <Flex width="100%" justifyContent="flex-start" alignItems="center">
-      <Avatar
-        alignSelf="flex-start"
-        src={userInfo.profileImage}
-        marginRight="10px"
-      />
+      <Circle overflow="hidden" alignSelf="flex-start" marginRight="10px">
+        <Image
+          width="42px"
+          height="42px"
+          src={userInfo.profileImage}
+          alt="프로필이미지"
+        />
+      </Circle>
       <Flex
         alignSelf="flex-start"
         flexDirection="column"

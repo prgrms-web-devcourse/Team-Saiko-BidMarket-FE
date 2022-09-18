@@ -1,4 +1,5 @@
-import { Box, Flex, Image, Text } from '@chakra-ui/react';
+import { Box, Flex, Text } from '@chakra-ui/react';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 import { notificationAPI } from 'apis';
@@ -44,8 +45,8 @@ const NotificationCard = ({
         <Image
           src="/svg/bidProductMenuIcon.svg"
           alt="notification-icon"
-          w="44px"
-          h="44px"
+          width="44px"
+          height="44px"
         />
         <Flex width="100%" direction="column" paddingLeft="10px">
           <Text fontWeight="bold">{title}</Text>
@@ -58,16 +59,22 @@ const NotificationCard = ({
                 {distanceTimeFormat(new Date(createdAt))}
               </Text>
             </Flex>
-            <Image
+            <Box
               w="71px"
               h="71px"
-              minWidth="71px"
-              src={productImage}
-              alt="product-image"
+              minW="71px"
               borderRadius="7px"
-              objectFit="cover"
               marginLeft="15px"
-            />
+              overflow="hidden"
+            >
+              <Image
+                width="71px"
+                height="71px"
+                src={productImage}
+                alt="product-image"
+                objectFit="cover"
+              />
+            </Box>
           </Flex>
         </Flex>
       </Flex>

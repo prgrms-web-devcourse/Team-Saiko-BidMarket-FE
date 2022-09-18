@@ -1,5 +1,6 @@
 import { ChevronRightIcon } from '@chakra-ui/icons';
-import { Flex, Divider, Text, Image } from '@chakra-ui/react';
+import { Flex, Divider, Text } from '@chakra-ui/react';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 interface ProductMenuItemProps {
