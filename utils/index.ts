@@ -9,3 +9,5 @@ export { default as biddingPriceValidation } from './validation/biddingPriceVali
 export { default as setToastInfo } from './toast';
 
 export { default as QUERY_KEYS } from './queryKey';
+
+export { default as SVG_URL } from './constants/svgSrcPath';
