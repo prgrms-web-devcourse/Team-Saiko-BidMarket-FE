@@ -2,6 +2,8 @@ import { Flex, Input, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 import React, { useRef, useState } from 'react';
 
+import { SVG_URL } from 'utils';
+
 import ProductLabel from './ProductLabel';
 interface AddProductMinimumPriceProps {
   inputMinimumPrice: string;
@@ -33,7 +35,7 @@ const AddProductMinimumPrice = ({
     <Flex direction="column" w="100%" gap="3">
       <ProductLabel
         LabelImage={
-          <Image src="/svg/price.svg" alt="amount" width="25px" height="15px" />
+          <Image src={SVG_URL.PRICE} alt="amount" width="25px" height="15px" />
         }
         LabelTitle={
           <Text fontSize="lg" fontWeight="semibold">

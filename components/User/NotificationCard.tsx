@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 import { notificationAPI } from 'apis';
+import { SVG_URL } from 'utils';
 import distanceTimeFormat from 'utils/format/distanceTimeFormat';
 
 interface NotificationCardProps {
@@ -43,7 +44,7 @@ const NotificationCard = ({
     >
       <Flex width="100%" padding="15px 0">
         <Image
-          src="/svg/bidProductMenuIcon.svg"
+          src={SVG_URL.BID_PRODUCT_MENU_ICON}
           alt="notification-icon"
           width="44px"
           height="44px"

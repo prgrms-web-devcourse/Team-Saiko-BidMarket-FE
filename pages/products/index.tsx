@@ -17,7 +17,7 @@ import { BidFilterCheckBox, FilterButton } from 'components/Products';
 import { useGetProductsByKeyword } from 'hooks/queries';
 import { categoryOptionsENType } from 'types/categoryOption';
 import { sortOptionsENType } from 'types/sortOption';
-import { categoryOption, sortOption } from 'utils';
+import { categoryOption, sortOption, SVG_URL } from 'utils';
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   return { props: { queryDatas: query } };
@@ -143,7 +143,7 @@ const Products = ({
         {productPages?.pages[0].data.length === 0 && (
           <Center flexDirection="column" height="100%">
             <Image
-              src="/svg/noneProductOther.svg"
+              src={SVG_URL.NONE_PRODUCT_OTHER}
               alt="None Product"
               width="139px"
               height="76px"

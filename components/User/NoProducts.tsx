@@ -3,6 +3,8 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { Fragment } from 'react';
 
+import { SVG_URL } from 'utils';
+
 interface NoProducts {
   pageName:
     | 'userBidProducts'
@@ -37,7 +39,7 @@ const NoProducts = ({ pageName }: NoProducts) => {
     return (
       <Fragment>
         <Image
-          src="/svg/noneProductOther.svg"
+          src={SVG_URL.NONE_PRODUCT_OTHER}
           alt="None Product"
           width="109px"
           height="76px"
@@ -50,7 +52,7 @@ const NoProducts = ({ pageName }: NoProducts) => {
   return (
     <>
       <Image
-        src="/svg/noneProduct.svg"
+        src={SVG_URL.NONE_PRODUCT}
         alt="None Product"
         width="109px"
         height="76px"

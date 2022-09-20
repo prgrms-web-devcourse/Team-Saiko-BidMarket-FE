@@ -4,6 +4,7 @@ import Image from 'next/image';
 
 import { Header, GoBackIcon, SEO, HeaderTitle } from 'components/common';
 import { GoogleLoginButton, Phrases } from 'components/Login';
+import { SVG_URL } from 'utils';
 
 const Login: NextPage = () => {
   return (
@@ -17,7 +18,7 @@ const Login: NextPage = () => {
         <Phrases />
         <Box marginTop="20px" marginBottom="45px">
           <Image
-            src="/svg/bidmarket-login.svg"
+            src={SVG_URL.BIDMARKET_LOGIN}
             alt="basket"
             width="131px"
             height="131px"

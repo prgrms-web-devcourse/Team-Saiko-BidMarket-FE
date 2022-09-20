@@ -2,6 +2,8 @@ import { Flex, Text, Textarea } from '@chakra-ui/react';
 import Image from 'next/image';
 import { ChangeEvent, useRef, useState } from 'react';
 
+import { SVG_URL } from 'utils';
+
 import ProductLabel from './ProductLabel';
 
 interface AddProductTitleProps {
@@ -18,7 +20,7 @@ const AddProductDescription = ({
       <ProductLabel
         LabelImage={
           <Image
-            src="/svg/description.svg"
+            src={SVG_URL.DESCRIPTION}
             alt="contents"
             width="20px"
             height="21px"
