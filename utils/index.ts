@@ -12,3 +12,4 @@ export { default as QUERY_KEYS } from './queryKey';
 
 export { default as SVG_URL } from './constants/svgSrcPath';
 export { default as JPG_URL } from './constants/jpgSrcPath';
+export { default as ICO_URL } from './constants/icoSrcPath';
