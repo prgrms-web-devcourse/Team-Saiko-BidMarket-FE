@@ -1,0 +1,28 @@
+const SVG_URL = {
+  404: '/svg/404.svg',
+  500: '/svg/500.svg',
+  BANNER: '/svg/banner.svg',
+  BASKET: '/svg/basket.svg',
+  BIDMARKET_BIBI: '/svg/bidmarket-bibi.svg',
+  BIDMARKET_LOGIN: '/svg/bidmarket-login.svg',
+  BIDMARKET_LOGO: '/svg/bidmarket-logo.svg',
+  BIDMARKET: '/svg/bidMarket.svg',
+  BID_PRODUCT_MENU_ICON: '/svg/bidProductMenuIcon.svg',
+  DESCRIPTION: '/svg/description.svg',
+  IMAGE: '/svg/image.svg',
+  LIKE_PRODUCT_MENU_ICON: '/svg/likeProductMenuIcon.svg',
+  LOGOUT: '/svg/logout.svg',
+  NONE_CHATTING: '/svg/noneChatting.svg',
+  NONE_NOTIFICATION: '/svg/noneNotification.svg',
+  NONE_PRODUCT: '/svg/noneProduct.svg',
+  NONE_PRODUCT_OTHER: '/svg/noneProductOther.svg',
+  PRICE: '/svg/price.svg',
+  SELL_PRODUCT_MENU_ICON: '/svg/sellProductMenuIcon.svg',
+  SETTING: '/svg/setting.svg',
+  SIREN_LIGHT: '/svg/siren-light.svg',
+  SIREN: '/svg/siren.svg',
+  TIME: '/svg/time.svg',
+  TITLE: '/svg/title.svg',
+};
+
+export default SVG_URL;
