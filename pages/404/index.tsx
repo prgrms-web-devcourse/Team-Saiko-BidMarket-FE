@@ -15,7 +15,12 @@ const NotFound = () => {
       gap="5px"
       height="100%"
     >
-      <Image src={SVG_URL[404]} alt="404-image" width="205px" height="198px" />
+      <Image
+        src={SVG_URL.NOT_FOUND}
+        alt="404-image"
+        width="205px"
+        height="198px"
+      />
       <Text fontSize="xl" fontWeight="bold" color="brand.primary-900">
         페이지를 찾을 수 없습니다.
       </Text>
