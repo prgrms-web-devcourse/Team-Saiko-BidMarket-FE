@@ -19,6 +19,7 @@ import {
 } from 'components/CreateProduct';
 import useForm from 'hooks/useForm';
 import { categoryOptionsENType } from 'types/categoryOption';
+import { SVG_URL } from 'utils';
 import productFormValidation from 'utils/validation/productFormValidation';
 
 const Product: NextPage = () => {
@@ -124,7 +125,7 @@ const Product: NextPage = () => {
             <ProductLabel
               LabelImage={
                 <Image
-                  src="/svg/setting.svg"
+                  src={SVG_URL.SETTING}
                   alt="select"
                   width="21px"
                   height="22px"

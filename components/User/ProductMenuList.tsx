@@ -1,6 +1,8 @@
 import { Flex } from '@chakra-ui/react';
 import { Fragment } from 'react';
 
+import { SVG_URL } from 'utils';
+
 import { ProductMenuItem } from '.';
 
 interface ProductMenuListProps {
@@ -11,17 +13,17 @@ interface ProductMenuListProps {
 const ProductMenuList = ({ userId, isMyPage }: ProductMenuListProps) => {
   const productMenu = [
     {
-      iconUrl: '/svg/sellProductMenuIcon.svg',
+      iconUrl: SVG_URL.SELL_PRODUCT_MENU_ICON,
       title: '판매 상품',
       routingUrl: `./${userId}/products/sell`,
     },
     {
-      iconUrl: '/svg/bidProductMenuIcon.svg',
+      iconUrl: SVG_URL.BID_PRODUCT_MENU_ICON,
       title: '입찰 상품',
       routingUrl: `./${userId}/products/bid`,
     },
     {
-      iconUrl: '/svg/likeProductMenuIcon.svg',
+      iconUrl: SVG_URL.LIKE_PRODUCT_MENU_ICON,
       title: '찜한 상품',
       routingUrl: `./${userId}/products/like`,
     },

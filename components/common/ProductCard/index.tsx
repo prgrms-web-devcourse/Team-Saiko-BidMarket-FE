@@ -3,7 +3,7 @@ import { Box, Flex, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 
 import { CardProductData } from 'types/product';
-import { priceFormat, remainedTimeFormat } from 'utils';
+import { priceFormat, remainedTimeFormat, SVG_URL } from 'utils';
 
 import ProductCardImage from './ProductCardImage';
 
@@ -27,7 +27,7 @@ const ProductCard = ({ productInfo }: ProductCardProps) => {
       <Box>
         <ProductCardImage
           alt={`${id}-product-image`}
-          src={thumbnailImage || '/svg/basket.svg'}
+          src={thumbnailImage || SVG_URL.BASKET}
         />
       </Box>
       <Flex

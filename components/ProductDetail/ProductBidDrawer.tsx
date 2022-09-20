@@ -18,7 +18,12 @@ import { ChangeEvent, useEffect, useState } from 'react';
 
 import { bidAPI } from 'apis';
 import useForm from 'hooks/useForm';
-import { biddingPriceValidation, priceFormat, setToastInfo } from 'utils';
+import {
+  biddingPriceValidation,
+  priceFormat,
+  setToastInfo,
+  SVG_URL,
+} from 'utils';
 
 interface ProductBidDrawerProps {
   minimumPrice: number;
@@ -86,7 +91,7 @@ const ProductBidDrawer = ({
             <Flex justifyContent="space-between" alignItems="center">
               <Flex alignItems="center" gap="10px">
                 <Image
-                  src="/svg/price.svg"
+                  src={SVG_URL.PRICE}
                   alt="bid-price"
                   width="25px"
                   height="25px"
