@@ -1,6 +1,6 @@
 const SVG_URL = {
-  404: '/svg/404.svg',
-  500: '/svg/500.svg',
+  NOT_FOUND: '/svg/404.svg',
+  SERVER_ERROR: '/svg/500.svg',
   BANNER: '/svg/banner.svg',
   BASKET: '/svg/basket.svg',
   BIDMARKET_BIBI: '/svg/bidmarket-bibi.svg',
