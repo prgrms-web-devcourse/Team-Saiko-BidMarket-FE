@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-import { JPG_URL } from 'utils';
+import { ICO_URL, JPG_URL } from 'utils';
 
 interface SEOProps {
   title: string;
@@ -13,7 +13,7 @@ const SEO = ({ title, description, image }: SEOProps) => {
   return (
     <Head>
       <title>{titleContent}</title>
-      <link rel="shortcut icon" href="/favicon.ico" />
+      <link rel="shortcut icon" href={ICO_URL.Favicon} />
       <meta httpEquiv="content-type" content="text/html; charset=euc-kr" />
       <meta
         name="description"
