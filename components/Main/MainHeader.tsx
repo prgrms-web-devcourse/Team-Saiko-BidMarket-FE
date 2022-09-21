@@ -1,7 +1,7 @@
 import { BellIcon, ChatIcon } from '@chakra-ui/icons';
 import { Circle, Flex } from '@chakra-ui/react';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 import { Header } from 'components/common';
 import { EMPTY_USERID } from 'hooks/useLoginUser';
@@ -14,8 +14,6 @@ interface MainHeaderProps {
 }
 
 const MainHeader = ({ authUser: { id, profileImage } }: MainHeaderProps) => {
-  const router = useRouter();
-
   return (
     <Header
       leftContent={
@@ -30,35 +28,30 @@ const MainHeader = ({ authUser: { id, profileImage } }: MainHeaderProps) => {
       rightContent={
         id !== EMPTY_USERID ? (
           <Flex gap="10px" alignItems="center">
-            <ChatIcon
-              w="24px"
-              h="24px"
-              _hover={{ cursor: 'pointer' }}
-              onClick={() => router.push(`/user/${id}/chat`)}
-            />
-            <BellIcon
-              w="32px"
-              h="32px"
-              _hover={{ cursor: 'pointer' }}
-              onClick={() => router.push(`/user/${id}/notifications`)}
-            />
-            <Circle
-              position="relative"
-              minW="32px"
-              minH="32px"
-              border="2px solid"
-              borderColor="brand.primary-900"
-              overflow="hidden"
-              _hover={{ cursor: 'pointer' }}
-              onClick={() => router.push(`/user/${id}`)}
-            >
-              <Image
-                src={profileImage}
-                priority
-                alt="프로필 이미지"
-                layout="fill"
-              />
-            </Circle>
+            <Link href={`/user/${id}/chat`}>
+              <ChatIcon w="24px" h="24px" _hover={{ cursor: 'pointer' }} />
+            </Link>
+            <Link href={`/user/${id}/notifications`} passHref>
+              <BellIcon w="32px" h="32px" _hover={{ cursor: 'pointer' }} />
+            </Link>
+            <Link href={`/user/${id}`}>
+              <Circle
+                position="relative"
+                minW="32px"
+                minH="32px"
+                border="2px solid"
+                borderColor="brand.primary-900"
+                overflow="hidden"
+                _hover={{ cursor: 'pointer' }}
+              >
+                <Image
+                  src={profileImage}
+                  priority
+                  alt="프로필 이미지"
+                  layout="fill"
+                />
+              </Circle>
+            </Link>
           </Flex>
         ) : (
           <LoginButton />
