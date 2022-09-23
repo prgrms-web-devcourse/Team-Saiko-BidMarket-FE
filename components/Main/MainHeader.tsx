@@ -28,29 +28,35 @@ const MainHeader = ({ authUser: { id, profileImage } }: MainHeaderProps) => {
       rightContent={
         id !== EMPTY_USERID ? (
           <Flex gap="10px" alignItems="center">
-            <Link href={`/user/${id}/chat`}>
-              <ChatIcon w="24px" h="24px" _hover={{ cursor: 'pointer' }} />
+            <Link href={`/user/${id}/chat`} passHref>
+              <a>
+                <ChatIcon w="24px" h="24px" _hover={{ cursor: 'pointer' }} />
+              </a>
             </Link>
             <Link href={`/user/${id}/notifications`} passHref>
-              <BellIcon w="32px" h="32px" _hover={{ cursor: 'pointer' }} />
+              <a>
+                <BellIcon w="32px" h="32px" _hover={{ cursor: 'pointer' }} />
+              </a>
             </Link>
-            <Link href={`/user/${id}`}>
-              <Circle
-                position="relative"
-                minW="32px"
-                minH="32px"
-                border="2px solid"
-                borderColor="brand.primary-900"
-                overflow="hidden"
-                _hover={{ cursor: 'pointer' }}
-              >
-                <Image
-                  src={profileImage}
-                  priority
-                  alt="프로필 이미지"
-                  layout="fill"
-                />
-              </Circle>
+            <Link href={`/user/${id}`} passHref>
+              <a>
+                <Circle
+                  position="relative"
+                  minW="32px"
+                  minH="32px"
+                  border="2px solid"
+                  borderColor="brand.primary-900"
+                  overflow="hidden"
+                  _hover={{ cursor: 'pointer' }}
+                >
+                  <Image
+                    src={profileImage}
+                    priority
+                    alt="프로필 이미지"
+                    layout="fill"
+                  />
+                </Circle>
+              </a>
             </Link>
           </Flex>
         ) : (
