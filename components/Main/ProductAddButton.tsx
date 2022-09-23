@@ -12,9 +12,9 @@ const ProductAddButton = () => {
     handleAuthUser: ({ isAuthUser }) => setIsLogin(isAuthUser),
   });
 
-  return (
-    isLogin && (
-      <Link href={'/product'}>
+  return isLogin ? (
+    <Link href={'/product'} passHref>
+      <a>
         <Button
           w="60px"
           h="60px"
@@ -24,8 +24,10 @@ const ProductAddButton = () => {
         >
           <AddIcon color="white" />
         </Button>
-      </Link>
-    )
+      </a>
+    </Link>
+  ) : (
+    <></>
   );
 };
 
