@@ -1,5 +1,6 @@
 import { Flex, Text, Button } from '@chakra-ui/react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 const NotFound = () => {
@@ -30,17 +31,18 @@ const NotFound = () => {
       >
         이전 페이지로 돌아가기
       </Button>
-      <Button
-        marginTop="5px"
-        padding="10px 30px"
-        border="1px"
-        borderRadius="30px"
-        color="brand.primary-900"
-        backgroundColor="white"
-        onClick={() => router.push(`/`)}
-      >
-        메인 페이지로 돌아가기
-      </Button>
+      <Link href={'/'} passHref>
+        <Button
+          marginTop="5px"
+          padding="10px 30px"
+          border="1px"
+          borderRadius="30px"
+          color="brand.primary-900"
+          backgroundColor="white"
+        >
+          메인 페이지로 돌아가기
+        </Button>
+      </Link>
     </Flex>
   );
 };
