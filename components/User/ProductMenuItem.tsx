@@ -1,8 +1,7 @@
 import { ChevronRightIcon } from '@chakra-ui/icons';
 import { Flex, Divider, Text } from '@chakra-ui/react';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
-
+import Link from 'next/link';
 interface ProductMenuItemProps {
   iconUrl: string;
   title: string;
@@ -16,16 +15,13 @@ const ProductMenuItem = ({
   routingUrl,
   isLastItem,
 }: ProductMenuItemProps) => {
-  const router = useRouter();
-
   return (
-    <>
+    <Link href={routingUrl} passHref>
       <Flex
         width="100%"
         justifyContent="space-between"
         alignItems="center"
         gap="13px"
-        onClick={() => router.push(routingUrl)}
         cursor="pointer"
       >
         <Flex justifyContent="space-between" alignItems="center" gap="10px">
@@ -48,7 +44,7 @@ const ProductMenuItem = ({
         <ChevronRightIcon />
       </Flex>
       {!isLastItem && <Divider />}
-    </>
+    </Link>
   );
 };
 
