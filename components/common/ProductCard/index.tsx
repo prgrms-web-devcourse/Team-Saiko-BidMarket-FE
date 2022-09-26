@@ -22,7 +22,7 @@ const ProductCard = ({ productInfo }: ProductCardProps) => {
           <Box>
             <ProductCardImage
               alt={`${id}-product-image`}
-              src={thumbnailImage || '/svg/basket.svg'}
+              src={thumbnailImage}
             />
           </Box>
           <Flex
