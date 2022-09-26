@@ -3,6 +3,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
+import { SVG_URL } from 'utils';
+
 const ERROR = () => {
   const router = useRouter();
 
@@ -14,7 +16,12 @@ const ERROR = () => {
       gap="5px"
       height="100%"
     >
-      <Image src="/svg/500.svg" alt="500-image" width="205px" height="198px" />
+      <Image
+        src={SVG_URL.SERVER_ERROR}
+        alt="500-image"
+        width="205px"
+        height="198px"
+      />
       <Text fontSize="xl" fontWeight="bold" color="brand.primary-900">
         서비스에 접속할 수 없습니다.
       </Text>

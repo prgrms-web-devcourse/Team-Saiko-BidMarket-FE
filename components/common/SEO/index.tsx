@@ -1,5 +1,7 @@
 import Head from 'next/head';
 
+import { ICO_URL, JPG_URL } from 'utils';
+
 interface SEOProps {
   title: string;
   description?: string;
@@ -11,7 +13,7 @@ const SEO = ({ title, description, image }: SEOProps) => {
   return (
     <Head>
       <title>{titleContent}</title>
-      <link rel="shortcut icon" href="/favicon.ico" />
+      <link rel="shortcut icon" href={ICO_URL.Favicon} />
       <meta httpEquiv="content-type" content="text/html; charset=euc-kr" />
       <meta
         name="description"
@@ -31,14 +33,7 @@ const SEO = ({ title, description, image }: SEOProps) => {
             : '거래는 중고지만 경험은 새롭게! 비딩으로 기다리는 설렘을 느껴봐!'
         }
       />
-      <meta
-        property="og:image"
-        content={
-          image
-            ? image
-            : 'https://user-images.githubusercontent.com/50071076/184589425-fc918624-3683-4e9c-824e-073ea6bdd60c.jpg'
-        }
-      />
+      <meta property="og:image" content={image ? image : JPG_URL.BANNER} />
     </Head>
   );
 };

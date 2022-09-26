@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 import { Image as ImageType } from 'types/product';
+import { SVG_URL } from 'utils';
 
 interface ProductImageProps {
   images: ImageType[];
@@ -25,7 +26,7 @@ const ProductImage = ({ images }: ProductImageProps) => {
           layout="fill"
           objectFit="cover"
           alt="product-image"
-          src={url ?? '/svg/basket.svg'}
+          src={url ?? SVG_URL.BASKET}
         />
       </Box>
     );

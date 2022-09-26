@@ -2,6 +2,8 @@ import { Flex, Input, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 import { ChangeEvent, useRef, useState } from 'react';
 
+import { SVG_URL } from 'utils';
+
 import ProductLabel from './ProductLabel';
 
 interface AddProductTitleProps {
@@ -16,7 +18,7 @@ const AddProductTitle = ({ inputTitle, onChange }: AddProductTitleProps) => {
     <Flex direction="column" w="100%" gap="3" marginTop="-3">
       <ProductLabel
         LabelImage={
-          <Image src="/svg/title.svg" alt="title" width="30px" height="30px" />
+          <Image src={SVG_URL.TITLE} alt="title" width="30px" height="30px" />
         }
         LabelTitle={
           <Text fontSize="lg" fontWeight="semibold">

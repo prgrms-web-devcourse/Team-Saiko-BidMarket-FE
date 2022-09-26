@@ -17,7 +17,7 @@ import {
   ProductBidRemainedTime,
 } from 'components/ProductDetail';
 import { EMPTY_USERID } from 'hooks/useLoginUser';
-import { priceFormat, setToastInfo } from 'utils';
+import { priceFormat, setToastInfo, SVG_URL } from 'utils';
 
 import ProductBidEndTextByStatus from './ProductBidEndTextByStatus';
 
@@ -217,7 +217,7 @@ const ProductBid = ({
             <Flex justifyContent="space-between" alignItems="center">
               <Flex alignItems="center" gap="10px">
                 <Image
-                  src="/svg/price.svg"
+                  src={SVG_URL.PRICE}
                   alt="start-price"
                   width="25px"
                   height="25px"
@@ -237,7 +237,7 @@ const ProductBid = ({
             <Flex justifyContent="space-between" alignItems="center">
               <Flex alignItems="center" gap="10px">
                 <Image
-                  src="/svg/time.svg"
+                  src={SVG_URL.TIME}
                   alt="remained-time"
                   width="25px"
                   height="25px"

@@ -3,7 +3,7 @@ import { Box, Flex, Text } from '@chakra-ui/react';
 import Link from 'next/link';
 
 import { CardProductData } from 'types/product';
-import { priceFormat, remainedTimeFormat } from 'utils';
+import { priceFormat, remainedTimeFormat, SVG_URL } from 'utils';
 
 import ProductCardImage from './ProductCardImage';
 

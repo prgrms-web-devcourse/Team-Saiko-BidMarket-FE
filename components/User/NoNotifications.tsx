@@ -1,11 +1,13 @@
 import { Text } from '@chakra-ui/react';
 import Image from 'next/image';
 
+import { SVG_URL } from 'utils';
+
 const NoNotifications = () => {
   return (
     <>
       <Image
-        src="/svg/noneNotification.svg"
+        src={SVG_URL.NONE_NOTIFICATION}
         alt="None Notifacion"
         width="108px"
         height="108px"

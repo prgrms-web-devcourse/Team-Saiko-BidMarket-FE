@@ -15,6 +15,7 @@ import {
   ProductHeart,
 } from 'components/ProductDetail';
 import useLoginUser from 'hooks/useLoginUser';
+import { SVG_URL } from 'utils';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { productId } = context.query;
@@ -92,7 +93,7 @@ const ProductDetail = ({
       >
         {!isSeller && (
           <Image
-            src="/svg/siren-light.svg"
+            src={SVG_URL.SIREN_LIGHT}
             alt="siren-light-icon"
             width="25px"
             height="25px"

@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { Header } from 'components/common';
 import { EMPTY_USERID } from 'hooks/useLoginUser';
 import { User } from 'types/user';
+import { SVG_URL } from 'utils';
 
 import LoginButton from './LoginButton';
 
@@ -18,7 +19,7 @@ const MainHeader = ({ authUser: { id, profileImage } }: MainHeaderProps) => {
     <Header
       leftContent={
         <Image
-          src="/svg/bidmarket-logo.svg"
+          src={SVG_URL.BIDMARKET_LOGO}
           alt="bidmarket logo"
           width="32px"
           height="32px"

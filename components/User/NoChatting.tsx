@@ -1,11 +1,13 @@
 import { Text } from '@chakra-ui/react';
 import Image from 'next/image';
 
+import { SVG_URL } from 'utils';
+
 const NoChatting = () => {
   return (
     <>
       <Image
-        src="/svg/noneChatting.svg"
+        src={SVG_URL.NONE_CHATTING}
         alt="None Chatting"
         width="86px"
         height="86px"

@@ -3,6 +3,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
+import { SVG_URL } from 'utils';
+
 const NotFound = () => {
   const router = useRouter();
 
@@ -14,7 +16,12 @@ const NotFound = () => {
       gap="5px"
       height="100%"
     >
-      <Image src="/svg/404.svg" alt="404-image" width="205px" height="198px" />
+      <Image
+        src={SVG_URL.NOT_FOUND}
+        alt="404-image"
+        width="205px"
+        height="198px"
+      />
       <Text fontSize="xl" fontWeight="bold" color="brand.primary-900">
         페이지를 찾을 수 없습니다.
       </Text>

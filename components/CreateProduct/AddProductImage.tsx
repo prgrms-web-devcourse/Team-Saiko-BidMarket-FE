@@ -2,6 +2,8 @@ import { AddIcon, CloseIcon } from '@chakra-ui/icons';
 import { Box, Divider, Flex, IconButton, Image, Text } from '@chakra-ui/react';
 import { useRef, useState } from 'react';
 
+import { SVG_URL } from 'utils';
+
 import ProductLabel from './ProductLabel';
 
 interface AddProductImageProps {
@@ -18,7 +20,7 @@ const AddProductImage = ({
   return (
     <Flex direction="column" w="100%" gap="1">
       <ProductLabel
-        LabelImage={<Image src="/svg/image.svg" alt="picture" width="22px" />}
+        LabelImage={<Image src={SVG_URL.IMAGE} alt="picture" width="22px" />}
         LabelTitle={
           <Text fontSize="lg" fontWeight="semibold">
             사진

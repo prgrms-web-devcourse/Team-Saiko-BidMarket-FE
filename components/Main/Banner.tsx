@@ -1,6 +1,8 @@
 import { Box, Flex, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 
+import { SVG_URL } from 'utils';
+
 const Banner = () => {
   //TODO: 슬로건 수정하기
   return (
@@ -19,7 +21,7 @@ const Banner = () => {
       </Flex>
       <Box position="relative" top="22px" right="20px">
         <Image
-          src="/svg/bidmarket-bibi.svg"
+          src={SVG_URL.BIDMARKET_BIBI}
           alt="banner"
           width="66px"
           height="66px"
