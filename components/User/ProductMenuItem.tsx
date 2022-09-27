@@ -16,37 +16,39 @@ const ProductMenuItem = ({
   isLastItem,
 }: ProductMenuItemProps) => {
   return (
-    <Link href={routingUrl} passHref>
-      <a>
-        <Flex
-          width="100%"
-          justifyContent="space-between"
-          alignItems="center"
-          gap="13px"
-          cursor="pointer"
-        >
-          <Flex justifyContent="space-between" alignItems="center" gap="10px">
-            <Image
-              width="33.92px"
-              height="38px"
-              src={iconUrl}
-              alt={`${title} 아이콘`}
-            />
-            <Text
-              color="brand.dark"
-              fontFamily="Roboto"
-              fontStyle="normal"
-              fontSize="16px"
-              lineHeight="128.19%"
-            >
-              {title}
-            </Text>
+    <>
+      <Link href={routingUrl} passHref>
+        <a>
+          <Flex
+            width="100%"
+            justifyContent="space-between"
+            alignItems="center"
+            gap="13px"
+            cursor="pointer"
+          >
+            <Flex justifyContent="space-between" alignItems="center" gap="10px">
+              <Image
+                width="33.92px"
+                height="38px"
+                src={iconUrl}
+                alt={`${title} 아이콘`}
+              />
+              <Text
+                color="brand.dark"
+                fontFamily="Roboto"
+                fontStyle="normal"
+                fontSize="16px"
+                lineHeight="128.19%"
+              >
+                {title}
+              </Text>
+            </Flex>
+            <ChevronRightIcon />
           </Flex>
-          <ChevronRightIcon />
-        </Flex>
-        {!isLastItem && <Divider />}
-      </a>
-    </Link>
+        </a>
+      </Link>
+      {!isLastItem && <Divider />}
+    </>
   );
 };
 
