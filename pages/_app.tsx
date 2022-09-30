@@ -32,6 +32,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
     const finishedLoading = () => {
       setIsLoading(false);
+    };
 
     Router.events.on('routeChangeStart', startLoading);
     Router.events.on('routeChangeComplete', finishedLoading);
