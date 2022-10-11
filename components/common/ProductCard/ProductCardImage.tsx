@@ -16,6 +16,8 @@ const CardProductImage = ({ alt, src }: CardProductImageProps) => {
         height={114}
         alt={alt}
         src={src}
+        placeholder="blur"
+        blurDataURL="data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAHIAAAByCAYAAACP3YV9AAAAuElEQVR42u3RMQkAAAgAME1uC8G2VvAVtgrL6angvRQpEpGIRKRIRCISkSIRiUhEIlIkIhGJSJGIRCQiRSISkYhEpEhEIhKRIhGJSESKFCkSkYhEpEhEIhKRIhGJSEQiUiQiEYlIkYhEJCJFIhKRiESkSEQiEpEiEYlIRIoUKRKRiESkSEQiEpEiEYlIRCJSJCIRiUiRiEQkIkUiEpGIRKRIRCISkSIRiUhEihQpEpGIRKRIRCKSqwXv2AQgpeMeOQAAAABJRU5ErkJggg=="
       />
     </Box>
   );
