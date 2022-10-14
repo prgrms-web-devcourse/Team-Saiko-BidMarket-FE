@@ -6,6 +6,9 @@ interface CardProductImageProps {
   src: string;
 }
 
+const BLUR_DATA_URL =
+  'data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAHIAAAByCAYAAACP3YV9AAAAuElEQVR42u3RMQkAAAgAME1uC8G2VvAVtgrL6angvRQpEpGIRKRIRCISkSIRiUhEIlIkIhGJSJGIRCQiRSISkYhEpEhEIhKRIhGJSESKFCkSkYhEpEhEIhKRIhGJSEQiUiQiEYlIkYhEJCJFIhKRiESkSEQiEpEiEYlIRIoUKRKRiESkSEQiEpEiEYlIRCJSJCIRiUiRiEQkIkUiEpGIRKRIRCISkSIRiUhEihQpEpGIRKRIRCKSqwXv2AQgpeMeOQAAAABJRU5ErkJggg==';
+
 const CardProductImage = ({ alt, src }: CardProductImageProps) => {
   return (
     <Box borderRadius={'5px'} overflow="hidden" w="114px" h="114px">
@@ -16,6 +19,8 @@ const CardProductImage = ({ alt, src }: CardProductImageProps) => {
         height={114}
         alt={alt}
         src={src}
+        placeholder="blur"
+        blurDataURL={BLUR_DATA_URL}
       />
     </Box>
   );

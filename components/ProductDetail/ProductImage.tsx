@@ -10,6 +10,9 @@ interface ProductImageProps {
   images: ImageType[];
 }
 
+const BLUR_DATA_URL =
+  'data:image/jpeg;base64, iVBORw0KGgoAAAANSUhEUgAAAfQAAAAfCAYAAAARIj9/AAAAfUlEQVR42u3VQQ0AAAgEIE1usXsYzRxuUILOZgoAeK2FDgBCBwCEDgAIHQAQOgAIHQAQOgAgdABA6AAgdABA6ACA0AEAoQOA0AEAoQMAQgcAhA4AQgcAhA4ACB0AEDoACB0AEDoAIHQAQOgAIHQAQOgAgNABAKEDgNABgFcOAXxUSX5JIaEAAAAASUVORK5CYII=';
+
 const ProductImage = ({ images }: ProductImageProps) => {
   const [showImage, setShowImage] = useState(1);
 
@@ -27,6 +30,8 @@ const ProductImage = ({ images }: ProductImageProps) => {
           objectFit="cover"
           alt="product-image"
           src={url ?? SVG_URL.BASKET}
+          placeholder="blur"
+          blurDataURL={BLUR_DATA_URL}
         />
       </Box>
     );
@@ -77,6 +82,8 @@ const ProductImage = ({ images }: ProductImageProps) => {
                 objectFit="cover"
                 alt="product-image"
                 src={url}
+                placeholder="blur"
+                blurDataURL={BLUR_DATA_URL}
               />
             </Box>
           );
