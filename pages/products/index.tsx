@@ -23,18 +23,21 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   return { props: { queryDatas: query } };
 };
 
+const initialSortOption = 'END_DATE_ASC';
+const initialCategoryOption = 'ALL';
+const initialProgressedOption = true;
+
 const Products = ({
-  queryDatas,
+  queryDatas: { title },
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
-  const { title, sort, category, progressed } = queryDatas;
   const [keyword, setKeyword] = useState<string>(title);
   const [selectedSortOption, setSelectedSortOption] =
-    useState<sortOptionsENType>(sort as sortOptionsENType);
+    useState<sortOptionsENType>(initialSortOption);
   const [selectedCategoryOption, setSelectedCategoryOption] =
-    useState<categoryOptionsENType>(category as categoryOptionsENType);
+    useState<categoryOptionsENType>(initialCategoryOption);
   const [isProgressed, setIsProgressed] = useState<boolean>(
-    Boolean(JSON.parse(progressed))
+    initialProgressedOption
   );
 
   // @TODO 쿼리스트링이 누락된 경우 메인페이지로 이동하는 예외처리
@@ -55,24 +58,15 @@ const Products = ({
     if (isView && hasNextPage) {
       fetchNextPage();
     }
-  }, [isView, productPages]);
-
-  useEffect(() => {
-    // @TODO router 주소 분리 작업 (for 가독성)
-    router.push(
-      `/products?title=${keyword}&sort=${selectedSortOption}&category=${selectedCategoryOption}&progressed=${isProgressed}&offset=0&limit=10`
-    );
-  }, [selectedSortOption, selectedCategoryOption, isProgressed]);
+  }, [isView, productPages, fetchNextPage, hasNextPage]);
 
   useEffect(() => {
     refetch();
-  }, [router.asPath]);
+  }, [selectedSortOption, selectedCategoryOption, isProgressed, refetch]);
 
   const handleFormSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    router.push(
-      `/products?title=${keyword}&sort=${selectedSortOption}&category=${selectedCategoryOption}&progressed=${isProgressed}&offset=0&limit=10`
-    );
+    router.push(`/products?title=${keyword}`);
   };
 
   // @TODO FilterButton과 함께 간결한 코드로 풀어낼 필요 (with Type)

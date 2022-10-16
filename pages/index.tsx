@@ -26,13 +26,11 @@ const Home: NextPage = () => {
     if (isView && hasNextPage) {
       fetchNextPage();
     }
-  }, [isView, productPages]);
+  }, [isView, productPages, fetchNextPage, hasNextPage]);
 
   const handleFormSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    router.push(
-      `/products?title=${title}&sort=END_DATE_ASC&category=ALL&progressed=true&offset=0&limit=10`
-    );
+    router.push(`/products?title=${title}`);
   };
 
   if (!isAuthFinished) {
@@ -48,7 +46,6 @@ const Home: NextPage = () => {
         <form onSubmit={handleFormSubmit}>
           <SearchInput keyword={title} onChange={setTitle} />
         </form>
-        {/* @TODO 컴포넌트로 분리해보기 */}
         {productPages?.pages.map(({ data }, pageIndex) => {
           return data.map((product, productIndex) => {
             const lastPageIndex = productPages.pages.length - 1;
