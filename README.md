@@ -123,7 +123,8 @@
 
 ## <img height="25px" src="https://user-images.githubusercontent.com/50071076/184506573-ed624123-2e8f-430c-9165-0bce79d1e13d.png" /> 개발 기간 & 일정
 
-> 2022/07/15 ~ 진행중
+> 2022/07/15 ~ 2022/08/17   
+> 2022/08/22 ~ 2022/10/17 (리팩토링)
 
 <table>
   <tr>
@@ -147,7 +148,7 @@
     <td align="center">알림, 채팅, 신고하기, 찜하기 기능 구현</td>
   </tr>
   <tr>
-    <td align="center">5주차 ~ 진행중</td>
+    <td align="center">5주차 ~ 12주차</td>
     <td align="center">리팩토링과 추가 기능 구현</td>
   </tr>
 </table>
@@ -177,6 +178,175 @@
 ## <img height="25px" src="https://user-images.githubusercontent.com/50071076/184506573-ed624123-2e8f-430c-9165-0bce79d1e13d.png" /> 디자인 및 와이어프레임
 
 - [비드마켓 Figma 보러가기](https://www.figma.com/file/bKGr5M3qtpqkE9FRBq6Sax/%EB%B9%84%EB%93%9C%EB%A7%88%EC%BC%93?node-id=0%3A1)
+
+<br />
+
+## <img height="25px" src="https://user-images.githubusercontent.com/50071076/184506573-ed624123-2e8f-430c-9165-0bce79d1e13d.png" /> 페이지 및 주요 기능
+
+<details>
+<summary>
+  메인 페이지
+</summary>
+<ul>
+  <li>무한 스크롤</li>
+  
+  https://user-images.githubusercontent.com/75886763/204949228-e4a8af96-a7ea-47f3-9077-efcd43490bbb.mov
+  
+  
+</ul>
+</details>
+
+<details>
+<summary>
+  로그인 페이지
+</summary>
+<ul>
+  <li>권한이 없는 기능, 페이지 접근시 로그인 페이지로 안내</li>
+
+https://user-images.githubusercontent.com/75886763/204952614-c968e570-375d-4fd0-91d9-5ce6f5be5fbd.mov
+
+
+</ul>
+</details>
+
+<details>
+<summary>
+  검색 페이지
+</summary>
+<ul>
+  <li>키워드 검색</li>
+
+https://user-images.githubusercontent.com/75886763/204949659-f8e27b2d-92b6-4c01-9c24-bfa250aed7c9.mov
+
+
+  <li>정렬 필터링</li>
+
+https://user-images.githubusercontent.com/75886763/204949694-cac20daa-d677-4a7a-83c6-51bd27da28de.mov
+
+
+  <li>카테고리 필터링</li>
+
+https://user-images.githubusercontent.com/75886763/204949700-9c9b546a-bf1b-4056-bb79-acd1d7cccb60.mov
+
+
+  <li>낙찰 여부에 따른 필터링</li>
+
+https://user-images.githubusercontent.com/75886763/204949717-c1cf603e-553d-4b01-a92f-56c5e404ce41.mp4
+
+
+</ul>
+</details>
+
+<details>
+<summary>
+  상품 등록 페이지
+</summary>
+<ul>
+  <li>사진 등록</li>
+  <li>상품 금액, 카테고리, 지역, 설명 작성</li>
+  <li>필수 입력칸 미작성하였는지 확인 기능</li>
+
+https://user-images.githubusercontent.com/75886763/204950181-1c987fda-b53b-4b8d-b29f-56cc6e517760.mov
+
+</ul>
+</details>
+
+<details>
+<summary>
+  상품 상세 페이지
+</summary>
+<ul>
+  <li>사진 넘기기 기능</li>
+  
+https://user-images.githubusercontent.com/75886763/204952004-e8cdf979-5e88-4636-a68e-a4f8bccc5d78.mp4
+
+
+  <li>남은 시간 타이머 기능</li>
+
+https://user-images.githubusercontent.com/75886763/204950517-e9320327-0bd9-45e4-87df-ee7d411280ed.mov
+
+
+  <li>정상적인 입찰가 입력 확인 기능</li>
+
+https://user-images.githubusercontent.com/75886763/204950595-8d8b13d1-4027-4179-96e7-ea18ce8de8cb.mp4
+
+
+
+https://user-images.githubusercontent.com/75886763/204950600-924c372b-f2e4-4ca1-a726-f2dc0b7263bd.mp4
+
+
+  <li>입찰 완료</li>
+
+https://user-images.githubusercontent.com/75886763/204950661-a3d0d8d1-36fe-4527-94cf-714492ebd3ce.mp4
+
+
+  <li>입찰 종료 및 낙찰까지 1분 대기 안내</li>
+
+https://user-images.githubusercontent.com/75886763/204950693-6e94c39a-56c8-42fa-84e4-436d76f64bdb.mp4
+
+
+  <li>낙찰 완료 (+ 알림 기능)</li>
+
+https://user-images.githubusercontent.com/75886763/204950738-f9db6932-b75e-49e0-8d2a-bb170711143f.mp4
+
+
+  <li>입찰자 없이 종료된 경우 재등록 안내</li>
+
+https://user-images.githubusercontent.com/75886763/204951462-3ac32932-3c1e-4fc8-bfe1-a984f76d8f1c.mp4
+
+
+</ul>
+</details>
+
+<details>
+<summary>
+  채팅 페이지
+</summary>
+<ul>
+  <li>판매자와 낙찰자의 채팅 기능</li>
+
+https://user-images.githubusercontent.com/75886763/204950757-dceb5023-9cef-4164-8816-9887dca680d1.mp4
+
+
+</ul>
+</details>
+
+<details>
+<summary>
+  회원 정보 페이지
+</summary>
+<ul>
+  <li>계정(+ 로그인)에 따른 회원 정보 페이지</li>
+
+https://user-images.githubusercontent.com/75886763/204950980-2df9e52f-ceda-4e07-9a8b-978baf235dca.mp4
+
+
+  <li>회원의 판매 상품 목록, 입찰 상품 목록, 찜한 상품 목록</li>
+  
+https://user-images.githubusercontent.com/75886763/204950822-0e208895-da52-4b50-96ef-69f8098f80b9.mov
+
+
+
+https://user-images.githubusercontent.com/75886763/204950827-6a130bbb-3e5e-411e-a337-2c9d68111224.mov
+
+
+  <li>회원 신고 기능</li>
+
+https://user-images.githubusercontent.com/75886763/204950918-249032ed-ddaf-43dc-ab28-0ae0b9292d29.mov
+
+
+  <li>회원 정보 변경 기능 (프로필 사진, 닉네임)</li>
+
+https://user-images.githubusercontent.com/75886763/204950858-f4791848-f692-4110-a14a-7a4cffa43e2d.mov
+
+
+  <li>계정 설정 기능 (로그아웃, 회원탈퇴)</li>
+
+https://user-images.githubusercontent.com/75886763/204950849-6fb56e33-2c1b-44c2-bf09-bee8814062dc.mov
+
+
+</ul>
+</details>
 
 <br />
 
